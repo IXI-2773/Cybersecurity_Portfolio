@@ -1,6 +1,17 @@
 name: Verify live GitHub Pages site
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'projects/*.html'
+      - 'styles.css'
+      - 'assets/network/*.svg'
+      - 'sitemap.xml'
+      - 'robots.txt'
+      - 'scripts/check_live_site.py'
+      - '.github/workflows/check-live-pages.yml'
   workflow_run:
     workflows:
       - pages build and deployment
