@@ -17,7 +17,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Nine focused security lab tests
+      - name: Authentication detection tests (9)
         run: python -m unittest discover -s projects/01-authentication-detection -p 'test_*.py' -v
+      - name: Windows process triage tests (11)
+        run: python -m unittest discover -s projects/02-windows-process-triage -p 'test_*.py' -v
       - name: Check local HTML links
         run: python scripts/check_links.py
