@@ -17,3 +17,20 @@ footer{border-top:1px solid var(--stroke)}.footer-inner{display:flex;justify-con
 .evidence-table th{color:var(--teal);font-size:.76rem;letter-spacing:.06em;text-transform:uppercase}
 .evidence-table td{color:var(--muted);font-size:.9rem}.evidence-table tbody tr:last-child td{border-bottom:none}
 .evidence-table a{color:var(--text);text-underline-offset:4px;font-weight:650}.evidence-table a:hover{color:var(--teal)}
+
+/* Issuer-agnostic credential cards, supported responsive layout and triage ladder. */
+.section-compact{padding:70px 0 65px;background:#0a1b27;scroll-margin-top:90px}
+.credential-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.credential-card{border:1px solid #35616a;border-radius:14px;background:linear-gradient(145deg,#122e3b,#0b1d2b);padding:28px;min-height:222px}
+.credential-top{display:flex;align-items:center;justify-content:space-between}
+.credential-mark{display:inline-flex;align-items:center;justify-content:center;min-width:46px;height:44px;padding:2px 6px;border-radius:10px;background:#103d3e;color:var(--teal);font-size:.95rem;font-weight:900}
+.credential-issuer{color:var(--teal);font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:.77rem}
+.credential-card h3{font-size:1.5rem;margin:16px 0 8px}
+.credential-card p{color:var(--muted);font-size:.92rem}
+.credential-foot{font-size:.74rem;color:#adc4cf}
+.operations-flow{border:1px solid var(--stroke);border-radius:14px;padding:20px 27px;background:var(--surface)}
+.operations-flow>div{display:flex;gap:20px;padding:15px 0}
+.operations-flow>div+div{border-top:1px solid var(--stroke)}
+.flow-step{font:800 .9rem ui-monospace,Consolas,monospace;color:var(--teal)}
+.operations-flow h3{margin:0;font-size:1rem}.operations-flow p{margin:4px 0 0;color:var(--muted);font-size:.87rem}
+@media(max-width:650px){.credential-grid{grid-template-columns:1fr}.credential-card{min-height:auto}.section-compact{padding:54px 0}}

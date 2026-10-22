@@ -4,11 +4,20 @@ A public, static portfolio presenting **reproducible synthetic defensive securit
 
 **Live website (after GitHub Pages is enabled):** https://ixi-2773.github.io/Cybersecurity_Portfolio/
 
+## Certifications
+
+- **CompTIA Security+** — credential reported by the portfolio owner.
+- **CompTIA CySA+** — credential reported by the portfolio owner.
+
+Public badge URLs, exam versions, dates and renewal status have not been supplied. See the [credential record](docs/CREDENTIALS.md) for claim limits.
+
 ## Start here
 - [Portfolio home](index.html) — skills and project index.
 - [Authentication detection case study](projects/authentication-detection.html) — reproducible, synthetic Python lab, 31 authentication tests, a simulated SOC investigation report, and a **Splunk runtime qualification package (not yet executed in Splunk)**.
 - [Windows process execution triage case study](projects/windows-process-triage.html) — synthetic Windows Event ID 4688 exercise, 11 tests, ATT&CK hypotheses T1059.001 and T1105.
 - [Recruiter overview](docs/RECRUITER_OVERVIEW.md) — skills mapped to public evidence.
+- [SOC analyst workflow](projects/soc-analyst-workflow.html), [incident triage playbook](docs/SOC_TRIAGE_PLAYBOOK.md), and [analyst handoff template](docs/ANALYST_HANDOFF_TEMPLATE.md).
+- [Detection evidence matrix](docs/DETECTION_EVIDENCE_MATRIX.md) and [résumé-ready project bullets](docs/RESUME_PORTFOLIO_BULLETS.md).
 - [Celestial Resonance case study](projects/celestial-resonance.html) — responsible high-level summary of reproducible software research, quality gates, and auditability.
 - [RAI case study](projects/research-ai-infrastructure.html) — high-level summary of evidence provenance, permission boundaries, and governed research tooling.
 - [Future lab backlog](projects/PLANNED.md) — **planned**, not claimed as completed.
@@ -35,7 +44,7 @@ Go to repository **Settings → Pages → Build and deployment → Deploy from a
 - Case studies are based on high-level architecture and development methods, and **do not** establish a production security system, an independent penetration test, or quantified business/security gains.
 - Both labs use fabricated events and reserved documentation IPs or domains. The SPL query, upload-free smoke test and validation protocol are *drafts*, not an empirically validated deployed detection.
 - Project status and evidence limitations are visible on each case-study page.
-- No certifications beyond the stated degree are asserted.
+- CompTIA Security+ and CySA+ are listed based on the owner's report; no independent public verification or current-renewal status is asserted.
 
 See [SECURITY.md](SECURITY.md) for disclosure handling and [PUBLICATION_CHECKLIST.md](PUBLICATION_CHECKLIST.md) before future updates.
 
