@@ -41,6 +41,8 @@ jobs:
         run: python -m unittest discover -s projects/04-local-vulnerability-assessment -p 'test_*.py' -v
       - name: Verify vulnerable versus remediated fixture
         run: python projects/04-local-vulnerability-assessment/audit_demo.py
+      - name: Audit site accessibility structure and navigation
+        run: python scripts/check_accessibility.py
       - name: Check local HTML links
         run: python scripts/check_links.py
       - name: Build downloadable offline website preview
