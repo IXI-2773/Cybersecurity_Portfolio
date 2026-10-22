@@ -31,3 +31,15 @@ These checks enforce document language, viewport settings, main/H1/skip semantic
 - Browser zoom up to 200%, text spacing and OS-level high-contrast modes.
 
 Live GitHub Pages HTTP verification is handled by a separate workflow; it checks that public pages and assets are served, but **cannot establish responsive visual quality**.
+
+## Browser screenshots and width checks
+
+A separate **Review responsive website in Chrome** workflow runs only for changes to HTML/CSS or the visual-check tooling, not for ordinary detection-lab changes. It uses a headless Chrome/ChromeDriver installation included on the GitHub Ubuntu 24.04 runner, plus a small Selenium library.
+
+The [responsive checker](../scripts/visual_review.py) tests four homepage widths (**320, 390, 768 and 1280 pixels**) and mobile/desktop widths for three project case studies. It checks:
+- Whether the native mobile navigation can open and close using keyboard Enter.
+- Whether mobile and desktop navigation are shown at the appropriate breakpoint.
+- Whether main page headings are visible.
+- Whether the document introduces unintended horizontal overflow.
+
+Results and **10 actual browser screenshots** are uploaded as the `responsive-website-review` Actions artifact when the job executes. This is a real headless Chrome rendering, not a synthetic visualization; however, screenshots still require human visual review and do not establish WCAG conformance or full accessibility.
