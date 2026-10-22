@@ -9,7 +9,7 @@ These are evidence-limited wording options. They describe public projects, not i
 
 ## Projects
 - Built a Python authentication-correlation lab with negative tests for success/reset boundaries, source isolation and malformed inputs; documented findings using synthetic login events.
-- Developed a Windows process-creation triage exercise using fabricated Event ID 4688 records, identifying suspicious PowerShell and certutil command patterns for analyst review.
+- Developed a Windows process-creation triage exercise using fabricated Event ID 4688 records, identifying two PowerShell/certutil command-pattern candidates and documenting a source-attributed five-event synthetic investigation.
 - Built a deterministic 20-packet PCAP generator and a bounded Python DNS/HTTP analyzer, verified through 18 focused tests.
 - Built a localhost-only HTTP response-hardening exercise with four intentional misconfigurations, verified remediated behavior and 16 regression tests.
 - Configured GitHub Actions to run **76 focused Python tests**, an offline validation matrix and link-integrity checks for a public portfolio.

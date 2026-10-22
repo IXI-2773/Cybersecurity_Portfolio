@@ -88,6 +88,21 @@ def check_page(path: Path, targets: dict[Path, set[str]]) -> list[str]:
     expect(page.html_lang == "en", "missing document language")
     expect(page.title_count == 1, "expected one page title")
     expect(page.h1 == 1 and page.mains == 1, "expected one H1 and one main landmark")
+    # Protect against a copied but misleading project headline.
+    body = path.read_text(encoding="utf-8")
+    match = __import__("re").search(r"<h1\b[^>]*>(.*?)</h1>", body, __import__("re").IGNORECASE | __import__("re").DOTALL)
+    expected_headings = {
+        "projects/windows-process-triage.html": "Windows Process Execution Triage",
+        "projects/authentication-detection.html": "Authentication Detection",
+        "projects/network-traffic-analysis.html": "Network Traffic Analysis",
+        "projects/vulnerability-remediation.html": "Vulnerability Assessment",
+        "projects/celestial-resonance.html": "Celestial Resonance",
+        "projects/research-ai-infrastructure.html": "Research AI Infrastructure",
+    }
+    expectation = expected_headings.get(rel)
+    if expectation:
+        expect(match is not None and expectation.lower() in match.group(1).lower(),
+               f"project H1 does not identify {expectation}")
     expect(page.skips == 1 and "main" in page.ids, "missing functional skip-to-main link")
     expect(len(page.ids) == len(set(page.ids)), "duplicate HTML IDs")
     expect(any(a.get("name") == "viewport" for a in page.metas), "missing responsive viewport")

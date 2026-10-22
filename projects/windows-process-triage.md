@@ -16,3 +16,5 @@ The lab examines fabricated process-creation records for patterns worth reviewin
 No real endpoints were monitored. No production EDR deployment is claimed.
 
 [All case studies](CASE_STUDIES.md) · [Designed page, after Pages activation](https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/windows-process-triage.html)
+
+**Detailed analyst write-up:** [LAB-PROC-001 source timeline and evidence-based disposition](02-windows-process-triage/CASE_REPORT.md).

@@ -21,3 +21,7 @@ python projects/02-windows-process-triage/process_triage.py projects/02-windows-
 **Limitations:** Command-line logging may not be available; flag matching is simple and can match legitimate administration or miss obfuscation. The test suite uses only fabricated data. No live environment was scanned or monitored. Technique hypotheses are not findings of compromise.
 
 **Analyst follow-up:** Verify signer and executable path, parent process and account, contextual PowerShell/EDR records, and proxy/file telemetry. Escalate only with corroboration.
+
+## SOC analyst case report
+
+Read [LAB-PROC-001 — simulated investigation](CASE_REPORT.md) for a source-row timeline, both rule matches, three negative controls, benign alternatives, and authorization-aware evidence requests. This is a reproducible fixture review, not a production endpoint incident.
