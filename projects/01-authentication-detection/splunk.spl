@@ -1,0 +1,6 @@
+index=lab_auth sourcetype="portfolio:auth"
+| eval _time=strptime(timestamp,"%Y-%m-%dT%H:%M:%SZ")
+| sort 0 username source_ip _time
+| streamstats time_window=10m count(eval(event_type="login_failure")) as recent_failures by username source_ip
+| where event_type="login_success" AND recent_failures>=5
+| table _time username source_ip host recent_failures

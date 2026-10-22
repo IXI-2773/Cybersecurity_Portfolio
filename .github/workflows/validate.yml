@@ -1,0 +1,23 @@
+name: Validate public portfolio
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  unit-and-links:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Nine focused security lab tests
+        run: python -m unittest discover -s projects/01-authentication-detection -p 'test_*.py' -v
+      - name: Check local HTML links
+        run: python scripts/check_links.py
