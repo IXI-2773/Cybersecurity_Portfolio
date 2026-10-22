@@ -6,7 +6,7 @@ A public, static portfolio presenting **reproducible synthetic defensive securit
 
 ## Start here
 - [Portfolio home](index.html) — skills and project index.
-- [Authentication detection case study](projects/authentication-detection.html) — reproducible, synthetic Python lab, 15 tests, a simulated SOC investigation report, and a **Splunk validation runbook (not yet executed in Splunk)**.
+- [Authentication detection case study](projects/authentication-detection.html) — reproducible, synthetic Python lab, 21 authentication tests, a simulated SOC investigation report, and a **Splunk runtime qualification package (not yet executed in Splunk)**.
 - [Windows process execution triage case study](projects/windows-process-triage.html) — synthetic Windows Event ID 4688 exercise, 11 tests, ATT&CK hypotheses T1059.001 and T1105.
 - [Recruiter overview](docs/RECRUITER_OVERVIEW.md) — skills mapped to public evidence.
 - [Celestial Resonance case study](projects/celestial-resonance.html) — responsible high-level summary of reproducible software research, quality gates, and auditability.
@@ -21,10 +21,11 @@ python -m unittest discover -s projects/01-authentication-detection -p 'test_*.p
 python -m unittest discover -s projects/02-windows-process-triage -p 'test_*.py' -v
 python projects/01-authentication-detection/detect_auth.py projects/01-authentication-detection/auth_events.csv
 python projects/01-authentication-detection/validate_matrix.py
+# The next step requires an authorized Splunk instance; see SPLUNK_RUNBOOK.md
 python projects/02-windows-process-triage/process_triage.py projects/02-windows-process-triage/events_4688.csv
 ```
 
-Expected: 26 locally passing tests across two synthetic exercises. The authentication fixture flags one login sequence for `alice` from `192.0.2.15`; the process-creation fixture returns two triage candidates. None is proof of real intrusion or production security efficacy.
+Expected: 32 locally passing tests across two synthetic exercises. The authentication fixture flags one login sequence for `alice` from `192.0.2.15`; the process-creation fixture returns two triage candidates. None is proof of real intrusion or production security efficacy.
 
 ## Publish using GitHub Pages
 Go to repository **Settings → Pages → Build and deployment → Deploy from a branch → main / (root)**. Save. After deployment, check the page in a private browser window. The website does not require JavaScript, frameworks, runtime credentials, analytics, third-party fonts, or paid hosting.
@@ -32,7 +33,7 @@ Go to repository **Settings → Pages → Build and deployment → Deploy from a
 ## Public disclosure and accuracy
 - CR and RAI are **private** engineering projects. Do not publish their source, internal records, repository URLs, security-sensitive workflow details, or artifacts without a separate review.
 - Case studies are based on high-level architecture and development methods, and **do not** establish a production security system, an independent penetration test, or quantified business/security gains.
-- Both labs use fabricated events and reserved documentation IPs or domains. The SPL query and validation protocol are *drafts*, not an empirically validated deployed detection.
+- Both labs use fabricated events and reserved documentation IPs or domains. The SPL query, upload-free smoke test and validation protocol are *drafts*, not an empirically validated deployed detection.
 - Project status and evidence limitations are visible on each case-study page.
 - No certifications beyond the stated degree are asserted.
 

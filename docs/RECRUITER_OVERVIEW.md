@@ -8,10 +8,10 @@
 
 | Competency | Evidence | Qualification |
 | --- | --- | --- |
-| Authentication log triage | [Synthetic login-detection lab](../projects/01-authentication-detection/) | 15 Python tests and 9 synthetic scenario families; SPL requires on-platform validation |
+| Authentication log triage | [Synthetic login-detection lab](../projects/01-authentication-detection/) | 21 Python tests and 9 synthetic scenario families; SPL requires on-platform validation |
 | Windows process telemetry triage | [Synthetic Event 4688 lab](../projects/02-windows-process-triage/) | 11 Python tests; not deployed |
 | Python automation | Two standard-library CLI tools and JSON outputs | No third-party dependencies |
-| Reproducible verification | 26 unit tests, offline SOC scenario checker, and [CI workflow](../.github/workflows/validate.yml) | CI status must be checked independently |
+| Reproducible verification | 32 unit tests, offline SOC scenario checker, and [CI workflow](../.github/workflows/validate.yml) | CI status must be checked independently |
 | Engineering quality and safeguards | [Celestial Resonance case study](../projects/celestial-resonance.html) | High-level private-project description |
 | Evidence provenance and permission boundaries | [RAI case study](../projects/research-ai-infrastructure.html) | Not a production security agent |
 

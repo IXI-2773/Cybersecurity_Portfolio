@@ -29,3 +29,12 @@ The test suite covers positive fixture, negative threshold, expired window, per-
 - [SPL design](splunk.spl): use one streak per account/source IP; **any** successful login closes the previous burst. Global chronological sort is required before a time-windowed `streamstats`. This remains a **draft pending real Splunk execution**.
 
 The v2.1 tests add regressions for non-alerting success resets, independent identities, malformed CSV data and validation matrix expectations. The project now has **15** Python unit tests.
+
+## Splunk runtime qualification gate (next milestone)
+
+1. Run the [upload-free Splunk smoke test](SPLUNK_SMOKE_TEST.spl) in an authorized instance; its **expected** output is one synthetic finding. It has **not** been executed here.
+2. Follow the [runbook](SPLUNK_RUNBOOK.md) to ingest the 64-event matrix exactly once and export both raw event rows and five detection findings.
+3. Use [`qualify_exports.py`](qualify_exports.py) to compare **both** supplied CSV files against the frozen fixtures and emit SHA-256 provenance hashes. Passing a CSV comparison **never** certifies a live Splunk run.
+4. Attach authentic Splunk version, job IDs, sanitized screenshots and run settings before updating the public portfolio's qualification status.
+
+The SPL query now parses the UTC offset explicitly instead of interpreting the trailing `Z` as timezone-free text. Runtime acceptance remains **BLOCKED — NO CONNECTED SPLUNK INSTANCE**.

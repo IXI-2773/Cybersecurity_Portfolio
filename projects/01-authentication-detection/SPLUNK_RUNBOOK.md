@@ -11,35 +11,60 @@ Detect >=5 failed logins within a rolling 10-minute window for the same user and
 - An upload mechanism that extracts CSV headers as fields; assign sourcetype `portfolio:auth` or replace it consistently in the query.
 - **No credentials or real organization data** in these fixtures.
 
+## 0. Run the upload-free Splunk smoke test first
+
+Paste [`SPLUNK_SMOKE_TEST.spl`](SPLUNK_SMOKE_TEST.spl) directly into **Splunk Search**. It generates seven entirely synthetic events in SPL and does **not** require an index or file ingestion.
+
+Expected: exactly **one** result: `smoke_user`, `192.0.2.99`, timestamp `2026-10-05T09:05:00Z`, count **5**. The second success at 09:06 must not produce another alert. This search is a **proposed smoke test**, not a recorded Splunk execution. Save the search job ID, version and a genuine screenshot if it runs.
+
+This small test checks basic SPL command semantics but **does not** establish the separate 64-event CSV ingestion and search qualification.
+
 ## 1. Upload and verify
 1. Open Splunk's **Add Data → Upload** (interface labels vary by version).
-2. Upload [`validation_events.csv`](validation_events.csv), choose CSV source type / field extraction, map the `timestamp` field, UTC format `%Y-%m-%dT%H:%M:%SZ`, and select the permitted destination index. Check that time extraction is correct before submitting.
+2. Upload [`validation_events.csv`](validation_events.csv), choose CSV source type / field extraction, map the `timestamp` field to event time with its explicit UTC `Z` offset (or assign UTC as the source timezone and verify preview values), and select the permitted destination index. Check that time extraction is correct before submitting.
 3. Check that the **event-time** range includes **October 5, 2026**, and use the corresponding time picker range (or All time for the isolated test index).
 4. Run:
    ```spl
    index=lab_auth sourcetype="portfolio:auth"
-   | stats count as events dc(username) as distinct_users by source
+   | stats count as events dc(username) as distinct_users dc(scenario) as scenario_count
    ```
+   Expected: **64 events** spanning **9 scenario labels**, assuming precisely one ingestion of the validation fixture. Any other count is a data-integrity problem; stop rather than continuing.
 5. Inspect at least two raw events and confirm extracted fields: `timestamp, username, source_ip, host, event_type, scenario`. A wrong time picker or field extraction is an ingestion issue, not a detection result.
 6. If you previously uploaded a fixture, use a fresh lab index or carefully filter `source` to avoid duplicate ingestion. **Do not erase production data.**
 
 ## 2. Run the detection search
 Paste [`splunk.spl`](splunk.spl) into Splunk Search, replacing the index/sourcetype selectors only if needed.
 
+**UTC correction:** The search transforms the suffix `Z` into `+0000` and parses with `%z`, which explicitly declares an offset. The original `timestamp` field is preserved in output; do not rebuild a literal `Z` using a local-time `strftime`. This improvement follows Splunk time-zone guidance but has **not** been tested in a Splunk runtime. See [Splunk time-zone interpretation](https://help.splunk.com/en/splunk-enterprise/search/spl2-search-manual/dates-and-time/time-zones) and [time variables](https://help.splunk.com/en/splunk-enterprise/search/spl2-search-manual/dates-and-time/using-time-variables).
+
 **Implementation detail:** The first `streamstats current=f` computes the number of *prior* successful logins per (username, source_ip), providing a streak identifier. After every success, the next event for that key belongs to a new streak. The second `streamstats time_window=10m` counts only failures in the current streak. Sorting by global `_time` ensures that the time window is forward-looking in event processing order. Events with equal timestamps need an explicit deterministic tie-breaker; this fixture avoids ties.
 
 The query is **SPL (Splunk Search Processing Language)**, not SPL2. Splunk's `streamstats` has a configurable maximum event window (often 10,000 events), so large-scale ingestion needs separate qualification.
 
 ## 3. Compare results against an independent expected fixture
-Export the **Statistics** search results as CSV, e.g. `splunk_results.csv`, ensuring the fields `timestamp, username, source_ip, failure_count_in_window` are present.
+Export **both** datasets from the same authorized isolated lab:
+
+A. Raw event fields, using a separate query:
+```spl
+index=lab_auth sourcetype="portfolio:auth"
+| table timestamp username source_ip host event_type scenario
+```
+Export as `splunk_raw_events.csv`; this must contain exactly **64 synthetic rows**.
+
+B. The detection search **Statistics** results as `splunk_findings.csv`, ensuring fields `timestamp, username, source_ip, failure_count_in_window` are present and exactly **five** rows are returned.
+
+**Do not compare only the five findings.** A wrong source, missing rows, or duplicate upload can otherwise produce misleading apparent agreement.
 
 Run:
 ```sh
 python projects/01-authentication-detection/validate_matrix.py
-python projects/01-authentication-detection/validate_matrix.py --splunk-export path/to/splunk_results.csv
+python projects/01-authentication-detection/validate_matrix.py --splunk-export path/to/splunk_findings.csv
+python projects/01-authentication-detection/qualify_exports.py --raw-export path/to/splunk_raw_events.csv --findings-export path/to/splunk_findings.csv --report local_qualification.json
 ```
 
-The first command checks the **Python reference detector** against the fixed expected matrix; it **does not execute Splunk**. The second compares whatever CSV the user supplied to the independent expected fixture; passing alone does not establish who generated that CSV.
+The first command checks the **Python reference detector** against the fixed expected matrix; it **does not execute Splunk**. The second independently checks provided result rows. The third compares **all 64 raw source events and five detection rows** to frozen expected values and writes SHA-256 digests of the inputs and query. **None of these commands can authenticate that Splunk produced the supplied CSV.** The JSON intentionally sets `splunk_runtime_validated=false` even if all rows match.
+
+Only separately reviewing genuine Splunk search-job provenance, version, input/upload settings and search screenshots can substantiate on-platform execution.
 
 Expected: **5 findings** (and 4 non-detecting scenario families) across these nine synthetic scenarios:
 
@@ -59,9 +84,9 @@ The expected JSON contains the **five exact timestamp/user/IP/count rows** and i
 
 ## 4. Capture employer-grade evidence (once actually executed)
 - Screenshot of Splunk Add Data field/timestamp preview, with personal identifiers removed.
-- Screenshot of query and the five result rows, with time picker and search index visible but no credentials.
-- Saved Results CSV and its SHA-256 checksum.
-- Actual Splunk product/version, index/sourcetype chosen, UTC/timezone settings, and any deviations from the runbook.
+- Screenshot of the smoke test's one result plus screenshot of the full query and its five result rows, with time picker and search index visible but no credentials.
+- Saved raw-events and findings CSV exports, with the qualification report's SHA-256 hashes.
+- Actual Splunk product/version, two search-job IDs (raw/detection), index/sourcetype, UTC/timezone settings, search time picker, and deviations from the runbook.
 - A short paragraph explaining observed differences and how you resolved them.
 - Verification output and local Python version, including any failing negative cases.
 
