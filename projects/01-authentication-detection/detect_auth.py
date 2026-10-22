@@ -33,6 +33,8 @@ def read_events(path: str | Path) -> list[dict]:
         events = []
         for line_number, row in enumerate(reader, start=2):
             try:
+                if None in row or any(row.get(column) is None for column in REQUIRED):
+                    raise ValueError("Malformed CSV row or unexpected field count")
                 if not row["username"] or not row["host"]:
                     raise ValueError("Empty username or host")
                 if row["event_type"] not in ALLOWED:
@@ -59,17 +61,19 @@ def find_suspicious_logins(
             recent.popleft()
         if event["event_type"] == "login_failure":
             recent.append(event["dt"])
-        elif event["event_type"] == "login_success" and len(recent) >= threshold:
-            findings.append({
-                "observed_at_utc": event["dt"].strftime("%Y-%m-%dT%H:%M:%SZ"),
-                "username": event["username"],
-                "source_ip": event["source_ip"],
-                "host": event["host"],
-                "failure_count_in_window": len(recent),
-                "earliest_failure_utc": recent[0].strftime("%Y-%m-%dT%H:%M:%SZ"),
-                "assessment": "Suspicious authentication sequence; investigate, not confirmed compromise",
-                "attack_hypothesis": "MITRE ATT&CK T1110 (Brute Force)",
-            })
+        elif event["event_type"] == "login_success":
+            if len(recent) >= threshold:
+                findings.append({
+                    "observed_at_utc": event["dt"].strftime("%Y-%m-%dT%H:%M:%SZ"),
+                    "username": event["username"],
+                    "source_ip": event["source_ip"],
+                    "host": event["host"],
+                    "failure_count_in_window": len(recent),
+                    "earliest_failure_utc": recent[0].strftime("%Y-%m-%dT%H:%M:%SZ"),
+                    "assessment": "Suspicious authentication sequence; investigate, not confirmed compromise",
+                    "attack_hypothesis": "MITRE ATT&CK T1110 (Brute Force)",
+                })
+            # Every success closes the failed-login streak, even if no alert fired.
             recent.clear()
     return findings
 

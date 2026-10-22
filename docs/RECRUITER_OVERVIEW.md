@@ -8,16 +8,16 @@
 
 | Competency | Evidence | Qualification |
 | --- | --- | --- |
-| Authentication log triage | [Synthetic login-detection lab](../projects/01-authentication-detection/) | 9 Python tests; SPL requires validation |
+| Authentication log triage | [Synthetic login-detection lab](../projects/01-authentication-detection/) | 15 Python tests and 9 synthetic scenario families; SPL requires on-platform validation |
 | Windows process telemetry triage | [Synthetic Event 4688 lab](../projects/02-windows-process-triage/) | 11 Python tests; not deployed |
 | Python automation | Two standard-library CLI tools and JSON outputs | No third-party dependencies |
-| Reproducible verification | Unit tests and [CI workflow](../.github/workflows/validate.yml) | CI status must be checked independently |
+| Reproducible verification | 26 unit tests, offline SOC scenario checker, and [CI workflow](../.github/workflows/validate.yml) | CI status must be checked independently |
 | Engineering quality and safeguards | [Celestial Resonance case study](../projects/celestial-resonance.html) | High-level private-project description |
 | Evidence provenance and permission boundaries | [RAI case study](../projects/research-ai-infrastructure.html) | Not a production security agent |
 
 ## Work in progress
 
-- Validate SPL with a permitted Splunk data source and document tuning.
+- Execute the [documented Splunk verification runbook](../projects/01-authentication-detection/SPLUNK_RUNBOOK.md) in an authorized instance; publish genuine, scrubbed evidence and tuning notes.
 - Analyze a licensed or owned packet capture and report evidence, uncertainty, and defensive observations.
 - Publish practical investigation reports with sanitized screenshots and time-stamped findings.
 

@@ -2,7 +2,7 @@
 
 These are **planned exercises**, not delivered portfolio evidence. Do not present them as finished in a résumé.
 
-1. **Splunk validation of the authentication rule** — ingest the synthetic fixture into an isolated instance, run SPL, compare result rows against Python and document divergence and tuning.
+1. **Splunk validation of the authentication rule** — run the already prepared [ingestion and comparison runbook](01-authentication-detection/SPLUNK_RUNBOOK.md) in a real authorized Splunk instance, compare its exported results to the frozen expected corpus, and document divergences and tuning. Offline preparation is complete, runtime validation remains open.
 2. **Packet analysis case study** — analyze a permissibly sourced PCAP in Wireshark; report timeline, observable facts, ambiguities and any privacy limitations.
 3. **Vulnerability management lab** — scan owned or expressly authorized lab services; document findings, validation, severity rationale, remediation and rescan.
 4. **Security automation mini-service** — log normalization, data schema checks, malicious input handling, audit-friendly reporting, negative tests.

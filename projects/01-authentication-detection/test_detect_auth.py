@@ -64,5 +64,65 @@ class DetectionTests(unittest.TestCase):
         self.assertEqual(len(find_suspicious_logins(events)), 1)
 
 
+    def test_success_resets_below_threshold(self):
+        events = [event(i, "login_failure") for i in range(3)]
+        events += [event(3, "login_success"), event(4, "login_failure"),
+                   event(5, "login_failure"), event(6, "login_success")]
+        self.assertEqual(find_suspicious_logins(events), [])
+
+    def test_new_burst_after_nonalerting_success(self):
+        events = [event(i, "login_failure") for i in range(3)]
+        events += [event(3, "login_success")]
+        events += [event(i, "login_failure") for i in range(4, 9)]
+        events += [event(9, "login_success")]
+        results = find_suspicious_logins(events)
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0]["failure_count_in_window"], 5)
+        self.assertEqual(results[0]["earliest_failure_utc"], "2026-10-01T09:04:00Z")
+
+    def test_interleaved_different_users_are_independent(self):
+        events = [event(i * 2, "login_failure", "alice") for i in range(5)]
+        events += [event(i * 2 + 1, "login_failure", "bob") for i in range(5)]
+        events += [event(9, "login_success", "alice"),
+                   event(10, "login_success", "bob")]
+        results = find_suspicious_logins(events)
+        self.assertEqual({r["username"] for r in results}, {"alice", "bob"})
+
+    def test_reject_malformed_csv_row(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as directory:
+            csv_path = Path(directory) / "bad.csv"
+            csv_path.write_text(
+                "timestamp,username,source_ip,host,event_type\\n"
+                "2026-10-01T09:00:00Z,alice,192.0.2.15,LAB-DC1,login_failure,EXTRA\\n",
+                encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "Line 2"):
+                read_events(csv_path)
+
+    def test_validation_matrix_expected_matches_python_detector(self):
+        import json
+        from validate_matrix import normalized_python_rows, normalized_expected_rows
+        directory = Path(__file__).parent
+        actual = normalized_python_rows(find_suspicious_logins(
+            read_events(directory / "validation_events.csv")))
+        expected = normalized_expected_rows(json.loads(
+            (directory / "expected_findings.json").read_text(encoding="utf-8")))
+        self.assertEqual(actual, expected)
+        self.assertEqual(len(actual), 5)
+
+    def test_export_checker_rejects_missing_findings(self):
+        import tempfile
+        import json
+        from validate_matrix import read_splunk_export, normalized_expected_rows
+        with tempfile.TemporaryDirectory() as directory:
+            export = Path(directory) / "empty.csv"
+            export.write_text("timestamp,username,source_ip,failure_count_in_window\\n",
+                              encoding="utf-8")
+            expected = normalized_expected_rows(json.loads(
+                (Path(__file__).parent / "expected_findings.json").read_text(
+                    encoding="utf-8")))
+            self.assertNotEqual(read_splunk_export(export), expected)
+
+
 if __name__ == "__main__":
     unittest.main()
