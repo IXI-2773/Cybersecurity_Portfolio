@@ -23,5 +23,17 @@ jobs:
         run: python projects/01-authentication-detection/validate_matrix.py
       - name: Windows process triage tests (11)
         run: python -m unittest discover -s projects/02-windows-process-triage -p 'test_*.py' -v
+      - name: Network PCAP tests (18)
+        run: python -m unittest discover -s projects/03-network-pcap -p 'test_*.py' -v
+      - name: Generate and inspect synthetic PCAP
+        run: |
+          python projects/03-network-pcap/generate_fixture.py --output projects/03-network-pcap/synthetic_traffic.pcap
+          python projects/03-network-pcap/analyze_pcap.py projects/03-network-pcap/synthetic_traffic.pcap
+      - name: Attach generated PCAP for Wireshark review
+        uses: actions/upload-artifact@v4
+        with:
+          name: synthetic-network-pcap
+          path: projects/03-network-pcap/synthetic_traffic.pcap
+          retention-days: 7
       - name: Check local HTML links
         run: python scripts/check_links.py

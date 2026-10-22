@@ -11,9 +11,10 @@
 | --- | --- | --- |
 | Authentication log triage | [Synthetic login-detection lab](../projects/01-authentication-detection/) | 31 Python tests and 9 synthetic scenario families; SPL requires on-platform validation |
 | Windows process telemetry triage | [Synthetic Event 4688 lab](../projects/02-windows-process-triage/) | 11 Python tests; not deployed |
-| Python automation | Two standard-library CLI tools and JSON outputs | No third-party dependencies |
+| Network packet analysis | [Synthetic PCAP](../projects/03-network-pcap/) and [investigation report](../projects/03-network-pcap/CASE_REPORT.md) | 20 fabricated packets, 18 tests; no real network capture |
+| Python automation | Three standard-library analysis exercises and JSON outputs | No third-party dependencies |
 | SOC evidence handling & handoff | [Read-only analyst workflow](../projects/soc-analyst-workflow.html), [triage playbook](SOC_TRIAGE_PLAYBOOK.md) | Demonstrated documentation, not a claim of live incident-response employment |
-| Reproducible verification | 32 unit tests, offline SOC scenario checker, and [CI workflow](../.github/workflows/validate.yml) | CI status must be checked independently |
+| Reproducible verification | 60 unit tests, offline SOC scenario checker, and [CI workflow](../.github/workflows/validate.yml) | CI status must be checked independently |
 | Engineering quality and safeguards | [Celestial Resonance case study](../projects/celestial-resonance.html) | High-level private-project description |
 | Evidence provenance and permission boundaries | [RAI case study](../projects/research-ai-infrastructure.html) | Not a production security agent |
 

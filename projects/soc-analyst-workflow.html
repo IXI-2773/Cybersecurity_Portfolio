@@ -16,7 +16,7 @@
 <li><strong>Handoff:</strong> cite evidence and recommend only permitted next actions.</li></ol>
 <h2>Two worked synthetic examples</h2><h3>Authentication — potential brute force</h3><p>Six fabricated login failures followed by a success satisfy the threshold. MFA and real session context remain unobserved, so the case is not a confirmed incident. <a href="01-authentication-detection/SOC_CASE_REPORT.md">Read simulated investigation</a>.</p>
 <h3>Windows execution — technique-like command lines</h3><p>Fabricated Windows 4688 entries match an encoded PowerShell switch and certutil URL-cache flags. Both need context before malicious intent could be inferred. <a href="windows-process-triage.html">Read process case study</a>.</p>
-<h2>Source-backed supporting artifacts</h2><ul>
+<h3>Network traffic — DNS/HTTP review</h3><p>A fabricated PCAP contains failed DNS resolutions and HTTP POST behavior; neither confirms command-and-control or exfiltration. <a href="network-traffic-analysis.html">Read the network case study</a>.</p><h2>Source-backed supporting artifacts</h2><ul>
 <li><a href="../docs/SOC_TRIAGE_PLAYBOOK.md">Triage playbook</a> — steps, evidence boundaries and example escalation levels.</li>
 <li><a href="../docs/DETECTION_EVIDENCE_MATRIX.md">Evidence matrix</a> — rule coverage, test sources and what remains unverified.</li>
 <li><a href="../docs/ANALYST_HANDOFF_TEMPLATE.md">Handoff template</a> — a reusable record of observations and authorized next steps.</li>

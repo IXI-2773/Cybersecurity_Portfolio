@@ -6,5 +6,6 @@ splunk_raw_events.csv
 *.log
 .env
 .env.*
+projects/03-network-pcap/synthetic_traffic.pcap
 __pycache__/
 *.pyc

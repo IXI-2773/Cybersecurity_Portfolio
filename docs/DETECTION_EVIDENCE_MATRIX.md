@@ -9,7 +9,10 @@ Public evidence is deliberately separated from interpretations, live execution, 
 | PROC-02: certutil URL-cache flags | ATT&CK T1105 | Same process-creation CSV and rule | Same focused tests | Actual file transfer, network context, malicious intent |
 | SPLUNK-AUTH-01: translation of AUTH-01 | ATT&CK T1110 | [SPL query](../projects/01-authentication-detection/splunk.spl), [test runbook](../projects/01-authentication-detection/SPLUNK_RUNBOOK.md) | [Mocked REST runner tests](../projects/01-authentication-detection/test_live_smoke.py) | **Actual Splunk runtime and 64-event ingestion/results** |
 
-**Status:** The public GitHub Actions workflow exercises **42 Python tests** and synthetic validation checks. A passing test asserts behavior on synthetic fixtures; it is **not** a measurement of production detection effectiveness.
+| NET-DNS-01: NXDOMAIN burst | ATT&CK T1071.004 | [Synthetic PCAP generator](../projects/03-network-pcap/generate_fixture.py), [analyzer](../projects/03-network-pcap/analyze_pcap.py) | [18 packet tests](../projects/03-network-pcap/test_network_lab.py) | No live DNS logs, malicious tunneling or endpoint context |
+| NET-HTTP-01: unusual HTTP POST | ATT&CK T1071.001 | [Same PCAP](../projects/03-network-pcap/README.md), [expected findings](../projects/03-network-pcap/expected_findings.json) | Same tests and [synthetic report](../projects/03-network-pcap/CASE_REPORT.md) | No evidence of exfiltration or malicious destination |
+
+**Status:** The public GitHub Actions workflow exercises **60 Python tests** and synthetic validation checks. A passing test asserts behavior on synthetic fixtures; it is **not** a measurement of production detection effectiveness.
 
 ## Promotion requirements for future claims
 
