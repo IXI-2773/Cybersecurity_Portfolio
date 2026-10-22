@@ -55,3 +55,11 @@ The ten screenshots from workflow run [39854646324](https://github.com/IXI-2773/
 The Chrome workflow now checks the terminal status element for internal overflow and tests whether the primary project action starts within the first small-mobile viewport. It still cannot guarantee visual perfection or complete WCAG conformance.
 
 **No observed issue:** The sampled case-study screenshots show readable titles, appropriate native mobile navigation and consistent visual hierarchy. Browser automation previously reported zero page-level horizontal overflow.
+
+## Screenshot comparison follow-up
+
+A before/after review of the real 320px, 390px and 1280px Chrome snapshots confirmed that mobile whitespace and headline height were reduced and the desktop detector disclaimer now wraps rather than being truncated.
+
+**Remaining observation at 320px:** The primary project action was still at the very bottom of the initial viewport. The hero introduction has been shortened to make the action easier to reach, and the browser regression now requires that the **entire button** fit within the initial 320 × 720 viewport, not just its top edge.
+
+This visual review is limited to the captured viewports. Full keyboard navigation beyond the compact menu, contrast at every state, and screen-reader testing remain open work.

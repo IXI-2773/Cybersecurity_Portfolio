@@ -76,8 +76,9 @@ def main() -> None:
                         failures.append(f"{name}/{viewport}: terminal result clipped: {box_info}")
                     if viewport == "small-mobile":
                         cta = driver.find_element(By.CSS_SELECTOR, ".hero .actions .button.primary")
-                        if cta.rect["y"] - driver.execute_script("return window.scrollY") > height:
-                            failures.append(f"{name}/{viewport}: first portfolio CTA below initial viewport")
+                        if (cta.rect["y"] + cta.rect["height"] -
+                                driver.execute_script("return window.scrollY")) > height - 8:
+                            failures.append(f"{name}/{viewport}: portfolio CTA not fully visible in initial viewport")
                 desktop_nav = driver.find_element(By.CSS_SELECTOR, ".nav > nav")
                 menu = driver.find_element(By.CSS_SELECTOR, ".nav > details.mobile-nav")
                 if dimensions["viewport"] <= 800:
