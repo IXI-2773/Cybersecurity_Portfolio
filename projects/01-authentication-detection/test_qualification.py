@@ -12,7 +12,7 @@ def copy_csv_rows(rows, path, fields):
     with path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=fields)
         writer.writeheader()
-        writer.writerows(rows)
+        writer.writerows({key: row.get(key, "") for key in fields} for row in rows)
 
 
 def rows_from_csv(path):
