@@ -89,3 +89,20 @@ section[id]{scroll-margin-top:100px}
  .button:hover{transform:none}
  .project-card:hover{transform:none}
 }
+
+/* Screenshot review 2026-10-22: prevent the synthetic detector status from
+   clipping at desktop size; keep all explanatory language visible. */
+.terminal-result{white-space:normal;overflow-wrap:anywhere;word-break:normal;line-height:1.65}
+.terminal-result .muted{white-space:normal}
+.terminal-body .code-line{white-space:nowrap}
+@media(max-width:650px){
+ .hero{padding:44px 0 62px}
+ .hero h1{font-size:clamp(2.2rem,10.6vw,2.65rem);line-height:1.08;margin:18px 0 20px;letter-spacing:-.04em}
+ .hero-lead{line-height:1.65}
+ .hero .actions{margin:24px 0}
+}
+@media(max-width:370px){
+ .hero{padding-top:38px}
+ .hero h1{font-size:2.14rem;line-height:1.08}
+ .hero .button{min-height:44px}
+}

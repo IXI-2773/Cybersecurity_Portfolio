@@ -64,6 +64,20 @@ def main() -> None:
                 """)
                 if dimensions["scrollWidth"] > dimensions["viewport"] + 2:
                     failures.append(f"{name}/{viewport}: document horizontal overflow: {dimensions}")
+                if name == "home":
+                    # The last line of the synthetic terminal must not be clipped.
+                    status_box = driver.find_element(By.CSS_SELECTOR, ".terminal-result")
+                    box_info = driver.execute_script("""
+                        const el = arguments[0];
+                        return {width: el.clientWidth, content_width: el.scrollWidth,
+                                white_space: getComputedStyle(el).whiteSpace};
+                    """, status_box)
+                    if box_info["content_width"] > box_info["width"] + 2:
+                        failures.append(f"{name}/{viewport}: terminal result clipped: {box_info}")
+                    if viewport == "small-mobile":
+                        cta = driver.find_element(By.CSS_SELECTOR, ".hero .actions .button.primary")
+                        if cta.rect["y"] - driver.execute_script("return window.scrollY") > height:
+                            failures.append(f"{name}/{viewport}: first portfolio CTA below initial viewport")
                 desktop_nav = driver.find_element(By.CSS_SELECTOR, ".nav > nav")
                 menu = driver.find_element(By.CSS_SELECTOR, ".nav > details.mobile-nav")
                 if dimensions["viewport"] <= 800:

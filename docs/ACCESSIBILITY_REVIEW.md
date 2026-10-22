@@ -43,3 +43,15 @@ The [responsive checker](../scripts/visual_review.py) tests four homepage widths
 - Whether the document introduces unintended horizontal overflow.
 
 Results and **10 actual browser screenshots** are uploaded as the `responsive-website-review` Actions artifact when the job executes. This is a real headless Chrome rendering, not a synthetic visualization; however, screenshots still require human visual review and do not establish WCAG conformance or full accessibility.
+
+## Human screenshot review — October 22, 2026
+
+The ten screenshots from workflow run [39854646324](https://github.com/IXI-2773/Cybersecurity_Portfolio/actions/runs/39854646324) were inspected, not just counted. They include the homepage at 320, 390, 768 and 1280 pixels, and CR, Network and Vulnerability pages at 390 and 1280 pixels.
+
+**Observed issues and corrections:**
+- At 1280px, the synthetic detector's green status line was cut off after the explanation of a non-incident. The terminal status is now allowed to wrap rather than inherit `white-space: nowrap`.
+- At 320px, the homepage headline and upper whitespace consumed most of the initial viewport. Mobile spacing and heading sizing were reduced to make the main project action easier to find.
+
+The Chrome workflow now checks the terminal status element for internal overflow and tests whether the primary project action starts within the first small-mobile viewport. It still cannot guarantee visual perfection or complete WCAG conformance.
+
+**No observed issue:** The sampled case-study screenshots show readable titles, appropriate native mobile navigation and consistent visual hierarchy. Browser automation previously reported zero page-level horizontal overflow.
