@@ -99,3 +99,25 @@ A five-failure success sequence is **not proof** of account takeover or password
 - [Splunk `streamstats` reference](https://help.splunk.com/en/splunk-enterprise/spl-search-reference/10.2/search-commands/streamstats)
 - [Splunk source types and structured CSV extraction](https://help.splunk.com/en/splunk-cloud-platform/get-data-in/get-started-with-getting-data-in/10.2.2510/configure-source-types/manage-source-types)
 - [Splunk timestamp parsing and UTC considerations](https://help.splunk.com/en/splunk-enterprise/search/search-manual/10.4/specify-time-ranges/how-time-zones-are-processed-by-the-splunk-platform)
+
+## 6. Optional authenticated REST execution of the upload-free smoke test
+
+The [read-only runtime runner](run_live_splunk_smoke.py) uses the **current Splunk REST v2 export endpoint**: `POST /services/search/v2/jobs/export`. An authorized token with search permissions and **TLS-verified access to Splunk management port** are required. This does not upload files, run scans, write Splunk configuration or produce production incidents. It sends only the [seven fabricated events query](SPLUNK_SMOKE_TEST.spl).
+
+**Windows PowerShell** (run on a computer that can reach the authorized Splunk management endpoint):
+```powershell
+$env:SPLUNK_MGMT_URL = "https://your-authorized-splunk-host:8089"
+python projects/01-authentication-detection/run_live_splunk_smoke.py --report smoke_local.json
+```
+
+The script prompts for an API token **without echoing it** if `SPLUNK_API_TOKEN` is not configured and a terminal is available. Do not paste API tokens into GitHub issues, chat, public screenshots, or the repository. The URL must be an HTTPS management origin with a trusted certificate; there is **no insecure TLS bypass**.
+
+Run **without** `--report` to avoid writing an output file. Reports only record a minimal search-result comparison and cryptographic hashes, and intentionally do not include hostnames, tokens, usernames, or server version.
+
+Expected returned report status: `SMOKE_RESULT_PASS`, one result at `2026-10-05T09:05:00Z`, username `smoke_user`, IP `192.0.2.99`, five failed logins. Passing verifies only the returned response (not the full lab, nor the operator's claimed execution environment); additional independent screenshots and job provenance still matter.
+
+**Splunk Cloud Free Trial:** REST API access may be unavailable in the trial. In that case, use the Splunk Search UI and capture genuine results rather than weakening security controls or treating a failed API connection as a failed detection.
+
+Do not commit `smoke_local.json` or any export without reviewing it first. For export and incident-report evidence, follow sections 1–5.
+
+[Splunk REST API search/v2/jobs/export reference](https://help.splunk.com/en/splunk-enterprise/rest-api-reference/10.2/search-endpoints/search-endpoint-descriptions) · [Splunk authentication token reference](https://help.splunk.com/en/splunk-enterprise/leverage-rest-apis/rest-api-user-manual/10.6/rest-api-user-manual/basic-concepts-about-the-splunk-platform-rest-api)

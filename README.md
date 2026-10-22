@@ -6,7 +6,7 @@ A public, static portfolio presenting **reproducible synthetic defensive securit
 
 ## Start here
 - [Portfolio home](index.html) — skills and project index.
-- [Authentication detection case study](projects/authentication-detection.html) — reproducible, synthetic Python lab, 21 authentication tests, a simulated SOC investigation report, and a **Splunk runtime qualification package (not yet executed in Splunk)**.
+- [Authentication detection case study](projects/authentication-detection.html) — reproducible, synthetic Python lab, 31 authentication tests, a simulated SOC investigation report, and a **Splunk runtime qualification package (not yet executed in Splunk)**.
 - [Windows process execution triage case study](projects/windows-process-triage.html) — synthetic Windows Event ID 4688 exercise, 11 tests, ATT&CK hypotheses T1059.001 and T1105.
 - [Recruiter overview](docs/RECRUITER_OVERVIEW.md) — skills mapped to public evidence.
 - [Celestial Resonance case study](projects/celestial-resonance.html) — responsible high-level summary of reproducible software research, quality gates, and auditability.
@@ -25,7 +25,7 @@ python projects/01-authentication-detection/validate_matrix.py
 python projects/02-windows-process-triage/process_triage.py projects/02-windows-process-triage/events_4688.csv
 ```
 
-Expected: 32 locally passing tests across two synthetic exercises. The authentication fixture flags one login sequence for `alice` from `192.0.2.15`; the process-creation fixture returns two triage candidates. None is proof of real intrusion or production security efficacy.
+Expected: 42 locally passing tests across two synthetic exercises. The authentication fixture flags one login sequence for `alice` from `192.0.2.15`; the process-creation fixture returns two triage candidates. None is proof of real intrusion or production security efficacy.
 
 ## Publish using GitHub Pages
 Go to repository **Settings → Pages → Build and deployment → Deploy from a branch → main / (root)**. Save. After deployment, check the page in a private browser window. The website does not require JavaScript, frameworks, runtime credentials, analytics, third-party fonts, or paid hosting.

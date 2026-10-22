@@ -12,3 +12,5 @@ These are **planned exercises**, not delivered portfolio evidence. Do not presen
 Each lab needs a reproducible environment and commands, minimal dependencies, safe/synthetic or authorized inputs, a hypothesis, expected output, negative test cases, documented results, and candid coverage limits.
 
 Do not run scans or access systems without permission. Publish only scrubbed evidence.
+
+Runtime smoke execution: a [read-only token-based Splunk REST runner](01-authentication-detection/run_live_splunk_smoke.py) with deterministic CSV checks is prepared. **Mocked tests passing do not establish any real Splunk execution.**

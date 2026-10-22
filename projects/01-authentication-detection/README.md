@@ -38,3 +38,6 @@ The v2.1 tests add regressions for non-alerting success resets, independent iden
 4. Attach authentic Splunk version, job IDs, sanitized screenshots and run settings before updating the public portfolio's qualification status.
 
 The SPL query now parses the UTC offset explicitly instead of interpreting the trailing `Z` as timezone-free text. Runtime acceptance remains **BLOCKED — NO CONNECTED SPLUNK INSTANCE**.
+
+### Live smoke runner prepared
+Run `python projects/01-authentication-detection/run_live_splunk_smoke.py` on an **authorized** host with `SPLUNK_MGMT_URL` pointing to the HTTPS management origin. A scoped REST token is entered invisibly at the terminal, or sourced from `SPLUNK_API_TOKEN`. The runner makes **one read-only Splunk v2 search/export call**, enforces TLS verification and blocks redirects. It fails closed unless the response contains exactly one expected result. Its ten focused tests use **mock transport** and **do not execute Splunk**.

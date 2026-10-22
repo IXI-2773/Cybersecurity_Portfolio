@@ -1,0 +1,10 @@
+# Local qualification artifacts; review before sharing
+smoke_local.json
+local_qualification.json
+splunk_findings.csv
+splunk_raw_events.csv
+*.log
+.env
+.env.*
+__pycache__/
+*.pyc
