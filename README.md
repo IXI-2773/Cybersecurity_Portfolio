@@ -2,20 +2,21 @@
 
 A public, static portfolio presenting **reproducible synthetic defensive security exercises** alongside **high-level case studies of private engineering work**.
 
+## Live portfolio website
+
+**[Visit the fully rendered cybersecurity portfolio](https://ixi-2773.github.io/Cybersecurity_Portfolio/)**. The [CR case study](https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/celestial-resonance.html) and [vulnerability remediation](https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/vulnerability-remediation.html) now have a successful GitHub Pages deployment. The published website is separate from GitHub's source-code view.
+
 ## Open the case studies right now
 
 **[View all six case studies in GitHub's readable format](projects/CASE_STUDIES.md).** This is the best option when browsing the repository; those pages display normally instead of exposing HTML source.
 
-For the **full designed website without GitHub Pages**, download the **`cybersecurity-portfolio-site` artifact** from the [latest successful GitHub Actions run](https://github.com/IXI-2773/Cybersecurity_Portfolio/actions), extract `cybersecurity-portfolio-site.zip`, and open `index.html` in your browser. The ZIP is automatically generated and validated in CI; no Python installation is required to view the extracted HTML.
+For an **offline backup of the designed site**, download the **`cybersecurity-portfolio-site` artifact** from the [latest successful GitHub Actions run](https://github.com/IXI-2773/Cybersecurity_Portfolio/actions), extract `cybersecurity-portfolio-site.zip`, and open `index.html` in your browser. The ZIP is automatically generated and validated in CI; no Python installation is required to view the extracted HTML.
 
 ## Website versus source code
 
-GitHub's **Code** tab shows HTML source rather than a rendered site. Enable GitHub Pages once using [Settings → Pages](https://github.com/IXI-2773/Cybersecurity_Portfolio/settings/pages) → **Deploy from branch → main → /(root)**. See the [site-launch guide](docs/SITE_LAUNCH.md).
+GitHub Pages is **enabled**, and GitHub has reported a successful build and deployment. Use the [live site](https://ixi-2773.github.io/Cybersecurity_Portfolio/) to view the styled HTML. The GitHub Code tab displays the *source* of `.html` files instead of rendering them; for code-hosted reading use the [Markdown case studies](projects/CASE_STUDIES.md).
 
-**Rendered site (after publishing is enabled):** https://ixi-2773.github.io/Cybersecurity_Portfolio/  
-**Rendered CR page (after publishing is enabled):** https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/celestial-resonance.html
-
-Opening a `github.com/.../blob/main/...html` link will continue to display source; use `github.io` after Pages is active.
+Automated deployment health checks are defined in [`check-live-pages.yml`](.github/workflows/check-live-pages.yml) and run independently of the Python project tests; a passing source CI is not itself a proof that a public HTTP endpoint responded.
 
 ## Certifications
 
@@ -66,8 +67,9 @@ python scripts/build_site_bundle.py --output cybersecurity-portfolio-site.zip
 
 Extract the ZIP fully before opening `index.html`. GitHub Actions generates a ready-made copy automatically on every successful `main` build.
 
-## Publish using GitHub Pages
-Go to repository **Settings → Pages → Build and deployment → Deploy from a branch → main / (root)**. Save. After deployment, check the page in a private browser window. The website does not require JavaScript, frameworks, runtime credentials, analytics, third-party fonts, or paid hosting.
+## GitHub Pages hosting
+
+Pages is configured for this repository. The current static site uses no JavaScript, frameworks, runtime credentials, analytics, external fonts or paid hosting. For hosting configuration, troubleshooting, and offline backup instructions, see [the site guide](docs/SITE_LAUNCH.md). [Check the latest Pages and website-health workflows](https://github.com/IXI-2773/Cybersecurity_Portfolio/actions).
 
 ## Public disclosure and accuracy
 - CR and RAI are **private** engineering projects. Do not publish their source, internal records, repository URLs, security-sensitive workflow details, or artifacts without a separate review.

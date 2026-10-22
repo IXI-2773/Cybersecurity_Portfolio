@@ -1,6 +1,6 @@
 # Don Lopez — Cybersecurity Portfolio Case Studies
 
-**GitHub-readable edition.** These Markdown pages display properly in GitHub **today**. They are an alternative to HTML files, which GitHub's Code tab displays as raw source until the separate Pages website is published.
+**GitHub-readable edition.** These Markdown pages display properly in GitHub **today**. They are an alternative to HTML files, which GitHub's Code tab always displays as source instead of rendering. The separate GitHub Pages website has been enabled.
 
 | Case study | Public evidence | Status |
 | --- | --- | --- |
@@ -15,4 +15,4 @@
 
 **Total:** 76 automated Python tests across four public synthetic labs. The [GitHub CI workflow](../.github/workflows/validate.yml) runs them.
 
-For the fully styled HTML site, use [GitHub Pages](../docs/SITE_LAUNCH.md) once enabled in repository settings. For an **offline styled preview** that does not require Pages, download `cybersecurity-portfolio-site.zip` from the latest successful [GitHub Actions run](https://github.com/IXI-2773/Cybersecurity_Portfolio/actions) and open `index.html` inside the extracted folder.
+For the fully styled HTML site, [open the published homepage](https://ixi-2773.github.io/Cybersecurity_Portfolio/) or consult the [Pages site guide](../docs/SITE_LAUNCH.md). For an **offline styled preview** that does not require Pages, download `cybersecurity-portfolio-site.zip` from the latest successful [GitHub Actions run](https://github.com/IXI-2773/Cybersecurity_Portfolio/actions) and open `index.html` inside the extracted folder.

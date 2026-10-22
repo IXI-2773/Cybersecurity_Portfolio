@@ -1,31 +1,32 @@
-# How to open the portfolio as a real website
+# Portfolio website — published and source-code viewing
 
-## Working alternatives that do not require Pages
+**Current Pages configuration:** Enabled. GitHub reported a successful Pages build and deployment for `IXI-2773/Cybersecurity_Portfolio` on October 22, 2026.
 
-**Read case studies directly in GitHub:** [Six readable Markdown case studies](../projects/CASE_STUDIES.md). These work now.
+The source-code URL `github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/projects/celestial-resonance.html` **always displays HTML source**. This is normal and separate from the published website.
 
-**Open the fully designed site locally:** From the [successful Actions workflow](https://github.com/IXI-2773/Cybersecurity_Portfolio/actions), download the `cybersecurity-portfolio-site` artifact, extract its ZIP, and open `index.html` in your browser. The archive includes CSS, illustrations and case-study pages; it does **not** create a public website.
-
-## Enable real online hosting
-
-GitHub's **Code** view displays `.html` files as source code. To render the designed portfolio site at its public `github.io` address, GitHub Pages must be enabled separately. Passing the code-test GitHub Actions workflow does **not** enable Pages.
-
-## One-time activation
-
-1. Sign in to GitHub and open [Cybersecurity_Portfolio → Settings → Pages](https://github.com/IXI-2773/Cybersecurity_Portfolio/settings/pages).
-2. Under **Build and deployment → Source**, select **Deploy from a branch**.
-3. Select **main** and **/(root)**, then **Save**.
-4. Check the Pages publishing/deployment status. If it fails, inspect the Pages workflow in the repository's Actions tab.
-
-Once publishing succeeds, these are the rendered URLs:
+## Open the rendered public site
 
 - [Portfolio homepage](https://ixi-2773.github.io/Cybersecurity_Portfolio/)
-- [Celestial Resonance — rendered case study](https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/celestial-resonance.html)
-- [Research AI Infrastructure — rendered case study](https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/research-ai-infrastructure.html)
-- [Vulnerability remediation — rendered case study](https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/vulnerability-remediation.html)
+- [Celestial Resonance](https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/celestial-resonance.html)
+- [RAI](https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/research-ai-infrastructure.html)
+- [Authentication detection](https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/authentication-detection.html)
+- [Windows process triage](https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/windows-process-triage.html)
+- [Network traffic analysis](https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/network-traffic-analysis.html)
+- [Vulnerability remediation](https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/vulnerability-remediation.html)
+- [SOC analyst workflow](https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/soc-analyst-workflow.html)
 
-These addresses may not work until Pages is enabled and successfully deployed.
+## Verify a future deployment
 
-**Do not use** `github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/projects/celestial-resonance.html` to view the designed page: that URL is specifically GitHub's source-file viewer.
+1. Review [GitHub Actions](https://github.com/IXI-2773/Cybersecurity_Portfolio/actions) for **pages build and deployment**. A successful status means GitHub reported publication success.
+2. Inspect the separate **Verify live GitHub Pages site** workflow; this checks HTTP availability of the homepage, seven case-study pages, and two static assets.
+3. If you see a browser 404, confirm the exact URL, clear a stale cache and check GitHub Pages settings/status. A completed normal Python CI workflow does **not** establish successful web hosting.
 
-If you see a 404, check Pages Settings, deployment status, the `main` branch and `/(root)` directory. The root `index.html` and `.nojekyll` are already present. CR and RAI source code remains private; the public website contains only high-level case studies.
+## Offline alternative
+
+Download the `cybersecurity-portfolio-site` artifact from a successful [portfolio CI run](https://github.com/IXI-2773/Cybersecurity_Portfolio/actions); extract the ZIP and open `index.html`. This is an offline preview, not a publicly hosted domain.
+
+## GitHub-native reading
+
+All six project descriptions are also provided as [GitHub-rendered Markdown case studies](../projects/CASE_STUDIES.md). They work inside GitHub without GitHub Pages.
+
+The public CR and RAI pages are safe high-level descriptions; private source and internal records remain undisclosed.
