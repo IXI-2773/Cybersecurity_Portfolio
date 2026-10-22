@@ -46,3 +46,16 @@ footer{border-top:1px solid var(--stroke)}.footer-inner{display:flex;justify-con
 .visual-disclaimer{font-size:.79rem;color:var(--muted);margin:5px 0 43px;max-width:860px}
 @media(max-width:850px){.network-evidence-gallery{grid-template-columns:1fr}.evidence-visual img{max-height:300px;object-fit:contain;background:#071522}}
 @media(prefers-reduced-motion:reduce){.evidence-visual{transition:none}}
+
+/* Explicitly labeled synthetic before/after vulnerability rule evidence. */
+.remediation-summary{display:grid;grid-template-columns:1fr 48px 1fr;gap:18px;align-items:center;margin:35px 0 15px}
+.remediation-result{border:1px solid var(--stroke);border-radius:15px;background:#0e2532;padding:25px;min-height:196px}
+.remediation-label{display:block;color:#a8becc;font-size:.73rem;letter-spacing:.1em;font-weight:800}
+.remediation-number{display:block;font-size:3.8rem;line-height:1.1;margin-top:12px;color:#e6ae7a}
+.remediation-zero{color:var(--teal)}
+.remediation-metric{display:block;color:#bcd2dd;font-size:.9rem}
+.remediation-meter{height:8px;border-radius:9px;overflow:hidden;background:#254657;margin:15px 0}
+.remediation-meter>span{display:block;height:100%;border-radius:9px}
+.remediation-result small{font-size:.76rem;line-height:1.5;color:var(--muted)}
+.remediation-arrow{font-size:2rem;color:var(--teal);text-align:center}
+@media(max-width:650px){.remediation-summary{grid-template-columns:1fr;gap:8px}.remediation-arrow{transform:rotate(90deg)}}
