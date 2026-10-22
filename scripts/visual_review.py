@@ -58,6 +58,7 @@ def main() -> None:
                 dimensions = driver.execute_script("""
                     return {
                       viewport: document.documentElement.clientWidth,
+                      viewportHeight: window.innerHeight,
                       scrollWidth: document.documentElement.scrollWidth,
                       mainWidth: document.querySelector('main').getBoundingClientRect().width
                     };
@@ -76,9 +77,12 @@ def main() -> None:
                         failures.append(f"{name}/{viewport}: terminal result clipped: {box_info}")
                     if viewport == "small-mobile":
                         cta = driver.find_element(By.CSS_SELECTOR, ".hero .actions .button.primary")
-                        if (cta.rect["y"] + cta.rect["height"] -
-                                driver.execute_script("return window.scrollY")) > height - 8:
-                            failures.append(f"{name}/{viewport}: portfolio CTA not fully visible in initial viewport")
+                        cta_bottom = driver.execute_script(
+                            "return arguments[0].getBoundingClientRect().bottom", cta)
+                        if cta_bottom > dimensions["viewportHeight"] - 1:
+                            failures.append(
+                                f"{name}/{viewport}: CTA bottom {cta_bottom:.1f}px exceeds "
+                                f"actual visible height {dimensions['viewportHeight']}px")
                 desktop_nav = driver.find_element(By.CSS_SELECTOR, ".nav > nav")
                 menu = driver.find_element(By.CSS_SELECTOR, ".nav > details.mobile-nav")
                 if dimensions["viewport"] <= 800:
@@ -102,6 +106,7 @@ def main() -> None:
                 driver.save_screenshot(str(out))
                 results.append({"page": relative, "viewport": viewport, "requested_width": width,
                                 "observed_width": dimensions["viewport"],
+                                "observed_height": dimensions["viewportHeight"],
                                 "scroll_width": dimensions["scrollWidth"],
                                 "screenshot": out.relative_to(ROOT).as_posix()})
 

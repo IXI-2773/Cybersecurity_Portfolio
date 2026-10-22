@@ -63,3 +63,9 @@ A before/after review of the real 320px, 390px and 1280px Chrome snapshots confi
 **Remaining observation at 320px:** The primary project action was still at the very bottom of the initial viewport. The hero introduction has been shortened to make the action easier to reach, and the browser regression now requires that the **entire button** fit within the initial 320 × 720 viewport, not just its top edge.
 
 This visual review is limited to the captured viewports. Full keyboard navigation beyond the compact menu, contrast at every state, and screen-reader testing remain open work.
+
+## Actual viewport height correction
+
+The final screenshots revealed that headless Chrome's **visible content viewport** is shorter than the height passed to `set_window_size` (the 320px screenshot used about 577px of visible page height). The primary-action visibility check now uses `window.innerHeight` and the button's `getBoundingClientRect().bottom` instead of the requested outer window height. The screenshot report records actual rendered viewport height separately.
+
+This ensures a future regression cannot pass merely because a button exists just below the genuinely visible first screen.
