@@ -93,8 +93,8 @@ class DetectionTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             csv_path = Path(directory) / "bad.csv"
             csv_path.write_text(
-                "timestamp,username,source_ip,host,event_type\\n"
-                "2026-10-01T09:00:00Z,alice,192.0.2.15,LAB-DC1,login_failure,EXTRA\\n",
+                "timestamp,username,source_ip,host,event_type\n"
+                "2026-10-01T09:00:00Z,alice,192.0.2.15,LAB-DC1,login_failure,EXTRA\n",
                 encoding="utf-8")
             with self.assertRaisesRegex(ValueError, "Line 2"):
                 read_events(csv_path)
@@ -116,7 +116,7 @@ class DetectionTests(unittest.TestCase):
         from validate_matrix import read_splunk_export, normalized_expected_rows
         with tempfile.TemporaryDirectory() as directory:
             export = Path(directory) / "empty.csv"
-            export.write_text("timestamp,username,source_ip,failure_count_in_window\\n",
+            export.write_text("timestamp,username,source_ip,failure_count_in_window\n",
                               encoding="utf-8")
             expected = normalized_expected_rows(json.loads(
                 (Path(__file__).parent / "expected_findings.json").read_text(
