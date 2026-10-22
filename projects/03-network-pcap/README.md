@@ -21,6 +21,18 @@ Deterministic PCAP SHA-256:
 
 The binary is generated rather than tracked in Git. You can also download a generated PCAP from a successful CI run's artifact. [Frozen expected findings](expected_findings.json) are independently authored.
 
+## Visual evidence gallery (synthetic, not Wireshark screenshots)
+
+The figures below summarize *actual decoded events from the fabricated PCAP*. They are vector images stored in the public repository and can be inspected at full resolution.
+
+![Offline synthetic PCAP evidence overview](../../assets/network/pcap-evidence-overview.svg)
+
+![Four synthetic DNS NXDOMAIN replies and one normal DNS response](../../assets/network/dns-nxdomain-investigation.svg)
+
+![Synthetic HTTP request comparison: normal GET and a triage-candidate POST](../../assets/network/http-request-comparison.svg)
+
+**Evidence classification:** Offline illustrations from the deterministic fixture. They are **not** screenshots from Wireshark or live security tooling, and they make no claim of malicious activity.
+
 ## Review findings
 
 | Rule | Synthetic behavior | Limit |

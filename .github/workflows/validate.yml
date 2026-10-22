@@ -35,5 +35,7 @@ jobs:
           name: synthetic-network-pcap
           path: projects/03-network-pcap/synthetic_traffic.pcap
           retention-days: 7
+      - name: Validate static network figures and disclosure labels
+        run: python scripts/verify_network_visuals.py
       - name: Check local HTML links
         run: python scripts/check_links.py

@@ -26,6 +26,14 @@ What do repeated unsuccessful DNS lookups and a subsequent HTTP POST in fabricat
 
 **Alternatives and missing evidence:** Application misconfiguration or negative-cache effects can cause repeated NXDOMAIN; HTTP POST is routine in legitimate software. We lack endpoint process association, real resolver logs, proxy and TLS records, destination ownership, user intent and behavioral baselines.
 
+## Figures and integrity
+
+- [PCAP timeline and counts](../../assets/network/pcap-evidence-overview.svg)
+- [DNS response timing](../../assets/network/dns-nxdomain-investigation.svg)
+- [HTTP GET versus POST](../../assets/network/http-request-comparison.svg)
+
+These images depict fabricated packet data from a locally reproduced deterministic capture. They **do not** represent Wireshark application screenshots, or results of a live packet acquisition.
+
 ## Verification and handoff
 
 Recreate the PCAP, verify its digest, execute the analyzer, compare its two findings to [expected_findings.json](expected_findings.json) and run 18 unit tests. The parser has already passed those tests locally; **an actual Wireshark GUI inspection is not claimed**.

@@ -34,3 +34,15 @@ footer{border-top:1px solid var(--stroke)}.footer-inner{display:flex;justify-con
 .flow-step{font:800 .9rem ui-monospace,Consolas,monospace;color:var(--teal)}
 .operations-flow h3{margin:0;font-size:1rem}.operations-flow p{margin:4px 0 0;color:var(--muted);font-size:.87rem}
 @media(max-width:650px){.credential-grid{grid-template-columns:1fr}.credential-card{min-height:auto}.section-compact{padding:54px 0}}
+
+/* Synthetic packet-evidence visual gallery. Vector images are from reproducible offline observations. */
+.network-evidence-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:0 0 12px}
+.evidence-visual{display:block;overflow:hidden;border:1px solid var(--stroke);border-radius:14px;background:#102535;color:var(--text);text-decoration:none;transition:border-color .2s,transform .2s}
+.evidence-visual:hover{border-color:var(--teal);transform:translateY(-3px)}
+.evidence-visual img{display:block;width:100%;height:auto;aspect-ratio:12 / 7;object-fit:cover;border-bottom:1px solid var(--stroke)}
+.evidence-visual span{display:block;padding:13px 15px 15px}
+.evidence-visual strong{display:block;font-size:.88rem}
+.evidence-visual small{display:block;font-size:.74rem;line-height:1.5;color:var(--muted);margin-top:4px}
+.visual-disclaimer{font-size:.79rem;color:var(--muted);margin:5px 0 43px;max-width:860px}
+@media(max-width:850px){.network-evidence-gallery{grid-template-columns:1fr}.evidence-visual img{max-height:300px;object-fit:contain;background:#071522}}
+@media(prefers-reduced-motion:reduce){.evidence-visual{transition:none}}
