@@ -6,6 +6,7 @@ screen-reader/browser-level inspection. It guards important semantics and links.
 from __future__ import annotations
 
 from html.parser import HTMLParser
+import re
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
@@ -97,7 +98,7 @@ def check_page(path: Path, targets: dict[Path, set[str]]) -> list[str]:
         "projects/network-traffic-analysis.html": "Network Traffic Analysis",
         "projects/vulnerability-remediation.html": "Vulnerability Assessment",
         "projects/celestial-resonance.html": "Celestial Resonance",
-        "projects/research-ai-infrastructure.html": "Research AI Infrastructure",
+        "projects/research-ai-infrastructure.html": "RAI — Evidence-Aware Research Infrastructure",
     }
     expectation = expected_headings.get(rel)
     if expectation:
