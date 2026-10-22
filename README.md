@@ -2,6 +2,12 @@
 
 A public, static portfolio presenting **reproducible synthetic defensive security exercises** alongside **high-level case studies of private engineering work**.
 
+## Open the case studies right now
+
+**[View all six case studies in GitHub's readable format](projects/CASE_STUDIES.md).** This is the best option when browsing the repository; those pages display normally instead of exposing HTML source.
+
+For the **full designed website without GitHub Pages**, download the **`cybersecurity-portfolio-site` artifact** from the [latest successful GitHub Actions run](https://github.com/IXI-2773/Cybersecurity_Portfolio/actions), extract `cybersecurity-portfolio-site.zip`, and open `index.html` in your browser. The ZIP is automatically generated and validated in CI; no Python installation is required to view the extracted HTML.
+
 ## Website versus source code
 
 GitHub's **Code** tab shows HTML source rather than a rendered site. Enable GitHub Pages once using [Settings → Pages](https://github.com/IXI-2773/Cybersecurity_Portfolio/settings/pages) → **Deploy from branch → main → /(root)**. See the [site-launch guide](docs/SITE_LAUNCH.md).
@@ -19,16 +25,16 @@ Opening a `github.com/.../blob/main/...html` link will continue to display sourc
 Public badge URLs, exam versions, dates and renewal status have not been supplied. See the [credential record](docs/CREDENTIALS.md) for claim limits.
 
 ## Start here
-- [Portfolio home](index.html) — skills and project index.
-- [Authentication detection case study](projects/authentication-detection.html) — reproducible, synthetic Python lab, 31 authentication tests, a simulated SOC investigation report, and a **Splunk runtime qualification package (not yet executed in Splunk)**.
-- [Windows process execution triage case study](projects/windows-process-triage.html) — synthetic Windows Event ID 4688 exercise, 11 tests, ATT&CK hypotheses T1059.001 and T1105.
-- [Network Traffic Analysis](projects/network-traffic-analysis.html) — PCAP generator, DNS/HTTP inspection, 18 tests, synthetic case report, and three [offline evidence images](assets/network/pcap-evidence-overview.svg).
-- [Vulnerability Assessment & Remediation](projects/vulnerability-remediation.html) — localhost-only before/after HTTP hardening, 4 synthetic findings fixed, 16 tests.
+- [GitHub-readable project gallery](projects/CASE_STUDIES.md) — all six case studies without raw HTML or a 404.
+- [Authentication detection case study](projects/authentication-detection.md) — reproducible, synthetic Python lab, 31 authentication tests, a simulated SOC investigation report, and a **Splunk runtime qualification package (not yet executed in Splunk)**.
+- [Windows process execution triage case study](projects/windows-process-triage.md) — synthetic Windows Event ID 4688 exercise, 11 tests, ATT&CK hypotheses T1059.001 and T1105.
+- [Network Traffic Analysis](projects/network-traffic-analysis.md) — PCAP generator, DNS/HTTP inspection, 18 tests, synthetic case report, and three [offline evidence images](assets/network/pcap-evidence-overview.svg).
+- [Vulnerability Assessment & Remediation](projects/vulnerability-remediation.md) — localhost-only before/after HTTP hardening, 4 synthetic findings fixed, 16 tests.
 - [Recruiter overview](docs/RECRUITER_OVERVIEW.md) — skills mapped to public evidence.
-- [SOC analyst workflow](projects/soc-analyst-workflow.html), [incident triage playbook](docs/SOC_TRIAGE_PLAYBOOK.md), and [analyst handoff template](docs/ANALYST_HANDOFF_TEMPLATE.md).
+- [SOC analyst workflow](docs/SOC_TRIAGE_PLAYBOOK.md), [incident triage playbook](docs/SOC_TRIAGE_PLAYBOOK.md), and [analyst handoff template](docs/ANALYST_HANDOFF_TEMPLATE.md).
 - [Detection evidence matrix](docs/DETECTION_EVIDENCE_MATRIX.md) and [résumé-ready project bullets](docs/RESUME_PORTFOLIO_BULLETS.md).
-- [Celestial Resonance case study](projects/celestial-resonance.html) — responsible high-level summary of reproducible software research, quality gates, and auditability.
-- [RAI case study](projects/research-ai-infrastructure.html) — high-level summary of evidence provenance, permission boundaries, and governed research tooling.
+- [Celestial Resonance case study](projects/celestial-resonance.md) — responsible high-level summary of reproducible software research, quality gates, and auditability.
+- [RAI case study](projects/research-ai-infrastructure.md) — high-level summary of evidence provenance, permission boundaries, and governed research tooling.
 - [Future lab backlog](projects/PLANNED.md) — **planned**, not claimed as completed.
 
 ## Run all four security labs
@@ -50,6 +56,16 @@ python -m unittest discover -s projects/04-local-vulnerability-assessment -p 'te
 
 Expected: **76 Python tests across four synthetic exercises** (31 authentication, 11 Windows process, 18 network, 16 local vulnerability assessment). The authentication fixture flags one login sequence for `alice` from `192.0.2.15`; the process-creation fixture returns two triage candidates. None is proof of real intrusion or production security efficacy.
 
+## Offline website archive
+
+The [bundler source](scripts/build_site_bundle.py) also supports creating the same archive manually with:
+
+```bash
+python scripts/build_site_bundle.py --output cybersecurity-portfolio-site.zip
+```
+
+Extract the ZIP fully before opening `index.html`. GitHub Actions generates a ready-made copy automatically on every successful `main` build.
+
 ## Publish using GitHub Pages
 Go to repository **Settings → Pages → Build and deployment → Deploy from a branch → main / (root)**. Save. After deployment, check the page in a private browser window. The website does not require JavaScript, frameworks, runtime credentials, analytics, third-party fonts, or paid hosting.
 
@@ -65,14 +81,15 @@ See [SECURITY.md](SECURITY.md) for disclosure handling and [PUBLICATION_CHECKLIS
 ## Structure
 ```text
 index.html, styles.css               Static website
-projects/*.html                    Employer-readable case studies
+projects/*.html                    Designed Pages case studies
+projects/*.md                      GitHub-native readable versions of all six case studies
 projects/01-authentication-detection/   Executable authentication lab
 projects/02-windows-process-triage/     Executable Windows event triage lab
 projects/03-network-pcap/              Generated PCAP exercise with source, tests, case report
 projects/04-local-vulnerability-assessment/ Toy localhost web hardening + before/after audit
 docs/RECRUITER_OVERVIEW.md            Skills mapped to evidence
 projects/PLANNED.md                Honest roadmap
-.github/workflows/validate.yml      Small focused CI checks
+.github/workflows/validate.yml      Small focused CI checks + offline site preview archive
 ```
 
 ## License

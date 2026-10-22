@@ -1,6 +1,14 @@
 # How to open the portfolio as a real website
 
-GitHub's **Code** view displays `.html` files as source code. To render the designed portfolio site, GitHub Pages must be configured separately. Passing the code-test GitHub Actions workflow does **not** enable Pages.
+## Working alternatives that do not require Pages
+
+**Read case studies directly in GitHub:** [Six readable Markdown case studies](../projects/CASE_STUDIES.md). These work now.
+
+**Open the fully designed site locally:** From the [successful Actions workflow](https://github.com/IXI-2773/Cybersecurity_Portfolio/actions), download the `cybersecurity-portfolio-site` artifact, extract its ZIP, and open `index.html` in your browser. The archive includes CSS, illustrations and case-study pages; it does **not** create a public website.
+
+## Enable real online hosting
+
+GitHub's **Code** view displays `.html` files as source code. To render the designed portfolio site at its public `github.io` address, GitHub Pages must be enabled separately. Passing the code-test GitHub Actions workflow does **not** enable Pages.
 
 ## One-time activation
 

@@ -43,3 +43,11 @@ jobs:
         run: python projects/04-local-vulnerability-assessment/audit_demo.py
       - name: Check local HTML links
         run: python scripts/check_links.py
+      - name: Build downloadable offline website preview
+        run: python scripts/build_site_bundle.py --output cybersecurity-portfolio-site.zip
+      - name: Attach browser-ready portfolio website archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: cybersecurity-portfolio-site
+          path: cybersecurity-portfolio-site.zip
+          retention-days: 30
