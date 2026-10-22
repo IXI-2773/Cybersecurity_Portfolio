@@ -1,0 +1,32 @@
+name: Verify live GitHub Pages site
+
+on:
+  workflow_run:
+    workflows:
+      - pages build and deployment
+    types:
+      - completed
+  workflow_dispatch:
+  schedule:
+    - cron: '17 16 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  live-site:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test offline response validator
+        run: python scripts/check_live_site.py --self-test
+      - name: Check published homepage, all seven case studies and shared assets
+        run: python scripts/check_live_site.py
