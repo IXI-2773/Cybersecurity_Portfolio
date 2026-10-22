@@ -14,7 +14,8 @@
 | Network packet analysis | [Synthetic PCAP](../projects/03-network-pcap/) and [investigation report](../projects/03-network-pcap/CASE_REPORT.md) | 20 fabricated packets, 18 tests; no real network capture |
 | Python automation | Three standard-library analysis exercises and JSON outputs | No third-party dependencies |
 | SOC evidence handling & handoff | [Read-only analyst workflow](../projects/soc-analyst-workflow.html), [triage playbook](SOC_TRIAGE_PLAYBOOK.md) | Demonstrated documentation, not a claim of live incident-response employment |
-| Reproducible verification | 60 unit tests, offline SOC scenario checker, and [CI workflow](../.github/workflows/validate.yml) | CI status must be checked independently |
+| Local vulnerability assessment | [Before/after web security exercise](../projects/04-local-vulnerability-assessment/) and [synthetic case report](../projects/04-local-vulnerability-assessment/CASE_REPORT.md) | Four deliberately introduced rule findings resolved; localhost only, not a third-party scan |
+| Reproducible verification | 76 unit tests, offline SOC scenario checker, and [CI workflow](../.github/workflows/validate.yml) | CI status must be checked independently |
 | Engineering quality and safeguards | [Celestial Resonance case study](../projects/celestial-resonance.html) | High-level private-project description |
 | Evidence provenance and permission boundaries | [RAI case study](../projects/research-ai-infrastructure.html) | Not a production security agent |
 

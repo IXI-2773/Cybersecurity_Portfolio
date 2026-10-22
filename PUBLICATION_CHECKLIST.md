@@ -4,7 +4,7 @@
 - [ ] Confirm Security+ and CySA+ issuance/renewal privately before describing them as active; only publish verification badges with permission.
 - [ ] Verify all newly published files contain no secrets, private project code, internal URLs, access tokens, proprietary research details or real user telemetry.
 - [ ] Confirm RAI and CR repositories remain private; only high-level summaries are shown publicly.
-- [ ] Run 31 authentication, 11 Windows process triage and 18 network PCAP tests and inspect expected output.
+- [ ] Run 31 authentication, 11 Windows process triage, 18 network PCAP and 16 local vulnerability fixture tests and inspect expected output.
 - [ ] Clearly label synthetic data, illustrative SPL and private architectural summaries.
 - [ ] Verify case study links, mobile presentation and keyboard navigation.
 - [ ] Enable GitHub Pages in Settings → Pages and verify the live URL after deployment.

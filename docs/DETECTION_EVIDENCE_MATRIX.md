@@ -12,7 +12,9 @@ Public evidence is deliberately separated from interpretations, live execution, 
 | NET-DNS-01: NXDOMAIN burst | ATT&CK T1071.004 | [Synthetic PCAP generator](../projects/03-network-pcap/generate_fixture.py), [analyzer](../projects/03-network-pcap/analyze_pcap.py) | [18 packet tests](../projects/03-network-pcap/test_network_lab.py) | No live DNS logs, malicious tunneling or endpoint context |
 | NET-HTTP-01: unusual HTTP POST | ATT&CK T1071.001 | [Same PCAP](../projects/03-network-pcap/README.md), [expected findings](../projects/03-network-pcap/expected_findings.json) | Same tests and [synthetic report](../projects/03-network-pcap/CASE_REPORT.md) | No evidence of exfiltration or malicious destination |
 
-**Status:** The public GitHub Actions workflow exercises **60 Python tests** and synthetic validation checks. A passing test asserts behavior on synthetic fixtures; it is **not** a measurement of production detection effectiveness.
+| WEB-01: synthetic response hardening | Missing security headers, cookie attributes and debug disclosure | [Toy loopback fixture](../projects/04-local-vulnerability-assessment/fixture_app.py) and [audit](../projects/04-local-vulnerability-assessment/audit_demo.py) | [16 focused tests](../projects/04-local-vulnerability-assessment/test_vulnerability_lab.py), four expected rule findings before and none after | No real app, CVSS, HTTPS/browser validation, or external vulnerability scan |
+
+**Status:** The public GitHub Actions workflow exercises **76 Python tests** and synthetic validation checks. A passing test asserts behavior on synthetic fixtures; it is **not** a measurement of production detection effectiveness.
 
 ## Promotion requirements for future claims
 
