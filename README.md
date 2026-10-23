@@ -119,7 +119,7 @@ Extract the ZIP fully before opening `index.html`. GitHub Actions generates a re
 
 ## GitHub Pages hosting
 
-Pages is configured for this repository. The current static site uses no JavaScript, frameworks, runtime credentials, analytics, external fonts or paid hosting. For hosting configuration, troubleshooting, and offline backup instructions, see [the site guide](docs/SITE_LAUNCH.md). [Check the latest Pages and website-health workflows](https://github.com/IXI-2773/Cybersecurity_Portfolio/actions).
+Pages is configured for this repository. The static site uses small, dependency-free JavaScript modules for optional project filtering and interactive public teaching checks. Case studies, evidence links, and contact navigation remain available without JavaScript. It uses no framework, runtime credentials, analytics, external fonts or paid hosting. For hosting configuration, troubleshooting, and offline backup instructions, see [the site guide](docs/SITE_LAUNCH.md). [Check the latest Pages and website-health workflows](https://github.com/IXI-2773/Cybersecurity_Portfolio/actions).
 
 ## Public disclosure and accuracy
 - CR and RAI are **private** engineering projects. Do not publish their source, internal records, repository URLs, security-sensitive workflow details, or artifacts without a separate review.
