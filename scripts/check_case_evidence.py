@@ -91,6 +91,14 @@ def main() -> None:
              and "user_boundary" in failure_report and "NOT PASSED" in failure_report,
              "Real Splunk mismatch record must preserve both missing detections")
 
+    # Stage B2 screenshot-reviewed findings must remain tied to frozen expected rows,
+    # while not asserting that query/SID or export provenance was obtained.
+    reviewed = get("projects/01-authentication-detection/SPLUNK_MATRIX_BOUNDARY_RETEST_RESULT_2026-10-23.md")
+    required("5/5" in reviewed and "cropped" in reviewed.lower()
+             and "64" in reviewed and "job" in reviewed.lower(),
+             "Stage B2 report must retain matching output and evidence limitations")
+    for user in ("user_threshold", "user_reset", "user_boundary", "user_alpha", "user_beta"):
+        required(user in reviewed, "Stage B2 observation missing expected account: " + user)
     # Recruiter-facing landing page must expose all four fixture-backed reports
     # and must not silently omit pending Splunk/Wireshark status.
     home = get("index.html")

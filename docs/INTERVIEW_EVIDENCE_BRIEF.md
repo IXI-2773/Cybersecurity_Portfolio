@@ -43,7 +43,7 @@ I built four independently reproducible defensive-security exercises covering au
 
 ## If asked about SIEM experience
 
-A screenshot from Splunk Enterprise, reviewed October 23, 2026, showed a seven-event synthetic authentication smoke test returning the expected single row with five failures. Full 64-event verification, exported results and job provenance remain pending. The screenshot has not been publicly committed; see the [observation record](../projects/01-authentication-detection/SPLUNK_SMOKE_OBSERVATION_2026-10-23.md).
+A screenshot from Splunk Enterprise, reviewed October 23, 2026, showed a seven-event synthetic authentication smoke test returning the expected single row with five failures. The initial 64-event Splunk search returned 3/5; a cropped screenshot of the corrected in-memory results matches all 5/5 synthetic expected findings. Indexed exports and independent search-job provenance remain unavailable. The screenshot has not been publicly committed; see the [observation record](../projects/01-authentication-detection/SPLUNK_SMOKE_OBSERVATION_2026-10-23.md).
 
 ## Answers to common challenges
 

@@ -26,4 +26,4 @@ A revised, **not yet executed** [explicit inclusive-window retest](SPLUNK_MATRIX
 
 The screenshot is supplied and visually examined in the conversation; it is **not preserved as a public image in this repository**. Search SID, exact Splunk version, query export, and authenticated raw/diagnostic output are unavailable. The screenshot verifies an application result but not its back-end job provenance.
 
-**Disposition:** `REAL_SPLUNK_MATRIX_PARITY_FAIL_3_OF_5`. Do not promote the full matrix to validated, alter the expected findings, or claim deployed detection efficacy.
+**Disposition at first run:** `REAL_SPLUNK_MATRIX_PARITY_FAIL_3_OF_5`. The original search remained incorrect. **Later update:** [the boundary-corrected Stage B2 result screenshot shows 5/5 expected rows](SPLUNK_MATRIX_BOUNDARY_RETEST_RESULT_2026-10-23.md). This preserves the original failure as a regression example without rewriting history.

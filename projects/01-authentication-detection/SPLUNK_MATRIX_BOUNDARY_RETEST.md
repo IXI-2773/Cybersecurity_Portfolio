@@ -1,6 +1,8 @@
-# Stage B2 — Splunk Boundary-Corrected Retest (Not Yet Executed)
+# Stage B2 — Splunk Boundary-Corrected Retest (Screenshot-Reviewed 5/5)
 
-**Owner:** Don Lopez · **Fixture:** Same frozen 64 synthetic events, nine scenarios, five expected matches  
+**Owner:** Don Lopez · **Fixture:** Same frozen 64 synthetic events, nine scenarios, five expected matches
+
+**Update, October 23, 2026:** [The operator-provided results screenshot matches all five expected rows](SPLUNK_MATRIX_BOUNDARY_RETEST_RESULT_2026-10-23.md). The cropped screenshot does not show the SPL query or SID, so this is a screenshot-reviewed result, not independently authenticated job provenance.  
 **Reason:** On October 23, 2026, the original Stage B `streamstats time_window=10m` query actually returned **3 findings instead of 5** in Splunk Enterprise.
 
 ## Real first-run observation
@@ -32,20 +34,20 @@ The frozen [64-row source](validation_events.csv) and [five expected detections]
 
 This is a **bounded validation technique** for the 64-event corpus, **not a production-ready high-volume alert**. Splunk documents that `list()` returns at most **100 values**, while streaming statistics also have configurable memory/window limits. Scaling this approach to production requires a separate detection design and capacity testing.
 
-## Run it without any upload
+## Reproduce the successful result without any upload
 
 1. Open [the corrected SPL](SPLUNK_MATRIX_BOUNDARY_RETEST.spl) in GitHub, click **Raw**, copy all the text.
 2. In Splunk **Search & Reporting**, choose **All time** and run the query.
 3. In **Statistics**, check that the result has **five rows**, each with `fixture_event_count=64`, `fixture_scenario_count=9`, and `failure_count_in_window=5`.
 4. Capture an authentic screenshot showing all five rows and any search diagnostics. If Splunk reports an error or still produces three findings, retain the result for further repair.
 
-Expected (not yet observed): `user_threshold` 09:05, `user_reset` 10:39, `user_boundary` 13:10, `user_alpha` 13:40, and `user_beta` 13:41 (all UTC on October 5, 2026).
+Expected and visible in the submitted Statistics screenshot: `user_threshold` 09:05, `user_reset` 10:39, `user_boundary` 13:10, `user_alpha` 13:40, and `user_beta` 13:41 (all UTC on October 5, 2026).
 
 ## Evidence classification
 
 - Stage A seven-event search: **SCREENSHOT-REVIEWED PASS**.
 - Stage B original full-matrix search: **OBSERVED 3/5 — PARITY FAIL**.
-- Stage B2 explicit-boundary candidate: **PREPARED — SPLUNK EXECUTION PENDING**.
+- Stage B2 explicit-boundary candidate: **5/5 RESULT SCREENSHOT-REVIEWED**; actual SPL job and SID not visible in cropped image.
 - Stage C indexed CSV ingestion/export comparison: **NOT YET VERIFIED**.
 
 There was **no real intrusion**. This is an observed discrepancy in a fabricated detector-validation exercise.

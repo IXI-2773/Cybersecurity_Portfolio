@@ -7,7 +7,7 @@
 
 The original query returned **3 rows**, each showing 64 fixture events and nine scenarios, but failed to report `user_boundary` at 13:10 UTC and `user_alpha` at 13:40 UTC. Both missing events involve the exact ten-minute boundary. [See observed row-by-row evidence and limitations](SPLUNK_MATRIX_FIRST_RUN_2026-10-23.md).
 
-**Next step:** Run [the boundary-corrected retest](SPLUNK_MATRIX_BOUNDARY_RETEST.spl) using the [new Stage B2 guide](SPLUNK_MATRIX_BOUNDARY_RETEST.md). Do **not** rerun this original query expecting it to pass unchanged.
+**Follow-up:** The later [boundary-corrected retest screenshot](SPLUNK_MATRIX_BOUNDARY_RETEST_RESULT_2026-10-23.md) matches 5/5 frozen expected rows. This original SPL remains preserved as a failed regression case; do **not** present it as a passing query.
 
 ## Original Stage B reproduction — intentionally preserved
 
