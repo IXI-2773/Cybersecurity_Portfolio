@@ -17,7 +17,7 @@ Paste [`SPLUNK_SMOKE_TEST.spl`](SPLUNK_SMOKE_TEST.spl) directly into **Splunk Se
 
 Expected: exactly **one** result: `smoke_user`, `192.0.2.99`, timestamp `2026-10-05T09:05:00Z`, count **5**. The second success at 09:06 must not produce another alert. This smoke query has a [screenshot-reviewed result from Splunk Enterprise](SPLUNK_SMOKE_OBSERVATION_2026-10-23.md); version, job ID and public screenshot provenance are still missing. Save the search job ID, version and a genuine screenshot if it runs.
 
-**Next without an upload:** Run the [Stage B 64-event in-memory query](SPLUNK_MATRIX_IN_MEMORY.spl) using [Stage B instructions](SPLUNK_MATRIX_IN_MEMORY.md). The seven-event smoke result does **not** establish this nine-scenario matrix or CSV ingestion.
+**Stage B result:** The original [64-event in-memory query](SPLUNK_MATRIX_IN_MEMORY.spl) actually returned **3/5** expected rows in an operator screenshot. [Observed failure report](SPLUNK_MATRIX_FIRST_RUN_2026-10-23.md). Both missing matches depend on the exact 600-second boundary; do **not** change the frozen oracle. **Next:** Run the [boundary-corrected 64-event SPL candidate](SPLUNK_MATRIX_BOUNDARY_RETEST.spl) with [Stage B2 instructions](SPLUNK_MATRIX_BOUNDARY_RETEST.md). The correction remains **unverified on Splunk** until the next actual run.
 
 ## 1. Upload and verify
 1. Open Splunk's **Add Data → Upload** (interface labels vary by version).
@@ -37,7 +37,9 @@ Paste [`splunk.spl`](splunk.spl) into Splunk Search, replacing the index/sourcet
 
 **UTC correction:** The search transforms the suffix `Z` into `+0000` and parses with `%z`, which explicitly declares an offset. The original `timestamp` field is preserved in output; do not rebuild a literal `Z` using a local-time `strftime`. This improvement follows Splunk time-zone guidance but has **not** been tested in a Splunk runtime. See [Splunk time-zone interpretation](https://help.splunk.com/en/splunk-enterprise/search/spl2-search-manual/dates-and-time/time-zones) and [time variables](https://help.splunk.com/en/splunk-enterprise/search/spl2-search-manual/dates-and-time/using-time-variables).
 
-**Implementation detail:** The first `streamstats current=f` computes the number of *prior* successful logins per (username, source_ip), providing a streak identifier. After every success, the next event for that key belongs to a new streak. The second `streamstats time_window=10m` counts only failures in the current streak. Sorting by global `_time` ensures that the time window is forward-looking in event processing order. Events with equal timestamps need an explicit deterministic tie-breaker; this fixture avoids ties.
+**Important qualification hold:** The indexed-file query [`splunk.spl`](splunk.spl) still contains the same `time_window=10m` predicate implicated in Stage B's real **3/5 parity failure**. It must **not** be labeled validated or used as a production alert. A bounded explicit-boundary candidate is available only in [Stage B2](SPLUNK_MATRIX_BOUNDARY_RETEST.md) pending actual Splunk results.
+
+**Implementation detail (original, currently failing the full matrix):** The first `streamstats current=f` computes the number of *prior* successful logins per (username, source_ip), providing a streak identifier. After every success, the next event for that key belongs to a new streak. The second `streamstats time_window=10m` counts only failures in the current streak. Sorting by global `_time` ensures that the time window is forward-looking in event processing order. Events with equal timestamps need an explicit deterministic tie-breaker; this fixture avoids ties.
 
 The query is **SPL (Splunk Search Processing Language)**, not SPL2. Splunk's `streamstats` has a configurable maximum event window (often 10,000 events), so large-scale ingestion needs separate qualification.
 

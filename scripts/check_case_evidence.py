@@ -74,6 +74,23 @@ def main() -> None:
              and "has not been committed" in evidence,
              "Screenshot review must not imply complete 64-event verification")
 
+    # The candidate retest uses precisely the same 64 source rows and
+    # an explicit inclusive 0..600 second comparison (not a wider window).
+    candidate = get("projects/01-authentication-detection/SPLUNK_MATRIX_BOUNDARY_RETEST.spl")
+    candidate_match = re.search(r'(?m)^\| eval fixture_rows="([^"]+)"$', candidate)
+    required(candidate_match is not None and candidate_match.group(1) == expected_payload,
+             "Boundary retest fixture differs from the frozen 64-event source")
+    for token in ("streamstats current=f list(failure_epoch)",
+                  "mvmap(prior_failure_times,_time-tonumber(prior_failure_times))",
+                  "mvfilter(isnotnull(age_seconds) AND age_seconds>=0 AND age_seconds<=600)"):
+        required(token in candidate, "Boundary candidate missing expected predicate: " + token)
+    required("time_window=10m" not in candidate,
+             "Boundary retest must not reuse the observed failing time-window term")
+    failure_report = get("projects/01-authentication-detection/SPLUNK_MATRIX_FIRST_RUN_2026-10-23.md")
+    required("3/5" in failure_report and "user_alpha" in failure_report
+             and "user_boundary" in failure_report and "NOT PASSED" in failure_report,
+             "Real Splunk mismatch record must preserve both missing detections")
+
     # Recruiter-facing landing page must expose all four fixture-backed reports
     # and must not silently omit pending Splunk/Wireshark status.
     home = get("index.html")

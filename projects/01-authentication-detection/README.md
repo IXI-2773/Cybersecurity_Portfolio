@@ -1,7 +1,7 @@
 # Authentication detection — reproducible synthetic lab
 
 **Implemented:** Python detector and focused tests.  
-**Partial Splunk runtime evidence:** A [seven-event screenshot](SPLUNK_SMOKE_OBSERVATION_2026-10-23.md) matches the expected smoke result. **Not verified:** full 64-event matrix, indexing, real SIEM deployment or accuracy.
+**Partial Splunk runtime evidence:** A [seven-event screenshot](SPLUNK_SMOKE_OBSERVATION_2026-10-23.md) matches the expected smoke result. **Not verified:** full 64-event parity (original run returned 3/5), indexing, real SIEM deployment or accuracy.
 
 ## Run
 ```sh
@@ -33,10 +33,11 @@ The v2.1 tests add regressions for non-alerting success resets, independent iden
 ## Splunk runtime qualification gate (next milestone)
 
 1. **Stage A passed:** The [seven-event smoke query](SPLUNK_SMOKE_TEST.spl) matches the [reviewed Splunk screenshot](SPLUNK_SMOKE_OBSERVATION_2026-10-23.md).
-2. **Stage B pending:** Run the [upload-free full 64-event matrix](SPLUNK_MATRIX_IN_MEMORY.spl) and compare the five expected findings.
-3. Follow the [runbook](SPLUNK_RUNBOOK.md) to ingest the 64-event matrix exactly once and export both raw event rows and five detection findings.
-4. Use [`qualify_exports.py`](qualify_exports.py) to compare **both** supplied CSV files against the frozen fixtures and emit SHA-256 provenance hashes. Passing a CSV comparison **never** certifies a live Splunk run.
-5. Attach authentic Splunk version, job IDs, sanitized screenshots and run settings before updating the public portfolio's qualification status.
+2. **Stage B observed failure:** The [original 64-event matrix](SPLUNK_MATRIX_IN_MEMORY.spl) returned **3 of 5** expected findings in Splunk. [Failure report](SPLUNK_MATRIX_FIRST_RUN_2026-10-23.md).
+3. **Stage B2 pending:** Run the [explicit-inclusive 64-event retest](SPLUNK_MATRIX_BOUNDARY_RETEST.spl) with its [instructions](SPLUNK_MATRIX_BOUNDARY_RETEST.md). No passing result has been observed yet.
+4. Follow the [runbook](SPLUNK_RUNBOOK.md) to ingest the 64-event matrix exactly once and export both raw event rows and five detection findings.
+5. Use [`qualify_exports.py`](qualify_exports.py) to compare **both** supplied CSV files against the frozen fixtures and emit SHA-256 provenance hashes. Passing a CSV comparison **never** certifies a live Splunk run.
+6. Attach authentic Splunk version, job IDs, sanitized screenshots and run settings before updating the public portfolio's qualification status.
 
 The SPL query now parses the UTC offset explicitly instead of interpreting the trailing `Z` as timezone-free text. Complete runtime qualification remains **PENDING**; only the seven-event application screenshot is reviewed.
 

@@ -1,13 +1,19 @@
 # Stage B — Splunk 64-Event In-Memory Matrix
 
-**Owner:** Don Lopez · **Status:** Prepared, **not yet executed in Splunk**.  
+**Owner:** Don Lopez · **Status:** **EXECUTED IN SPLUNK — PARITY FAILURE 3/5** on October 23, 2026 (operator screenshot). Original query retained as a regression artifact; [revised candidate](SPLUNK_MATRIX_BOUNDARY_RETEST.spl) remains **not yet executed**.  
 **Prerequisite:** The separate [seven-event upload-free smoke test](SPLUNK_SMOKE_TEST.spl) produced the expected one-row result in a user-provided screenshot on October 23, 2026.
 
-## Fastest next step — no upload or index permissions needed
+## Observed first run and next action
+
+The original query returned **3 rows**, each showing 64 fixture events and nine scenarios, but failed to report `user_boundary` at 13:10 UTC and `user_alpha` at 13:40 UTC. Both missing events involve the exact ten-minute boundary. [See observed row-by-row evidence and limitations](SPLUNK_MATRIX_FIRST_RUN_2026-10-23.md).
+
+**Next step:** Run [the boundary-corrected retest](SPLUNK_MATRIX_BOUNDARY_RETEST.spl) using the [new Stage B2 guide](SPLUNK_MATRIX_BOUNDARY_RETEST.md). Do **not** rerun this original query expecting it to pass unchanged.
+
+## Original Stage B reproduction — intentionally preserved
 
 1. Open Splunk Enterprise **Search & Reporting** and set the time range to **All time**.
 2. Open the [in-memory 64-event matrix search](SPLUNK_MATRIX_IN_MEMORY.spl), select **Raw**, copy its full contents, paste into Splunk Search and execute.
-3. Open **Statistics**. Capture an authentic screenshot showing the search, row count and all five findings. Save the search job ID and Splunk version where available.
+3. Open **Statistics**. The first real execution showed three findings, not five. Retain the actual output as a reproducible failure, then use the Stage B2 corrected candidate. Save the search job ID and Splunk version where available.
 4. Compare every row to [the independent expected findings](expected_findings.json). If anything differs, record the raw result; **do not change the oracle merely to make it pass**.
 
 Expected: **five finding rows**, each carrying `fixture_event_count=64` and `fixture_scenario_count=9` with these UTC timestamps, accounts and source IPs:
