@@ -207,6 +207,56 @@ def main() -> None:
              and all(f'href="#{anchor}"' in evidence_guide for anchor in
                      ("public-lab-title", "engineering-title", "browser-title")),
              "Evidence guide must retain all three in-page scope links")
+    # Four genuinely separate labs now have concise analyst-facing source
+    # summaries, not a fabricated unified response case.
+    briefs = (
+        ("projects/authentication-detection.html", "64-event synthetic matrix",
+         "validation_events.csv", "Expected findings", "SPLUNK_MATRIX_BOUNDARY_RETEST.spl"),
+        ("projects/windows-process-triage.html", "two of five",
+         "events_4688.csv", "CASE_REPORT.md", "process lineage"),
+        ("projects/network-traffic-analysis.html", "20-frame PCAP",
+         "generate_fixture.py", "CASE_REPORT.md", "Wireshark GUI"),
+        ("projects/vulnerability-remediation.html", "four scoped fixture findings",
+         "audit_demo.py", "CASE_REPORT.md", "Localhost-only"),
+    )
+    for page, finding, source_a, source_b, guardrail in briefs:
+        public_case = get(page)
+        required(public_case.count('class="case-analyst-brief"') == 1
+                 and 'id="case-brief-title"' in public_case
+                 and 'data-reviewed-case="public-lab"' in public_case
+                 and public_case.count('class="case-brief-fact"') == 4
+                 and public_case.count('data-brief-limit="true"') == 1,
+                 "Public case must disclose question/observation/decision/limit: " + page)
+        required(all(phrase.lower() in public_case.lower() for phrase in
+                     (finding, source_a, source_b, guardrail)),
+                 "Public case summary missing supported evidence and scope: " + page)
+        required('href="#case-brief-title"' in public_case
+                 and 'class="case-brief-details"' in public_case
+                 and public_case.index('class="case-review-strip"')
+                 < public_case.index('class="case-analyst-brief"')
+                 < public_case.index('class="article-layout"'),
+                 "Public case summary must lead to evidence without replacing report: " + page)
+    guided = get("explore.html")
+    required(guided.count('class="explorer-playbook"') == 1
+             and guided.count('class="playbook-go"') == 4
+             and "independent training scenarios" in guided
+             and all(f'projects/{slug}.html#case-brief-title' in guided for slug in (
+                 "authentication-detection", "windows-process-triage",
+                 "network-traffic-analysis", "vulnerability-remediation")),
+             "Guided analyst paths must link four separate, scoped cases")
+    for page, kind, key in (
+        ("projects/authentication-detection.html", "identity", "user_boundary"),
+        ("projects/windows-process-triage.html", "endpoint", "powershell.exe"),
+        ("projects/network-traffic-analysis.html", "network", "NXDOMAIN"),
+        ("projects/vulnerability-remediation.html", "web", "nosniff")):
+        html = get(page)
+        required(html.count('class="case-evidence-contrast"') == 1
+                 and f'data-case-contrast="{kind}"' in html
+                 and 'id="case-evidence-contrast-title"' in html
+                 and html.count('class="case-contrast-side"') == 2
+                 and key in html
+                 and "source" in html.lower(),
+                 "Evidence contrast missing grounded signal/control: " + page)
     roles = get("roles.html")
     for target in ("soc-analyst", "security-analyst", "security-automation"):
         required(f'id="{target}"' in roles and f'href="#{target}"' in roles,
@@ -244,6 +294,30 @@ def main() -> None:
     required("independently authored" in guide.lower()
              and "private" in guide.lower(),
              "Public teaching engines must remain distinct from private implementations")
+    # Landing-page role clarity and genuine evidence must survive redesigns.
+    hiring_home = get("index.html")
+    import re as _hiring_re
+    hiring_h1 = _hiring_re.search(r"<h1[^>]*>(.*?)</h1>", hiring_home,
+                                  flags=_hiring_re.DOTALL | _hiring_re.IGNORECASE)
+    required(bool(hiring_h1) and "SOC Analyst" in hiring_h1.group(1),
+             "Homepage heading must identify target analyst role before scrolling")
+    required('class="hero-evidence-image"' in hiring_home
+             and 'src="assets/evidence/splunk-native-dashboard-results.png"' in hiring_home
+             and "Actual cropped screenshot" in hiring_home
+             and "Training data." in hiring_home
+             and "no production incidents" in hiring_home,
+             "Landing panel must show actual, scoped Splunk training evidence")
+    required(hiring_home.index('id="featured-splunk"') <
+             hiring_home.index('id="hiring-start"') <
+             hiring_home.index('id="boundary-replay"'),
+             "Source-first featured investigation should precede secondary recruiter routing")
+    required(hiring_home.count('class="hero-evidence-image"') == 1
+             and 'href="#featured-splunk">See the Splunk evidence' in hiring_home
+             and 'href="recruiter.html">One-page profile' in hiring_home,
+             "First-screen primary and secondary actions must match their destinations")
+    required("Information Systems &amp; Technology (Cybersecurity)" in hiring_home
+             and "holder-reported" in get("recruiter.html").lower(),
+             "Portfolio must retain credential scope context")
     # Homepage boundary preview must use the verified browser engine, not
     # hardcoded substitute detections. The static labels are only expected rows.
     source = get("index.html")
@@ -294,7 +368,7 @@ def main() -> None:
     required('href="roles.html"' in home_v4,
              "Homepage must expose the three-role hiring guide")
     onepage_html = get("recruiter.html")
-    required('href="apply.html">Choose ATS résumé' in onepage_html,
+    required('href="apply.html">Choose full résumé' in onepage_html,
              "Recruiter profile must not falsely label a link as a download")
     github_source = "https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/"
     for name, document in (
@@ -370,10 +444,79 @@ def main() -> None:
             required(prohibited.lower() not in role.lower(),
                      "Resume has unsupported detail or placeholder: " + prohibited)
     application_doc = get("docs/APPLICATION_READINESS.md")
-    required("actual employment history" in application_doc
+    required("Allied Universal" in application_doc
              and "not a guarantee" in application_doc
              and "not established" in application_doc,
              "Application guide must give accurate contact/employment and ATS limitations")
+    import re as _pii_re
+    _phone_pattern = r"(?<!\\d)(?:\\(\\d{3}\\)|\\d{3})[-. ]*\\d{3}[-. ]*\\d{4}(?!\\d)"
+    # Public brand stays Don Lopez while the uploaded resume supplies
+    # accurately qualified education and past physical-security employment.
+    for page_name in ("index.html", "recruiter.html", "apply.html"):
+        public_content = get(page_name)
+        required("Don Lopez" in public_content
+                 and "Brandon" not in public_content
+                 and not _pii_re.search(_phone_pattern, public_content),
+                 "Public page lost chosen brand or exposed private PDF details: " + page_name)
+    for public_name in ("resumes/Don_Lopez_SOC_Analyst.txt",
+                        "resumes/Don_Lopez_Security_Analyst.txt"):
+        public_resume = get(public_name)
+        for term in ("DON LOPEZ", "Allied Universal", "Security Officer",
+                     "Information Systems & Technology (Cybersecurity)",
+                     "California State University, San Bernardino",
+                     "SOC", "2019", "October 2026", "SCCDA",
+                     "Planned", "not earned", "December 2024"):
+            required(term.lower() in public_resume.lower(),
+                     "Owner-resume fact or planned-status missing: " + public_name + " / " + term)
+        required("Brandon" not in public_resume and not _pii_re.search(_phone_pattern, public_resume),
+                 "Public ATS text exposed private source PDF identity: " + public_name)
+        required("PORTFOLIO LABS, NOT EMPLOYMENT" in public_resume
+                 and "5 of 5" in public_resume
+                 and "Allied Universal" in public_resume,
+                 "Public ATS resume must distinguish real employment from synthetic labs")
+    required("Information Systems &amp; Technology (Cybersecurity)" in get("index.html")
+             and "Allied Universal" in get("index.html")
+             and "Allied Universal" in get("recruiter.html"),
+             "Homepage and recruiter profile must show corrected education and job history")
+    required("résumé-reported" in get("recruiter.html")
+             and "not claimed as paid SOC" in get("recruiter.html"),
+             "Recruiter profile must qualify source and SOC employment boundary")
+    reconciliation = get("docs/RESUME_SOURCE_RECONCILIATION_2026-10-23.md")
+    required("Don Lopez" in reconciliation and "5,000" in reconciliation
+             and "not independently verified" in reconciliation.lower()
+             and "not earned" in reconciliation.lower()
+             and not _pii_re.search(_phone_pattern, reconciliation) and "Brandon" not in reconciliation,
+             "Source reconciliation must distinguish owner resume from public lab proof")
+    # Print-ready versions complement, rather than substitute, owner-reported work history.
+    for pathname, role, leading_project in (
+        ("resume-soc.html", "SOC Analyst", "Authentication correlation"),
+        ("resume-security.html", "Security Analyst", "Localhost web hardening"),
+    ):
+        html = get(pathname)
+        for fact in ("Don Lopez", "Allied Universal", "Security Officer",
+                     "Information Systems &amp; Technology (Cybersecurity)",
+                     "California State University, San Bernardino",
+                     "CompTIA Security+", "CompTIA CySA+", "2019–Present",
+                     "Dec 2024", "not independently verified"):
+            required(fact.lower() in html.lower(), pathname + ": missing sourced fact " + fact)
+        required(role in html and leading_project in html
+                 and "window.print()" in html
+                 and 'href="apply.html"' in html,
+                 pathname + ": formatted résumé or print action incomplete")
+        required("Brandon" not in html and not _pii_re.search(_phone_pattern, html)
+                 and "tel:" not in html
+                 and "mailto:frailtycraven@gmail.com" in html,
+                 pathname + ": private source identity/contact leaked")
+        required('href="resumes/Don_Lopez_' in html,
+                 pathname + ": missing editable ATS text alternative")
+    required('href="resume-soc.html"' in application
+             and 'href="resume-security.html"' in application
+             and 'download="Don_Lopez_SOC_Analyst.txt"' in application
+             and 'download="Don_Lopez_Security_Analyst.txt"' in application,
+             "Application toolkit missing both accessible HTML and ATS text formats")
+    required("resume-soc.html" in get("sitemap.xml")
+             and "resume-security.html" in get("sitemap.xml"),
+             "Both printable resume documents must be discoverable in the sitemap")
     # Public release gates: do not automatically publish prior application contact
     # details or claim employer histories/verified issuer badges without evidence.
     gates = get("docs/PUBLICATION_GATES.md")

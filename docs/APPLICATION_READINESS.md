@@ -1,6 +1,6 @@
 # Application Readiness — Don Lopez
 
-This guide accompanies the public [application toolkit](https://ixi-2773.github.io/Cybersecurity_Portfolio/apply.html) and the two plain-text résumé drafts. The résumé files are starting materials to tailor truthfully, **not claims of prior paid cybersecurity employment**.
+This guide accompanies the public [application toolkit](https://ixi-2773.github.io/Cybersecurity_Portfolio/apply.html) and the two plain-text résumé drafts. The résumé files are starting materials to tailor truthfully, **not claims of prior paid SOC employment**.
 
 ## Select a role-specific version
 
@@ -16,12 +16,12 @@ This guide accompanies the public [application toolkit](https://ixi-2773.github.
 | Application element | Status | Public handling |
 | --- | --- | --- |
 | Portfolio and case studies | **Ready** | Public GitHub website, source, genuine cropped Splunk screenshot and four synthetic security labs |
-| Two role-specific résumé drafts | **Ready to tailor** | Public text files include the approved professional email; no invented employers or phone details |
+| Two role-specific résumé drafts | **Ready to tailor** | Public text files include the approved professional email; owner-résumé-reported Security Officer experience; no invented employers or phone details |
 | Professional profile | **Public** | [GitHub profile](https://github.com/IXI-2773); not represented as a guaranteed direct messaging channel |
 | Professional email | **Publicly approved** | [frailtycraven@gmail.com](mailto:frailtycraven@gmail.com) appears on the website and both résumé drafts |
 | Phone / other email addresses | **Not approved for public site** | Keep private unless separately authorized |
-| Employment chronology | **Unverified for publication** | No supported employer names, positions and dates available; do not present project labs as employment |
-| Security+ / CySA+ | **Holder-reported** | Public badge URLs, issue and expiration dates not supplied; [issuer-backed sharing guidance](CREDENTIALS.md) |
+| Employment chronology | **Résumé-reported; not independently verified** | Allied Universal Security Officer, 2019–present. Physical-security work is separate from public technical labs and is not SOC employment |
+| Security+ / CySA+ | **Holder-reported** | The supplied résumé reports CySA+ earned October 2026. Issue/expiry details for Security+ and issuer verification URLs remain unavailable; see [credential guidance](CREDENTIALS.md) |
 | Production SOC experience | **Not established** | No invented employment, real incident investigation or live SIEM deployments |
 
 [See publication gates](PUBLICATION_GATES.md) for the release record. **frailtycraven@gmail.com** is the approved direct contact; GitHub remains an evidence and professional-profile reference.
@@ -29,7 +29,7 @@ This guide accompanies the public [application toolkit](https://ixi-2773.github.
 ## Five-minute tailoring workflow
 
 1. Read the job posting and highlight no more than five **required** capabilities; check each against code or a genuinely completed task. Do not add a tool you have merely heard of or a credential not held.
-2. Choose the nearest résumé track and keep the text-only section headings **Professional Summary**, **Technical Skills**, **Selected Cybersecurity Projects**, **Education**, **Certifications**. Add actual employment history yourself when appropriate; never invent it.
+2. Choose the nearest résumé track and keep the text-only section headings **Professional Summary**, **Technical Skills**, **Selected Cybersecurity Projects**, **Education**, **Certifications**. Review the Allied Universal role and dates against employment records before submission; never invent experience.
 3. Reorder two or three project bullets to match the posting. For a SOC job, foreground Splunk, Windows Event 4688 and investigative judgement; for a security analyst role, foreground HTTP response controls, repeatable remediation checks and network evidence.
 4. Confirm **frailtycraven@gmail.com** remains the preferred email for employers. It appears in the public drafts. Add a phone number or alternative address only to a private copy unless separately authorized; review badge visibility and issued-to names before posting verification URLs.
 5. Paste the plain text into your preferred résumé editor; proofread dates, links, line wrapping and final PDF before submitting. A text copy is provided for ease of ATS parsing, **not a guarantee of ATS performance or hiring success**.
@@ -43,7 +43,7 @@ This guide accompanies the public [application toolkit](https://ixi-2773.github.
 
 ## Claims deliberately excluded
 
-- No salaried SOC tenure or employers were supplied.
+- No paid SOC analyst tenure was supplied. The separately identified Allied Universal Security Officer role is résumé-reported, not independently employer-verified.
 - No real breach, attacker attribution, production Splunk alert, indexed ingestion, Wireshark screenshot, independently audited credential status, or enterprise remediation was established.
 - No unverifiable precision/recall, detection latency, avoided losses, or threat statistics.
 

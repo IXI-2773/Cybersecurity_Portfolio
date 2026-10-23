@@ -1,8 +1,14 @@
 # Cybersecurity Portfolio — Don Lopez
 
+> Professional résumé alignment (October 2026): the owner supplied a private résumé listing the B.S. in Information Systems & Technology (Cybersecurity), California State University, San Bernardino, and Allied Universal Security Officer experience. The published portfolio keeps **Don Lopez** as the display name; the original PDF and private phone number are not committed. [Source distinctions](docs/RESUME_SOURCE_RECONCILIATION_2026-10-23.md).
+
 A public, static portfolio presenting **reproducible synthetic defensive security exercises** alongside **high-level case studies of private engineering work**.
 
 ## Hiring-team tools
+
+The four public security case studies each include a concise **question → fixture result → analyst disposition → evidence limit** summary, plus a keyboard-accessible source trail and next-investigation prompts. The Project Explorer also offers a guided four-exercise analyst path, expressly labeling these as **separate synthetic/localhost training scenarios rather than one incident**. The full case reports and private CR/RAI architecture boundaries remain unchanged.
+
+The release-candidate homepage introduces the target **SOC Analyst** role in the main heading, offers just two prominent first-screen actions (genuine Splunk evidence and printable recruiter profile), places the actual cropped saved-panel screenshot beside the introduction, and moves extra hiring routes after the detailed investigation. Its training-event limitations and direct text résumé download remain explicit. This is a navigation/presentation change, not a new executed security result.
 
 The Project Explorer, Verification Workbench and Evidence Review guide now share a three-step visual navigation bar, consistent restrained design, and narrow-screen layouts. The Explorer has synchronized role shortcuts; the workbench provides executable 599/600-second presets built on the existing public training engine; Evidence Review has direct jump links by evidence category. These presentation and navigation changes do not alter public test inputs or imply new private CR/RAI or live Splunk execution.
 
@@ -49,15 +55,19 @@ Public badge URLs, exam versions, dates and renewal status have not been supplie
 
 ## Public profile and verification policy
 
-The [publication readiness record](docs/PUBLICATION_GATES.md) reflects the owner's explicit approval to publish **frailtycraven@gmail.com** as the professional contact. Other email addresses, phone numbers, unverified employment chronology and issuer-backed badge URLs remain unpublished.
+The [publication readiness record](docs/PUBLICATION_GATES.md) reflects the owner's explicit approval to publish **frailtycraven@gmail.com** as the professional contact. Phone numbers, alternate emails and issuer-backed badge URLs remain unpublished. The professional name, exact degree and Security Officer employment history are now sourced to the owner-supplied October 2026 résumé; independent verification is not claimed.
+
+## Printable role-targeted résumés
+
+Two accessible, mobile-responsive, role-specific **HTML résumés** are linked from the [application toolkit](apply.html). [SOC Analyst](resume-soc.html) and [Security Analyst](resume-security.html) versions use professionally structured printable layouts and browser **Print / save PDF** functionality, rather than offering plain text as the only visual résumé format. The existing ATS-friendly text files remain available. Both use the selected public **Don Lopez** name, the résumé-reported Allied Universal physical-security role and correct CSUSB degree, with private source name/phone omitted. A Chrome PDF audit checks US-letter size, one-page output, and required content; a visual review is still necessary.
 
 ## Role-targeted job application materials
 
-[Open the application toolkit](https://ixi-2773.github.io/Cybersecurity_Portfolio/apply.html) to download **two ATS-oriented plain-text résumé drafts** and review interviewer evidence prompts. The SOC Analyst and Security Analyst versions contain the approved professional email, owner-reported credentials and source-backed lab work, without invented phone numbers, employment or production incidents. [Tailoring checklist](docs/APPLICATION_READINESS.md).
+[Open the application toolkit](https://ixi-2773.github.io/Cybersecurity_Portfolio/apply.html) to download **two ATS-oriented plain-text résumé drafts** and review interviewer evidence prompts. The SOC Analyst and Security Analyst versions contain the approved professional email, owner-reported credentials and source-backed lab work, with separately identified owner-reported Security Officer experience, no disclosed personal phone number, and no invented production SOC incidents. [Tailoring checklist](docs/APPLICATION_READINESS.md).
 
 ## Recruiter-ready web profile
 
-[View the print-friendly, one-page SOC Analyst profile](https://ixi-2773.github.io/Cybersecurity_Portfolio/recruiter.html). It presents the verified Splunk 3/5 → 5/5 case, credentials as owner-reported, and three additional source-linked security investigations; browser print can save it as PDF. It includes the approved professional email and excludes invented employers, phone numbers and operational incident claims.
+[View the print-friendly, one-page SOC Analyst profile](https://ixi-2773.github.io/Cybersecurity_Portfolio/recruiter.html). It presents the verified Splunk 3/5 → 5/5 case, credentials as owner-reported, and three additional source-linked security investigations; browser print can save it as PDF. It includes the approved professional email and identifies actual résumé-reported Security Officer work separately from synthetic investigations while withholding private phone information.
 
 ## One-page recruiter evidence brief
 

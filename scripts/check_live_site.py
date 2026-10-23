@@ -19,6 +19,8 @@ BASE = "https://ixi-2773.github.io/Cybersecurity_Portfolio/"
 EXPECTED_PAGES = {
     "": "Don Lopez",
     "apply.html": "Application Toolkit",
+    "resume-soc.html": "SOC Analyst Résumé",
+    "resume-security.html": "Security Analyst Résumé",
     "explore.html": "Project Explorer",
     "recruiter.html": "SOC Analyst Recruiter Profile",
     "roles.html": "Role Paths",

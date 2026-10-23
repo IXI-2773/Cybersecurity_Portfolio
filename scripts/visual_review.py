@@ -30,6 +30,8 @@ PAGES = {
     "soc-analyst-evidence": "projects/soc-analyst-evidence.html",
     "recruiter-profile": "recruiter.html",
     "application-toolkit": "apply.html",
+    "soc-resume": "resume-soc.html",
+    "security-resume": "resume-security.html",
     "celestial-resonance": "projects/celestial-resonance.html",
     "network": "projects/network-traffic-analysis.html",
     "vulnerability": "projects/vulnerability-remediation.html",
@@ -60,6 +62,7 @@ def main() -> None:
     results = []
     failures = []
     print_review = {"status": "NOT_RUN", "pages": None}
+    resume_print_review = {}
 
     with webdriver.Chrome(service=Service(executable_path=driver_exe), options=opts) as driver:
         driver.set_page_load_timeout(20)
@@ -122,6 +125,31 @@ def main() -> None:
                         body.send_keys(Keys.CONTROL, Keys.HOME)
                     if not bar.is_displayed():
                         failures.append(f"{name}/{viewport}: review shortcuts hidden")
+                if name in {"authentication", "windows", "network", "vulnerability"}:
+                    brief = driver.find_element(By.CSS_SELECTOR, ".case-analyst-brief")
+                    facts = brief.find_elements(By.CSS_SELECTOR, ".case-brief-fact")
+                    limits = brief.find_elements(By.CSS_SELECTOR, '[data-brief-limit="true"]')
+                    if len(facts) != 4 or len(limits) != 1 or not brief.is_displayed():
+                        failures.append(f"{name}/{viewport}: missing four evidence-bounded review facts")
+                    if not driver.find_elements(By.ID, "case-brief-title"):
+                        failures.append(f"{name}/{viewport}: missing direct reviewer anchor")
+                    disclosure = brief.find_element(By.CSS_SELECTOR, ".case-brief-details")
+                    summary = disclosure.find_element(By.TAG_NAME, "summary")
+                    summary.send_keys(Keys.ENTER)
+                    sources = brief.find_elements(By.CSS_SELECTOR, ".case-brief-source-links a")
+                    if disclosure.get_attribute("open") is None or len(sources) < 2 or any(not a.is_displayed() for a in sources):
+                        failures.append(f"{name}/{viewport}: source trail did not open with keyboard")
+                    summary.send_keys(Keys.ENTER)
+                    if disclosure.get_attribute("open") is not None:
+                        failures.append(f"{name}/{viewport}: source trail cannot close")
+                    body.send_keys(Keys.CONTROL, Keys.HOME)
+                if name in {"authentication", "windows", "network", "vulnerability"}:
+                    diagram = driver.find_element(By.CSS_SELECTOR, ".case-evidence-contrast")
+                    panels = diagram.find_elements(By.CSS_SELECTOR, ".case-contrast-side")
+                    if not diagram.is_displayed() or len(panels) != 2:
+                        failures.append(f"{name}/{viewport}: evidence comparison missing")
+                    if not diagram.find_element(By.CSS_SELECTOR, "figcaption a").is_displayed():
+                        failures.append(f"{name}/{viewport}: comparison missing direct source link")
                 if name == "role-paths":
                     sections = ("soc-analyst", "security-analyst", "security-automation")
                     if len(driver.find_elements(By.CSS_SELECTOR, ".role-route-card")) != 3:
@@ -171,6 +199,16 @@ def main() -> None:
                             failures.append(f"{name}/{viewport}: public browser evidence jump failed")
                     if not driver.find_element(By.CSS_SELECTOR, 'a[href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/splunk_workflow/NATIVE_DASHBOARD_RESULT_2026-10-23.md"]').is_displayed():
                         failures.append(f"{name}/{viewport}: missing native Splunk observation")
+                if name == "explorer":
+                    guide = driver.find_element(By.CSS_SELECTOR, ".explorer-playbook")
+                    links = guide.find_elements(By.CSS_SELECTOR, ".explorer-playbook-steps a")
+                    if len(links) != 4 or not guide.is_displayed():
+                        failures.append(f"{name}/{viewport}: expected four linked independent investigations")
+                    if "independent training scenarios" not in guide.text:
+                        failures.append(f"{name}/{viewport}: missing separate-fixture disclaimer")
+                    for link in links:
+                        if not link.get_attribute("href").endswith("#case-brief-title"):
+                            failures.append(f"{name}/{viewport}: guided investigation link has wrong target")
                 if name == "explorer":
                     def shown_cards():
                         return [el for el in driver.find_elements(By.CSS_SELECTOR, "[data-project-entry]") if el.is_displayed()]
@@ -266,8 +304,8 @@ def main() -> None:
                 if name == "recruiter-profile" and viewport == "desktop":
                     # A profile is not itself an ATS text résumé; follow the actual choice.
                     download_choice = driver.find_element(By.CSS_SELECTOR, '.recruiter-actions a[href="apply.html"]')
-                    if "Choose ATS résumé" not in download_choice.text:
-                        failures.append("recruiter/profile: résumé choice is labeled as an immediate download")
+                    if "Choose full résumé" not in download_choice.text:
+                        failures.append("recruiter/profile: expected clear link to full résumé choices")
                     click_control(download_choice)
                     if not driver.current_url.endswith("/apply.html") or len(
                             driver.find_elements(By.CSS_SELECTOR, ".application-role-actions a[download]")) != 2:
@@ -275,6 +313,39 @@ def main() -> None:
                     driver.get(url)
                     body = driver.find_element(By.TAG_NAME, "body")
                 if name == "home":
+                    # First-screen recruiter tasks: job identity and authentic
+                    # controlled proof, not a decorative rule diagram.
+                    h1_text = driver.find_element(By.CSS_SELECTOR, ".hero h1").text
+                    if "SOC Analyst" not in h1_text:
+                        failures.append(f"{name}/{viewport}: analyst role not in first heading")
+                    landing_actions = driver.find_elements(By.CSS_SELECTOR, ".hero .actions a")
+                    if len(landing_actions) != 2:
+                        failures.append(f"{name}/{viewport}: first screen needs exactly two main actions")
+                    else:
+                        if not landing_actions[0].get_attribute("href").endswith("#featured-splunk"):
+                            failures.append(f"{name}/{viewport}: primary action misses genuine Splunk evidence")
+                        if not landing_actions[1].get_attribute("href").endswith("/recruiter.html"):
+                            failures.append(f"{name}/{viewport}: secondary action misses printable profile")
+                    evidence_card = driver.find_element(By.CSS_SELECTOR, ".hero-evidence-panel")
+                    evidence_image = evidence_card.find_element(By.CSS_SELECTOR, ".hero-evidence-image img")
+                    if driver.execute_script(
+                            "return arguments[0].complete && arguments[0].naturalWidth > 0;",
+                            evidence_image) is not True:
+                        failures.append(f"{name}/{viewport}: hero genuine Splunk screenshot did not load")
+                    if "Training data." not in evidence_card.text or "no production incidents" not in evidence_card.text:
+                        failures.append(f"{name}/{viewport}: hero screenshot missing training disclaimer")
+                    if (driver.execute_script(
+                            "return arguments[0].compareDocumentPosition(arguments[1]) & Node.DOCUMENT_POSITION_FOLLOWING",
+                            driver.find_element(By.ID, "featured-splunk"),
+                            driver.find_element(By.ID, "hiring-start")) == 0):
+                        failures.append(f"{name}/{viewport}: extra hiring routes interrupt proof-first journey")
+                    if viewport == "small-mobile":
+                        primary = driver.find_element(By.CSS_SELECTOR, ".hero .actions .button.primary")
+                        position = driver.execute_script(
+                            "return {bottom: arguments[0].getBoundingClientRect().bottom, height: innerHeight}",
+                            primary)
+                        if position["bottom"] > position["height"] - 1:
+                            failures.append(f"{name}/{viewport}: primary hiring action below first viewport")
                     replay = driver.find_element(By.ID, "boundary-replay")
                     replay_buttons = replay.find_elements(By.CSS_SELECTOR, "[data-replay-window]")
                     if len(replay_buttons) != 2 or any(b.get_attribute("disabled") is not None for b in replay_buttons):
@@ -314,6 +385,24 @@ def main() -> None:
                         failures.append(f"{name}/{viewport}: recruiter section hidden")
                     if len(quick_view.find_elements(By.CSS_SELECTOR, ".soc-proof-card")) != 4:
                         failures.append(f"{name}/{viewport}: expected four SOC evidence cards")
+                    if driver.execute_script(
+                            "return arguments[0].compareDocumentPosition(arguments[1]) & Node.DOCUMENT_POSITION_FOLLOWING",
+                            quick_view, driver.find_element(By.ID, "boundary-replay")) == 0:
+                        failures.append(f"{name}/{viewport}: long replay interrupts project discovery")
+                    for card in quick_view.find_elements(By.CSS_SELECTOR, ".work-card"):
+                        proof = card.find_element(By.CSS_SELECTOR, "dl.work-proofline")
+                        descriptions = proof.find_elements(By.TAG_NAME, "dd")
+                        if len(descriptions) != 2 or any(not item.is_displayed() for item in descriptions):
+                            failures.append(f"{name}/{viewport}: project result or evidence scope hidden")
+                        for item in descriptions:
+                            if float(item.value_of_css_property("font-size").removesuffix("px")) < 14:
+                                failures.append(f"{name}/{viewport}: project evidence text below 14px")
+                        for label in proof.find_elements(By.TAG_NAME, "dt"):
+                            if driver.execute_script("return arguments[0].scrollWidth > arguments[0].clientWidth", label):
+                                failures.append(f"{name}/{viewport}: project evidence label clipped")
+                        for action in card.find_elements(By.CSS_SELECTOR, ".work-footer > a"):
+                            if action.rect["height"] < 44:
+                                failures.append(f"{name}/{viewport}: project source action below 44px")
                     main_link = quick_view.find_element(By.CSS_SELECTOR, "a[href='projects/soc-analyst-evidence.html']")
                     if not main_link.is_displayed():
                         failures.append(f"{name}/{viewport}: SOC evidence detail link missing")
@@ -395,9 +484,24 @@ def main() -> None:
                 driver.execute_script("window.scrollTo({top:0,left:0,behavior:'instant'})")
                 out = SCREENSHOTS / f"{name}-{viewport}.png"
                 driver.save_screenshot(str(out))
+                if name == "home" and viewport in {"desktop", "mobile", "small-mobile"}:
+                    gallery = driver.find_element(By.CSS_SELECTOR,
+                            ".work-grid" if viewport == "desktop" else ".work-grid .work-card")
+                    # Separate gallery capture makes evidence hierarchy reviewable
+                    # without viewport cropping or the sticky header over the cards.
+                    bounds = driver.execute_script("""
+                        const r = arguments[0].getBoundingClientRect();
+                        return {x:r.left + scrollX, y:r.top + scrollY,
+                                width:r.width, height:r.height, scale:1};
+                    """, gallery)
+                    capture = driver.execute_cdp_cmd("Page.captureScreenshot", {
+                        "format": "png", "captureBeyondViewport": True, "clip": bounds})
+                    (SCREENSHOTS / f"home-project-evidence-{viewport}.png").write_bytes(
+                        base64.b64decode(capture["data"]))
                 if viewport == "desktop" and name in {
                         "home", "explorer", "test-workbench", "evidence-review",
-                        "recruiter-profile", "role-paths"}:
+                        "recruiter-profile", "role-paths", "soc-resume", "security-resume", "authentication",
+                        "windows", "network", "vulnerability"}:
                     # Reviewer can inspect complete page hierarchy, not only the
                     # top viewport. This is still a raw Chrome screenshot.
                     metrics = driver.execute_cdp_cmd("Page.getLayoutMetrics", {})
@@ -406,10 +510,53 @@ def main() -> None:
                         "format": "png", "captureBeyondViewport": True,
                         "clip": {"x": 0, "y": 0,
                                  "width": min(1280, content_size["width"]),
-                                 "height": min(12000, content_size["height"]),
+                                 "height": min(3200 if name in {
+                                     "authentication", "windows", "network", "vulnerability"
+                                 } else 12000, content_size["height"]),
                                  "scale": 1}})
                     (SCREENSHOTS / f"{name}-full-desktop.png").write_bytes(
                         base64.b64decode(full["data"]))
+                if name in ("soc-resume", "security-resume"):
+                    sheet = driver.find_element(By.CSS_SELECTOR, ".resume-document")
+                    if not sheet.is_displayed() or "Don Lopez" not in sheet.text:
+                        failures.append(f"{name}/{viewport}: printable résumé not visible")
+                    for selector in ("#resume-experience", "#resume-projects",
+                                     "#resume-skills", "#resume-education",
+                                     "#resume-certs"):
+                        if not driver.find_elements(By.CSS_SELECTOR, selector):
+                            failures.append(f"{name}/{viewport}: missing résumé section {selector}")
+                    if "Allied Universal" not in sheet.text or "not independently verified" not in sheet.text:
+                        failures.append(f"{name}/{viewport}: missing résumé provenance disclosure")
+                    if "Brandon" in sheet.text or driver.find_elements(By.CSS_SELECTOR, "a[href^='tel:']"):
+                        failures.append(f"{name}/{viewport}: private contact field in résumé")
+                    if viewport == "desktop":
+                        outfile = SCREENSHOTS / f"{name}-print.pdf"
+                        try:
+                            obj = driver.execute_cdp_cmd("Page.printToPDF", {
+                                "printBackground": True, "displayHeaderFooter": False,
+                                "preferCSSPageSize": True})
+                            outfile.write_bytes(base64.b64decode(obj["data"]))
+                            reader = PdfReader(str(outfile))
+                            pages = len(reader.pages)
+                            extracted = "\n".join(p.extract_text() or "" for p in reader.pages)
+                            box = reader.pages[0].mediabox if pages else None
+                            letter = bool(box and abs(float(box.width)-612)<1
+                                          and abs(float(box.height)-792)<1)
+                            required = ("Don Lopez", "Allied Universal", "Security Officer",
+                                        "Information Systems", "CompTIA Security+",
+                                        "CompTIA CySA+", "Evidence scope:")
+                            missing = [term for term in required if term not in extracted]
+                            ok = pages == 1 and letter and not missing and "Brandon" not in extracted
+                            resume_print_review[name] = {"status": "PASS" if ok else "FAIL",
+                                "pages": pages, "letter": letter, "missing": missing,
+                                "filename": outfile.name}
+                            if not ok:
+                                failures.append(f"{name}/print: expected one US-letter page; "
+                                                f"pages={pages}, letter={letter}, missing={missing}")
+                        except (OSError, ValueError, KeyError) as exc:
+                            resume_print_review[name] = {"status": "FAIL",
+                                "reason": type(exc).__name__}
+                            failures.append(f"{name}/print: generated PDF could not be checked")
                 if name == "recruiter-profile" and viewport == "desktop":
                     pdf_path = SCREENSHOTS / "recruiter-print.pdf"
                     try:
@@ -420,7 +567,7 @@ def main() -> None:
                         reader = PdfReader(str(pdf_path))
                         pages = len(reader.pages)
                         printed_text = "\n".join(page.extract_text() or "" for page in reader.pages)
-                        required_text = ("Don Lopez", "Featured: Splunk authentication",
+                        required_text = ("Don Lopez", "Allied Universal", "Information Systems", "Featured: Splunk authentication",
                                          "Additional security investigations",
                                          "Technical evidence & approach", "Evidence scope:")
                         missing_text = [item for item in required_text if item not in printed_text]
@@ -450,7 +597,8 @@ def main() -> None:
               "motion_preference": "reduce",
               "pages": len(PAGES),
               "viewports_reviewed": len(results),
-              "screenshots": results, "print_review": print_review, "failures": failures,
+              "screenshots": results, "print_review": print_review,
+              "resume_print_review": resume_print_review, "failures": failures,
               "status": "PASS" if not failures else "FAIL",
               "limitations": "Checks keyboard nav and horizontal overflow; screenshots still need human visual review. Not a WCAG or screen-reader audit."}
     (SCREENSHOTS / "review.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
