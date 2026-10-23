@@ -5,7 +5,10 @@ Selenium and LOCAL file:// portfolio pages; no login or external page requests.
 """
 from __future__ import annotations
 
+import base64
 import json
+import re
+import subprocess
 from pathlib import Path
 import shutil
 
@@ -57,6 +60,7 @@ def main() -> None:
     opts.add_experimental_option("prefs", {"download.default_directory": str(downloads), "download.prompt_for_download": False})
     results = []
     failures = []
+    print_review = {"status": "NOT_RUN", "pages": None}
 
     with webdriver.Chrome(service=Service(executable_path=driver_exe), options=opts) as driver:
         driver.set_page_load_timeout(20)
@@ -386,8 +390,47 @@ def main() -> None:
                             failures.append(f"{name}/{viewport}: keyboard Enter did not close menu")
                 elif not desktop_nav.is_displayed() or menu.is_displayed():
                     failures.append(f"{name}/{viewport}: desktop nav visibility incorrect")
+                # Preserve an actual top-of-page capture, not the scroll position
+                # left behind by interaction tests (a prior review-artifact defect).
+                driver.get(url)
+                driver.execute_script("window.scrollTo({top:0,left:0,behavior:'instant'})")
                 out = SCREENSHOTS / f"{name}-{viewport}.png"
                 driver.save_screenshot(str(out))
+                if viewport == "desktop" and name in {
+                        "home", "explorer", "test-workbench", "evidence-review",
+                        "recruiter-profile", "role-paths"}:
+                    # Reviewer can inspect complete page hierarchy, not only the
+                    # top viewport. This is still a raw Chrome screenshot.
+                    metrics = driver.execute_cdp_cmd("Page.getLayoutMetrics", {})
+                    content_size = metrics.get("cssContentSize", metrics["contentSize"])
+                    full = driver.execute_cdp_cmd("Page.captureScreenshot", {
+                        "format": "png", "captureBeyondViewport": True,
+                        "clip": {"x": 0, "y": 0,
+                                 "width": min(1280, content_size["width"]),
+                                 "height": min(12000, content_size["height"]),
+                                 "scale": 1}})
+                    (SCREENSHOTS / f"{name}-full-desktop.png").write_bytes(
+                        base64.b64decode(full["data"]))
+                if name == "recruiter-profile" and viewport == "desktop":
+                    pdf_path = SCREENSHOTS / "recruiter-print.pdf"
+                    try:
+                        pdf = driver.execute_cdp_cmd("Page.printToPDF", {
+                            "printBackground": True, "displayHeaderFooter": False,
+                            "preferCSSPageSize": True})
+                        pdf_path.write_bytes(base64.b64decode(pdf["data"]))
+                        info = subprocess.run(
+                            ["pdfinfo", str(pdf_path)], capture_output=True,
+                            text=True, check=True, timeout=10)
+                        match = re.search(r"^Pages:\\s+(\\d+)", info.stdout, re.M)
+                        pages = int(match.group(1)) if match else None
+                        print_review = {"status": "PASS" if pages == 1 else "FAIL",
+                                        "pages": pages, "filename": "recruiter-print.pdf"}
+                        if pages != 1:
+                            failures.append(f"recruiter/print: expected one US-letter page, got {pages}")
+                    except (OSError, ValueError, subprocess.SubprocessError, KeyError) as error:
+                        print_review = {"status": "FAIL", "pages": None,
+                                        "reason": type(error).__name__}
+                        failures.append("recruiter/print: could not inspect generated PDF")
                 results.append({"page": relative, "viewport": viewport, "requested_width": width,
                                 "observed_width": dimensions["viewport"],
                                 "observed_height": dimensions["viewportHeight"],
@@ -399,7 +442,7 @@ def main() -> None:
               "motion_preference": "reduce",
               "pages": len(PAGES),
               "viewports_reviewed": len(results),
-              "screenshots": results, "failures": failures,
+              "screenshots": results, "print_review": print_review, "failures": failures,
               "status": "PASS" if not failures else "FAIL",
               "limitations": "Checks keyboard nav and horizontal overflow; screenshots still need human visual review. Not a WCAG or screen-reader audit."}
     (SCREENSHOTS / "review.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
