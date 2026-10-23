@@ -137,6 +137,23 @@ def main() -> None:
             required(row["timestamp"] in visual and row["source_ip"] in visual,
                      "Illustrative alert must match the frozen oracle boundary case")
 
+    # Feature only demonstrated Splunk scope; prevent stale "not run" homepage copy.
+    required('id="featured-splunk"' in home and "3 / 5" in home and "5 / 5" in home,
+             "Homepage missing featured Splunk debugging evidence")
+    required("Splunk execution still pending" not in home
+             and "have not been executed in Splunk" not in home
+             and "Splunk on-platform execution" not in home,
+             "Homepage contains obsolete pre-Splunk execution status")
+    required("indexed ingestion and alerts not verified" in home
+             and "practice dataset" in home.lower()
+             and "NATIVE_DASHBOARD_RESULT_2026-10-23.md" in home,
+             "Homepage must distinguish real Splunk UI evidence from untested deployment")
+    project_slice = home.split('id="projects"', 1)[1].split('id="evidence"', 1)[0]
+    security_pos = [project_slice.find(s) for s in (
+        "Authentication Detection", "Windows Process", "Network Traffic",
+        "Vulnerability Assessment", "Celestial Resonance", "Research AI Infrastructure")]
+    required(all(x >= 0 for x in security_pos) and security_pos == sorted(security_pos),
+             "Security labs must precede private engineering case studies")
     # Recruiter-facing landing page must expose all four fixture-backed reports
     # and must not silently omit pending Splunk/Wireshark status.
     home = get("index.html")

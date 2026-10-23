@@ -5,6 +5,12 @@
 **Certifications (owner-reported):** CompTIA Security+ and CompTIA CySA+. Public verification and renewal dates pending; see [credentials](CREDENTIALS.md).  
 **Portfolio:** [GitHub repository](https://github.com/IXI-2773/Cybersecurity_Portfolio) · [Live portfolio website](https://ixi-2773.github.io/Cybersecurity_Portfolio/)
 
+## Featured Splunk case — real tool, synthetic data
+
+**Quickest evidence path:** [Featured authentication investigation](https://ixi-2773.github.io/Cybersecurity_Portfolio/#featured-splunk) → [full case study](../projects/authentication-detection.html) → [screenshot-reviewed saved Splunk dashboard result](../splunk_workflow/NATIVE_DASHBOARD_RESULT_2026-10-23.md).
+
+In Splunk Enterprise Search & Reporting, the original 64-event authentication correlation produced **3 of 5** expected matches. A bounded, explicit-inclusive 600-second correction produced a screenshot-consistent **5/5**, then the operator saved a **one-panel dashboard** displaying those rows. The data represent nine fabricated test scenarios, not real events; search SID, exports and indexed ingestion were not authenticated. The original mismatch remains preserved as a debugging example.
+
 ## SOC Analyst starting point
 
 [Review the SOC Analyst evidence overview](https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/soc-analyst-evidence.html) for four source-linked synthetic investigations, or use the [GitHub-rendered evidence guide](SOC_ANALYST_EVIDENCE_GUIDE.md) for a five-minute verification path. Both explicitly distinguish completed local testing from Splunk, Wireshark and production outcomes still pending.

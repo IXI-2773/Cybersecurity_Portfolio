@@ -178,3 +178,35 @@ section[id]{scroll-margin-top:100px}
 .sim-alert dt{color:#a3c4d1}.sim-alert dd{margin:0;text-align:right;font-weight:600;overflow-wrap:anywhere}
 @media(max-width:760px){.sim-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.sim-alert{grid-template-columns:1fr}.sim-panel{padding:17px}.sim-chart-row{grid-template-columns:90px minmax(0,1fr) 50px;gap:8px}.sim-chart-label{font-size:.74rem}.sim-chart-total{font-size:.72rem}}
 @media(max-width:370px){.sim-stat{padding:12px}.sim-chart-row{grid-template-columns:75px minmax(0,1fr) 47px}}
+
+/* V4: recruiter-first verified Splunk investigation.
+   Screenshot-review table is deliberately not represented as a live widget. */
+.splunk-feature{background:linear-gradient(145deg,#0b2631,#0a1722 78%);border-bottom:1px solid var(--stroke);scroll-margin-top:85px}
+.splunk-feature .section-head p{max-width:490px}
+.splunk-feature-grid{display:grid;grid-template-columns:minmax(0,.96fr) minmax(0,1.04fr);gap:25px;align-items:stretch}
+.splunk-feature-copy{min-width:0}
+.splunk-statusline{display:flex;align-items:center;gap:9px;color:#a0e6d9;text-transform:uppercase;font-size:.71rem;font-weight:800;letter-spacing:.065em}
+.splunk-status-dot{width:8px;height:8px;border-radius:50%;background:#72d6bc;box-shadow:0 0 0 4px #184439}
+.splunk-feature-copy h3{font-size:clamp(1.35rem,2.55vw,1.8rem);line-height:1.22;margin:18px 0 12px}
+.splunk-feature-copy>p{color:#bdd1dc;font-size:.91rem;line-height:1.75}
+.splunk-progress{display:flex;align-items:center;gap:15px;margin:23px 0}
+.splunk-progress>div:not(.splunk-progress-arrow){flex:1;border:1px solid #355a68;background:#112a36;border-radius:12px;padding:13px;min-width:0}
+.splunk-progress span,.splunk-progress small{display:block;color:#a8c5d0;font-size:.75rem}
+.splunk-progress strong{display:block;font-size:1.55rem;color:#e3faf4;font-variant-numeric:tabular-nums;margin:4px 0}
+.splunk-progress-arrow{font-size:1.5rem;color:var(--teal);flex:none}
+.splunk-feature-links{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-top:19px}
+.splunk-feature-links .button{font-size:.82rem}
+.splunk-feature-copy .splunk-scope{font-size:.79rem;margin-top:19px;color:#9db9c7}
+.splunk-evidence-preview{border:1px solid #356072;border-radius:16px;background:#0b1923;overflow:hidden;min-width:0;align-self:start}
+.splunk-evidence-heading{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:9px;padding:17px 17px;background:#13303e;color:#d7e9ef;font-size:.77rem}
+.splunk-evidence-heading span:last-child{color:#83d9c8}
+.splunk-evidence-preview .evidence-scroll{overflow-x:auto}
+.splunk-evidence-table{border-collapse:collapse;min-width:470px;width:100%;font-size:.78rem;color:#d5e8ec}
+.splunk-evidence-table th{font-size:.7rem;color:#a3c0d0;text-transform:uppercase;letter-spacing:.02em;text-align:left;padding:13px 11px;border-bottom:1px solid #385362}
+.splunk-evidence-table td{padding:13px 11px;border-bottom:1px solid #263f4c;white-space:nowrap}
+.splunk-evidence-table code{color:#b8f0e2;font-size:.77rem}
+.splunk-evidence-table .splunk-boundary-row{background:#14343c}
+.splunk-evidence-preview .splunk-table-note{font-size:.76rem;color:#aec6d2;line-height:1.6;margin:16px}
+.splunk-evidence-preview .splunk-table-note a{color:var(--teal);text-underline-offset:3px}
+@media(max-width:950px){.splunk-feature-grid{grid-template-columns:1fr}.splunk-evidence-preview{max-width:780px}.splunk-feature .section-head{display:block}}
+@media(max-width:480px){.splunk-progress{gap:8px}.splunk-progress>div:not(.splunk-progress-arrow){padding:10px}.splunk-progress-arrow{font-size:1.15rem}.splunk-feature-copy .button{width:100%;text-align:center}.splunk-evidence-heading{padding:13px 14px}}

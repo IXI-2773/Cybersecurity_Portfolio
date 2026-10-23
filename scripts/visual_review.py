@@ -68,6 +68,9 @@ def main() -> None:
                 if dimensions["scrollWidth"] > dimensions["viewport"] + 2:
                     failures.append(f"{name}/{viewport}: document horizontal overflow: {dimensions}")
                 if name == "home":
+                    featured = driver.find_element(By.ID, "featured-splunk")
+                    if not featured.is_displayed() or len(featured.find_elements(By.CSS_SELECTOR, ".splunk-evidence-table tbody tr")) != 5:
+                        failures.append(f"{name}/{viewport}: missing featured five-row Splunk evidence section")
                     quick_view = driver.find_element(By.ID, "soc-evidence")
                     if not quick_view.is_displayed():
                         failures.append(f"{name}/{viewport}: recruiter section hidden")

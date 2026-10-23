@@ -4,6 +4,10 @@
 
 **Website:** [SOC Analyst evidence overview](https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/soc-analyst-evidence.html)
 
+## Fast track: authentic Splunk application evidence
+
+[Open the featured Splunk investigation on the live site](https://ixi-2773.github.io/Cybersecurity_Portfolio/#featured-splunk). The saved **one-panel** Splunk Search & Reporting dashboard was screenshot-reviewed, showing all five frozen expected findings over 64 artificial events. A previous search returned **3/5** due to boundary behavior; its failure and the correction are documented separately. No real incident, indexed CSV import or scheduled alert is claimed.
+
 ## Five-minute project review
 
 | Investigation | Demonstrated synthetic behavior | Independent public evidence | Tests | Unverified |
