@@ -113,6 +113,28 @@ def main() -> None:
              "Native dashboard evidence status or limitations drifted")
     for user in ("user_threshold", "user_reset", "user_boundary", "user_alpha", "user_beta"):
         required(user in native, "Native dashboard report missing source case " + user)
+    # This public visual is a reproducible synthetic example, never a claimed
+    # screenshot from Splunk or a real alert trigger.
+    visual = get("projects/splunk-synthetic-preview.html")
+    failed = sum(row["event_type"] == "login_failure" for row in rows)
+    succeeded = sum(row["event_type"] == "login_success" for row in rows)
+    for key, value in (("data-fixture-events", len(rows)),
+                       ("data-fixture-failures", failed),
+                       ("data-fixture-successes", succeeded),
+                       ("data-fixture-scenarios", len({r["scenario"] for r in rows})),
+                       ("data-expected-findings", 5)):
+        required(f'{key}="{value}"' in visual,
+                 "Simulated overview diverges from canonical fixture: " + key)
+    required("SIMULATED — NOT CAPTURED FROM SPLUNK" in visual
+             and "NOT A TRIGGERED SPLUNK ALERT" in visual
+             and "splunk_workflow/NATIVE_DASHBOARD_RESULT_2026-10-23.md" in visual,
+             "Visual preview must keep synthetic/real evidence boundaries explicit")
+    for row in __import__("json").loads(get(
+             "projects/01-authentication-detection/expected_findings.json"))["expected_findings"]:
+        if row["username"] == "user_boundary":
+            required(row["timestamp"] in visual and row["source_ip"] in visual,
+                     "Illustrative alert must match the frozen oracle boundary case")
+
     # Recruiter-facing landing page must expose all four fixture-backed reports
     # and must not silently omit pending Splunk/Wireshark status.
     home = get("index.html")

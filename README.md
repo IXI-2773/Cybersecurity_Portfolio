@@ -25,6 +25,10 @@ Automated deployment health checks are defined in [`check-live-pages.yml`](.gith
 
 Public badge URLs, exam versions, dates and renewal status have not been supplied. See the [credential record](docs/CREDENTIALS.md) for claim limits.
 
+## Synthetic visual demo — no additional Splunk work required
+
+[Open source-derived SOC charts and illustrative alert](https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/splunk-synthetic-preview.html). The graphs are computed from the existing **64 fabricated events**, with documentation-only IP addresses and a visible **not captured from Splunk** label. The alert specimen is hypothetical, not a triggered product alert. The genuine native [one-panel Splunk dashboard evidence](splunk_workflow/NATIVE_DASHBOARD_RESULT_2026-10-23.md) remains separate.
+
 ## New: installable Splunk SOC authentication lab
 
 **Splunk native dashboard verified:** An operator screenshot shows the one-panel **Don Lopez — SOC Authentication Investigation** dashboard within Search & Reporting displaying five expected synthetic results. [Observation and evidence limits](splunk_workflow/NATIVE_DASHBOARD_RESULT_2026-10-23.md). Six-panel XML, indexed ingestion and alerts remain unverified.

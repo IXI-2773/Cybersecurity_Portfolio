@@ -18,6 +18,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SCREENSHOTS = ROOT / "visual-review-screenshots"
 PAGES = {
     "home": "index.html",
+    "synthetic-soc-preview": "projects/splunk-synthetic-preview.html",
     "soc-analyst-evidence": "projects/soc-analyst-evidence.html",
     "celestial-resonance": "projects/celestial-resonance.html",
     "network": "projects/network-traffic-analysis.html",

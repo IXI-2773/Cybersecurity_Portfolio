@@ -6,6 +6,7 @@ Only change status based on genuine Splunk screenshots, exports or verified job 
 | --- | --- | --- | --- |
 | Previous 7-event SPL smoke | Query | Screenshot-reviewed 1/1 | Small synthetic SPL smoke passed |
 | Previous 64-event SPL matrix | Query and five-row oracle | Initial screenshot 3/5; cropped corrected results 5/5 | Bounded screenshot consistency; job provenance unverified |
+| Source-derived website trend charts and hypothetical alert | [Synthetic preview](../projects/splunk-synthetic-preview.html) | Generated from 64 fabricated records (not a Splunk screenshot) | Clearly labeled visual aid only, **not** alert triggering or SIEM monitoring |
 | Native Search & Reporting dashboard table | [No-app guide](NO_APP_GUIDE.md) | [Operator screenshot review: 5/5](NATIVE_DASHBOARD_RESULT_2026-10-23.md) | One panel rendered successfully; query and SID not visible |
 | Standalone six-panel Classic XML dashboard | [No-app XML](NO_APP_DASHBOARD.xml) | **Not yet executed** | Prepared only |
 | Bundled CSV lookup dashboard | Splunk app, CSV, Simple XML | **Not yet executed** | App source prepared; not demo runtime success |

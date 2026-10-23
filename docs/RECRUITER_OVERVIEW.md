@@ -9,6 +9,10 @@
 
 [Review the SOC Analyst evidence overview](https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/soc-analyst-evidence.html) for four source-linked synthetic investigations, or use the [GitHub-rendered evidence guide](SOC_ANALYST_EVIDENCE_GUIDE.md) for a five-minute verification path. Both explicitly distinguish completed local testing from Splunk, Wireshark and production outcomes still pending.
 
+## Illustrative SOC visuals (not actual SIEM screenshots)
+
+[The synthetic data overview](../projects/splunk-synthetic-preview.html) includes failure/success trends, top source IPs, and an **explicitly hypothetical** analyst alert generated from the frozen 64-event CSV. These are reproducible offline visualizations. Only the [native five-row Splunk dashboard](../splunk_workflow/NATIVE_DASHBOARD_RESULT_2026-10-23.md) was actually observed in-product.
+
 ## Prepared Splunk workflow (not executed in trial)
 
 A [no-install dashboard fallback](../splunk_workflow/NO_APP_GUIDE.md) is also prepared because the installed custom app returned 404 in the user's instance. The **native one-panel Search & Reporting dashboard now displays 5/5 findings** in a [real screenshot review](../splunk_workflow/NATIVE_DASHBOARD_RESULT_2026-10-23.md); the six-panel XML, indexing and alerts remain unverified.
