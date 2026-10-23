@@ -4,7 +4,7 @@
 **Education:** B.S. Cybersecurity, December 2024  
 **Certifications:** CompTIA Security+ and CySA+ (owner-reported; public badges/validity dates not independently available)
 
-[**Live portfolio**](https://ixi-2773.github.io/Cybersecurity_Portfolio/) · [**Featured Splunk investigation**](https://ixi-2773.github.io/Cybersecurity_Portfolio/#featured-splunk) · [**GitHub source**](https://github.com/IXI-2773/Cybersecurity_Portfolio)
+[**Printable recruiter profile**](https://ixi-2773.github.io/Cybersecurity_Portfolio/recruiter.html) · [**Live portfolio**](https://ixi-2773.github.io/Cybersecurity_Portfolio/) · [**Featured Splunk investigation**](https://ixi-2773.github.io/Cybersecurity_Portfolio/#featured-splunk) · [**GitHub source**](https://github.com/IXI-2773/Cybersecurity_Portfolio)
 
 ## Primary technical example — real Splunk Enterprise UI, controlled training data
 

@@ -164,6 +164,19 @@ def main() -> None:
     required("Splunk Enterprise" in bullets and "5/5" in bullets
              and "actual Splunk execution remains pending" not in bullets,
              "Resume bullets drifted to unsupported or obsolete Splunk status")
+    # Employer-facing website profile must remain a sourced, honest resume
+    # companion and never imply live production SOC employment.
+    profile = get("recruiter.html")
+    required("Splunk Enterprise Search &amp; Reporting" in profile
+             and "3 of 5" in profile and "5 of 5" in profile
+             and "64 synthetic events" in profile,
+             "Recruiter profile must preserve the observed synthetic debugging case")
+    required("Holder-reported" in profile and "not yet publicly archived" in profile
+             and "Indexed CSV ingestion" in profile,
+             "Recruiter profile must disclose credential and runtime limitations")
+    required('href="recruiter.html"' in home_v4
+             and "recruiter.html" in get("sitemap.xml"),
+             "Recruiter profile must be reachable from homepage and sitemap")
     # Recruiter-facing landing page must expose all four fixture-backed reports
     # and must not silently omit pending Splunk/Wireshark status.
     home = get("index.html")

@@ -25,6 +25,10 @@ Automated deployment health checks are defined in [`check-live-pages.yml`](.gith
 
 Public badge URLs, exam versions, dates and renewal status have not been supplied. See the [credential record](docs/CREDENTIALS.md) for claim limits.
 
+## Recruiter-ready web profile
+
+[View the print-friendly, one-page SOC Analyst profile](https://ixi-2773.github.io/Cybersecurity_Portfolio/recruiter.html). It presents the verified Splunk 3/5 → 5/5 case, credentials as owner-reported, and three additional source-linked security investigations; browser print can save it as PDF. It excludes invented employers, contact details and operational incident claims.
+
 ## One-page recruiter evidence brief
 
 [Review Don Lopez's SOC Analyst evidence brief](docs/RECRUITER_QUICK_BRIEF.md) — a concise, source-linked summary of the screenshot-reviewed Splunk debugging result, all four public labs, qualification limits and interview evidence.

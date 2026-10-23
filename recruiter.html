@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Don Lopez — SOC Analyst and Security Analyst recruiter profile. Real Splunk Enterprise authentication-debugging example, Security+ and CySA+, 76 Python tests, and source-linked case studies.">
+<meta name="theme-color" content="#07131e">
+<meta property="og:type" content="website"><meta property="og:title" content="Don Lopez | SOC Analyst Recruiter Profile">
+<meta property="og:description" content="A concise, evidence-backed recruiter profile with a Splunk investigation and three defensive security case studies.">
+<meta property="og:url" content="https://ixi-2773.github.io/Cybersecurity_Portfolio/recruiter.html">
+<link rel="canonical" href="https://ixi-2773.github.io/Cybersecurity_Portfolio/recruiter.html">
+<title>Don Lopez | SOC Analyst Recruiter Profile</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="topbar recruiter-chrome"><div class="container nav">
+<a class="logo" href="index.html">DL<span class="dot">.</span> SECURITY</a>
+<nav aria-label="Main navigation"><a href="index.html">Portfolio</a><a href="index.html#featured-splunk">Splunk</a><a href="projects/soc-analyst-evidence.html">SOC Evidence</a><a href="index.html#contact">Contact</a></nav>
+<details class="mobile-nav"><summary aria-label="Open site navigation">Menu</summary>
+<nav aria-label="Mobile navigation"><a href="index.html">Portfolio</a><a href="index.html#featured-splunk">Splunk</a><a href="projects/soc-analyst-evidence.html">SOC Evidence</a><a href="index.html#contact">Contact</a></nav></details>
+</div></header>
+<main id="main" class="container recruiter-main">
+<div class="recruiter-actions recruiter-screen-only">
+<a class="back" href="index.html">← Back to portfolio</a>
+<button type="button" class="button primary recruiter-print" onclick="window.print()">Print / save as PDF <span aria-hidden="true">↗</span></button>
+</div>
+<article class="recruiter-sheet" aria-labelledby="recruiter-name">
+<header class="recruiter-sheet-head">
+<div class="eyebrow">SECURITY OPERATIONS / ANALYST PORTFOLIO</div>
+<h1 id="recruiter-name">Don Lopez</h1>
+<p class="recruiter-position">SOC Analyst · Cybersecurity Analyst · Security Automation</p>
+<p class="recruiter-intro">Cybersecurity graduate with CompTIA Security+ and CySA+. Builds reproducible defensive-security investigations, tests detection logic against negative cases, and documents uncertainty rather than treating a rule match as a confirmed incident.</p>
+<div class="recruiter-links">
+<a href="https://ixi-2773.github.io/Cybersecurity_Portfolio/">Live portfolio</a>
+<a href="https://github.com/IXI-2773/Cybersecurity_Portfolio">GitHub repository</a>
+<a href="https://github.com/IXI-2773">GitHub profile</a>
+</div>
+</header>
+<div class="recruiter-credential-row">
+<div><strong>Education</strong><span>B.S. Cybersecurity · Dec 2024</span></div>
+<div><strong>Certifications</strong><span>CompTIA Security+ · CySA+</span><small>Holder-reported; public verification pending</small></div>
+<div><strong>Public lab suite</strong><span>4 defensive exercises · 76 Python tests</span></div>
+</div>
+<section class="recruiter-block" aria-labelledby="recruiter-featured">
+<div class="recruiter-section-title"><span>01</span><h2 id="recruiter-featured">Featured: Splunk authentication investigation</h2></div>
+<p class="recruiter-detail">Executed an authentication-correlation SPL search in <strong>Splunk Enterprise Search &amp; Reporting</strong> against 64 synthetic events across nine test scenarios. The first full-matrix search returned <strong>3 of 5</strong> expected findings, omitting two detections at the exact ten-minute boundary. Reworked the bounded search to calculate an <strong>inclusive 600-second window</strong>; the corrected results and saved one-panel Splunk dashboard displayed <strong>5 of 5</strong> expected findings in screenshots supplied by the operator.</p>
+<div class="recruiter-comparison" role="group" aria-label="Splunk boundary-debugging results">
+<div><small>Original query</small><strong>3 / 5</strong><span>Two boundary misses</span></div>
+<div class="recruiter-arrow" aria-hidden="true">→</div>
+<div><small>Corrected query</small><strong>5 / 5</strong><span>Saved Splunk table reviewed</span></div>
+</div>
+<p class="recruiter-evidence-links">
+<a href="projects/authentication-detection.html">Case study</a> ·
+<a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/projects/01-authentication-detection/SPLUNK_MATRIX_FIRST_RUN_2026-10-23.md">First-run discrepancy</a> ·
+<a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/projects/01-authentication-detection/SPLUNK_MATRIX_BOUNDARY_RETEST.spl">Corrected SPL</a> ·
+<a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/splunk_workflow/NATIVE_DASHBOARD_RESULT_2026-10-23.md">Dashboard observation record</a>
+</p>
+</section>
+<section class="recruiter-block" aria-labelledby="recruiter-projects">
+<div class="recruiter-section-title"><span>02</span><h2 id="recruiter-projects">Additional security investigations</h2></div>
+<div class="recruiter-project-grid">
+<div><h3>Windows Event 4688 triage</h3><p>Reviewed encoded PowerShell and certutil-style command patterns against benign controls; 11 focused tests. <a href="projects/windows-process-triage.html">Evidence →</a></p></div>
+<div><h3>Network traffic analysis</h3><p>Generated and analyzed a 20-packet DNS/HTTP PCAP with source-attributed rule candidates; 18 focused tests. <a href="projects/network-traffic-analysis.html">Evidence →</a></p></div>
+<div><h3>HTTP vulnerability remediation</h3><p>Verified four deliberate HTTP-response weaknesses stopped matching after fixes in a localhost toy fixture; 16 tests. <a href="projects/vulnerability-remediation.html">Evidence →</a></p></div>
+</div>
+</section>
+<section class="recruiter-block recruiter-bottom" aria-labelledby="recruiter-skills">
+<div class="recruiter-section-title"><span>03</span><h2 id="recruiter-skills">Technical evidence &amp; approach</h2></div>
+<div class="recruiter-skill-columns">
+<div><h3>Hands-on areas</h3><p>Splunk SPL, detection debugging, Python 3, Windows process creation, PCAP, DNS/HTTP, input validation, targeted tests, GitHub Actions CI.</p></div>
+<div><h3>Analyst method</h3><p>Verify source and time → correlate user/IP/host → test alternative explanations → document missing corroboration → escalate only with authorized context.</p></div>
+</div>
+</section>
+<p class="recruiter-qualification"><strong>Evidence scope:</strong> All public lab inputs are fabricated or localhost-only; tests are not production detection metrics. The one-panel Splunk dashboard was screenshot-reviewed in conversation, but the original image is not yet publicly archived. Indexed CSV ingestion, scheduled Splunk alert triggering, and real incident response were not demonstrated. Certification validity dates and badges remain unverified publicly.</p>
+</article>
+<p class="recruiter-screen-only recruiter-after">For expanded investigations, source code and verification limits, see the <a href="projects/soc-analyst-evidence.html">SOC Analyst evidence index</a> or <a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/docs/RECRUITER_QUICK_BRIEF.md">GitHub-readable evidence brief</a>.</p>
+</main>
+<footer class="recruiter-chrome"><div class="container footer-inner"><span>© 2026 Don Lopez · Source-linked portfolio</span><a href="index.html">Portfolio home ↗</a></div></footer>
+</body></html>

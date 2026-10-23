@@ -20,6 +20,7 @@ PAGES = {
     "home": "index.html",
     "synthetic-soc-preview": "projects/splunk-synthetic-preview.html",
     "soc-analyst-evidence": "projects/soc-analyst-evidence.html",
+    "recruiter-profile": "recruiter.html",
     "celestial-resonance": "projects/celestial-resonance.html",
     "network": "projects/network-traffic-analysis.html",
     "vulnerability": "projects/vulnerability-remediation.html",
