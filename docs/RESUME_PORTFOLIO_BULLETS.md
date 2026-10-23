@@ -10,8 +10,8 @@ These are evidence-limited wording options. They describe public projects, not i
 ## Projects
 - Built a Python authentication-correlation lab with negative tests for success/reset boundaries, source isolation and malformed inputs; documented findings using synthetic login events.
 - Developed a Windows process-creation triage exercise using fabricated Event ID 4688 records, identifying two PowerShell/certutil command-pattern candidates and documenting a source-attributed five-event synthetic investigation.
-- Built a deterministic 20-packet PCAP generator and a bounded Python DNS/HTTP analyzer, verified through 18 focused tests.
-- Built a localhost-only HTTP response-hardening exercise with four intentional misconfigurations, verified remediated behavior and 16 regression tests.
+- Built a deterministic 20-packet PCAP generator and a bounded Python DNS/HTTP analyzer, verified through 18 focused tests; produced a frame-attributed synthetic DNS/HTTP case report.
+- Built a localhost-only HTTP response-hardening exercise with four intentional misconfigurations, verified the four-to-zero reduction in fixed rule violations with 16 regression tests and a documented limits assessment.
 - Configured GitHub Actions to run **76 focused Python tests**, an offline validation matrix and link-integrity checks for a public portfolio.
 - Created a Splunk search qualification package, including synthetic events, frozen expected outputs, mock-tested REST execution tooling and an ingestion runbook; **actual Splunk execution remains pending**.
 - Documented high-level engineering techniques for evidence provenance, controlled authority and software quality using public-safe summaries of private CR and RAI projects.

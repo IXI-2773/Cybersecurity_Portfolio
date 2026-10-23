@@ -33,6 +33,10 @@ The figures below summarize *actual decoded events from the fabricated PCAP*. Th
 
 **Evidence classification:** Offline illustrations from the deterministic fixture. They are **not** screenshots from Wireshark or live security tooling, and they make no claim of malicious activity.
 
+## Analyst report and disposition
+
+[LAB-NET-001 — source-attributed packet investigation](CASE_REPORT.md) links the two findings to exact **UTC timestamps, generated frame numbers, rule conditions, benign controls and missing corroboration**. The documented decision is `SYNTHETIC_REVIEW_ONLY`: the test data do not establish C2 or exfiltration.
+
 ## Review findings
 
 | Rule | Synthetic behavior | Limit |

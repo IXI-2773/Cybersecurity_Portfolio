@@ -16,8 +16,8 @@ A standard-library Python script generates a classic Ethernet/IPv4 PCAP containi
 
 ![Synthetic HTTP GET/POST comparison](../assets/network/http-request-comparison.svg)
 
-These are offline **illustrations**, not Wireshark screenshots. Manual Wireshark inspection has not been performed.
+These are offline **illustrations**, not Wireshark screenshots. The [source-linked analyst report](03-network-pcap/CASE_REPORT.md) identifies packet frames **1–20**, exact trigger times, controls and a proportionate synthetic-only disposition. Manual Wireshark inspection has not been performed.
 
 [Generator and analyzer](03-network-pcap/README.md) · [Simulated network case report](03-network-pcap/CASE_REPORT.md) · [All case studies](CASE_STUDIES.md)
 
-**Designed page (once Pages is enabled):** https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/network-traffic-analysis.html
+**Live designed page:** https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/network-traffic-analysis.html

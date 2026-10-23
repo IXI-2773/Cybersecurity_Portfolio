@@ -1,43 +1,57 @@
-# Synthetic Network Threat-Hunting Case — LAB-NET-001
+# LAB-NET-001 — DNS and HTTP Packet Triage
 
-**Prepared by:** Don Lopez  
-**Classification:** Fabricated educational example, **not an actual incident**  
-**Source:** 20-packet PCAP generated offline by the published Python script  
-**Disposition:** `SYNTHETIC_TRIAGE_ONLY`
+**Analyst:** Don Lopez · **Classification:** Synthetic network investigation; **no real incident**  
+**Evidence:** [Deterministically generated classic PCAP](generate_fixture.py) · [offline decoder and predicates](analyze_pcap.py) · [frozen expected output](expected_findings.json)  
+**Scope:** 20 invented Ethernet/IPv4 packets; 12 decoded DNS/HTTP message events · **Finding count:** 2  
+**Disposition:** `SYNTHETIC_REVIEW_ONLY` — neither a confirmed C2 channel nor data theft
 
-## Question
+## 30-second analyst summary
 
-What do repeated unsuccessful DNS lookups and a subsequent HTTP POST in fabricated network telemetry actually establish?
+A fabricated client `192.0.2.10` generates four DNS A queries answered with NXDOMAIN within 36.2 seconds, followed later by an HTTP POST addressed to `collector.invalid/upload`. The offline rule engine identifies **two review candidates**: `NET_DNS_NXDOMAIN_BURST` at **12:00:36.200 UTC** and `NET_HTTP_POST_RESERVED_HOST` at **12:01:15.030 UTC** on October 10, 2026. A second client provides normal DNS/HTTP controls. These events were **constructed**, not captured from a device.
 
-## Synthetic timeline (2026-10-10 UTC)
+## Source-attributed packet timeline
 
-| UTC time | Source | Observation | Evidence interpretation |
+The frame positions below follow [`build_capture()`](generate_fixture.py), which sorts its generated packets by timestamp. They can be checked in the binary regenerated from that script.
+
+| UTC time (Oct 10, 2026) | Generated frame(s) | Evidence and source | Rule interpretation |
 | --- | --- | --- | --- |
-| 12:00:00–12:00:36.200 | `192.0.2.10` → `198.51.100.53` | Four matched DNS questions and NXDOMAIN replies for `bad-1.invalid` through `bad-4.invalid` | Failed-name pattern meets review threshold; no tunneling payload was observed |
-| 12:00:48–12:00:48.200 | `192.0.2.11` | Successful `portal.example` lookup | Benign comparison |
-| 12:01:00–12:01:00.040 | `192.0.2.11` → `203.0.113.80` | TCP handshake, GET `/index.html`, HTTP 200 | Benign comparison |
-| 12:01:15–12:01:15.040 | `192.0.2.10` → `203.0.113.80` | TCP handshake, POST to `collector.invalid/upload`; body is literal `SAFE` | Rule match only; no real data transfer to an external service |
+| 12:00:00.000–12:00:36.200 | **1–8** | Four A questions `bad-1.invalid` … `bad-4.invalid` from `192.0.2.10` to `198.51.100.53`, paired to resolver NXDOMAIN replies | Fourth reply at 12:00:36.200 completes **four matched errors within 60 seconds** |
+| 12:00:48.000–12:00:48.200 | **9–10** | `192.0.2.11` queries `portal.example`; receives a normal DNS answer | Benign control; no alert |
+| 12:01:00.000–12:01:00.040 | **11–15** | `192.0.2.11` performs synthetic TCP handshake, HTTP GET `/index.html`, 200 response | Benign HTTP control; no alert |
+| 12:01:15.000–12:01:15.040 | **16–20** | `192.0.2.10` performs synthetic TCP handshake, POST `/upload`, `Host: collector.invalid`, body `SAFE`, fabricated 200 response | **POST request at frame 19, 12:01:15.030** matches reserved-host rule |
 
-## Observations and hypotheses
+Addresses come from documentation-only ranges; the `.invalid` and `.example` names are reserved. The packet set is **made by code without network transmission**, and the fake response is not proof of contact with a web service.
 
-**What the fabricated PCAP demonstrates:** Exactly 20 encoded frames, 12 decoded events and two rule matches with fixed timestamps. The SHA-256 of the generator output is `5fc309499252677ba5cd31106b611edde5fd1b941aed3cc2f87f216da4dd707c`.
+## Exact detector conditions and result provenance
 
-**What it does not demonstrate:** DNS tunneling, command-and-control, malicious process attribution, stolen information, an unauthorized upload, or any production incident. ATT&CK T1071.004 (DNS) and T1071.001 (Web Protocols) provide investigative context only.
+| Finding ID | Rule predicate | Observed synthetic result | Alternative explanations |
+| --- | --- | --- | --- |
+| `NET_DNS_NXDOMAIN_BURST` | Matched DNS question/response, NXDOMAIN (rcode 3), **at least four** responses for the same client within **60 seconds** | `192.0.2.10`; four responses; alert at `12:00:36.200Z` | Misconfiguration, typos, application retries, stale domain discovery |
+| `NET_HTTP_POST_RESERVED_HOST` | Unencrypted HTTP request, method **POST**, `Host` ending in **.invalid** | `192.0.2.10` → `203.0.113.80:80`, `collector.invalid/upload` at `12:01:15.030Z` | Artificial hostname by construction; normal apps regularly POST |
 
-**Alternatives and missing evidence:** Application misconfiguration or negative-cache effects can cause repeated NXDOMAIN; HTTP POST is routine in legitimate software. We lack endpoint process association, real resolver logs, proxy and TLS records, destination ownership, user intent and behavioral baselines.
+[See exact JSON oracle](expected_findings.json) and [rule implementation](analyze_pcap.py). Hypotheses may be *categorized* under [ATT&CK T1071.004](https://attack.mitre.org/techniques/T1071/004/) and [T1071.001](https://attack.mitre.org/techniques/T1071/001/); **no tunneling, C2, exfiltration, or malicious intent was established**.
 
-## Figures and integrity
+## Analyst decision
 
-- [PCAP timeline and counts](../../assets/network/pcap-evidence-overview.svg)
-- [DNS response timing](../../assets/network/dns-nxdomain-investigation.svg)
-- [HTTP GET versus POST](../../assets/network/http-request-comparison.svg)
+**Provisional disposition:** `SYNTHETIC_REVIEW_ONLY`. Neither finding warrants host isolation, account action, attribution or an incident declaration. Confidence is **high that the implemented predicates matched the fabricated fixture** and **not assessed for maliciousness or real-world detection accuracy**.
 
-These images depict fabricated packet data from a locally reproduced deterministic capture. They **do not** represent Wireshark application screenshots, or results of a live packet acquisition.
+**If equivalent signals arose on authorized operational telemetry:** Verify DNS query/response provenance and client identity, compare historical NXDOMAIN baselines, associate lookups with endpoint processes, inspect domain registration or approved application behavior as permitted, and correlate proxy/EDR/file-transfer records before choosing escalation. A POST is not equivalent to an upload of sensitive data.
 
-## Verification and handoff
+**Known gaps:** No genuine resolver/proxy/endpoint logs, no authenticated user/device context, no packet capture of external systems, no TLS analysis, no full TCP reassembly, and no malware or payload provenance.
 
-Recreate the PCAP, verify its digest, execute the analyzer, compare its two findings to [expected_findings.json](expected_findings.json) and run 18 unit tests. The parser has already passed those tests locally; **an actual Wireshark GUI inspection is not claimed**.
+## Independent reproduction and negative controls
 
-In authorized enterprise work, identify the originating process, check DNS query characteristics and baselines, examine proxy/eDR correlations, and determine whether endpoint/identity evidence supports escalation. Obtain required permissions before active response.
+From the repository root:
 
-**Disposition:** Keep as a synthetic training example; no real attack or exfiltration established.
+```bash
+python projects/03-network-pcap/generate_fixture.py --output projects/03-network-pcap/synthetic_traffic.pcap
+python projects/03-network-pcap/analyze_pcap.py projects/03-network-pcap/synthetic_traffic.pcap
+python -m unittest discover -s projects/03-network-pcap -p 'test_*.py' -v
+```
+
+- Deterministic file: **1,907 bytes**, **20 packets**, SHA-256 `5fc309499252677ba5cd31106b611edde5fd1b941aed3cc2f87f216da4dd707c`.
+- Expected output: **12 decoded events**; exactly the two findings and UTC timestamps listed in [`expected_findings.json`](expected_findings.json).
+- **18 focused tests** cover negative controls, matched DNS transactions, replayed DNS replies, separate client identities, invalid packets and capture bounds.
+- [PCAP overview](../../assets/network/pcap-evidence-overview.svg), [DNS illustration](../../assets/network/dns-nxdomain-investigation.svg), and [HTTP illustration](../../assets/network/http-request-comparison.svg) are **offline vector interpretations**, not genuine Wireshark screenshots.
+
+**Verification boundary:** An offline Python parser is not Wireshark or a production IDS. A real Wireshark inspection, application screenshot, full packet protocol validation, and live telemetry analysis remain pending.
