@@ -93,6 +93,21 @@ def main() -> None:
                     main_link = quick_view.find_element(By.CSS_SELECTOR, "a[href='projects/soc-analyst-evidence.html']")
                     if not main_link.is_displayed():
                         failures.append(f"{name}/{viewport}: SOC evidence detail link missing")
+                    # Both concise evidence disclosures must expose their content by keyboard.
+                    for selector, content_selector in (
+                        (".result-details", ".splunk-evidence-table"),
+                        (".evidence-details", ".evidence-table"),
+                    ):
+                        disclosure = driver.find_element(By.CSS_SELECTOR, selector)
+                        summary = disclosure.find_element(By.TAG_NAME, "summary")
+                        summary.send_keys(Keys.ENTER)
+                        if disclosure.get_attribute("open") is None or not disclosure.find_element(By.CSS_SELECTOR, content_selector).is_displayed():
+                            failures.append(f"{name}/{viewport}: {selector} failed to open by keyboard")
+                        summary.send_keys(Keys.ENTER)
+                        if disclosure.get_attribute("open") is not None:
+                            failures.append(f"{name}/{viewport}: {selector} failed to close by keyboard")
+                    # Restore the top after keyboard disclosure checks scroll the page.
+                    body.send_keys(Keys.CONTROL, Keys.HOME)
                     # The last line of the synthetic terminal must not be clipped.
                     status_box = driver.find_element(By.CSS_SELECTOR, ".terminal-result")
                     box_info = driver.execute_script("""

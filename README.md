@@ -2,6 +2,10 @@
 
 A public, static portfolio presenting **reproducible synthetic defensive security exercises** alongside **high-level case studies of private engineering work**.
 
+## Homepage refresh
+
+The recruiter-focused homepage combines four visual public-lab cards, the genuine Splunk screenshot, compact engineering summaries, a direct SOC resume download, and keyboard-expandable evidence tables. Native HTML and scoped CSS keep the site dependency-free.
+
 ## Live portfolio website
 
 **[Visit the fully rendered cybersecurity portfolio](https://ixi-2773.github.io/Cybersecurity_Portfolio/)**. The [CR case study](https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/celestial-resonance.html) and [vulnerability remediation](https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/vulnerability-remediation.html) now have a successful GitHub Pages deployment. The published website is separate from GitHub's source-code view.
