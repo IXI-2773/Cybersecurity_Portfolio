@@ -102,7 +102,7 @@ def main() -> None:
     # The new SOC integration package must stay visibly marked as pending real
     # dashboard and alert execution; source verification is not runtime proof.
     pack = get("splunk_workflow/README.md")
-    require("PREPARED" in pack and "NOT YET VERIFIED" in pack
+    required("PREPARED" in pack and "NOT YET VERIFIED" in pack
              and "disabled" in pack.lower() and "64" in pack,
              "Splunk app must retain synthetic/demo vs runtime evidence boundary")
     # Recruiter-facing landing page must expose all four fixture-backed reports
