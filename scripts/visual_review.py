@@ -98,6 +98,27 @@ def main() -> None:
                     failures.append(f"{name}/{viewport}: requested {width}px but observed {dimensions['viewport']}px")
                 if dimensions["scrollWidth"] > dimensions["viewport"] + 2:
                     failures.append(f"{name}/{viewport}: document horizontal overflow: {dimensions}")
+                if name in {"authentication", "windows", "network", "vulnerability",
+                            "celestial-resonance", "research-ai"}:
+                    bar = driver.find_element(By.CSS_SELECTOR, ".case-review-strip")
+                    scope_type = bar.get_attribute("data-case-scope")
+                    expected_scope = "private-summary" if name in {"celestial-resonance", "research-ai"} else "public-lab"
+                    if scope_type != expected_scope:
+                        failures.append(f"{name}/{viewport}: wrong evidence scope in case review bar")
+                    actions = bar.find_elements(By.CSS_SELECTOR, ".case-review-actions a")
+                    if len(actions) != 3:
+                        failures.append(f"{name}/{viewport}: expected three reviewer shortcuts")
+                    else:
+                        for anchor in (actions[0], actions[2]):
+                            dest = anchor.get_attribute("href").split("#")[-1]
+                            if not driver.find_elements(By.ID, dest):
+                                failures.append(f"{name}/{viewport}: broken case-section shortcut #{dest}")
+                        click_control(actions[2])
+                        if driver.execute_script("return location.hash") != "#" + actions[2].get_attribute("href").split("#")[-1]:
+                            failures.append(f"{name}/{viewport}: evidence-limit shortcut did not navigate")
+                        body.send_keys(Keys.CONTROL, Keys.HOME)
+                    if not bar.is_displayed():
+                        failures.append(f"{name}/{viewport}: review shortcuts hidden")
                 if name == "role-paths":
                     sections = ("soc-analyst", "security-analyst", "security-automation")
                     if len(driver.find_elements(By.CSS_SELECTOR, ".role-route-card")) != 3:

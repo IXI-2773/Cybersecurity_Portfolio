@@ -137,6 +137,42 @@ def main() -> None:
             required(row["timestamp"] in visual and row["source_ip"] in visual,
                      "Illustrative alert must match the frozen oracle boundary case")
 
+    # Project dossier structure: six consistent navigation bars, with private
+    # architecture clearly distinct from testable public training fixtures.
+    home_cards = get("index.html")
+    required(home_cards.count('class="work-proofline"') == 4
+             and home_cards.count('class="engineering-proofline"') == 2,
+             "Four public-lab and two private architecture cards need matching proof labels")
+    public_cases = (
+        ("projects/authentication-detection.html", "scope-and-further-work"),
+        ("projects/windows-process-triage.html", "scope-and-limits"),
+        ("projects/network-traffic-analysis.html", "scope-and-limits"),
+        ("projects/vulnerability-remediation.html", "scope-and-limits"),
+    )
+    private_cases = ("projects/celestial-resonance.html",
+                     "projects/research-ai-infrastructure.html")
+    for page, anchor in public_cases:
+        source = get(page)
+        required(source.count('class="case-review-strip"') == 1
+                 and 'data-case-scope="public-lab"' in source
+                 and f'href="#{anchor}"' in source
+                 and 'class="case-review-actions"' in source,
+                 "Public lab missing common review bar or scope anchor: " + page)
+        required("Controlled evidence" in source
+                 and "private implementation" not in source.split('class="case-review-strip"', 1)[1].split('class="article-layout"', 1)[0].lower(),
+                 "Public lab review banner has incorrect disclosure: " + page)
+    for page in private_cases:
+        source = get(page)
+        required(source.count('class="case-review-strip"') == 1
+                 and 'data-case-scope="private-summary"' in source
+                 and 'href="#public-scope"' in source
+                 and 'Separate public' in source,
+                 "Private case must label its independent teaching demonstration: " + page)
+    for page in [p for p, _ in public_cases] + list(private_cases):
+        source = get(page)
+        required(source.index('class="case-snapshot"') < source.index('class="case-review-strip"')
+                 < source.index('class="article-layout"'),
+                 "Case review shortcuts must follow the summary and precede the report: " + page)
     roles = get("roles.html")
     for target in ("soc-analyst", "security-analyst", "security-automation"):
         required(f'id="{target}"' in roles and f'href="#{target}"' in roles,
