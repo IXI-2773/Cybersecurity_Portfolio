@@ -43,6 +43,8 @@ jobs:
         run: python projects/04-local-vulnerability-assessment/audit_demo.py
       - name: Audit site accessibility structure and navigation
         run: python scripts/check_accessibility.py
+      - name: Verify published case-study claims against frozen evidence
+        run: python scripts/check_case_evidence.py
       - name: Check local HTML links
         run: python scripts/check_links.py
       - name: Build downloadable offline website preview
