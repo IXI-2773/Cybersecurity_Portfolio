@@ -45,6 +45,16 @@ jobs:
         run: python scripts/check_accessibility.py
       - name: Verify published case-study claims against frozen evidence
         run: python scripts/check_case_evidence.py
+      - name: Validate Splunk integration source and safe disabled alert
+        run: |
+          python scripts/check_splunk_workflow.py
+          python scripts/build_splunk_app.py --output don_lopez_soc.spl
+      - name: Attach installable synthetic Splunk SOC app package
+        uses: actions/upload-artifact@v4
+        with:
+          name: don-lopez-splunk-soc-app
+          path: don_lopez_soc.spl
+          retention-days: 30
       - name: Check local HTML links
         run: python scripts/check_links.py
       - name: Build downloadable offline website preview
