@@ -55,6 +55,8 @@ jobs:
           name: don-lopez-splunk-soc-app
           path: don_lopez_soc.spl
           retention-days: 30
+      - name: Validate genuine Splunk screenshot PNG integrity
+        run: python scripts/verify_splunk_screenshot.py
       - name: Check local HTML links
         run: python scripts/check_links.py
       - name: Build downloadable offline website preview
