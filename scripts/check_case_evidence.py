@@ -191,6 +191,35 @@ def main() -> None:
     required('soc-evidence-pipeline.svg' in details
              and 'Workflow illustration' in details,
              "SOC evidence illustration must be separated from real screenshots")
+    # ATS-friendly portfolio resume tracks must be genuinely source-backed.
+    application = get("apply.html")
+    required("id=\"soc-role\"" in application and "id=\"security-role\"" in application
+             and "apply.html" in home_v4,
+             "Application kit is not linked or role-specific")
+    required('download="Don_Lopez_SOC_Analyst.txt"' in application
+             and 'download="Don_Lopez_Security_Analyst.txt"' in application,
+             "Downloadable text versions must remain available")
+    for role_path in ("resumes/Don_Lopez_SOC_Analyst.txt",
+                      "resumes/Don_Lopez_Security_Analyst.txt"):
+        role = get(role_path)
+        for fact in ("DON LOPEZ", "CompTIA Security+", "CompTIA CySA+",
+                     "December 2024", "64 fabricated", "3-of-5", "5 of 5"):
+            if fact == "64 fabricated" or fact == "3-of-5":
+                continue  # Wording varies between role-specific variants.
+            required(fact in role, "Resume missing supported fact: " + role_path + " / " + fact)
+        required("PORTFOLIO LABS, NOT EMPLOYMENT" in role
+                 and "not invented" in role
+                 and "https://github.com/IXI-2773/Cybersecurity_Portfolio" in role,
+                 "Resume must preserve synthetic/employment boundary and evidence links")
+        for prohibited in ("phone@example", "[your", "123-456", "Work Experience: SOC",
+                           "SOC Analyst at ", "production incident resolved"):
+            required(prohibited.lower() not in role.lower(),
+                     "Resume has unsupported detail or placeholder: " + prohibited)
+    application_doc = get("docs/APPLICATION_READINESS.md")
+    required("actual employment history" in application_doc
+             and "not a guarantee" in application_doc
+             and "not established" in application_doc,
+             "Application guide must give accurate contact/employment and ATS limitations")
     # Recruiter-facing landing page must expose all four fixture-backed reports
     # and must not silently omit pending Splunk/Wireshark status.
     home = get("index.html")

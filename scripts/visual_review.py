@@ -69,6 +69,15 @@ def main() -> None:
                 """)
                 if dimensions["scrollWidth"] > dimensions["viewport"] + 2:
                     failures.append(f"{name}/{viewport}: document horizontal overflow: {dimensions}")
+                if name == "application-toolkit":
+                    role_cards = driver.find_elements(By.CSS_SELECTOR, ".application-role-card")
+                    downloads = driver.find_elements(By.CSS_SELECTOR, ".application-role-actions a[download]")
+                    if len(role_cards) != 2 or len(downloads) != 2:
+                        failures.append(f"{name}/{viewport}: expected two role cards and downloads")
+                    for link in downloads:
+                        relative_resume = link.get_attribute("href")
+                        if not relative_resume or not relative_resume.endswith(".txt"):
+                            failures.append(f"{name}/{viewport}: missing real text resume link")
                 if name == "home":
                     featured = driver.find_element(By.ID, "featured-splunk")
                     if not featured.is_displayed() or len(featured.find_elements(By.CSS_SELECTOR, ".splunk-evidence-table tbody tr")) != 5:
