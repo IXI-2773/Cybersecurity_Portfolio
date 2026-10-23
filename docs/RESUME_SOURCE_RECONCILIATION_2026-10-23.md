@@ -12,7 +12,7 @@
 | Employment | **Allied Universal, Security Officer, 2019–present** | Clearly labeled professional experience, distinct from technical lab projects |
 | Duties | Secure-environment monitoring, security logs, incident reports and escalation; source reports 10+ monthly reports | Qualitative responsibilities only; the quantitative volume is **not independently verified** |
 | Certifications | Security+ certified; CySA+ earned October 2026 | Holder/résumé-reported until issuer-backed evidence is approved for publication |
-| Planned qualification | Splunk Certified Cybersecurity Defense Analyst (SCCDA), **planned** | Never treated as earned |
+| Planned qualification | Splunk Certified Cybersecurity Defense Analyst (SCCDA), **planned** | **Not earned**; planned preparation only |
 | Skills | SPL, Sigma, Snort, MITRE ATT&CK, alert triage; Wireshark/Nessus/Nmap/Metasploit; Linux, Windows Server, VMware, Docker, basic AWS; Python, Bash, PowerShell, SQL | Distinguish current public-lab demonstrations from broader résumé-reported exposure |
 
 ## Important source-to-repository distinction
