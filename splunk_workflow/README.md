@@ -15,6 +15,14 @@
 | Saved alert | Disabled `Portfolio SOC Auth Candidate - Indexed (DISABLED)` | Disabled; no automatic action |
 | Installation package | CI build artifact `don-lopez-splunk-soc-app` / generated `.spl` file | Source/build verification only |
 
+## Preferred workaround if the installed app opens a 404
+
+**Stop upgrading the custom app.** Instead follow [No-App Dashboard Guide](NO_APP_GUIDE.md). The reliable path is to run the **already successful 64-event SPL in Search & Reporting**, then use **Save As → Dashboard Panel**. This creates a real native Splunk dashboard without `don_lopez_soc` app routing, file uploads, indexes or installation.
+
+For all six panels in one paste, use [self-contained Classic Simple XML](NO_APP_DASHBOARD.xml), which embeds the 64 fabricated events and runs in your normal Search & Reporting app. No custom lookup or installed app is involved.
+
+**Execution status:** The no-app dashboard is prepared; a screenshot confirming its actual rendering has not yet been supplied.
+
 ## Resolving a Splunk 404 after installation
 
 On October 23, 2026, an operator submitted a Splunk Enterprise **404 Not Found** screenshot after attempting the earlier v1.0.0 package. The screenshot did not show the request URL or app-install status. Thus, it is **not possible to prove the exact root cause** from that image. The following are defensible troubleshooting actions.

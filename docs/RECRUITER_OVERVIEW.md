@@ -11,6 +11,8 @@
 
 ## Prepared Splunk workflow (not executed in trial)
 
+A [no-install dashboard fallback](../splunk_workflow/NO_APP_GUIDE.md) is also prepared because the installed custom app returned 404 in the user's instance. It creates panels in ordinary Search & Reporting instead; no actual dashboard screenshot has been verified yet.
+
 The [installable Splunk source kit](../splunk_workflow/README.md) adds a bundled lookup dashboard, an indexed-data dashboard, nine analyst SPL searches and a default-disabled alert definition. CI checks the app package and CSV-source integrity. **Actual in-product dashboard rendering, indexed ingestion and alert firing have not been verified** and are not portfolio accomplishments yet. These are separate from the screenshot-reviewed seven-event and 64-event in-memory detections.
 
 ## Demonstrable projects

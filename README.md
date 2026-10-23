@@ -27,6 +27,8 @@ Public badge URLs, exam versions, dates and renewal status have not been supplie
 
 ## New: installable Splunk SOC authentication lab
 
+**If the custom Splunk application opens a 404**, use the [no-install native dashboard workaround](splunk_workflow/NO_APP_GUIDE.md). It starts in the working Search & Reporting UI and can be created by **Save As → Dashboard Panel**. A [standalone six-panel XML dashboard](splunk_workflow/NO_APP_DASHBOARD.xml) is also available to paste into a Classic dashboard, with no app installation, lookup, index or network calls.
+
 The [Splunk workflow kit](splunk_workflow/README.md) now includes **two Six-panel Simple XML dashboards**, a matching 64-row CSV lookup, nine investigative SPL searches, and one **disabled** saved alert. The [CI-generated `.spl` application archive](https://github.com/IXI-2773/Cybersecurity_Portfolio/actions) is available as the `don-lopez-splunk-soc-app` artifact in successful workflow runs.
 
 The lookup-based dashboard can be inspected without creating an index. The indexed dashboard, true CSV ingestion, and alert firing still require your own authorized Splunk execution and are **not claimed as completed**. See [ingestion](splunk_workflow/INGESTION.md), [alerting](splunk_workflow/ALERTING.md), and [runtime status](splunk_workflow/VALIDATION_CHECKLIST.md).
