@@ -122,6 +122,24 @@ def main() -> None:
                         body.send_keys(Keys.CONTROL, Keys.HOME)
                     if not bar.is_displayed():
                         failures.append(f"{name}/{viewport}: review shortcuts hidden")
+                if name in {"authentication", "windows", "network", "vulnerability"}:
+                    brief = driver.find_element(By.CSS_SELECTOR, ".case-analyst-brief")
+                    facts = brief.find_elements(By.CSS_SELECTOR, ".case-brief-fact")
+                    limits = brief.find_elements(By.CSS_SELECTOR, '[data-brief-limit="true"]')
+                    if len(facts) != 4 or len(limits) != 1 or not brief.is_displayed():
+                        failures.append(f"{name}/{viewport}: missing four evidence-bounded review facts")
+                    if not driver.find_elements(By.ID, "case-brief-title"):
+                        failures.append(f"{name}/{viewport}: missing direct reviewer anchor")
+                    disclosure = brief.find_element(By.CSS_SELECTOR, ".case-brief-details")
+                    summary = disclosure.find_element(By.TAG_NAME, "summary")
+                    summary.send_keys(Keys.ENTER)
+                    sources = brief.find_elements(By.CSS_SELECTOR, ".case-brief-source-links a")
+                    if disclosure.get_attribute("open") is None or len(sources) < 2 or any(not a.is_displayed() for a in sources):
+                        failures.append(f"{name}/{viewport}: source trail did not open with keyboard")
+                    summary.send_keys(Keys.ENTER)
+                    if disclosure.get_attribute("open") is not None:
+                        failures.append(f"{name}/{viewport}: source trail cannot close")
+                    body.send_keys(Keys.CONTROL, Keys.HOME)
                 if name == "role-paths":
                     sections = ("soc-analyst", "security-analyst", "security-automation")
                     if len(driver.find_elements(By.CSS_SELECTOR, ".role-route-card")) != 3:
@@ -171,6 +189,16 @@ def main() -> None:
                             failures.append(f"{name}/{viewport}: public browser evidence jump failed")
                     if not driver.find_element(By.CSS_SELECTOR, 'a[href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/splunk_workflow/NATIVE_DASHBOARD_RESULT_2026-10-23.md"]').is_displayed():
                         failures.append(f"{name}/{viewport}: missing native Splunk observation")
+                if name == "explorer":
+                    guide = driver.find_element(By.CSS_SELECTOR, ".explorer-playbook")
+                    links = guide.find_elements(By.CSS_SELECTOR, ".explorer-playbook-steps a")
+                    if len(links) != 4 or not guide.is_displayed():
+                        failures.append(f"{name}/{viewport}: expected four linked independent investigations")
+                    if "independent training scenarios" not in guide.text:
+                        failures.append(f"{name}/{viewport}: missing separate-fixture disclaimer")
+                    for link in links:
+                        if not link.get_attribute("href").endswith("#case-brief-title"):
+                            failures.append(f"{name}/{viewport}: guided investigation link has wrong target")
                 if name == "explorer":
                     def shown_cards():
                         return [el for el in driver.find_elements(By.CSS_SELECTOR, "[data-project-entry]") if el.is_displayed()]

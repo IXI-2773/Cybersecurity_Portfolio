@@ -207,6 +207,43 @@ def main() -> None:
              and all(f'href="#{anchor}"' in evidence_guide for anchor in
                      ("public-lab-title", "engineering-title", "browser-title")),
              "Evidence guide must retain all three in-page scope links")
+    # Four genuinely separate labs now have concise analyst-facing source
+    # summaries, not a fabricated unified response case.
+    briefs = (
+        ("projects/authentication-detection.html", "64-event synthetic matrix",
+         "validation_events.csv", "Expected findings", "SPLUNK_MATRIX_BOUNDARY_RETEST.spl"),
+        ("projects/windows-process-triage.html", "two of five",
+         "events_4688.csv", "CASE_REPORT.md", "process lineage"),
+        ("projects/network-traffic-analysis.html", "20-frame PCAP",
+         "generate_fixture.py", "CASE_REPORT.md", "Wireshark GUI"),
+        ("projects/vulnerability-remediation.html", "four scoped fixture findings",
+         "audit_demo.py", "CASE_REPORT.md", "Localhost-only"),
+    )
+    for page, finding, source_a, source_b, guardrail in briefs:
+        public_case = get(page)
+        required(public_case.count('class="case-analyst-brief"') == 1
+                 and 'id="case-brief-title"' in public_case
+                 and 'data-reviewed-case="public-lab"' in public_case
+                 and public_case.count('class="case-brief-fact"') == 4
+                 and public_case.count('data-brief-limit="true"') == 1,
+                 "Public case must disclose question/observation/decision/limit: " + page)
+        required(all(phrase.lower() in public_case.lower() for phrase in
+                     (finding, source_a, source_b, guardrail)),
+                 "Public case summary missing supported evidence and scope: " + page)
+        required('href="#case-brief-title"' in public_case
+                 and 'class="case-brief-details"' in public_case
+                 and public_case.index('class="case-review-strip"')
+                 < public_case.index('class="case-analyst-brief"')
+                 < public_case.index('class="article-layout"'),
+                 "Public case summary must lead to evidence without replacing report: " + page)
+    guided = get("explore.html")
+    required(guided.count('class="explorer-playbook"') == 1
+             and guided.count('class="playbook-go"') == 4
+             and "independent training scenarios" in guided
+             and all(f'projects/{slug}.html#case-brief-title' in guided for slug in (
+                 "authentication-detection", "windows-process-triage",
+                 "network-traffic-analysis", "vulnerability-remediation")),
+             "Guided analyst paths must link four separate, scoped cases")
     roles = get("roles.html")
     for target in ("soc-analyst", "security-analyst", "security-automation"):
         required(f'id="{target}"' in roles and f'href="#{target}"' in roles,

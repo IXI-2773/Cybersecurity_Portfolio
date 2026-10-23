@@ -1236,3 +1236,61 @@ section[id]{scroll-margin-top:100px}
  .hero-evidence-image{padding:6px}
 }
 @media(prefers-reduced-motion:reduce){.portfolio-home .hero-evidence-panel .signal-panel::after{animation:none}}
+
+/* Security case executive review: one structure for four separately verified labs.
+   Does not imply cross-case event correlation or production detection. */
+.case-page .case-analyst-brief{margin:0 0 37px;padding:22px 23px 0;border:1px solid #52756a;border-radius:10px;background:linear-gradient(115deg,#192e2b,#142529 73%,#122026);scroll-margin-top:96px;overflow:hidden}
+.case-brief-heading{display:flex;align-items:center;justify-content:space-between;gap:15px 22px;margin-bottom:20px}
+.case-brief-code{display:block;color:#b6e6b5;font:650 .6rem/1.6 ui-monospace,Consolas,monospace;letter-spacing:.065em}
+.case-page .case-brief-heading h2{font-size:clamp(1.23rem,2.6vw,1.67rem);line-height:1.3;letter-spacing:-.027em;margin:6px 0 7px;color:#f0f4e9}
+.case-brief-heading p{margin:0;color:#bfd0c9;font-size:.76rem;line-height:1.65}
+.case-brief-decision-link{white-space:nowrap;flex-shrink:0;display:inline-flex;gap:7px;align-items:center;min-height:40px;padding:8px 13px;background:#2c493d;border:1px solid #6a947d;border-radius:5px;text-decoration:none;color:#e6f7e7;font-size:.73rem;font-weight:650}
+.case-brief-decision-link:hover{background:#365c48;border-color:#a5dfb5}
+.case-brief-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:0 0 17px}
+.case-brief-fact{min-width:0;padding:14px 14px 17px;border:1px solid #415d56;border-top:2px solid #86bb9d;background:#13272a;border-radius:5px}
+.case-brief-fact:nth-child(2){border-top-color:#92bcd0}
+.case-brief-fact:nth-child(3){border-top-color:#b7cea1}
+.case-brief-fact[data-brief-limit="true"]{background:#282d2b;border-color:#636a5e;border-top-color:#d2bc93}
+.case-brief-fact-label{display:block;font:650 .59rem/1.6 ui-monospace,Consolas,monospace;letter-spacing:.025em;color:#a9d7ba;margin:0 0 9px}
+.case-brief-fact[data-brief-limit="true"] .case-brief-fact-label{color:#edd1a2}
+.case-brief-fact p{margin:0;font-size:.77rem;line-height:1.74;color:#d7e3de;overflow-wrap:break-word}
+.case-brief-details{margin:0 -23px;border-top:1px solid #43635b}
+.case-brief-details>summary{list-style:revert;cursor:pointer;padding:14px 23px;min-height:47px;color:#d5ead9;font-size:.78rem;font-weight:650}
+.case-brief-details>summary:hover{background:rgba(92,166,125,.1)}
+.case-brief-details>summary:focus-visible,.case-brief-decision-link:focus-visible,.case-brief-source-links a:focus-visible{outline:3px solid #b6efbf;outline-offset:3px}
+.case-brief-details>summary>span{padding-left:6px;color:#9cccaa}
+.case-brief-details[open]>summary{border-bottom:1px solid #3d5b53;background:#1c3631}
+.case-brief-expanded{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:23px;padding:20px 23px 24px}
+.case-brief-expanded>div{min-width:0}
+.case-brief-expanded h3{font-size:.82rem;letter-spacing:0;color:#e2efdf;margin:0 0 12px}
+.case-brief-source-links{display:flex;flex-direction:column;align-items:flex-start;gap:11px}
+.case-brief-source-links a{font-size:.76rem;color:#a7e6bd;text-underline-offset:4px;overflow-wrap:anywhere}
+.case-brief-expanded ol{margin:0;padding-left:22px;font-size:.76rem;line-height:1.72;color:#d2e1da}
+.case-brief-expanded li+li{margin-top:6px}
+.explorer-playbook{margin:45px 0 31px;padding:24px 23px;border:1px solid #56776d;border-radius:9px;background:linear-gradient(135deg,#1b302d,#14242a)}
+.explorer-playbook-intro{display:grid;grid-template-columns:1fr 1fr;gap:25px;align-items:end;margin-bottom:20px}
+.explorer-playbook-intro h2{font-size:clamp(1.28rem,2.8vw,1.85rem);letter-spacing:-.027em;margin:7px 0 0;color:#f0f3eb}
+.explorer-playbook-intro p{margin:0;font-size:.78rem;line-height:1.75;color:#c6d8d0}
+.explorer-playbook-intro strong{color:#d9ecd8}
+.explorer-playbook-steps{padding:0;margin:0;list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.explorer-playbook-steps li{min-width:0}
+.explorer-playbook-steps a{min-height:100%;text-decoration:none;display:flex;flex-direction:column;gap:10px;padding:18px 15px;border:1px solid #476158;border-top:3px solid #8ac2a0;border-radius:6px;background:#14272a;transition:background .16s ease,border-color .16s ease,transform .16s ease}
+.explorer-playbook-steps li:nth-child(2) a{border-top-color:#99bbd6}
+.explorer-playbook-steps li:nth-child(3) a{border-top-color:#b2b8dd}
+.explorer-playbook-steps li:nth-child(4) a{border-top-color:#d7bc89}
+.explorer-playbook-steps a>span:first-child{font:650 .59rem/1.6 ui-monospace,Consolas,monospace;letter-spacing:.04em;color:#b2dabd}
+.explorer-playbook-steps a strong{font-size:.84rem;line-height:1.48;color:#edf1e9}
+.explorer-playbook-steps a small{display:block;font-size:.72rem;line-height:1.7;color:#bfcfcb}
+.explorer-playbook-steps a .playbook-go{margin-top:auto;font-size:.71rem;font-weight:650;color:#b8e4b9;padding-top:10px}
+.explorer-playbook-steps a:hover{background:#203b36;border-color:#8fc9a5;transform:translateY(-2px)}
+.explorer-playbook-steps a:focus-visible{outline:3px solid #b9efbf;outline-offset:3px}
+@media(max-width:1030px){.case-brief-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.explorer-playbook-steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+.explorer-playbook-intro{grid-template-columns:1fr;gap:12px}}
+@media(max-width:650px){.case-page .case-analyst-brief{padding:18px 15px 0;margin-bottom:26px}
+.case-brief-heading{display:block}.case-brief-decision-link{margin-top:13px;white-space:normal}
+.case-brief-grid{grid-template-columns:1fr;gap:8px}.case-brief-fact{padding:12px 13px}.case-brief-fact p{font-size:.79rem}
+.case-brief-details{margin:0 -15px}.case-brief-details>summary{padding:14px 15px}.case-brief-expanded{grid-template-columns:1fr;padding:16px 17px;gap:20px}
+.explorer-playbook{padding:21px 16px}.explorer-playbook-steps{grid-template-columns:1fr}
+.explorer-playbook-steps a{padding:14px 15px;gap:8px}.explorer-playbook-steps a .playbook-go{padding-top:3px}}
+@media(prefers-reduced-motion:reduce){.explorer-playbook-steps a{transition:none}.explorer-playbook-steps a:hover{transform:none}}

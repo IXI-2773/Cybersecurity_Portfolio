@@ -4,6 +4,8 @@ A public, static portfolio presenting **reproducible synthetic defensive securit
 
 ## Hiring-team tools
 
+The four public security case studies each include a concise **question → fixture result → analyst disposition → evidence limit** summary, plus a keyboard-accessible source trail and next-investigation prompts. The Project Explorer also offers a guided four-exercise analyst path, expressly labeling these as **separate synthetic/localhost training scenarios rather than one incident**. The full case reports and private CR/RAI architecture boundaries remain unchanged.
+
 The release-candidate homepage introduces the target **SOC Analyst** role in the main heading, offers just two prominent first-screen actions (genuine Splunk evidence and printable recruiter profile), places the actual cropped saved-panel screenshot beside the introduction, and moves extra hiring routes after the detailed investigation. Its training-event limitations and direct text résumé download remain explicit. This is a navigation/presentation change, not a new executed security result.
 
 The Project Explorer, Verification Workbench and Evidence Review guide now share a three-step visual navigation bar, consistent restrained design, and narrow-screen layouts. The Explorer has synchronized role shortcuts; the workbench provides executable 599/600-second presets built on the existing public training engine; Evidence Review has direct jump links by evidence category. These presentation and navigation changes do not alter public test inputs or imply new private CR/RAI or live Splunk execution.
