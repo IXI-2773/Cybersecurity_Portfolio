@@ -1,6 +1,7 @@
 # Don Lopez | SOC Analyst & Security Analyst — Evidence Brief
 
 **Career focus:** SOC Analyst · Cybersecurity Analyst · Junior Detection Engineering  
+**Email:** [frailtycraven@gmail.com](mailto:frailtycraven@gmail.com)  
 **Education:** B.S. Cybersecurity, December 2024  
 **Certifications:** CompTIA Security+ and CySA+ (owner-reported; public badges/validity dates not independently available). [Verification scope](CREDENTIALS.md)
 

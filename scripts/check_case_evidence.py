@@ -222,26 +222,31 @@ def main() -> None:
     # details or claim employer histories/verified issuer badges without evidence.
     gates = get("docs/PUBLICATION_GATES.md")
     cred = get("docs/CREDENTIALS.md")
-    required("NOT PUBLISHED" in gates and "NOT INVENTED" in gates
-             and "explicit public-use approval not established" in gates,
-             "Public contact/credential publication gates are missing")
+    required("APPROVED FOR PUBLICATION" in gates and "NOT PUBLISHED" in gates
+             and "NOT INVENTED" in gates and "frailtycraven@gmail.com" in gates,
+             "Public contact approval and other withholding controls must both remain explicit")
     required("issued-to name" in cred and "Holder" not in cred[:100],
              "Credential disclosure or legal-name visibility guidance missing")
     required('id="application-status"' in application
-             and "NOT APPROVED" not in application
+             and "mailto:frailtycraven@gmail.com" in application
              and "GitHub profile" in application,
-             "Application page missing professional public/private contact pathway")
+             "Application page missing approved email and professional profile")
     for role_path in ("resumes/Don_Lopez_SOC_Analyst.txt",
                       "resumes/Don_Lopez_Security_Analyst.txt"):
         role = get(role_path)
-        required("Public professional profile: https://github.com/IXI-2773" in role
+        required("Email: frailtycraven@gmail.com" in role
+                 and "Public professional profile: https://github.com/IXI-2773" in role
                  and "Professional contact:" not in role,
-                 "GitHub profile must not be falsely labeled a direct-contact inbox")
-    # Guard only current public submission entry points, avoiding fixture data.
+                 "Resumes must show approved email separately from public GitHub profile")
+    # Guard only approved public contact on the three submission entry points.
     for public_page in ("index.html", "recruiter.html", "apply.html"):
         page = get(public_page)
-        required("mailto:" not in page and "tel:" not in page,
-                 "Public direct contact needs an explicitly approved release")
+        required("mailto:frailtycraven@gmail.com" in page and "tel:" not in page,
+                 "Public page missing approved email or discloses unapproved phone link")
+        import re
+        used = set(re.findall(r'mailto:([^"\\s<>?]+)', page))
+        required(used == {"frailtycraven@gmail.com"},
+                 "An unapproved alternate email was inserted into a public page")
     # Recruiter-facing landing page must expose all four fixture-backed reports
     # and must not silently omit pending Splunk/Wireshark status.
     home = get("index.html")

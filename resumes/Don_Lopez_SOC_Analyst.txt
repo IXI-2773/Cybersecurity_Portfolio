@@ -2,6 +2,7 @@ DON LOPEZ
 SOC ANALYST | CYBERSECURITY ANALYST
 Portfolio: https://ixi-2773.github.io/Cybersecurity_Portfolio/
 GitHub: https://github.com/IXI-2773/Cybersecurity_Portfolio
+Email: frailtycraven@gmail.com
 Public professional profile: https://github.com/IXI-2773
 
 PROFESSIONAL SUMMARY
@@ -39,4 +40,4 @@ CompTIA Security+ | Holder-reported; public validation details not supplied
 CompTIA CySA+ | Holder-reported; public validation details not supplied
 
 EVIDENCE SCOPE
-Public labs use fabricated or localhost-only inputs. Splunk search and one-panel saved dashboard results were observed in the application; this does not establish real incidents, SOC employment, production alerts, or indexed telemetry. Employment history and private contact details are deliberately not invented.
+Public labs use fabricated or localhost-only inputs. Splunk search and one-panel saved dashboard results were observed in the application; this does not establish real incidents, SOC employment, production alerts, or indexed telemetry. Employment history and phone details are not invented; this professional email was authorized for public use.

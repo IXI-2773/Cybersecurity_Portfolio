@@ -3,7 +3,7 @@
 **Reviewed:** October 23, 2026  
 **Scope:** Public GitHub Pages, public GitHub resume text and recruiter documentation.
 
-This record distinguishes what can be published **without requesting further details** from what requires an explicit publication choice. It does not store contact information, certificate IDs or private application content.
+This record documents the explicitly approved public contact address and distinguishes it from private details requiring separate publication decisions. It contains no private credentials, phone numbers or application records.
 
 | Item | Basis | Release decision |
 | --- | --- | --- |
@@ -12,7 +12,8 @@ This record distinguishes what can be published **without requesting further det
 | Education — B.S. Cybersecurity, December 2024 | Owner-provided | PUBLIC |
 | Security+ and CySA+ names | Owner-reported | PUBLIC WITH HOLDER-REPORTED QUALIFICATION |
 | Digital badge links or issue/expiry dates | No approved public verification record | NOT PUBLISHED |
-| Job-application emails and phone numbers | Prior application information exists, but explicit public-use approval not established | **NOT PUBLISHED** |
+| Professional email: `frailtycraven@gmail.com` | Owner provided the address in response to the question of what email to display publicly on the portfolio (October 23, 2026) | **APPROVED FOR PUBLICATION** |
+| Phone numbers and other email addresses | No separate public-use authorization | **NOT PUBLISHED** |
 | Employment history | No supported company, position and date record provided for the portfolio | **NOT INVENTED / NOT PUBLISHED** |
 | Private CR/RAI implementation | Projects have separate private source | PUBLIC HIGH-LEVEL DESCRIPTIONS ONLY |
 | Actual saved Splunk dashboard | Operator screenshot reviewed, cropped derivative public | PUBLIC AS REAL UI SCREENSHOT ON TRAINING DATA |
@@ -21,9 +22,9 @@ This record distinguishes what can be published **without requesting further det
 ## To complete a private job submission
 
 1. Use the existing [SOC Analyst or Security Analyst text draft](../apply.html).
-2. Add the direct contact details of your choosing **to the private copy being submitted**, not to a public repository by default.
+2. The approved email **frailtycraven@gmail.com** now appears on the portfolio and public résumé drafts. Add phone or alternative contact information only to a private copy unless separately authorized.
 3. Include documented employment only if the employer, dates, position and accomplishments are accurate. No undocumented length-of-service claim is carried forward from online applications.
 4. If desired, open the [credential guidance](CREDENTIALS.md) and review each public badge's displayed name and profile visibility before sharing its verification URL.
 5. Recheck links and final submitted document. The résumé's portfolio-lab content is not a claim of salaried SOC employment.
 
-**Publication rule:** Do not merge direct phone numbers, private email addresses, employer chronology, credential IDs or externally visible badge URLs into this public repository without a clear user request to publish those particular details. Treat uncertainty as missing, not as permission to infer.
+**Publication rule:** Only **frailtycraven@gmail.com** was expressly authorized for public contact. Do not publish phone numbers, other private email addresses, employer chronology, credential IDs or badge URLs without a separate user request. Treat uncertainty as missing, not as permission to infer.

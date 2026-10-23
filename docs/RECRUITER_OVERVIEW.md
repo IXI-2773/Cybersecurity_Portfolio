@@ -61,4 +61,4 @@ See [interview discussion guide](INTERVIEW_EVIDENCE_BRIEF.md) for short, evidenc
 
 **Evidence policy:** No invented certifications, real incidents, deployed security systems, production precision/recall results, or disclosure of private project source.
 
-**Public professional profile:** [GitHub profile](https://github.com/IXI-2773) (not a direct messaging guarantee). No personal email/phone was approved for publication. [Publication gates](PUBLICATION_GATES.md).
+**Approved public contact:** [frailtycraven@gmail.com](mailto:frailtycraven@gmail.com) · [GitHub profile](https://github.com/IXI-2773). No phone or other private address is published. [Publication gates](PUBLICATION_GATES.md).

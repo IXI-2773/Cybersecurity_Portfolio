@@ -27,15 +27,15 @@ Public badge URLs, exam versions, dates and renewal status have not been supplie
 
 ## Public profile and verification policy
 
-The [publication readiness record](docs/PUBLICATION_GATES.md) distinguishes public portfolio links and user-reported credentials from private job-application contact details, unverified employment chronology, and issuer-backed badge URLs. No personal email or phone from earlier applications is automatically republished.
+The [publication readiness record](docs/PUBLICATION_GATES.md) reflects the owner's explicit approval to publish **frailtycraven@gmail.com** as the professional contact. Other email addresses, phone numbers, unverified employment chronology and issuer-backed badge URLs remain unpublished.
 
 ## Role-targeted job application materials
 
-[Open the application toolkit](https://ixi-2773.github.io/Cybersecurity_Portfolio/apply.html) to download **two ATS-oriented plain-text résumé drafts** and review interviewer evidence prompts. The SOC Analyst and Security Analyst versions contain only owner-reported credentials and source-backed lab work, with no invented contact details, professional employment or production incidents. [Tailoring checklist](docs/APPLICATION_READINESS.md).
+[Open the application toolkit](https://ixi-2773.github.io/Cybersecurity_Portfolio/apply.html) to download **two ATS-oriented plain-text résumé drafts** and review interviewer evidence prompts. The SOC Analyst and Security Analyst versions contain the approved professional email, owner-reported credentials and source-backed lab work, without invented phone numbers, employment or production incidents. [Tailoring checklist](docs/APPLICATION_READINESS.md).
 
 ## Recruiter-ready web profile
 
-[View the print-friendly, one-page SOC Analyst profile](https://ixi-2773.github.io/Cybersecurity_Portfolio/recruiter.html). It presents the verified Splunk 3/5 → 5/5 case, credentials as owner-reported, and three additional source-linked security investigations; browser print can save it as PDF. It excludes invented employers, contact details and operational incident claims.
+[View the print-friendly, one-page SOC Analyst profile](https://ixi-2773.github.io/Cybersecurity_Portfolio/recruiter.html). It presents the verified Splunk 3/5 → 5/5 case, credentials as owner-reported, and three additional source-linked security investigations; browser print can save it as PDF. It includes the approved professional email and excludes invented employers, phone numbers and operational incident claims.
 
 ## One-page recruiter evidence brief
 

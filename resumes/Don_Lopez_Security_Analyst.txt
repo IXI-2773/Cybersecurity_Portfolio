@@ -2,6 +2,7 @@ DON LOPEZ
 CYBERSECURITY ANALYST | SECURITY ANALYST
 Portfolio: https://ixi-2773.github.io/Cybersecurity_Portfolio/
 GitHub: https://github.com/IXI-2773/Cybersecurity_Portfolio
+Email: frailtycraven@gmail.com
 Public professional profile: https://github.com/IXI-2773
 
 PROFESSIONAL SUMMARY
@@ -41,4 +42,4 @@ CompTIA Security+ | Holder-reported; public validation details not supplied
 CompTIA CySA+ | Holder-reported; public validation details not supplied
 
 EVIDENCE SCOPE
-These are individual practice projects, not a substitute for employment experience. All lab data are fabricated or localhost-only. Splunk dashboard operation was observed on synthetic data; real incident response, production monitoring, and independent certificate verification are not established. Personal contact information was not invented.
+These are individual practice projects, not a substitute for employment experience. All lab data are fabricated or localhost-only. Splunk dashboard operation was observed on synthetic data; real incident response, production monitoring, and independent certificate verification are not established. The professional email above was authorized for public use; phone details and employment history were not invented.
