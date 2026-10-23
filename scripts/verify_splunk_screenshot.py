@@ -36,8 +36,8 @@ def main():
             assert end == len(data), "Trailing data in published screenshot"
             break
         pos = end
-    assert ended and dimensions == (800, 193), f"Unexpected PNG dimensions {dimensions}"
-    print("PASS: original-source cropped screenshot PNG CRC integrity, dimensions 800x193")
+    assert ended and dimensions == (700, 169), f"Unexpected PNG dimensions {dimensions}"
+    print("PASS: original-source cropped screenshot PNG CRC integrity, dimensions 700x169")
     print("Scope: screenshot image integrity, NOT source-job authentication")
 
 
