@@ -151,3 +151,30 @@ section[id]{scroll-margin-top:100px}
 .analyst-resources{display:flex;flex-wrap:wrap;gap:11px 20px;margin-top:22px}
 @media(max-width:800px){.analyst-section-head{display:block}.analyst-section-head>p{max-width:unset;margin-top:10px}}
 @media(max-width:650px){.soc-proof-grid,.soc-status-grid,.analyst-evidence-grid,.analyst-verification-grid{grid-template-columns:1fr}.soc-proof-card,.analyst-evidence-card{padding:18px}.soc-overview-bottom .actions{display:flex;flex-direction:column;align-items:stretch;width:100%}.soc-overview-bottom .actions .button{width:100%;text-align:center}.analyst-review-section{margin:30px 0 35px}}
+
+/* Transparent source-derived SOC demo. Not styled or described as Splunk output. */
+.sim-main{padding-bottom:80px}.sim-banner{display:flex;flex-direction:column;gap:8px;padding:17px 20px;margin:25px 0;border:1px solid #8a7448;background:#302717;color:#f5e7c7;border-radius:12px;line-height:1.55}
+.sim-banner strong{font-size:.81rem;letter-spacing:.07em}.sim-banner span{font-size:.85rem}
+.sim-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:26px 0}
+.sim-stat{background:#132b38;border:1px solid #355867;border-radius:14px;padding:17px}.sim-stat strong{display:block;font-size:clamp(1.5rem,3vw,2.2rem);color:#7de1d1;line-height:1.25}.sim-stat span{color:#bbd0dd;font-size:.78rem}
+.sim-panel{padding:24px;margin:19px 0;border:1px solid #385a67;background:#0d2230;border-radius:16px}
+.sim-panel h2{font-size:1.18rem;margin:4px 0 0}.sim-panel>p{color:#c3d5de;font-size:.87rem;line-height:1.7}.sim-panel a{color:#78e6d3;text-underline-offset:3px}
+.sim-panel-head{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}.sim-panel-head .eyebrow{font-size:.65rem}
+.sim-legend{display:flex;gap:17px;font-size:.79rem}.sim-legend span:before{content:"";display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:7px}
+.sim-key-f:before{background:#71bce9}.sim-key-s:before{background:#77dec1}
+.sim-chart{margin-top:22px;display:flex;flex-direction:column;gap:12px}
+.sim-chart-row{display:grid;grid-template-columns:130px minmax(0,1fr) 64px;gap:13px;align-items:center}
+.sim-chart-label{font-size:.81rem;font-weight:650;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.sim-chart-bars{display:flex;flex-direction:column;justify-content:center;gap:4px;min-height:28px}
+.sim-bar{display:block;height:9px;min-width:0;border-radius:2px}
+.sim-bar-f{background:#71bce9}.sim-bar-s{background:#77dec1}
+.sim-chart-total{font:600 .8rem/1.4 ui-monospace,monospace;text-align:right;font-variant-numeric:tabular-nums}
+.sim-data{margin-top:19px;border-top:1px solid #315062;padding-top:12px}.sim-data summary{cursor:pointer;color:#8ff0d9;font-weight:650;font-size:.84rem;min-height:44px;display:flex;align-items:center}
+.sim-data .evidence-scroll{margin:14px 0 0;overflow-x:auto}
+.sim-pill{font-size:.71rem;border:1px solid #a78750;color:#f7d8a2;border-radius:40px;padding:5px 12px;font-weight:700}
+.sim-alert{display:grid;grid-template-columns:minmax(200px, .8fr) minmax(0,1.3fr);gap:22px;margin:19px 0;padding:20px;border:1px solid #536b76;border-radius:12px;background:#142d3b}
+.sim-alert strong{color:#f3f7fc}.sim-alert p{color:#c2d5e1;font-size:.82rem}
+.sim-alert dl{margin:0}.sim-alert dl>div{display:flex;justify-content:space-between;gap:15px;border-bottom:1px solid #2a4957;padding:7px 0;font-size:.83rem}
+.sim-alert dt{color:#a3c4d1}.sim-alert dd{margin:0;text-align:right;font-weight:600;overflow-wrap:anywhere}
+@media(max-width:760px){.sim-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.sim-alert{grid-template-columns:1fr}.sim-panel{padding:17px}.sim-chart-row{grid-template-columns:90px minmax(0,1fr) 50px;gap:8px}.sim-chart-label{font-size:.74rem}.sim-chart-total{font-size:.72rem}}
+@media(max-width:370px){.sim-stat{padding:12px}.sim-chart-row{grid-template-columns:75px minmax(0,1fr) 47px}}
