@@ -11,7 +11,7 @@
 | [Celestial Resonance](celestial-resonance.md) | Review-safe engineering principles | Private implementation; no production security claim |
 | [Research AI Infrastructure](research-ai-infrastructure.md) | Evidence provenance, uncertainty and authority controls | Private implementation; no autonomous SOC claim |
 
-**SOC Analyst recruiter view:** [Dedicated evidence overview](soc-analyst-evidence.html) · [GitHub-readable evidence guide](../docs/SOC_ANALYST_EVIDENCE_GUIDE.md).
+**SOC Analyst recruiter view:** [Dedicated evidence overview](https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/soc-analyst-evidence.html) · [GitHub-readable evidence guide](../docs/SOC_ANALYST_EVIDENCE_GUIDE.md).
 
 **Credentials:** [CompTIA Security+ and CySA+](../docs/CREDENTIALS.md), reported by the portfolio owner; public badge verification not yet linked.
 

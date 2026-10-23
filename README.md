@@ -26,7 +26,7 @@ Automated deployment health checks are defined in [`check-live-pages.yml`](.gith
 Public badge URLs, exam versions, dates and renewal status have not been supplied. See the [credential record](docs/CREDENTIALS.md) for claim limits.
 
 ## Start here
-- [SOC Analyst evidence overview](projects/soc-analyst-evidence.html) — dedicated recruiter-ready index of four synthetic labs, each with a source-linked report and test references.
+- [SOC Analyst evidence overview](https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/soc-analyst-evidence.html) — dedicated recruiter-ready index of four synthetic labs, each with a source-linked report and test references.
 - [GitHub-readable SOC Analyst evidence guide](docs/SOC_ANALYST_EVIDENCE_GUIDE.md) — brief verified-versus-pending qualifications.
 - [GitHub-readable project gallery](projects/CASE_STUDIES.md) — all six case studies without raw HTML or a 404.
 - [Authentication detection case study](projects/authentication-detection.md) — reproducible, synthetic Python lab, 31 authentication tests, a simulated SOC investigation report, and a **Splunk runtime qualification package (not yet executed in Splunk)**.

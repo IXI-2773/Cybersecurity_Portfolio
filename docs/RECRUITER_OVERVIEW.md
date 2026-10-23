@@ -7,7 +7,7 @@
 
 ## SOC Analyst starting point
 
-[Review the SOC Analyst evidence overview](../projects/soc-analyst-evidence.html) for four source-linked synthetic investigations, or use the [GitHub-rendered evidence guide](SOC_ANALYST_EVIDENCE_GUIDE.md) for a five-minute verification path. Both explicitly distinguish completed local testing from Splunk, Wireshark and production outcomes still pending.
+[Review the SOC Analyst evidence overview](https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/soc-analyst-evidence.html) for four source-linked synthetic investigations, or use the [GitHub-rendered evidence guide](SOC_ANALYST_EVIDENCE_GUIDE.md) for a five-minute verification path. Both explicitly distinguish completed local testing from Splunk, Wireshark and production outcomes still pending.
 
 ## Demonstrable projects
 

@@ -3,7 +3,7 @@
 **Audience:** SOC Analyst, junior Security Analyst, Detection Engineering and Security Automation interviewers  
 **Positioning:** B.S. Cybersecurity (2024); CompTIA Security+ and CySA+ **reported by holder**, public verification pending. The four public security labs are **synthetic portfolio exercises**, not paid SOC incident experience.
 
-**Recruiter navigation:** [SOC Analyst evidence index](../projects/soc-analyst-evidence.html) · [GitHub-readable evidence guide](SOC_ANALYST_EVIDENCE_GUIDE.md).
+**Recruiter navigation:** [SOC Analyst evidence index](https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/soc-analyst-evidence.html) · [GitHub-readable evidence guide](SOC_ANALYST_EVIDENCE_GUIDE.md).
 
 ## 45-second introduction
 
