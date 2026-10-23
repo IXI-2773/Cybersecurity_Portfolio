@@ -275,6 +275,39 @@ def main() -> None:
                     driver.get(url)
                     body = driver.find_element(By.TAG_NAME, "body")
                 if name == "home":
+                    # First-screen recruiter tasks: job identity and authentic
+                    # controlled proof, not a decorative rule diagram.
+                    h1_text = driver.find_element(By.CSS_SELECTOR, ".hero h1").text
+                    if "SOC Analyst" not in h1_text:
+                        failures.append(f"{name}/{viewport}: analyst role not in first heading")
+                    landing_actions = driver.find_elements(By.CSS_SELECTOR, ".hero .actions a")
+                    if len(landing_actions) != 2:
+                        failures.append(f"{name}/{viewport}: first screen needs exactly two main actions")
+                    else:
+                        if not landing_actions[0].get_attribute("href").endswith("#featured-splunk"):
+                            failures.append(f"{name}/{viewport}: primary action misses genuine Splunk evidence")
+                        if not landing_actions[1].get_attribute("href").endswith("/recruiter.html"):
+                            failures.append(f"{name}/{viewport}: secondary action misses printable profile")
+                    evidence_card = driver.find_element(By.CSS_SELECTOR, ".hero-evidence-panel")
+                    evidence_image = evidence_card.find_element(By.CSS_SELECTOR, ".hero-evidence-image img")
+                    if driver.execute_script(
+                            "return arguments[0].complete && arguments[0].naturalWidth > 0;",
+                            evidence_image) is not True:
+                        failures.append(f"{name}/{viewport}: hero genuine Splunk screenshot did not load")
+                    if "Training data." not in evidence_card.text or "no production incidents" not in evidence_card.text:
+                        failures.append(f"{name}/{viewport}: hero screenshot missing training disclaimer")
+                    if (driver.execute_script(
+                            "return arguments[0].compareDocumentPosition(arguments[1]) & Node.DOCUMENT_POSITION_FOLLOWING",
+                            driver.find_element(By.ID, "featured-splunk"),
+                            driver.find_element(By.ID, "hiring-start")) == 0):
+                        failures.append(f"{name}/{viewport}: extra hiring routes interrupt proof-first journey")
+                    if viewport == "small-mobile":
+                        primary = driver.find_element(By.CSS_SELECTOR, ".hero .actions .button.primary")
+                        position = driver.execute_script(
+                            "return {bottom: arguments[0].getBoundingClientRect().bottom, height: innerHeight}",
+                            primary)
+                        if position["bottom"] > position["height"] - 1:
+                            failures.append(f"{name}/{viewport}: primary hiring action below first viewport")
                     replay = driver.find_element(By.ID, "boundary-replay")
                     replay_buttons = replay.find_elements(By.CSS_SELECTOR, "[data-replay-window]")
                     if len(replay_buttons) != 2 or any(b.get_attribute("disabled") is not None for b in replay_buttons):

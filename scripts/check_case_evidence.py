@@ -244,6 +244,30 @@ def main() -> None:
     required("independently authored" in guide.lower()
              and "private" in guide.lower(),
              "Public teaching engines must remain distinct from private implementations")
+    # Landing-page role clarity and genuine evidence must survive redesigns.
+    hiring_home = get("index.html")
+    import re as _hiring_re
+    hiring_h1 = _hiring_re.search(r"<h1[^>]*>(.*?)</h1>", hiring_home,
+                                  flags=_hiring_re.DOTALL | _hiring_re.IGNORECASE)
+    required(bool(hiring_h1) and "SOC Analyst" in hiring_h1.group(1),
+             "Homepage heading must identify target analyst role before scrolling")
+    required('class="hero-evidence-image"' in hiring_home
+             and 'src="assets/evidence/splunk-native-dashboard-results.png"' in hiring_home
+             and "Actual cropped screenshot" in hiring_home
+             and "Training data." in hiring_home
+             and "no production incidents" in hiring_home,
+             "Landing panel must show actual, scoped Splunk training evidence")
+    required(hiring_home.index('id="featured-splunk"') <
+             hiring_home.index('id="hiring-start"') <
+             hiring_home.index('id="boundary-replay"'),
+             "Source-first featured investigation should precede secondary recruiter routing")
+    required(hiring_home.count('class="hero-evidence-image"') == 1
+             and 'href="#featured-splunk">See the Splunk evidence' in hiring_home
+             and 'href="recruiter.html">One-page profile' in hiring_home,
+             "First-screen primary and secondary actions must match their destinations")
+    required("B.S. Cybersecurity" in hiring_home
+             and "holder-reported" in get("recruiter.html").lower(),
+             "Portfolio must retain credential scope context")
     # Homepage boundary preview must use the verified browser engine, not
     # hardcoded substitute detections. The static labels are only expected rows.
     source = get("index.html")

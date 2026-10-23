@@ -1181,3 +1181,58 @@ section[id]{scroll-margin-top:100px}
  .recruiter-project-grid>div,.recruiter-skill-columns>div{min-width:0;overflow-wrap:anywhere}
  .recruiter-detail,.recruiter-qualification{overflow-wrap:break-word}
 }
+
+/* Hiring-first release candidate: real controlled evidence takes hero priority.
+   Scoped to homepage to preserve other case-study and page layouts. */
+.portfolio-home .hero{padding:58px 0 46px}
+.portfolio-home .hero-grid{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(25px,4.3vw,62px)}
+.portfolio-home .hero h1{font-size:clamp(2.7rem,4.6vw,4.25rem);max-width:630px;margin:17px 0 17px}
+.portfolio-home .hero-lead{font-size:.97rem;line-height:1.78;max-width:560px}
+.portfolio-home .hero .actions{margin:20px 0 17px}
+.portfolio-home .hero .actions .button{min-height:46px}
+.portfolio-home .hero-resume-download{margin:0 0 18px}
+.hero-proof-summary{display:flex;gap:13px 25px;flex-wrap:wrap;border-top:1px solid #365249;padding-top:14px;margin-top:1px;color:#c4d2ce;font-size:.72rem;line-height:1.7}
+.hero-proof-summary>span{display:inline-flex;align-items:baseline;gap:6px}
+.hero-proof-summary strong{color:#a4ecb1;font:700 .96rem/1.2 ui-monospace,Consolas,monospace}
+.portfolio-home .hero-evidence-panel{border-color:#668579;background:linear-gradient(135deg,#162b29,#111e26);box-shadow:11px 14px 0 #0c171a}
+.portfolio-home .hero-evidence-panel .signal-panel-body{padding:23px 23px 18px}
+.hero-evidence-eyebrow{color:#bcdfbd;font:700 .58rem/1.6 ui-monospace,Consolas,monospace;letter-spacing:.075em;margin-bottom:7px}
+.portfolio-home .hero-evidence-panel h2{font-size:clamp(1.25rem,2vw,1.7rem);line-height:1.22;letter-spacing:-.035em;margin:5px 0 14px}
+.hero-evidence-image{display:block;background:#e2e8eb;border:1px solid #839994;border-radius:5px;padding:9px;box-shadow:0 8px 17px rgba(0,0,0,.17)}
+.hero-evidence-image img{display:block;width:100%;height:auto;min-height:40px;object-fit:contain}
+.hero-evidence-image:hover,.hero-evidence-image:focus-visible{outline:2px solid #b7edbc;outline-offset:3px}
+.portfolio-home .hero-evidence-panel .terminal-result{margin:13px 0 10px;padding:10px 12px;background:#1a3030;border:1px solid #4c7066;border-radius:6px;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 9px}
+.portfolio-home .hero-evidence-panel .terminal-result strong{white-space:nowrap}
+.portfolio-home .hero-evidence-panel .terminal-result>span:last-child{font-size:.65rem;line-height:1.6}
+.hero-evidence-disclosure{font-size:.69rem;line-height:1.65;color:#c1d2cd;margin:0 0 13px}
+.hero-evidence-disclosure strong{color:#dff0de}
+.portfolio-home .hero-evidence-panel .signal-link{font-size:.76rem}
+.portfolio-home .hero-evidence-panel .signal-panel-foot{font-size:.59rem}
+.portfolio-home .splunk-feature{scroll-margin-top:79px}
+.portfolio-home .hiring-start{padding:28px 0 12px;border-top:1px solid #2f4845}
+@media(max-width:950px){
+ .portfolio-home .hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px}
+ .portfolio-home .hero h1{font-size:clamp(2.35rem,4.9vw,3.1rem)}
+ .portfolio-home .hero-evidence-panel .signal-panel-body{padding:19px}
+}
+@media(max-width:800px){
+ .portfolio-home .hero{padding:34px 0 37px}
+ .portfolio-home .hero-grid{grid-template-columns:1fr;gap:29px}
+ .portfolio-home .hero h1{font-size:clamp(2.45rem,6.5vw,3.25rem)}
+ .portfolio-home .hero-lead{max-width:620px}
+ .portfolio-home .hero-evidence-panel{max-width:620px;box-shadow:none}
+ .portfolio-home .hero-evidence-panel h2{font-size:1.55rem}
+ .portfolio-home .hero-proof-summary{margin-top:0}
+}
+@media(max-width:390px){
+ .portfolio-home .hero{padding:23px 0 30px}
+ .portfolio-home .hero h1{font-size:clamp(2.02rem,8.3vw,2.25rem);margin:14px 0}
+ .portfolio-home .hero-lead{font-size:.83rem;line-height:1.6}
+ .portfolio-home .hero .actions{gap:8px;margin:16px 0 13px}
+ .portfolio-home .hero .actions .button{min-height:44px}
+ .portfolio-home .hero-resume-download{font-size:.71rem;margin:0 0 14px}
+ .hero-proof-summary{font-size:.66rem;gap:6px 14px;padding-top:10px}
+ .portfolio-home .hero-evidence-panel .signal-panel-body{padding:16px}
+ .hero-evidence-image{padding:6px}
+}
+@media(prefers-reduced-motion:reduce){.portfolio-home .hero-evidence-panel .signal-panel::after{animation:none}}
