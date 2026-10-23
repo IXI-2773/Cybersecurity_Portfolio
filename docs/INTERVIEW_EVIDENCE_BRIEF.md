@@ -51,3 +51,23 @@ The portfolio includes Splunk SPL drafts, a smoke test and a documented export-c
 - **What is CR/RAI?** Private software-engineering projects discussed in public-safe architectural summaries. Their private implementations have not been independently validated as deployed security systems.
 
 Use these statements only where they match the current code and public case evidence. Do not imply professional employment history, verified badge status or on-platform Splunk execution.
+
+## Story 4 — Network triage with source-level traceability
+
+**Question:** Do repeated NXDOMAIN responses or an HTTP POST establish command-and-control?
+
+**Evidence:** [LAB-NET-001](../projects/03-network-pcap/CASE_REPORT.md), [deterministic PCAP generator](../projects/03-network-pcap/generate_fixture.py), [frozen expected findings](../projects/03-network-pcap/expected_findings.json), and [18 tests](../projects/03-network-pcap/test_network_lab.py).
+
+**Observed:** Four synthetic failed DNS replies trigger at 12:00:36.200 UTC (frame 8), and a reserved-host POST triggers at 12:01:15.030 UTC (frame 19). A separate client provides benign DNS and GET controls.
+
+**Decision:** Investigate only on authorized real telemetry with endpoint and resolver/proxy corroboration. No C2, tunneling or exfiltration is established.
+
+## Story 5 — What a zero-finding remediation report can and cannot prove
+
+**Question:** Does adding Secure/HttpOnly/SameSite and CSP prove a web application is secure?
+
+**Evidence:** [LAB-WEB-001](../projects/04-local-vulnerability-assessment/CASE_REPORT.md), [local fixture](../projects/04-local-vulnerability-assessment/fixture_app.py), and [16 tests](../projects/04-local-vulnerability-assessment/test_vulnerability_lab.py).
+
+**Observed:** Four artificial HTTP response-control rules match the deliberately vulnerable localhost fixture. The same rules match zero after modification.
+
+**Limit:** The cookie test checks attribute presence over HTTP without TLS. The CSP test checks whether a header exists, not its semantics or browser enforcement. Those findings must not be promoted to a production security sign-off.
