@@ -304,8 +304,8 @@ def main() -> None:
                 if name == "recruiter-profile" and viewport == "desktop":
                     # A profile is not itself an ATS text résumé; follow the actual choice.
                     download_choice = driver.find_element(By.CSS_SELECTOR, '.recruiter-actions a[href="apply.html"]')
-                    if "Choose ATS résumé" not in download_choice.text:
-                        failures.append("recruiter/profile: résumé choice is labeled as an immediate download")
+                    if "Choose full résumé" not in download_choice.text:
+                        failures.append("recruiter/profile: expected clear link to full résumé choices")
                     click_control(download_choice)
                     if not driver.current_url.endswith("/apply.html") or len(
                             driver.find_elements(By.CSS_SELECTOR, ".application-role-actions a[download]")) != 2:

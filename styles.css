@@ -1413,3 +1413,19 @@ section[id]{scroll-margin-top:100px}
  .resume-document *{break-inside:avoid}
  .resume-document a{color:#164d57!important;text-decoration:none}
 }
+
+/* Enlarged printed résumé typography following actual Chrome PDF inspection.
+   The previous version left excess blank space despite fitting on one page. */
+@media print{
+ .resume-document h1{font-size:24pt}
+ .resume-document p,.resume-document li{font-size:9.35pt;line-height:1.42}
+ .resume-document-contact{font-size:8pt}
+ .resume-document-role{font-size:9.1pt}
+ .resume-section{margin:9pt 0}
+ .resume-section h2{font-size:9.45pt;margin-bottom:5pt;padding-bottom:3pt}
+ .resume-section h3{font-size:9.1pt}
+ .resume-history-header>span{font-size:8.35pt}
+ .resume-project{margin-top:7pt}
+ .resume-document-muted{font-size:7.8pt!important;line-height:1.36!important}
+ .resume-document-scope{font-size:7.3pt!important;line-height:1.35!important}
+}
