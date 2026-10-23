@@ -210,3 +210,6 @@ section[id]{scroll-margin-top:100px}
 .splunk-evidence-preview .splunk-table-note a{color:var(--teal);text-underline-offset:3px}
 @media(max-width:950px){.splunk-feature-grid{grid-template-columns:1fr}.splunk-evidence-preview{max-width:780px}.splunk-feature .section-head{display:block}}
 @media(max-width:480px){.splunk-progress{gap:8px}.splunk-progress>div:not(.splunk-progress-arrow){padding:10px}.splunk-progress-arrow{font-size:1.15rem}.splunk-feature-copy .button{width:100%;text-align:center}.splunk-evidence-heading{padding:13px 14px}}
+
+/* Maintain first project CTA inside Chrome's actual 320px-wide content viewport. */
+@media(max-width:370px){.hero h1{font-size:2.06rem;margin:14px 0 12px;line-height:1.06}.hero-lead{font-size:.86rem;line-height:1.52}.hero{padding:30px 0 40px}.hero .actions{margin:17px 0}}
