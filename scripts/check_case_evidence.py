@@ -105,6 +105,14 @@ def main() -> None:
     required("PREPARED" in pack and "NOT YET VERIFIED" in pack
              and "disabled" in pack.lower() and "64" in pack,
              "Splunk app must retain synthetic/demo vs runtime evidence boundary")
+    # Screenshot-reviewed native *one-panel* dashboard is separate from six-panel XML.
+    native = get("splunk_workflow/NATIVE_DASHBOARD_RESULT_2026-10-23.md")
+    required("ONE_PANEL_NATIVE_DASHBOARD_VERIFIED_BY_SCREENSHOT" in native
+             and "not yet stored in this public repository" in native
+             and "six-panel" in native and "real attack" in native,
+             "Native dashboard evidence status or limitations drifted")
+    for user in ("user_threshold", "user_reset", "user_boundary", "user_alpha", "user_beta"):
+        required(user in native, "Native dashboard report missing source case " + user)
     # Recruiter-facing landing page must expose all four fixture-backed reports
     # and must not silently omit pending Splunk/Wireshark status.
     home = get("index.html")

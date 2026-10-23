@@ -10,7 +10,7 @@
 4. Select **New Dashboard**; name it **Don Lopez — SOC Authentication Investigation**. If prompted for framework, select **Classic / Simple XML**.
 5. Save the results as a **table**. The dashboard belongs to the normal **Search & Reporting** app. **No custom app package, restart, indexed data, or API is needed.**
 
-**Expected only after real execution:** five fabricated detection rows. A dashboard screenshot cannot be claimed until you see it in Splunk.
+**Observed October 23, 2026:** The native Search & Reporting dashboard titled **Don Lopez — SOC Authentication Investigation** opened and showed all five synthetic detection rows in an operator screenshot. [Result review and limitations](NATIVE_DASHBOARD_RESULT_2026-10-23.md). The image itself is not in the public repository.
 
 ## One-paste route: complete six-panel classic dashboard
 
@@ -40,4 +40,4 @@ Splunk dashboards belong to an app context. The broken custom app's menu and das
 
 First test the one-panel Save As workflow, which avoids XML entirely. If that works but pasting XML fails, capture the source editor error. If even a saved panel fails to open under Search & Reporting, investigate **view permissions and Dashboard menu access** in that standard app, rather than reinstalling `don_lopez_soc`.
 
-**Status:** Source files prepared and statically verifiable; **no actual in-product rendering of this new dashboard has been observed**. Don't fabricate the screenshot or label the dashboard working until you can view it.
+**Status:** **One-panel native dashboard screenshot-reviewed PASS (5/5)**. The separate **six-panel Classic XML** has not been shown running; it remains prepared only.

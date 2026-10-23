@@ -27,6 +27,10 @@
 
 **Interpretation:** A rule match leads to corroboration and a documented decision; it does not authorize containment or prove compromise. All published case studies preserve this distinction.
 
+## Native Splunk dashboard: screenshot-reviewed
+
+The [native Search & Reporting dashboard](../splunk_workflow/NATIVE_DASHBOARD_RESULT_2026-10-23.md) opened in Splunk Enterprise and displayed a saved table of **5/5 synthetic authentication findings**. Only the **one-panel** dashboard is verified by screenshot. The six-panel XML, indexed ingestion and scheduled alert are not validated. The screenshot remains in chat rather than the public repository.
+
 ## Splunk development package — prepared, not deployed
 
 [Inspect the complete Splunk app kit](../splunk_workflow/README.md). It packages a synthetic lookup-backed SOC dashboard, an indexed-data dashboard, nine SPL searches and a disabled alert definition. Source and package validation is automated. **These new components have not yet been installed or validated in the actual Splunk Enterprise user interface.**

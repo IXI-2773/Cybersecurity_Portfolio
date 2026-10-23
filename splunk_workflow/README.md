@@ -21,7 +21,7 @@
 
 For all six panels in one paste, use [self-contained Classic Simple XML](NO_APP_DASHBOARD.xml), which embeds the 64 fabricated events and runs in your normal Search & Reporting app. No custom lookup or installed app is involved.
 
-**Execution status:** The no-app dashboard is prepared; a screenshot confirming its actual rendering has not yet been supplied.
+**Execution status:** The native one-panel Search & Reporting dashboard now has a [real operator screenshot showing 5/5 synthetic findings](NATIVE_DASHBOARD_RESULT_2026-10-23.md). The six-panel Classic XML and custom-app dashboards remain unverified.
 
 ## Resolving a Splunk 404 after installation
 
