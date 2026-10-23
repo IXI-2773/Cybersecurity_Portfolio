@@ -397,6 +397,9 @@ def main() -> None:
                         for item in descriptions:
                             if float(item.value_of_css_property("font-size").removesuffix("px")) < 14:
                                 failures.append(f"{name}/{viewport}: project evidence text below 14px")
+                        for label in proof.find_elements(By.TAG_NAME, "dt"):
+                            if driver.execute_script("return arguments[0].scrollWidth > arguments[0].clientWidth", label):
+                                failures.append(f"{name}/{viewport}: project evidence label clipped")
                         for action in card.find_elements(By.CSS_SELECTOR, ".work-footer > a"):
                             if action.rect["height"] < 44:
                                 failures.append(f"{name}/{viewport}: project source action below 44px")
@@ -482,10 +485,19 @@ def main() -> None:
                 out = SCREENSHOTS / f"{name}-{viewport}.png"
                 driver.save_screenshot(str(out))
                 if name == "home" and viewport in {"desktop", "mobile", "small-mobile"}:
-                    gallery = driver.find_element(By.CSS_SELECTOR, ".work-grid")
+                    gallery = driver.find_element(By.CSS_SELECTOR,
+                            ".work-grid" if viewport == "desktop" else ".work-grid .work-card")
                     # Separate gallery capture makes evidence hierarchy reviewable
-                    # without scaling down the entire long homepage.
-                    gallery.screenshot(str(SCREENSHOTS / f"home-project-evidence-{viewport}.png"))
+                    # without viewport cropping or the sticky header over the cards.
+                    bounds = driver.execute_script("""
+                        const r = arguments[0].getBoundingClientRect();
+                        return {x:r.left + scrollX, y:r.top + scrollY,
+                                width:r.width, height:r.height, scale:1};
+                    """, gallery)
+                    capture = driver.execute_cdp_cmd("Page.captureScreenshot", {
+                        "format": "png", "captureBeyondViewport": True, "clip": bounds})
+                    (SCREENSHOTS / f"home-project-evidence-{viewport}.png").write_bytes(
+                        base64.b64decode(capture["data"]))
                 if viewport == "desktop" and name in {
                         "home", "explorer", "test-workbench", "evidence-review",
                         "recruiter-profile", "role-paths", "soc-resume", "security-resume", "authentication",
