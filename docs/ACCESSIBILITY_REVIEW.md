@@ -69,3 +69,11 @@ This visual review is limited to the captured viewports. Full keyboard navigatio
 The final screenshots revealed that headless Chrome's **visible content viewport** is shorter than the height passed to `set_window_size` (the 320px screenshot used about 577px of visible page height). The primary-action visibility check now uses `window.innerHeight` and the button's `getBoundingClientRect().bottom` instead of the requested outer window height. The screenshot report records actual rendered viewport height separately.
 
 This ensures a future regression cannot pass merely because a button exists just below the genuinely visible first screen.
+
+## October 23, 2026 — updated release-candidate image and print review
+
+The latest examined workflow artifact for development head `522fc6055171795d4e640082f1b1f3c6b4572072` contains **44 captured responsive viewports** covering 16 pages. Actual PNG images for the main desktop and mobile hiring routes were visually inspected. No page-level horizontal overflow was reported by the automated review. The screenshots revealed a QA-artifact limitation: some images were saved after navigation and scrolled user interactions, so those PNGs are not valid top-of-page first-impression records.
+
+The revised Chrome workflow now reloads each page before taking viewport screenshots and records complete desktop-page captures for the main hiring pages. The recruiter profile printout is a real one-page US-letter Chrome PDF, reviewed via a rendered page image; print typography was increased to use its available space more readably, and a library-based page-count/content audit replaces the unavailable `pdfinfo` runner binary. Passing these checks is not the same as manual screen-reader or comprehensive WCAG validation.
+
+See [release-candidate report](RELEASE_READINESS_REVIEW_2026-10-23.md) for constraints and the publication hold.

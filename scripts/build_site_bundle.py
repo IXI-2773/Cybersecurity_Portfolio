@@ -14,20 +14,21 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 ARCHIVE_DATE = (2026, 10, 22, 0, 0, 0)
 ALLOWED = {
-    "assets": {".svg", ".png", ".jpg", ".jpeg", ".webp"},
+    "assets": {".svg", ".png", ".jpg", ".jpeg", ".webp", ".js"},
     "docs": {".md"},
     "resumes": {".txt"},
     "projects": {".html", ".md", ".py", ".json", ".csv", ".spl"},
 }
 ROOT_FILES = {
-    "index.html", "apply.html", "recruiter.html", "styles.css", "README.md", "SECURITY.md",
+    "index.html", "apply.html", "recruiter.html", "explore.html", "test-lab.html", "verify.html", "roles.html", "styles.css", "README.md", "SECURITY.md",
     "PUBLICATION_CHECKLIST.md",
 }
 REQUIRED_SITE_FILES = {
-    "index.html", "apply.html", "recruiter.html", "styles.css",
+    "index.html", "apply.html", "recruiter.html", "explore.html", "test-lab.html", "verify.html", "roles.html", "styles.css",
     "resumes/Don_Lopez_SOC_Analyst.txt",
     "resumes/Don_Lopez_Security_Analyst.txt",
     "assets/evidence/splunk-native-dashboard-results.png",
+    "assets/js/explorer.js", "assets/js/lab-data.js", "assets/js/test-engine.js", "assets/js/lab-ui.js", "assets/js/home-replay.js",
     "projects/celestial-resonance.html",
     "projects/research-ai-infrastructure.html",
     "projects/authentication-detection.html",

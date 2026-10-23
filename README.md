@@ -2,6 +2,28 @@
 
 A public, static portfolio presenting **reproducible synthetic defensive security exercises** alongside **high-level case studies of private engineering work**.
 
+## Hiring-team tools
+
+The Project Explorer, Verification Workbench and Evidence Review guide now share a three-step visual navigation bar, consistent restrained design, and narrow-screen layouts. The Explorer has synchronized role shortcuts; the workbench provides executable 599/600-second presets built on the existing public training engine; Evidence Review has direct jump links by evidence category. These presentation and navigation changes do not alter public test inputs or imply new private CR/RAI or live Splunk execution.
+
+The four homepage security cards now surface their evidence type alongside the role-specific test counts. CR and RAI cards remain distinctly labeled private architecture. All six case studies include a shared review bar connecting their analysis, relevant public source or independent teaching demo, and precise evidence limitations. This adds no claims of production detection or publicly inspectable private implementations.
+
+The [role-specific hiring paths](https://ixi-2773.github.io/Cybersecurity_Portfolio/roles.html) organize the verified work for SOC Analyst, Security Analyst, and Security Automation reviews. Each provides a prioritized case-study route, a technical interview answer, direct source links, and an explicit evidence limit. This new page remains on the PR branch until deployment.
+
+The [evidence review guide](https://ixi-2773.github.io/Cybersecurity_Portfolio/verify.html) maps four public security labs, two private engineering summaries, and the public verification workbench to inspectable sources and explicit limitations. This new page is available on the review branch until merged and deployed.
+
+The [project explorer](https://ixi-2773.github.io/Cybersecurity_Portfolio/explore.html) filters the six case studies and public verification workbench by role and skill. All entries and evidence links remain readable without JavaScript.
+
+The [verification workbench](https://ixi-2773.github.io/Cybersecurity_Portfolio/test-lab.html) runs two independent browser teaching engines: authentication replay over the existing 64-event fixture, and structured attributed-evidence coverage. Nine executable baseline checks and negative controls produce real calculated results. A receipt download records fixture SHA-256 values and completed runs. These are separate from private CR/RAI implementations, the Python suite, and Splunk execution.
+
+Reproduce the public engine checks: `python scripts/build_browser_fixture.py --check` and `node scripts/test_browser_engine.cjs`.
+
+## Homepage refresh
+
+The homepage now includes an interactive **599/600-second boundary replay** that calculates five reference-case results using the same frozen 64-event public teaching fixture and JavaScript detection engine as the verification workbench. It starts with an unexecuted reference display when scripts are disabled; it never suggests live telemetry or fresh Splunk execution. The result and individual case indicators change only after calculations from the source fixture.
+
+The recruiter-focused homepage combines four visual public-lab cards, the genuine Splunk screenshot, compact engineering summaries, a direct SOC resume download, and keyboard-expandable evidence tables. Native HTML and scoped CSS keep the site dependency-free.
+
 ## Live portfolio website
 
 **[Visit the fully rendered cybersecurity portfolio](https://ixi-2773.github.io/Cybersecurity_Portfolio/)**. The [CR case study](https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/celestial-resonance.html) and [vulnerability remediation](https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/vulnerability-remediation.html) now have a successful GitHub Pages deployment. The published website is separate from GitHub's source-code view.
@@ -107,7 +129,7 @@ Extract the ZIP fully before opening `index.html`. GitHub Actions generates a re
 
 ## GitHub Pages hosting
 
-Pages is configured for this repository. The current static site uses no JavaScript, frameworks, runtime credentials, analytics, external fonts or paid hosting. For hosting configuration, troubleshooting, and offline backup instructions, see [the site guide](docs/SITE_LAUNCH.md). [Check the latest Pages and website-health workflows](https://github.com/IXI-2773/Cybersecurity_Portfolio/actions).
+Pages is configured for this repository. The static site uses small, dependency-free JavaScript modules for optional project filtering and interactive public teaching checks. Case studies, evidence links, and contact navigation remain available without JavaScript. It uses no framework, runtime credentials, analytics, external fonts or paid hosting. For hosting configuration, troubleshooting, and offline backup instructions, see [the site guide](docs/SITE_LAUNCH.md). [Check the latest Pages and website-health workflows](https://github.com/IXI-2773/Cybersecurity_Portfolio/actions).
 
 ## Public disclosure and accuracy
 - CR and RAI are **private** engineering projects. Do not publish their source, internal records, repository URLs, security-sensitive workflow details, or artifacts without a separate review.

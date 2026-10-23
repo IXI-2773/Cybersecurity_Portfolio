@@ -137,6 +137,135 @@ def main() -> None:
             required(row["timestamp"] in visual and row["source_ip"] in visual,
                      "Illustrative alert must match the frozen oracle boundary case")
 
+    # Project dossier structure: six consistent navigation bars, with private
+    # architecture clearly distinct from testable public training fixtures.
+    home_cards = get("index.html")
+    required(home_cards.count('class="work-proofline"') == 4
+             and home_cards.count('class="engineering-proofline"') == 2,
+             "Four public-lab and two private architecture cards need matching proof labels")
+    public_cases = (
+        ("projects/authentication-detection.html", "scope-and-further-work"),
+        ("projects/windows-process-triage.html", "scope-and-limits"),
+        ("projects/network-traffic-analysis.html", "scope-and-limits"),
+        ("projects/vulnerability-remediation.html", "scope-and-limits"),
+    )
+    private_cases = ("projects/celestial-resonance.html",
+                     "projects/research-ai-infrastructure.html")
+    for page, anchor in public_cases:
+        source = get(page)
+        required(source.count('class="case-review-strip"') == 1
+                 and 'data-case-scope="public-lab"' in source
+                 and f'href="#{anchor}"' in source
+                 and 'class="case-review-actions"' in source,
+                 "Public lab missing common review bar or scope anchor: " + page)
+        required("Controlled evidence" in source
+                 and "private implementation" not in source.split('class="case-review-strip"', 1)[1].split('class="article-layout"', 1)[0].lower(),
+                 "Public lab review banner has incorrect disclosure: " + page)
+    for page in private_cases:
+        source = get(page)
+        required(source.count('class="case-review-strip"') == 1
+                 and 'data-case-scope="private-summary"' in source
+                 and 'href="#public-scope"' in source
+                 and 'Separate public' in source,
+                 "Private case must label its independent teaching demonstration: " + page)
+    for page in [p for p, _ in public_cases] + list(private_cases):
+        source = get(page)
+        required(source.index('class="case-snapshot"') < source.index('class="case-review-strip"')
+                 < source.index('class="article-layout"'),
+                 "Case review shortcuts must follow the summary and precede the report: " + page)
+    # Shared recruiting tool design and real, connected interaction contracts.
+    for page, active in (("explore.html", "explore"), ("test-lab.html", "lab"),
+                         ("verify.html", "verify")):
+        source = get(page)
+        required(source.count('class="toolkit-masthead"') == 1
+                 and source.count('class="toolkit-pipeline"') == 1,
+                 "Tool page missing shared design system: " + page)
+        required(source.count('data-toolkit-step=') == 3
+                 and f'data-toolkit-step="{active}" aria-current="page"' in source,
+                 "Tool page needs navigable and labeled active path: " + page)
+    explorer = get("explore.html")
+    required(explorer.count('data-quick-role=') == 4
+             and 'class="explorer-role-pills"' in explorer,
+             "Explorer needs all four functional role shortcuts")
+    explorer_js = get("assets/js/explorer.js")
+    required("button.dataset.quickRole" in explorer_js
+             and "role.value = button.dataset.quickRole" in explorer_js
+             and "aria-pressed" in explorer_js,
+             "Explorer role shortcuts must update and announce filter state")
+    lab = get("test-lab.html")
+    required(lab.count('data-window-preset=') == 2
+             and 'data-window-preset="599"' in lab
+             and 'data-window-preset="600"' in lab,
+             "Test lab needs both public authentication boundary presets")
+    lab_script = get("assets/js/lab-ui.js")
+    required("requestSubmit()" in lab_script
+             and "updatePreset()" in lab_script
+             and "button.dataset.windowPreset" in lab_script,
+             "Lab presets must execute existing public engine and synchronize state")
+    evidence_guide = get("verify.html")
+    required(evidence_guide.count('class="verification-jump"') == 1
+             and all(f'href="#{anchor}"' in evidence_guide for anchor in
+                     ("public-lab-title", "engineering-title", "browser-title")),
+             "Evidence guide must retain all three in-page scope links")
+    roles = get("roles.html")
+    for target in ("soc-analyst", "security-analyst", "security-automation"):
+        required(f'id="{target}"' in roles and f'href="#{target}"' in roles,
+                 "Role page missing working role destination: " + target)
+    required(roles.count('class="role-route-card"') == 3
+             and roles.count('class="role-interview-question"') == 3
+             and roles.count('class="role-scope"') == 3,
+             "Each role needs a route, question and evidence limit")
+    for case in ("projects/authentication-detection.html",
+                 "projects/windows-process-triage.html",
+                 "projects/network-traffic-analysis.html",
+                 "projects/vulnerability-remediation.html",
+                 "projects/celestial-resonance.html",
+                 "projects/research-ai-infrastructure.html",
+                 "test-lab.html#authentication-replay",
+                 "test-lab.html#evidence-coverage"):
+        required(case in roles, "Role page missing existing evidence path: " + case)
+    required("independently authored" in roles.lower()
+             and "private" in roles.lower()
+             and "not" in roles.lower(),
+             "Role page must retain limits of public/private evidence")
+    required('href="roles.html"' in get("index.html")
+             and 'href="roles.html"' in get("explore.html")
+             and 'roles.html#security-automation' in get("apply.html"),
+             "Homepage, explorer and application paths must all reach role guide")
+    guide = get("verify.html")
+    required(guide.count("data-evidence-card") == 7
+             and guide.count('class="verification-limit"') == 7,
+             "Evidence review guide must contain seven source/limit entries")
+    for source in ("splunk_workflow/NATIVE_DASHBOARD_RESULT_2026-10-23.md",
+                   "assets/evidence/splunk-native-dashboard-results.png",
+                   "projects/03-network-pcap/CASE_REPORT.md",
+                   "projects/04-local-vulnerability-assessment/CASE_REPORT.md"):
+        required(source in guide, "Evidence review guide missing artifact: " + source)
+    required("independently authored" in guide.lower()
+             and "private" in guide.lower(),
+             "Public teaching engines must remain distinct from private implementations")
+    # Homepage boundary preview must use the verified browser engine, not
+    # hardcoded substitute detections. The static labels are only expected rows.
+    source = get("index.html")
+    required('id="boundary-replay"' in source
+             and 'assets/js/lab-data.js' in source
+             and 'assets/js/test-engine.js' in source
+             and 'assets/js/home-replay.js' in source,
+             "Homepage boundary preview must reference public source/engine")
+    required(source.count("data-replay-username=") == 5
+             and source.count("data-replay-window=") == 2,
+             "Homepage preview must expose five expected identities and two time windows")
+    reference = json.loads(get("projects/01-authentication-detection/expected_findings.json"))
+    expected_users = {row["username"] for row in reference["expected_findings"]}
+    import re as _replay_re
+    shown_users = set(_replay_re.findall(r'data-replay-username="([^"]+)"', source))
+    required(shown_users == expected_users,
+             "Homepage preview labels do not match the frozen expected finding identities")
+    script = get("assets/js/home-replay.js")
+    required("PortfolioEngine" in script and "PortfolioLabData" in script
+             and "detectAuth" in script and "actual.has(key(reference))" in script
+             and "seconds}-second inclusive" in script,
+             "Homepage replay must calculate fixture findings using the public engine")
     # Feature only demonstrated Splunk scope; prevent stale "not run" homepage copy.
     home_v4 = get("index.html")
     required('id="featured-splunk"' in home_v4 and "3 / 5" in home_v4 and "5 / 5" in home_v4,
@@ -155,6 +284,33 @@ def main() -> None:
         "Vulnerability Assessment", "Celestial Resonance", "Research AI Infrastructure")]
     required(all(x >= 0 for x in security_pos) and security_pos == sorted(security_pos),
              "Security labs must precede private engineering case studies")
+    # Focused recruiter journey contract: no falsely labeled download, readable
+    # source reports, and direct role/resume/evidence navigation.
+    required('href="recruiter.html">One-page profile' in home_v4,
+             "Homepage must distinguish printable profile from an ATS résumé")
+    required('class="hero-resume-download"' in home_v4
+             and 'href="resumes/Don_Lopez_SOC_Analyst.txt"' in home_v4,
+             "Homepage needs a direct SOC résumé download")
+    required('href="roles.html"' in home_v4,
+             "Homepage must expose the three-role hiring guide")
+    onepage_html = get("recruiter.html")
+    required('href="apply.html">Choose ATS résumé' in onepage_html,
+             "Recruiter profile must not falsely label a link as a download")
+    github_source = "https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/"
+    for name, document in (
+        ("role paths", roles),
+        ("evidence guide", guide),
+        ("analyst workflow", get("projects/soc-analyst-workflow.html")),
+    ):
+        import re as _re
+        raw_reports = _re.findall(r'href="(?!(?:https?://))[^"]+\.md(?:#[^"]*)?"', document)
+        required(not raw_reports,
+                 name + " has non-rendered relative Markdown links: " + repr(raw_reports))
+    for report in ("splunk_workflow/NATIVE_DASHBOARD_RESULT_2026-10-23.md",
+                   "projects/03-network-pcap/CASE_REPORT.md",
+                   "projects/04-local-vulnerability-assessment/CASE_REPORT.md"):
+        required(f'href="{github_source}{report}"' in guide,
+                 "Review guide must open the readable GitHub source: " + report)
     # Resume/recruiter claims must remain grounded in completed screenshot review.
     onepage = get("docs/RECRUITER_QUICK_BRIEF.md")
     bullets = get("docs/RESUME_PORTFOLIO_BULLETS.md")

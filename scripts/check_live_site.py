@@ -18,6 +18,13 @@ import urllib.request
 BASE = "https://ixi-2773.github.io/Cybersecurity_Portfolio/"
 EXPECTED_PAGES = {
     "": "Don Lopez",
+    "apply.html": "Application Toolkit",
+    "explore.html": "Project Explorer",
+    "recruiter.html": "SOC Analyst Recruiter Profile",
+    "roles.html": "Role Paths",
+    "test-lab.html": "Verification Workbench",
+    "verify.html": "Evidence Review",
+    "projects/splunk-synthetic-preview.html": "Synthetic SOC Dashboard Preview",
     "projects/authentication-detection.html": "Authentication",
     "projects/windows-process-triage.html": "Windows",
     "projects/network-traffic-analysis.html": "Network",
@@ -27,7 +34,15 @@ EXPECTED_PAGES = {
     "projects/soc-analyst-workflow.html": "SOC",
     "projects/soc-analyst-evidence.html": "SOC Analyst",
 }
-STATIC_ASSETS = ("styles.css", "assets/network/pcap-evidence-overview.svg")
+STATIC_ASSETS = (
+    "styles.css",
+    "assets/network/pcap-evidence-overview.svg",
+    "assets/js/explorer.js",
+    "assets/js/lab-data.js",
+    "assets/js/test-engine.js",
+    "assets/js/lab-ui.js",
+    "assets/js/home-replay.js",
+)
 MAX_BYTES = 1024 * 1024
 
 
@@ -90,7 +105,9 @@ def verify_response(path: str, status: int, content_type: str, body: bytes) -> d
         if path == "":
             for value in ("projects/celestial-resonance.html",
                           "projects/vulnerability-remediation.html",
-                          "projects/soc-analyst-evidence.html"):
+                          "projects/soc-analyst-evidence.html",
+                          "explore.html", "recruiter.html", "roles.html",
+                          "test-lab.html", "verify.html"):
                 if value not in parser.links:
                     raise ValueError(f"Homepage missing internal project link: {value}")
         return {"path": path or "/", "status": "PASS", "title": title}
@@ -104,6 +121,11 @@ def verify_response(path: str, status: int, content_type: str, body: bytes) -> d
             raise ValueError("SVG asset served with unexpected MIME type")
         if b"<svg" not in body or b"OFFLINE VISUALIZATION" not in body:
             raise ValueError("SVG evidence content missing")
+    elif path.endswith(".js"):
+        if "javascript" not in content_type.lower():
+            raise ValueError("Browser test code served with incorrect MIME type")
+        if not body.strip():
+            raise ValueError("Browser test code response was empty")
     return {"path": path, "status": "PASS", "content_type": content_type}
 
 
@@ -169,6 +191,14 @@ def self_test() -> None:
             continue
         raise AssertionError("Invalid response passed healthcheck")
     assert verify_response("styles.css", 200, "text/css", b":root{--bg:black;--teal:green}")["status"] == "PASS"
+    assert verify_response("assets/js/test-engine.js", 200, "text/javascript",
+                           b"globalThis.PortfolioEngine = {}")["status"] == "PASS"
+    try:
+        verify_response("assets/js/test-engine.js", 200, "text/plain", b"test")
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("Unsafe JavaScript content type passed")
     print("Local healthcheck self-tests: PASS; no external HTTP requests made")
 
 
