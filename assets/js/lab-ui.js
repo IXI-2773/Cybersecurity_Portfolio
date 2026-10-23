@@ -17,6 +17,25 @@
   const stamp = () => new Date().toISOString();
   byId('run-checks').disabled = false;
   byId('replay-submit').disabled = false;
+  const presetButtons = [...document.querySelectorAll('[data-window-preset]')];
+  const updatePreset = () => {
+    const windowSeconds = byId('auth-window').value;
+    const threshold = byId('auth-threshold').value;
+    for (const button of presetButtons) button.setAttribute('aria-pressed', String(
+      button.dataset.windowPreset === windowSeconds && threshold === '5'));
+  };
+  for (const button of presetButtons) {
+    button.disabled = false;
+    button.addEventListener('click', () => {
+      byId('auth-threshold').value = '5';
+      byId('auth-window').value = button.dataset.windowPreset;
+      updatePreset();
+      byId('replay-form').requestSubmit();
+    });
+  }
+  byId('auth-window').addEventListener('input', updatePreset);
+  byId('auth-threshold').addEventListener('input', updatePreset);
+  updatePreset();
   byId('coverage-submit').disabled = false;
   byId('run-checks').addEventListener('click',() => {
     const checks=engine.runChecks(fixture);
@@ -44,6 +63,7 @@
       byId('replay-empty').hidden=findings.length>0;
       byId('replay-status').textContent=`${findings.length} findings · ${missing} baseline rows missing · ${additional} additional rows. ${threshold===5 && windowSeconds===600?'Frozen baseline settings.':'Modified rule settings.'}`;
       receipt.replay={run_at:stamp(),settings:{threshold,window_seconds:windowSeconds},findings,baseline_comparison:{missing,additional}};
+      updatePreset();
     } catch(error) {byId('replay-status').textContent=error.message;}
   });
   byId('coverage-form').addEventListener('submit',event => {

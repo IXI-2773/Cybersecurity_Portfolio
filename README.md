@@ -4,6 +4,8 @@ A public, static portfolio presenting **reproducible synthetic defensive securit
 
 ## Hiring-team tools
 
+The Project Explorer, Verification Workbench and Evidence Review guide now share a three-step visual navigation bar, consistent restrained design, and narrow-screen layouts. The Explorer has synchronized role shortcuts; the workbench provides executable 599/600-second presets built on the existing public training engine; Evidence Review has direct jump links by evidence category. These presentation and navigation changes do not alter public test inputs or imply new private CR/RAI or live Splunk execution.
+
 The four homepage security cards now surface their evidence type alongside the role-specific test counts. CR and RAI cards remain distinctly labeled private architecture. All six case studies include a shared review bar connecting their analysis, relevant public source or independent teaching demo, and precise evidence limitations. This adds no claims of production detection or publicly inspectable private implementations.
 
 The [role-specific hiring paths](https://ixi-2773.github.io/Cybersecurity_Portfolio/roles.html) organize the verified work for SOC Analyst, Security Analyst, and Security Automation reviews. Each provides a prioritized case-study route, a technical interview answer, direct source links, and an explicit evidence limit. This new page remains on the PR branch until deployment.

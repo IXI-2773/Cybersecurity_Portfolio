@@ -6,6 +6,7 @@
   const search = form.querySelector('#project-search');
   const entries = [...document.querySelectorAll('[data-project-entry]')];
   const status = document.querySelector('#filter-status');
+  const quickRoles = [...form.querySelectorAll('[data-quick-role]')];
   const empty = document.querySelector('#filter-empty');
   const normalize = value => value.toLocaleLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g,'');
   function update() {
@@ -20,6 +21,7 @@
       if (match) shown++;
     }
     status.textContent = `${shown} of ${entries.length} entries shown`;
+    for (const button of quickRoles) button.setAttribute('aria-pressed', String(button.dataset.quickRole === role.value));
     empty.hidden = shown !== 0;
   }
   const requested = new URLSearchParams(location.search).get('role');
@@ -27,6 +29,10 @@
   form.querySelector('fieldset').hidden = false;
   search.addEventListener('input',update);
   role.addEventListener('change',update);
+  for (const button of quickRoles) button.addEventListener('click', () => {
+    role.value = button.dataset.quickRole;
+    update();
+  });
   form.addEventListener('submit',event => {event.preventDefault();update();});
   form.addEventListener('reset',event => {event.preventDefault();search.value='';role.value='all';update();});
   update();

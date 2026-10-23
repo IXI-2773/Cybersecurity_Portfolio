@@ -173,6 +173,40 @@ def main() -> None:
         required(source.index('class="case-snapshot"') < source.index('class="case-review-strip"')
                  < source.index('class="article-layout"'),
                  "Case review shortcuts must follow the summary and precede the report: " + page)
+    # Shared recruiting tool design and real, connected interaction contracts.
+    for page, active in (("explore.html", "explore"), ("test-lab.html", "lab"),
+                         ("verify.html", "verify")):
+        source = get(page)
+        required(source.count('class="toolkit-masthead"') == 1
+                 and source.count('class="toolkit-pipeline"') == 1,
+                 "Tool page missing shared design system: " + page)
+        required(source.count('data-toolkit-step=') == 3
+                 and f'data-toolkit-step="{active}" aria-current="page"' in source,
+                 "Tool page needs navigable and labeled active path: " + page)
+    explorer = get("explore.html")
+    required(explorer.count('data-quick-role=') == 4
+             and 'class="explorer-role-pills"' in explorer,
+             "Explorer needs all four functional role shortcuts")
+    explorer_js = get("assets/js/explorer.js")
+    required("button.dataset.quickRole" in explorer_js
+             and "role.value = button.dataset.quickRole" in explorer_js
+             and "aria-pressed" in explorer_js,
+             "Explorer role shortcuts must update and announce filter state")
+    lab = get("test-lab.html")
+    required(lab.count('data-window-preset=') == 2
+             and 'data-window-preset="599"' in lab
+             and 'data-window-preset="600"' in lab,
+             "Test lab needs both public authentication boundary presets")
+    lab_script = get("assets/js/lab-ui.js")
+    required("requestSubmit()" in lab_script
+             and "updatePreset()" in lab_script
+             and "button.dataset.windowPreset" in lab_script,
+             "Lab presets must execute existing public engine and synchronize state")
+    evidence_guide = get("verify.html")
+    required(evidence_guide.count('class="verification-jump"') == 1
+             and all(f'href="#{anchor}"' in evidence_guide for anchor in
+                     ("public-lab-title", "engineering-title", "browser-title")),
+             "Evidence guide must retain all three in-page scope links")
     roles = get("roles.html")
     for target in ("soc-analyst", "security-analyst", "security-automation"):
         required(f'id="{target}"' in roles and f'href="#{target}"' in roles,

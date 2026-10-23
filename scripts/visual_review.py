@@ -142,11 +142,30 @@ def main() -> None:
                     if first.get_attribute("open") is not None:
                         failures.append(f"{name}/{viewport}: interview question did not collapse")
                     body.send_keys(Keys.CONTROL, Keys.HOME)
+                if name in {"explorer", "test-workbench", "evidence-review"}:
+                    shell = driver.find_element(By.CSS_SELECTOR, ".toolkit-masthead")
+                    pipeline = driver.find_elements(By.CSS_SELECTOR, ".toolkit-pipeline a")
+                    if not shell.is_displayed() or len(pipeline) != 3:
+                        failures.append(f"{name}/{viewport}: missing common review navigation")
+                    active = [a for a in pipeline if a.get_attribute("aria-current") == "page"]
+                    if len(active) != 1 or not active[0].is_displayed():
+                        failures.append(f"{name}/{viewport}: active review step not discoverable")
                 if name == "evidence-review":
                     if len(driver.find_elements(By.CSS_SELECTOR, "[data-evidence-card]")) != 7:
                         failures.append(f"{name}/{viewport}: expected seven claim-to-source cards")
                     if len(driver.find_elements(By.CSS_SELECTOR, ".verification-limit")) != 7:
                         failures.append(f"{name}/{viewport}: every evidence item must state its limit")
+                    jump_links = driver.find_elements(By.CSS_SELECTOR, ".verification-jump a")
+                    if len(jump_links) != 3:
+                        failures.append(f"{name}/{viewport}: evidence category anchors missing")
+                    for link in jump_links:
+                        anchor = link.get_attribute("href").split("#")[-1]
+                        if not driver.find_elements(By.ID, anchor):
+                            failures.append(f"{name}/{viewport}: evidence category anchor {anchor} not found")
+                    if len(jump_links) == 3:
+                        click_control(jump_links[2])
+                        if driver.execute_script("return location.hash") != "#browser-title":
+                            failures.append(f"{name}/{viewport}: public browser evidence jump failed")
                     if not driver.find_element(By.CSS_SELECTOR, 'a[href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/splunk_workflow/NATIVE_DASHBOARD_RESULT_2026-10-23.md"]').is_displayed():
                         failures.append(f"{name}/{viewport}: missing native Splunk observation")
                 if name == "explorer":
@@ -154,6 +173,18 @@ def main() -> None:
                         return [el for el in driver.find_elements(By.CSS_SELECTOR, "[data-project-entry]") if el.is_displayed()]
                     query = driver.find_element(By.ID, "project-search")
                     role = Select(driver.find_element(By.ID, "role-filter"))
+                    quick_roles = driver.find_elements(By.CSS_SELECTOR, "[data-quick-role]")
+                    if len(quick_roles) != 4:
+                        failures.append(f"{name}/{viewport}: missing accessible role shortcuts")
+                    else:
+                        for focus, expected in (("soc", 4), ("automation", 4), ("security", 6), ("all", 7)):
+                            click_control(driver.find_element(By.CSS_SELECTOR, f'[data-quick-role="{focus}"]'))
+                            if role.first_selected_option.get_attribute("value") != focus:
+                                failures.append(f"{name}/{viewport}: quick filter {focus} did not update select")
+                            if driver.find_element(By.CSS_SELECTOR, f'[data-quick-role="{focus}"]').get_attribute("aria-pressed") != "true":
+                                failures.append(f"{name}/{viewport}: quick filter {focus} not announced selected")
+                            if len(shown_cards()) != expected:
+                                failures.append(f"{name}/{viewport}: quick filter {focus} returned {len(shown_cards())}, expected {expected}")
                     if len(shown_cards()) != 7:
                         failures.append(f"{name}/{viewport}: all seven entries must be discoverable")
                     for acronym in ("CR", "RAI"):
@@ -186,6 +217,16 @@ def main() -> None:
                     click_control(driver.find_element(By.ID, "run-checks"))
                     if "9 / 9" not in driver.find_element(By.ID,"checks-status").text:
                         failures.append(f"{name}/{viewport}: real baseline checks did not pass")
+                    for seconds, count in ((599, 3), (600, 5)):
+                        preset = driver.find_element(By.CSS_SELECTOR, f'[data-window-preset="{seconds}"]')
+                        if preset.get_attribute("disabled") is not None:
+                            failures.append(f"{name}/{viewport}: {seconds}s preset did not initialize")
+                            continue
+                        click_control(preset)
+                        if (len(driver.find_elements(By.CSS_SELECTOR, "#replay-rows tr")) != count or
+                                driver.find_element(By.ID, "auth-window").get_attribute("value") != str(seconds) or
+                                preset.get_attribute("aria-pressed") != "true"):
+                            failures.append(f"{name}/{viewport}: {seconds}s preset did not compute expected source rows")
                     window = driver.find_element(By.ID,"auth-window")
                     for seconds, count in ((599,3),(600,5)):
                         window.clear()
