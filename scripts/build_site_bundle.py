@@ -16,14 +16,19 @@ ARCHIVE_DATE = (2026, 10, 22, 0, 0, 0)
 ALLOWED = {
     "assets": {".svg", ".png", ".jpg", ".jpeg", ".webp"},
     "docs": {".md"},
+    "resumes": {".txt"},
     "projects": {".html", ".md", ".py", ".json", ".csv", ".spl"},
 }
 ROOT_FILES = {
-    "index.html", "styles.css", "README.md", "SECURITY.md",
+    "index.html", "apply.html", "recruiter.html", "styles.css", "README.md", "SECURITY.md",
     "PUBLICATION_CHECKLIST.md",
 }
 REQUIRED_SITE_FILES = {
-    "index.html", "styles.css", "projects/celestial-resonance.html",
+    "index.html", "apply.html", "recruiter.html", "styles.css",
+    "resumes/Don_Lopez_SOC_Analyst.txt",
+    "resumes/Don_Lopez_Security_Analyst.txt",
+    "assets/evidence/splunk-native-dashboard-results.png",
+    "projects/celestial-resonance.html",
     "projects/research-ai-infrastructure.html",
     "projects/authentication-detection.html",
     "projects/windows-process-triage.html",
@@ -84,6 +89,10 @@ def make_bundle(destination: Path) -> dict:
         for path in check.namelist():
             if path.startswith("/") or ".." in Path(path).parts:
                 raise ValueError("Unsafe archive path: " + path)
+        for file in ("apply.html", "recruiter.html", "resumes/Don_Lopez_SOC_Analyst.txt",
+                     "resumes/Don_Lopez_Security_Analyst.txt"):
+            if file not in check.namelist():
+                raise ValueError("Missing offline application file: " + file)
         if not check.read("index.html").startswith(b"<!doctype html>"):
             raise ValueError("Expected root HTML entry point missing")
     return {"status": "OFFLINE_PREVIEW_CREATED", "files": len(all_files),

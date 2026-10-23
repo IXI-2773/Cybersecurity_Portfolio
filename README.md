@@ -25,6 +25,10 @@ Automated deployment health checks are defined in [`check-live-pages.yml`](.gith
 
 Public badge URLs, exam versions, dates and renewal status have not been supplied. See the [credential record](docs/CREDENTIALS.md) for claim limits.
 
+## Role-targeted job application materials
+
+[Open the application toolkit](https://ixi-2773.github.io/Cybersecurity_Portfolio/apply.html) to download **two ATS-oriented plain-text résumé drafts** and review interviewer evidence prompts. The SOC Analyst and Security Analyst versions contain only owner-reported credentials and source-backed lab work, with no invented contact details, professional employment or production incidents. [Tailoring checklist](docs/APPLICATION_READINESS.md).
+
 ## Recruiter-ready web profile
 
 [View the print-friendly, one-page SOC Analyst profile](https://ixi-2773.github.io/Cybersecurity_Portfolio/recruiter.html). It presents the verified Splunk 3/5 → 5/5 case, credentials as owner-reported, and three additional source-linked security investigations; browser print can save it as PDF. It excludes invented employers, contact details and operational incident claims.

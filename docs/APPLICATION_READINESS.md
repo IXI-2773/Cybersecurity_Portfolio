@@ -1,0 +1,35 @@
+# Application Readiness — Don Lopez
+
+This guide accompanies the public [application toolkit](https://ixi-2773.github.io/Cybersecurity_Portfolio/apply.html) and the two plain-text résumé drafts. The résumé files are starting materials to tailor truthfully, **not claims of prior paid cybersecurity employment**.
+
+## Select a role-specific version
+
+| Target | Copy/download | Best first interview example |
+| --- | --- | --- |
+| SOC Analyst / Tier 1 SOC | [SOC Analyst ATS text](../resumes/Don_Lopez_SOC_Analyst.txt) | Real Splunk 3/5 → 5/5 boundary-debugging and triage case |
+| Cybersecurity / Security Analyst | [Security Analyst ATS text](../resumes/Don_Lopez_Security_Analyst.txt) | Local HTTP hardening from four toy rule hits to zero; then Splunk and Windows/PCAP |
+
+**Source anchors:** [Genuine cropped Splunk screenshot](../assets/evidence/splunk-native-dashboard-results.png) · [Auth case](../projects/authentication-detection.html) · [Process case](../projects/windows-process-triage.html) · [Network case](../projects/network-traffic-analysis.html) · [Web remediation case](../projects/vulnerability-remediation.html).
+
+## Five-minute tailoring workflow
+
+1. Read the job posting and highlight no more than five **required** capabilities; check each against code or a genuinely completed task. Do not add a tool you have merely heard of or a credential not held.
+2. Choose the nearest résumé track and keep the text-only section headings **Professional Summary**, **Technical Skills**, **Selected Cybersecurity Projects**, **Education**, **Certifications**. Add actual employment history yourself when appropriate; never invent it.
+3. Reorder two or three project bullets to match the posting. For a SOC job, foreground Splunk, Windows Event 4688 and investigative judgement; for a security analyst role, foreground HTTP response controls, repeatable remediation checks and network evidence.
+4. Add your own professional contact information and, only if you want it published, issuer-verifiable certificate links. Neither was supplied to the project and none has been fabricated.
+5. Paste the plain text into your preferred résumé editor; proofread dates, links, line wrapping and final PDF before submitting. A text copy is provided for ease of ATS parsing, **not a guarantee of ATS performance or hiring success**.
+
+## Interview verification map
+
+- **Walk through a Splunk investigation:** explain the original 3/5 result, why 600-second inclusivity matters, the revised SPL and the real native 5/5 screenshot. [Original discrepancy](../projects/01-authentication-detection/SPLUNK_MATRIX_FIRST_RUN_2026-10-23.md) · [Corrected query](../projects/01-authentication-detection/SPLUNK_MATRIX_BOUNDARY_RETEST.spl).
+- **How do you differentiate signal from incident?** A rule hit is a lead; corroborate MFA, device, identity and session logs. Our available public events are invented.
+- **How do you test a fix?** Compare frozen expected findings before and after while preserving negative cases and scope. HTTP lab demonstrates four fixture-rule hits dropping to zero, not production security.
+- **How do you handle missing telemetry?** State limitations and alternative explanations, do not invent supporting data. [Analyst handoff template](ANALYST_HANDOFF_TEMPLATE.md).
+
+## Claims deliberately excluded
+
+- No salaried SOC tenure or employers were supplied.
+- No real breach, attacker attribution, production Splunk alert, indexed ingestion, Wireshark screenshot, independently audited credential status, or enterprise remediation was established.
+- No unverifiable precision/recall, detection latency, avoided losses, or threat statistics.
+
+**Document purpose:** evidence-backed job-application preparation, not credential endorsement or employment verification.

@@ -298,3 +298,42 @@ section[id]{scroll-margin-top:100px}
 .recruiter-evidence-img img{width:100%;height:auto;display:block}
 .recruiter-evidence-img figcaption{font-size:.72rem;color:#bfdae3;padding:8px 12px}
 @media print{.recruiter-evidence-img{display:none!important}}
+
+
+/* Application readiness: role-selective ATS text, not an employment claim. */
+.application-page{max-width:1120px;padding-top:32px;padding-bottom:75px}
+.application-page h1{font-size:clamp(2rem,4vw,3.2rem);line-height:1.1;letter-spacing:-.03em;max-width:760px;margin:10px 0 15px}
+.application-lead{max-width:770px;color:#c6d9e4;font-size:1.04rem;line-height:1.72}
+.application-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin:30px 0 39px}
+.application-stats>div{padding:18px;border:1px solid #355866;border-radius:11px;background:#112a38}
+.application-stats strong{display:block;font-size:1.65rem;color:#a2f0da;line-height:1.25}
+.application-stats span{display:block;color:#b9d1dd;font-size:.8rem;line-height:1.45}
+.application-section{margin:38px 0}.application-section-heading h2{font-size:clamp(1.4rem,2.6vw,2rem);line-height:1.22;margin:5px 0 9px}
+.application-section-heading p{color:#bbd0da;margin:0 0 20px}
+.application-role-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.application-role-card{background:linear-gradient(140deg,#153443,#101f2d);border:1px solid #467181;border-radius:15px;padding:24px;min-width:0;display:flex;flex-direction:column}
+.application-role-header>span{display:block;font-size:.72rem;letter-spacing:.055em;font-weight:750;color:#92ddcf}
+.application-role-header h3{font-size:1.4rem;margin:7px 0}.application-role-header p{font-size:.87rem;color:#bed2dc;line-height:1.6}
+.application-role-card ul{padding-left:20px;margin:14px 0 25px;color:#e0edf1;font-size:.86rem;line-height:1.65}
+.application-role-card li{margin:7px 0}.application-role-actions{margin-top:auto;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.application-role-actions .button{font-size:.83rem}.application-role-actions .text-link{font-size:.81rem}
+.application-proof-list{border:1px solid #3f6473;border-radius:13px;overflow:hidden;margin-top:17px}
+.application-proof-list a{display:grid;grid-template-columns: minmax(170px,.72fr) minmax(0,1.3fr) 18px;gap:15px;align-items:center;padding:17px 20px;border-bottom:1px solid #305363;text-decoration:none;background:#102736}
+.application-proof-list a:last-child{border-bottom:0}
+.application-proof-list a:hover,.application-proof-list a:focus-visible{background:#194052}
+.application-proof-list a strong{font-size:.9rem;color:#e7f7f8}
+.application-proof-list a span{font-size:.82rem;color:#b7d2dc}
+.application-proof-list a span:last-child{font-size:1.1rem;color:#77e8ce}
+.application-questions{display:grid;gap:10px;margin-top:19px}
+.application-questions details{padding:14px 19px;background:#112d3c;border:1px solid #375d6d;border-radius:10px}
+.application-questions summary{cursor:pointer;list-style:revert;font-size:.91rem;font-weight:650;min-height:40px;display:list-item}
+.application-questions p{color:#c3d6e1;font-size:.85rem;line-height:1.75;margin:12px 0 5px}
+.application-questions a,.application-further a{color:#89e9d5;text-underline-offset:3px}
+.application-further{font-size:.86rem;margin:17px 0 0}
+.application-disclosure{border-top:1px solid #355b67;margin:48px 0 0;padding:23px 0;color:#bdd2df}
+.application-disclosure strong{color:#90e8d4;font-size:.9rem}
+.application-disclosure p{font-size:.85rem;max-width:900px;line-height:1.7}
+@media(max-width:820px){.application-role-grid{grid-template-columns:1fr}.application-proof-list a{grid-template-columns:1fr 20px;gap:4px}.application-proof-list a strong{grid-column:1}.application-proof-list a span:nth-child(2){grid-column:1}.application-proof-list a span:last-child{grid-row:1 / span 2;grid-column:2;text-align:right}}
+@media(max-width:500px){.application-stats{grid-template-columns:1fr;gap:9px;margin:23px 0}.application-stats>div{display:flex;gap:14px;align-items:center;padding:12px 15px}.application-stats strong{font-size:1.4rem;min-width:40px}.application-role-card{padding:18px}.application-role-actions .button{width:100%;text-align:center}.application-page{padding-top:22px}}
+
+.application-recruiter-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}@media(max-width:500px){.application-recruiter-actions{width:100%}.application-recruiter-actions .button{flex:1;text-align:center}}

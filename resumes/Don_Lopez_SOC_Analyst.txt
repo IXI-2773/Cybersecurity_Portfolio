@@ -1,0 +1,42 @@
+DON LOPEZ
+SOC ANALYST | CYBERSECURITY ANALYST
+Portfolio: https://ixi-2773.github.io/Cybersecurity_Portfolio/
+GitHub: https://github.com/IXI-2773/Cybersecurity_Portfolio
+Professional contact: https://github.com/IXI-2773
+
+PROFESSIONAL SUMMARY
+Cybersecurity graduate with CompTIA Security+ and CySA+ (holder-reported). Demonstrated Splunk Enterprise authentication searches and a saved results dashboard using controlled lab data. Develops Python-based detection exercises and source-attributed analyst reports with clear limits, negative tests, and evidence-based triage recommendations.
+
+TECHNICAL SKILLS
+Splunk Enterprise Search & Reporting; SPL correlation; authentication-log analysis; detection tuning and boundary tests; Windows Security Event ID 4688 triage; PowerShell/certutil command-line review; Python; CSV/JSON; DNS/HTTP packet analysis; PCAP; MITRE ATT&CK investigative mapping; GitHub Actions; regression testing; technical reporting.
+
+SELECTED CYBERSECURITY PROJECTS (PORTFOLIO LABS, NOT EMPLOYMENT)
+Splunk Authentication Detection and Debugging
+- Executed a real Splunk Enterprise SPL search over 64 fabricated login events across nine test scenarios; identified a 3-of-5 detection mismatch affecting exact ten-minute boundary cases.
+- Corrected the bounded SPL logic to include failures occurring 0-600 seconds before success; a saved Splunk Search & Reporting dashboard showed all 5 expected synthetic results in a publicly archived cropped screenshot.
+- Documented missing evidence, false-positive considerations, and investigative steps; did not claim indexed-data qualification, live alerts, or production effectiveness.
+Evidence: https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/authentication-detection.html
+
+Windows Process Creation Triage
+- Implemented Python triage of five fabricated Windows Security Event 4688 records; highlighted two PowerShell/certutil rule candidates while keeping three benign controls.
+- Wrote 11 focused tests and documented process ancestry, source, and endpoint corroboration needed before escalation.
+Evidence: https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/projects/02-windows-process-triage/CASE_REPORT.md
+
+Network Traffic Investigation
+- Built deterministic generation and analysis of a 20-packet practice PCAP; investigated DNS NXDOMAIN bursts and a reserved-host HTTP POST as review signals, not confirmed compromise.
+- Documented frame-level observations and validated the exercise using 18 focused Python tests.
+Evidence: https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/projects/03-network-pcap/CASE_REPORT.md
+
+ADDITIONAL LAB / VERIFICATION
+- Developed a localhost HTTP response-hardening exercise documenting four deliberately introduced rule violations reduced to zero after remediation; 16 focused tests.
+- Authentication lab contains 31 tests; four public labs total 76 focused Python tests. These counts describe unit coverage, not real-world detection accuracy.
+
+EDUCATION
+Bachelor of Science (B.S.), Cybersecurity | December 2024
+
+CERTIFICATIONS
+CompTIA Security+ | Holder-reported; public validation details not supplied
+CompTIA CySA+ | Holder-reported; public validation details not supplied
+
+EVIDENCE SCOPE
+Public labs use fabricated or localhost-only inputs. Splunk search and one-panel saved dashboard results were observed in the application; this does not establish real incidents, SOC employment, production alerts, or indexed telemetry. Employment history and private contact details are deliberately not invented.

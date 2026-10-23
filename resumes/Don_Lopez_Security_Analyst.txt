@@ -1,0 +1,44 @@
+DON LOPEZ
+CYBERSECURITY ANALYST | SECURITY ANALYST
+Portfolio: https://ixi-2773.github.io/Cybersecurity_Portfolio/
+GitHub: https://github.com/IXI-2773/Cybersecurity_Portfolio
+Professional contact: https://github.com/IXI-2773
+
+PROFESSIONAL SUMMARY
+Cybersecurity graduate with CompTIA Security+ and CySA+ (holder-reported). Creates reproducible security-analysis and remediation exercises spanning authentication detections, Windows process telemetry, network traffic, and web response hardening. Combines Python automation with negative testing, bounded conclusions, and analyst evidence documentation.
+
+TECHNICAL SKILLS
+Security analysis; vulnerability assessment methodology; HTTP security headers and cookie controls; Windows Event ID 4688 review; authentication correlation in Splunk Enterprise and SPL; Python; network traffic analysis; DNS, HTTP, and PCAP; MITRE ATT&CK investigative mapping; security validation; CI; incident-triage documentation; input validation; source traceability.
+
+SELECTED CYBERSECURITY PROJECTS (PORTFOLIO LABS, NOT EMPLOYMENT)
+HTTP Vulnerability Assessment and Remediation
+- Tested a deliberately insecure localhost HTTP demonstration service, identifying four artificial response-control omissions including security headers, cookie attributes, and debugging details.
+- Applied fixture-level remediations and verified the same rule set returned zero violations, with 16 focused Python tests and a before-and-after case report.
+- Scoped conclusions to the toy fixture; neither production application security, TLS, browser enforcement nor a third-party vulnerability scan was established.
+Evidence: https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/projects/04-local-vulnerability-assessment/CASE_REPORT.md
+
+Splunk Authentication Investigation
+- Ran an authentication-correlation query in Splunk Enterprise Search & Reporting on 64 fabricated events, found a 3-of-5 ten-minute boundary discrepancy, and tested a correction.
+- Saved a one-panel native Splunk dashboard displaying 5 of 5 expected synthetic findings; the genuine cropped image and code are publicly reviewable.
+Evidence: https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/authentication-detection.html
+
+Windows and Network Event Review
+- Analyzed synthetic Windows Event 4688 process-creation records, identifying two PowerShell/certutil rule candidates with benign controls and 11 focused tests.
+- Generated and analyzed a 20-packet DNS/HTTP PCAP exercise; documented two anomaly candidates with packet attribution and 18 focused tests.
+Evidence: https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/projects/02-windows-process-triage/CASE_REPORT.md
+Evidence: https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/projects/03-network-pcap/CASE_REPORT.md
+
+AUTOMATION AND QUALITY
+- Developed reproducible Python-based exercises covering authentication, process, packet, and HTTP analysis.
+- Maintained a public project CI workflow with 76 focused Python tests across four labs, plus separate source/evidence and website checks.
+- Documented uncertainty, benign alternatives, and authorization limits before proposing incident escalation.
+
+EDUCATION
+Bachelor of Science (B.S.), Cybersecurity | December 2024
+
+CERTIFICATIONS
+CompTIA Security+ | Holder-reported; public validation details not supplied
+CompTIA CySA+ | Holder-reported; public validation details not supplied
+
+EVIDENCE SCOPE
+These are individual practice projects, not a substitute for employment experience. All lab data are fabricated or localhost-only. Splunk dashboard operation was observed on synthetic data; real incident response, production monitoring, and independent certificate verification are not established. Personal contact information was not invented.
