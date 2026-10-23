@@ -1328,3 +1328,88 @@ section[id]{scroll-margin-top:100px}
 .case-evidence-contrast figcaption a{color:#adf0c1;font-weight:600}
 .case-evidence-contrast figcaption a:focus-visible{outline:3px solid #baefbe;outline-offset:3px}
 @media(max-width:650px){.case-contrast-grid{grid-template-columns:1fr}.case-contrast-heading{padding:17px}.case-contrast-side{padding:15px 17px}.case-evidence-contrast figcaption{padding:13px 17px}}
+
+/* Don Lopez printable, role-specific résumé documents.
+   Keep the substantive résumé in semantic HTML for search and assistive tech. */
+.resume-document-page{background:#0b151a}
+.resume-document-main{max-width:1100px;padding-top:30px;padding-bottom:64px}
+.resume-document-controls{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 auto 20px;max-width:900px}
+.resume-document-controls>a,.resume-document-buttons>a{color:#bfdfd8;font-size:.83rem;text-underline-offset:4px}
+.resume-document-buttons{display:flex;flex-wrap:wrap;align-items:center;gap:14px}
+.resume-document-buttons .button{font-size:.81rem;min-height:42px}
+.resume-document{max-width:900px;margin:0 auto;padding:43px 51px 35px;background:#fdfefe;color:#18252d;border:1px solid #b6c7cc;box-shadow:0 16px 55px rgba(0,0,0,.31);font-family:Arial,Helvetica,sans-serif}
+.resume-document *{box-sizing:border-box}
+.resume-document-heading{padding:0 0 15px;margin-bottom:14px;border-bottom:3px solid #16605d}
+.resume-document-category{display:block;color:#477075;font-size:.62rem;font-weight:700;letter-spacing:.1em}
+.resume-document h1{font-family:Arial,Helvetica,sans-serif;color:#122c38;font-size:2.15rem;font-weight:750;letter-spacing:-.045em;margin:6px 0 1px;line-height:1.15}
+.resume-document-role{color:#17615d;font-size:.83rem;font-weight:700;letter-spacing:.06em;margin:6px 0 12px}
+.resume-document-contact{display:flex;flex-wrap:wrap;gap:6px 17px;color:#365362;font-size:.72rem;line-height:1.6}
+.resume-document a{color:#13645a;text-decoration:underline;text-underline-offset:2px}
+.resume-document a:focus-visible{outline:2px solid #13645a;outline-offset:2px}
+.resume-document p,.resume-document li{color:#26383f;font-size:.82rem;line-height:1.55}
+.resume-document p{margin:0}
+.resume-section{margin:12px 0}
+.resume-section h2{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:0 0 7px;padding-bottom:4px;color:#144f57;border-bottom:1px solid #ccd8d9;font:750 .89rem/1.3 Arial,Helvetica,sans-serif;text-transform:uppercase;letter-spacing:.035em}
+.resume-section h2 small{font-size:.62rem;letter-spacing:0;font-weight:400;text-transform:none;color:#63767d}
+.resume-section h3{font:700 .84rem/1.3 Arial,Helvetica,sans-serif;color:#172b32;margin:0 0 3px}
+.resume-history-header{display:flex;justify-content:space-between;gap:16px;align-items:baseline}
+.resume-history-header>span{font-size:.74rem;color:#52676e;font-weight:600;white-space:nowrap}
+.resume-document-small{font-weight:500;color:#52676e}
+.resume-document ul{padding-left:17px;margin:5px 0 0}
+.resume-document li+li{margin-top:4px}
+.resume-project{margin:9px 0 0}
+.resume-project:first-of-type{margin-top:0}
+.resume-project p a{font-weight:700;white-space:nowrap}
+.resume-document-muted{color:#5b6b72!important;font-size:.72rem!important;margin-top:5px!important}
+.resume-document-bottom{display:grid;grid-template-columns:1fr 1fr;gap:23px}
+.resume-document-bottom .resume-section{min-width:0}
+.resume-document-scope{color:#52676e!important;font-size:.67rem!important;line-height:1.48!important;border-top:1px solid #c4d0d2;padding-top:10px;margin-top:13px!important}
+.resume-document-disclaimer{max-width:900px;margin:18px auto 0;color:#b8cdd0;font-size:.76rem;line-height:1.65}
+.resume-document-disclaimer a{color:#b9eccd}
+.application-role-actions .resume-formatted-link{display:inline-flex;align-items:center;justify-content:center;min-height:39px;white-space:normal;text-decoration:none;padding:8px 11px;border:1px solid #6ca99a;border-radius:6px;background:#23493f;color:#e5f6e9;font-size:.8rem;font-weight:650}
+.application-role-actions .resume-formatted-link:hover{background:#306251}
+.application-role-actions .resume-formatted-link:focus-visible{outline:3px solid #bef0bf;outline-offset:2px}
+@media(max-width:700px){
+ .resume-document-main{padding-top:18px;padding-bottom:35px}
+ .resume-document{padding:27px 23px;box-shadow:none}
+ .resume-document-controls{flex-wrap:wrap}
+ .resume-document h1{font-size:1.9rem}
+ .resume-document-bottom{grid-template-columns:1fr;gap:0}
+ .resume-document-contact{gap:5px 12px}
+}
+@media(max-width:390px){
+ .resume-document{padding:21px 15px}
+ .resume-document h1{font-size:1.7rem}
+ .resume-document p,.resume-document li{font-size:.79rem}
+ .resume-history-header{flex-wrap:wrap;gap:3px}
+ .resume-document-buttons{gap:9px}
+}
+@media print{
+ @page{size:letter;margin:0}
+ body.resume-document-page{background:white!important;color:#172733!important;
+   margin:0!important;padding:.38in .52in!important;min-height:0!important}
+ .resume-site-chrome,.resume-document-controls,.resume-document-disclaimer,
+ .resume-document-page .skip-link{display:none!important}
+ .resume-document-main{width:100%!important;max-width:100%!important;padding:0!important;margin:0!important}
+ .resume-document{width:100%!important;max-width:100%!important;border:0!important;
+   box-shadow:none!important;padding:0!important;margin:0!important}
+ .resume-document-heading{padding-bottom:8pt;margin-bottom:7pt;border-bottom:2pt solid #16605d}
+ .resume-document-category{font-size:6.8pt}
+ .resume-document h1{font-size:22pt;margin:3pt 0 0}
+ .resume-document-role{font-size:8.4pt;margin:2pt 0 5pt}
+ .resume-document-contact{font-size:7.25pt;gap:0 10pt}
+ .resume-section{margin:7pt 0}
+ .resume-section h2{font-size:8.8pt;line-height:1.2;margin-bottom:4pt;padding-bottom:2pt}
+ .resume-section h2 small{font-size:6.2pt}
+ .resume-section h3{font-size:8.45pt;margin-bottom:2pt}
+ .resume-document p,.resume-document li{font-size:8.25pt;line-height:1.34}
+ .resume-history-header>span{font-size:7.7pt}
+ .resume-document ul{margin-top:2pt;padding-left:13pt}
+ .resume-document li+li{margin-top:1pt}
+ .resume-project{margin-top:6pt}
+ .resume-document-muted{font-size:7.2pt!important;line-height:1.32!important;margin-top:3pt!important}
+ .resume-document-bottom{gap:13pt}
+ .resume-document-scope{font-size:6.55pt!important;line-height:1.27!important;margin-top:7pt!important;padding-top:5pt}
+ .resume-document *{break-inside:avoid}
+ .resume-document a{color:#164d57!important;text-decoration:none}
+}

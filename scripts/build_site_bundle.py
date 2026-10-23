@@ -20,7 +20,7 @@ ALLOWED = {
     "projects": {".html", ".md", ".py", ".json", ".csv", ".spl"},
 }
 ROOT_FILES = {
-    "index.html", "apply.html", "recruiter.html", "explore.html", "test-lab.html", "verify.html", "roles.html", "styles.css", "README.md", "SECURITY.md",
+    "index.html", "apply.html", "recruiter.html", "resume-soc.html", "resume-security.html", "explore.html", "test-lab.html", "verify.html", "roles.html", "styles.css", "README.md", "SECURITY.md",
     "PUBLICATION_CHECKLIST.md",
 }
 REQUIRED_SITE_FILES = {

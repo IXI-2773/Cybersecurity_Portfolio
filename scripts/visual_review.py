@@ -30,6 +30,8 @@ PAGES = {
     "soc-analyst-evidence": "projects/soc-analyst-evidence.html",
     "recruiter-profile": "recruiter.html",
     "application-toolkit": "apply.html",
+    "soc-resume": "resume-soc.html",
+    "security-resume": "resume-security.html",
     "celestial-resonance": "projects/celestial-resonance.html",
     "network": "projects/network-traffic-analysis.html",
     "vulnerability": "projects/vulnerability-remediation.html",
@@ -60,6 +62,7 @@ def main() -> None:
     results = []
     failures = []
     print_review = {"status": "NOT_RUN", "pages": None}
+    resume_print_review = {}
 
     with webdriver.Chrome(service=Service(executable_path=driver_exe), options=opts) as driver:
         driver.set_page_load_timeout(20)
@@ -465,7 +468,7 @@ def main() -> None:
                 driver.save_screenshot(str(out))
                 if viewport == "desktop" and name in {
                         "home", "explorer", "test-workbench", "evidence-review",
-                        "recruiter-profile", "role-paths", "authentication",
+                        "recruiter-profile", "role-paths", "soc-resume", "security-resume", "authentication",
                         "windows", "network", "vulnerability"}:
                     # Reviewer can inspect complete page hierarchy, not only the
                     # top viewport. This is still a raw Chrome screenshot.
@@ -481,6 +484,47 @@ def main() -> None:
                                  "scale": 1}})
                     (SCREENSHOTS / f"{name}-full-desktop.png").write_bytes(
                         base64.b64decode(full["data"]))
+                if name in ("soc-resume", "security-resume"):
+                    sheet = driver.find_element(By.CSS_SELECTOR, ".resume-document")
+                    if not sheet.is_displayed() or "Don Lopez" not in sheet.text:
+                        failures.append(f"{name}/{viewport}: printable résumé not visible")
+                    for selector in ("#resume-experience", "#resume-projects",
+                                     "#resume-skills", "#resume-education",
+                                     "#resume-certs"):
+                        if not driver.find_elements(By.CSS_SELECTOR, selector):
+                            failures.append(f"{name}/{viewport}: missing résumé section {selector}")
+                    if "Allied Universal" not in sheet.text or "not independently verified" not in sheet.text:
+                        failures.append(f"{name}/{viewport}: missing résumé provenance disclosure")
+                    if "Brandon" in sheet.text or driver.find_elements(By.CSS_SELECTOR, "a[href^='tel:']"):
+                        failures.append(f"{name}/{viewport}: private contact field in résumé")
+                    if viewport == "desktop":
+                        outfile = SCREENSHOTS / f"{name}-print.pdf"
+                        try:
+                            obj = driver.execute_cdp_cmd("Page.printToPDF", {
+                                "printBackground": True, "displayHeaderFooter": False,
+                                "preferCSSPageSize": True})
+                            outfile.write_bytes(base64.b64decode(obj["data"]))
+                            reader = PdfReader(str(outfile))
+                            pages = len(reader.pages)
+                            extracted = "\n".join(p.extract_text() or "" for p in reader.pages)
+                            box = reader.pages[0].mediabox if pages else None
+                            letter = bool(box and abs(float(box.width)-612)<1
+                                          and abs(float(box.height)-792)<1)
+                            required = ("Don Lopez", "Allied Universal", "Security Officer",
+                                        "Information Systems", "CompTIA Security+",
+                                        "CompTIA CySA+", "Evidence scope:")
+                            missing = [term for term in required if term not in extracted]
+                            ok = pages == 1 and letter and not missing and "Brandon" not in extracted
+                            resume_print_review[name] = {"status": "PASS" if ok else "FAIL",
+                                "pages": pages, "letter": letter, "missing": missing,
+                                "filename": outfile.name}
+                            if not ok:
+                                failures.append(f"{name}/print: expected one US-letter page; "
+                                                f"pages={pages}, letter={letter}, missing={missing}")
+                        except (OSError, ValueError, KeyError) as exc:
+                            resume_print_review[name] = {"status": "FAIL",
+                                "reason": type(exc).__name__}
+                            failures.append(f"{name}/print: generated PDF could not be checked")
                 if name == "recruiter-profile" and viewport == "desktop":
                     pdf_path = SCREENSHOTS / "recruiter-print.pdf"
                     try:
@@ -521,7 +565,8 @@ def main() -> None:
               "motion_preference": "reduce",
               "pages": len(PAGES),
               "viewports_reviewed": len(results),
-              "screenshots": results, "print_review": print_review, "failures": failures,
+              "screenshots": results, "print_review": print_review,
+              "resume_print_review": resume_print_review, "failures": failures,
               "status": "PASS" if not failures else "FAIL",
               "limitations": "Checks keyboard nav and horizontal overflow; screenshots still need human visual review. Not a WCAG or screen-reader audit."}
     (SCREENSHOTS / "review.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")

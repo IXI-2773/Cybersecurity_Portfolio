@@ -57,6 +57,10 @@ Public badge URLs, exam versions, dates and renewal status have not been supplie
 
 The [publication readiness record](docs/PUBLICATION_GATES.md) reflects the owner's explicit approval to publish **frailtycraven@gmail.com** as the professional contact. Phone numbers, alternate emails and issuer-backed badge URLs remain unpublished. The professional name, exact degree and Security Officer employment history are now sourced to the owner-supplied October 2026 résumé; independent verification is not claimed.
 
+## Printable role-targeted résumés
+
+Two accessible, mobile-responsive, role-specific **HTML résumés** are linked from the [application toolkit](apply.html). [SOC Analyst](resume-soc.html) and [Security Analyst](resume-security.html) versions use professionally structured printable layouts and browser **Print / save PDF** functionality, rather than offering plain text as the only visual résumé format. The existing ATS-friendly text files remain available. Both use the selected public **Don Lopez** name, the résumé-reported Allied Universal physical-security role and correct CSUSB degree, with private source name/phone omitted. A Chrome PDF audit checks US-letter size, one-page output, and required content; a visual review is still necessary.
+
 ## Role-targeted job application materials
 
 [Open the application toolkit](https://ixi-2773.github.io/Cybersecurity_Portfolio/apply.html) to download **two ATS-oriented plain-text résumé drafts** and review interviewer evidence prompts. The SOC Analyst and Security Analyst versions contain the approved professional email, owner-reported credentials and source-backed lab work, with separately identified owner-reported Security Officer experience, no disclosed personal phone number, and no invented production SOC incidents. [Tailoring checklist](docs/APPLICATION_READINESS.md).

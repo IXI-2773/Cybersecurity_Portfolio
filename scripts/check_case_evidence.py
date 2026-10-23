@@ -368,7 +368,7 @@ def main() -> None:
     required('href="roles.html"' in home_v4,
              "Homepage must expose the three-role hiring guide")
     onepage_html = get("recruiter.html")
-    required('href="apply.html">Choose ATS résumé' in onepage_html,
+    required('href="apply.html">Choose full résumé' in onepage_html,
              "Recruiter profile must not falsely label a link as a download")
     github_source = "https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/"
     for name, document in (
@@ -487,6 +487,36 @@ def main() -> None:
              and "not earned" in reconciliation.lower()
              and not _pii_re.search(_phone_pattern, reconciliation) and "Brandon" not in reconciliation,
              "Source reconciliation must distinguish owner resume from public lab proof")
+    # Print-ready versions complement, rather than substitute, owner-reported work history.
+    for pathname, role, leading_project in (
+        ("resume-soc.html", "SOC Analyst", "Authentication correlation"),
+        ("resume-security.html", "Security Analyst", "Localhost web hardening"),
+    ):
+        html = get(pathname)
+        for fact in ("Don Lopez", "Allied Universal", "Security Officer",
+                     "Information Systems &amp; Technology (Cybersecurity)",
+                     "California State University, San Bernardino",
+                     "CompTIA Security+", "CompTIA CySA+", "2019–Present",
+                     "Dec 2024", "not independently verified"):
+            required(fact.lower() in html.lower(), pathname + ": missing sourced fact " + fact)
+        required(role in html and leading_project in html
+                 and "window.print()" in html
+                 and 'href="apply.html"' in html,
+                 pathname + ": formatted résumé or print action incomplete")
+        required("Brandon" not in html and not _pii_re.search(_phone_pattern, html)
+                 and "tel:" not in html
+                 and "mailto:frailtycraven@gmail.com" in html,
+                 pathname + ": private source identity/contact leaked")
+        required('href="resumes/Don_Lopez_' in html,
+                 pathname + ": missing editable ATS text alternative")
+    required('href="resume-soc.html"' in application
+             and 'href="resume-security.html"' in application
+             and 'download="Don_Lopez_SOC_Analyst.txt"' in application
+             and 'download="Don_Lopez_Security_Analyst.txt"' in application,
+             "Application toolkit missing both accessible HTML and ATS text formats")
+    required("resume-soc.html" in get("sitemap.xml")
+             and "resume-security.html" in get("sitemap.xml"),
+             "Both printable resume documents must be discoverable in the sitemap")
     # Public release gates: do not automatically publish prior application contact
     # details or claim employer histories/verified issuer badges without evidence.
     gates = get("docs/PUBLICATION_GATES.md")
