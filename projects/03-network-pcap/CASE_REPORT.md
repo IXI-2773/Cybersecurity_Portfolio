@@ -26,8 +26,8 @@ Addresses come from documentation-only ranges; the `.invalid` and `.example` nam
 
 | Finding ID | Rule predicate | Observed synthetic result | Alternative explanations |
 | --- | --- | --- | --- |
-| `NET_DNS_NXDOMAIN_BURST` | Matched DNS question/response, NXDOMAIN (rcode 3), **at least four** responses for the same client within **60 seconds** | `192.0.2.10`; four responses; alert at `12:00:36.200Z` | Misconfiguration, typos, application retries, stale domain discovery |
-| `NET_HTTP_POST_RESERVED_HOST` | Unencrypted HTTP request, method **POST**, `Host` ending in **.invalid** | `192.0.2.10` → `203.0.113.80:80`, `collector.invalid/upload` at `12:01:15.030Z` | Artificial hostname by construction; normal apps regularly POST |
+| `NET_DNS_NXDOMAIN_BURST` | Matched DNS question/response, NXDOMAIN (rcode 3), **at least four** responses for the same client within **60 seconds** | `192.0.2.10`; four responses; alert at `2026-10-10T12:00:36.200Z` | Misconfiguration, typos, application retries, stale domain discovery |
+| `NET_HTTP_POST_RESERVED_HOST` | Unencrypted HTTP request, method **POST**, `Host` ending in **.invalid** | `192.0.2.10` → `203.0.113.80:80`, `collector.invalid/upload` at `2026-10-10T12:01:15.030Z` | Artificial hostname by construction; normal apps regularly POST |
 
 [See exact JSON oracle](expected_findings.json) and [rule implementation](analyze_pcap.py). Hypotheses may be *categorized* under [ATT&CK T1071.004](https://attack.mitre.org/techniques/T1071/004/) and [T1071.001](https://attack.mitre.org/techniques/T1071/001/); **no tunneling, C2, exfiltration, or malicious intent was established**.
 
