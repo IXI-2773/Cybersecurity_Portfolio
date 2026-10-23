@@ -28,7 +28,7 @@ REQUIRED_SITE_FILES = {
     "resumes/Don_Lopez_SOC_Analyst.txt",
     "resumes/Don_Lopez_Security_Analyst.txt",
     "assets/evidence/splunk-native-dashboard-results.png",
-    "assets/js/explorer.js", "assets/js/lab-data.js", "assets/js/test-engine.js", "assets/js/lab-ui.js",
+    "assets/js/explorer.js", "assets/js/lab-data.js", "assets/js/test-engine.js", "assets/js/lab-ui.js", "assets/js/home-replay.js",
     "projects/celestial-resonance.html",
     "projects/research-ai-infrastructure.html",
     "projects/authentication-detection.html",

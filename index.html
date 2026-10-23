@@ -3,7 +3,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Don Lopez — cybersecurity analyst portfolio: verified Splunk authentication dashboard, four reproducible security labs, Python detection tests, incident triage, and CompTIA Security+ and CySA+ credentials.">
 <meta name="theme-color" content="#0b1014"><meta property="og:description" content="Security analysis, detection engineering, Python, evidence-backed engineering.">
-<link rel="canonical" href="https://ixi-2773.github.io/Cybersecurity_Portfolio/"><meta property="og:type" content="website"><meta property="og:url" content="https://ixi-2773.github.io/Cybersecurity_Portfolio/"><meta property="og:site_name" content="Don Lopez Cybersecurity Portfolio"><meta name="twitter:card" content="summary"><meta property="og:title" content="Don Lopez | Cybersecurity Portfolio"><title>Don Lopez | Cybersecurity &amp; Security Engineering</title><link rel="stylesheet" href="styles.css">
+<link rel="canonical" href="https://ixi-2773.github.io/Cybersecurity_Portfolio/"><meta property="og:type" content="website"><meta property="og:url" content="https://ixi-2773.github.io/Cybersecurity_Portfolio/"><meta property="og:site_name" content="Don Lopez Cybersecurity Portfolio"><meta name="twitter:card" content="summary"><meta property="og:title" content="Don Lopez | Cybersecurity Portfolio"><title>Don Lopez | Cybersecurity &amp; Security Engineering</title><link rel="stylesheet" href="styles.css"><script defer src="assets/js/lab-data.js"></script><script defer src="assets/js/test-engine.js"></script><script defer src="assets/js/home-replay.js"></script>
 </head><body class="portfolio-shell portfolio-home">
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="topbar"><div class="container nav"><a class="logo" href="index.html" aria-label="Don Lopez, home"><span class="brand-symbol" aria-hidden="true">[</span> DON LOPEZ <span class="brand-symbol" aria-hidden="true">]</span><span class="brand-discipline"> / SECURITY</span></a><nav aria-label="Main navigation"><a href="explore.html">Projects</a><a href="test-lab.html">Test lab</a><a href="index.html#about">About</a><a href="recruiter.html">Resume</a><a class="nav-contact" href="index.html#contact">Contact <span aria-hidden="true">↗</span></a></nav><details class="mobile-nav"><summary aria-label="Open site navigation">Menu</summary><nav aria-label="Mobile navigation"><a href="explore.html">Projects</a><a href="test-lab.html">Test lab</a><a href="index.html#about">About</a><a href="recruiter.html">Resume</a><a class="nav-contact" href="index.html#contact">Contact <span aria-hidden="true">↗</span></a></nav></details></div></header>
@@ -59,7 +59,39 @@
 <p class="splunk-table-note">Accessible transcription of the screenshot above. Training events; indexed ingestion and alerts not verified. <a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/splunk_workflow/NATIVE_DASHBOARD_RESULT_2026-10-23.md">View the review record ↗</a></p>
 </details></div>
 </div>
+
 </div></section>
+<section class="replay-section" aria-labelledby="replay-title" id="boundary-replay">
+<div class="container">
+<div class="replay-frame">
+<div class="replay-topline"><span><i aria-hidden="true"></i> FORENSIC WORKBENCH / AUTH–01</span><span>FROZEN TRAINING INPUT · 64 EVENTS / 9 SCENARIOS</span></div>
+<div class="replay-layout">
+<div class="replay-narrative">
+<div class="eyebrow">ONE SECOND. TWO MISSED FINDINGS.</div>
+<h2 id="replay-title">Move the boundary.<br><span>Watch the result change.</span></h2>
+<p>The training rule looks for five failed logins followed by success, correlated by username and source IP. Run the same public source events with two different inclusive time windows.</p>
+<div class="replay-select" role="group" aria-label="Detection time window">
+<button type="button" data-replay-window="599" aria-pressed="false" disabled><strong>599s</strong><small>Shorter window</small></button>
+<button type="button" data-replay-window="600" aria-pressed="false" disabled><strong>600s</strong><small>Inclusive edge</small></button>
+</div>
+<div class="replay-result" aria-live="polite" aria-atomic="true"><span>CALCULATED FIXTURE MATCHES</span><strong id="home-replay-count">— / 5</strong><p id="home-replay-status">Enable JavaScript to calculate this training replay. The frozen reference contains five expected findings.</p></div>
+<p class="replay-disclaimer">Public JavaScript replay, <strong>not live monitoring or a new Splunk execution.</strong> The actual saved Splunk dashboard observation and its limitations are documented above.</p>
+<div class="replay-links"><a href="test-lab.html#authentication-replay">Open the full replay engine ↗</a><a href="projects/authentication-detection.html">Read the investigation ↗</a></div>
+</div>
+<div class="replay-console" aria-label="Five expected training findings, with calculated match status after selecting a time window">
+<div class="replay-console-header"><span>OBSERVATION MATRIX</span><span>Reference set / 05</span></div>
+<ol class="replay-cases"><li class="replay-case" data-replay-username="user_threshold" data-replay-status="reference"><div class="replay-case-index">01</div><div class="replay-case-main"><strong>Threshold</strong><span>5 failures then success</span><small>09:05 UTC · user_threshold</small></div><span class="replay-case-verdict" data-replay-verdict>EXPECTED</span></li>
+<li class="replay-case" data-replay-username="user_reset" data-replay-status="reference"><div class="replay-case-index">02</div><div class="replay-case-main"><strong>Reset</strong><span>New five-failure burst</span><small>10:39 UTC · user_reset</small></div><span class="replay-case-verdict" data-replay-verdict>EXPECTED</span></li>
+<li class="replay-case" data-replay-username="user_boundary" data-replay-status="reference"><div class="replay-case-index">03</div><div class="replay-case-main"><strong>Exact boundary</strong><span>600-second edge case</span><small>13:10 UTC · user_boundary</small></div><span class="replay-case-verdict" data-replay-verdict>EXPECTED</span></li>
+<li class="replay-case" data-replay-username="user_alpha" data-replay-status="reference"><div class="replay-case-index">04</div><div class="replay-case-main"><strong>Interleaved A</strong><span>Same-user/IP correlation</span><small>13:40 UTC · user_alpha</small></div><span class="replay-case-verdict" data-replay-verdict>EXPECTED</span></li>
+<li class="replay-case" data-replay-username="user_beta" data-replay-status="reference"><div class="replay-case-index">05</div><div class="replay-case-main"><strong>Interleaved B</strong><span>Independent user/IP</span><small>13:41 UTC · user_beta</small></div><span class="replay-case-verdict" data-replay-verdict>EXPECTED</span></li></ol>
+<div class="replay-console-footer"><span><i aria-hidden="true" class="replay-legend-dot"></i> Match</span><span><i aria-hidden="true" class="replay-legend-dot missing"></i> Missing against frozen reference</span></div>
+</div>
+</div>
+<noscript><p class="replay-noscript">Interactive replay is unavailable without JavaScript. All case studies, the observed Splunk screenshot, and source documents remain accessible.</p></noscript>
+</div>
+</div>
+</section>
 
 <section class="section work-section" id="projects"><div class="container" id="soc-evidence">
 <div class="section-head"><div><div class="eyebrow">02 / SELECTED SECURITY WORK</div><h2>Investigations,<br>from signal to decision.</h2></div><p>Four reproducible labs covering identity, endpoint, network, and application security. Each includes source code, test cases, and an analyst report.</p></div>

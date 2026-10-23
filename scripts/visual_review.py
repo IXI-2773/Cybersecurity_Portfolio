@@ -210,6 +210,34 @@ def main() -> None:
                     driver.get(url)
                     body = driver.find_element(By.TAG_NAME, "body")
                 if name == "home":
+                    replay = driver.find_element(By.ID, "boundary-replay")
+                    replay_buttons = replay.find_elements(By.CSS_SELECTOR, "[data-replay-window]")
+                    if len(replay_buttons) != 2 or any(b.get_attribute("disabled") is not None for b in replay_buttons):
+                        failures.append(f"{name}/{viewport}: replay did not initialize from source fixtures")
+                    if len(replay.find_elements(By.CSS_SELECTOR, "[data-replay-username]")) != 5:
+                        failures.append(f"{name}/{viewport}: frozen reference rows missing")
+                    for seconds, expected_count, expected_missing in ((599, "3 / 5", 2), (600, "5 / 5", 0)):
+                        click_control(replay.find_element(By.CSS_SELECTOR, f'[data-replay-window="{seconds}"]'))
+                        actual_count = replay.find_element(By.ID, "home-replay-count").text.strip()
+                        missing_count = len(replay.find_elements(By.CSS_SELECTOR, '[data-replay-status="missing"]'))
+                        if actual_count != expected_count or missing_count != expected_missing:
+                            failures.append(f"{name}/{viewport}: {seconds}s replay calculated {actual_count}, {missing_count} missing")
+                        if replay.find_element(By.CSS_SELECTOR, f'[data-replay-window="{seconds}"]').get_attribute("aria-pressed") != "true":
+                            failures.append(f"{name}/{viewport}: {seconds}s replay not announced as selected")
+                    if viewport == "desktop":
+                        # JS-free rendering must not pretend the training rule executed.
+                        try:
+                            driver.execute_cdp_cmd("Emulation.setScriptExecutionDisabled", {"value": True})
+                            driver.get(url)
+                            replay = driver.find_element(By.ID, "boundary-replay")
+                            if not all(btn.get_attribute("disabled") is not None for btn in replay.find_elements(By.CSS_SELECTOR, "[data-replay-window]")):
+                                failures.append("home/no-js: replay controls should remain disabled")
+                            if replay.find_element(By.ID, "home-replay-count").text.strip() != "— / 5":
+                                failures.append("home/no-js: dynamic finding count must remain uncalculated")
+                        finally:
+                            driver.execute_cdp_cmd("Emulation.setScriptExecutionDisabled", {"value": False})
+                            driver.get(url)
+                            body = driver.find_element(By.TAG_NAME, "body")
                     featured = driver.find_element(By.ID, "featured-splunk")
                     if not featured.is_displayed() or len(featured.find_elements(By.CSS_SELECTOR, ".splunk-evidence-table tbody tr")) != 5:
                         failures.append(f"{name}/{viewport}: missing featured five-row Splunk evidence section")

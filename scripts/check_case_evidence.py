@@ -174,6 +174,28 @@ def main() -> None:
     required("independently authored" in guide.lower()
              and "private" in guide.lower(),
              "Public teaching engines must remain distinct from private implementations")
+    # Homepage boundary preview must use the verified browser engine, not
+    # hardcoded substitute detections. The static labels are only expected rows.
+    source = get("index.html")
+    required('id="boundary-replay"' in source
+             and 'assets/js/lab-data.js' in source
+             and 'assets/js/test-engine.js' in source
+             and 'assets/js/home-replay.js' in source,
+             "Homepage boundary preview must reference public source/engine")
+    required(source.count("data-replay-username=") == 5
+             and source.count("data-replay-window=") == 2,
+             "Homepage preview must expose five expected identities and two time windows")
+    reference = json.loads(get("projects/01-authentication-detection/expected_findings.json"))
+    expected_users = {row["username"] for row in reference["expected_findings"]}
+    import re as _replay_re
+    shown_users = set(_replay_re.findall(r'data-replay-username="([^"]+)"', source))
+    required(shown_users == expected_users,
+             "Homepage preview labels do not match the frozen expected finding identities")
+    script = get("assets/js/home-replay.js")
+    required("PortfolioEngine" in script and "PortfolioLabData" in script
+             and "detectAuth" in script and "actual.has(key(reference))" in script
+             and "seconds}-second inclusive" in script,
+             "Homepage replay must calculate fixture findings using the public engine")
     # Feature only demonstrated Splunk scope; prevent stale "not run" homepage copy.
     home_v4 = get("index.html")
     required('id="featured-splunk"' in home_v4 and "3 / 5" in home_v4 and "5 / 5" in home_v4,

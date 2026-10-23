@@ -16,6 +16,8 @@ Reproduce the public engine checks: `python scripts/build_browser_fixture.py --c
 
 ## Homepage refresh
 
+The homepage now includes an interactive **599/600-second boundary replay** that calculates five reference-case results using the same frozen 64-event public teaching fixture and JavaScript detection engine as the verification workbench. It starts with an unexecuted reference display when scripts are disabled; it never suggests live telemetry or fresh Splunk execution. The result and individual case indicators change only after calculations from the source fixture.
+
 The recruiter-focused homepage combines four visual public-lab cards, the genuine Splunk screenshot, compact engineering summaries, a direct SOC resume download, and keyboard-expandable evidence tables. Native HTML and scoped CSS keep the site dependency-free.
 
 ## Live portfolio website
