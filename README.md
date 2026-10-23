@@ -4,6 +4,8 @@ A public, static portfolio presenting **reproducible synthetic defensive securit
 
 ## Hiring-team tools
 
+The [role-specific hiring paths](https://ixi-2773.github.io/Cybersecurity_Portfolio/roles.html) organize the verified work for SOC Analyst, Security Analyst, and Security Automation reviews. Each provides a prioritized case-study route, a technical interview answer, direct source links, and an explicit evidence limit. This new page remains on the PR branch until deployment.
+
 The [evidence review guide](https://ixi-2773.github.io/Cybersecurity_Portfolio/verify.html) maps four public security labs, two private engineering summaries, and the public verification workbench to inspectable sources and explicit limitations. This new page is available on the review branch until merged and deployed.
 
 The [project explorer](https://ixi-2773.github.io/Cybersecurity_Portfolio/explore.html) filters the six case studies and public verification workbench by role and skill. All entries and evidence links remain readable without JavaScript.

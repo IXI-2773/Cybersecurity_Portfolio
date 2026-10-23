@@ -22,6 +22,7 @@ PAGES = {
     "home": "index.html",
     "explorer": "explore.html",
     "evidence-review": "verify.html",
+    "role-paths": "roles.html",
     "test-workbench": "test-lab.html",
     "synthetic-soc-preview": "projects/splunk-synthetic-preview.html",
     "soc-analyst-evidence": "projects/soc-analyst-evidence.html",
@@ -75,7 +76,7 @@ def main() -> None:
             for viewport, (width, height) in VIEWPORTS.items():
                 # Check six rewritten cases at 320px as well as mobile/desktop.
                 case_pages = {"authentication", "windows", "network", "vulnerability",
-                              "celestial-resonance", "research-ai", "explorer", "test-workbench", "evidence-review"}
+                              "celestial-resonance", "research-ai", "explorer", "test-workbench", "evidence-review", "role-paths"}
                 if name != "home" and viewport not in ("mobile", "desktop"):
                     if name not in case_pages or viewport != "small-mobile":
                         continue
@@ -97,6 +98,29 @@ def main() -> None:
                     failures.append(f"{name}/{viewport}: requested {width}px but observed {dimensions['viewport']}px")
                 if dimensions["scrollWidth"] > dimensions["viewport"] + 2:
                     failures.append(f"{name}/{viewport}: document horizontal overflow: {dimensions}")
+                if name == "role-paths":
+                    sections = ("soc-analyst", "security-analyst", "security-automation")
+                    if len(driver.find_elements(By.CSS_SELECTOR, ".role-route-card")) != 3:
+                        failures.append(f"{name}/{viewport}: expected exactly three role links")
+                    if len(driver.find_elements(By.CSS_SELECTOR, ".role-interview-question summary")) != 3:
+                        failures.append(f"{name}/{viewport}: every role needs an interview disclosure")
+                    for role_id in sections:
+                        anchor = driver.find_element(By.CSS_SELECTOR, f'.role-route-card[href="#{role_id}"]')
+                        click_control(anchor)
+                        if driver.execute_script("return window.location.hash") != f"#{role_id}":
+                            failures.append(f"{name}/{viewport}: role link did not navigate to {role_id}")
+                        target = driver.find_element(By.ID, role_id)
+                        if not target.is_displayed() or not target.find_element(By.TAG_NAME, "h2").is_displayed():
+                            failures.append(f"{name}/{viewport}: hidden role section {role_id}")
+                    first = driver.find_element(By.CSS_SELECTOR, "#soc-analyst .role-interview-question")
+                    summary = first.find_element(By.TAG_NAME, "summary")
+                    click_control(summary)
+                    if first.get_attribute("open") is None:
+                        failures.append(f"{name}/{viewport}: interview question did not expand")
+                    click_control(summary)
+                    if first.get_attribute("open") is not None:
+                        failures.append(f"{name}/{viewport}: interview question did not collapse")
+                    body.send_keys(Keys.CONTROL, Keys.HOME)
                 if name == "evidence-review":
                     if len(driver.find_elements(By.CSS_SELECTOR, "[data-evidence-card]")) != 7:
                         failures.append(f"{name}/{viewport}: expected seven claim-to-source cards")

@@ -874,3 +874,47 @@ section[id]{scroll-margin-top:100px}
 .verification-final-links{display:flex;gap:12px;flex-wrap:wrap;margin-top:27px}
 @media(max-width:800px){.verification-section-head{grid-template-columns:1fr;gap:10px}.verification-intro{grid-template-columns:1fr;gap:10px}.verification-intro>div{padding:17px 19px}.verification-grid{grid-template-columns:1fr}.verification-card{padding:21px}}
 @media(max-width:390px){.verification-card h3{font-size:1.18rem}.verification-type{overflow-wrap:anywhere}.verification-command pre{font-size:.68rem}}
+
+/* Role paths: recruiter-friendly navigation and independent interview evidence. */
+.role-paths-page{scroll-margin-top:100px}
+.role-route-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin:33px 0 16px;scroll-margin-top:96px}
+.role-route-card{display:flex;flex-direction:column;text-decoration:none;min-width:0;border:1px solid #4a656c;border-radius:8px;padding:24px;background:linear-gradient(155deg,#1b302f,#142229);transition:border-color .15s ease,background .15s ease}
+.role-route-card:hover{border-color:var(--teal);background:#1b3431}
+.role-route-card:focus-visible,.role-interview-question summary:focus-visible{outline:3px solid var(--teal);outline-offset:4px}
+.role-route-card>span,.role-step-label{font:500 .61rem/1.7 ui-monospace,Consolas,monospace;letter-spacing:.055em;color:#c4d9a6}
+.role-route-card strong{display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:1.25rem;color:#edf4e9;letter-spacing:-.02em;margin:14px 0}
+.role-route-card strong span{color:var(--teal)}
+.role-route-card small{display:block;font-size:.76rem;line-height:1.75;color:#bbced3;margin-top:auto}
+.role-read-note{font-size:.77rem;line-height:1.8;color:#bdccd1;margin:18px 0 42px;padding:16px 19px;background:#13242b;border-left:3px solid #9fbf82}
+.role-read-note a,.role-interview-panel a,.role-evidence-step a{color:var(--teal);text-underline-offset:4px}
+.role-track-section{padding:44px 0 34px;border-top:1px solid #3a5057;scroll-margin-top:96px}
+.role-track-heading{display:flex;justify-content:space-between;gap:22px;align-items:flex-start;margin-bottom:29px}
+.role-track-heading h2{font-size:clamp(1.8rem,3vw,2.5rem);line-height:1.2;letter-spacing:-.035em;margin:11px 0 12px}
+.role-track-heading p{max-width:720px;line-height:1.8;color:#c0d1d2;font-size:.87rem;margin:0}
+.role-track-back{color:#c3dba9;font-size:.75rem;white-space:nowrap;margin-top:10px;text-underline-offset:4px}
+.role-track-body{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:24px;align-items:start}
+.role-trail-title{font-size:1rem;margin:0 0 16px}
+.role-evidence-trail{margin:0;padding:0;list-style:none;display:grid;gap:11px}
+.role-evidence-step{display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;background:#13232a;border:1px solid #3a545e;border-radius:7px;padding:17px 19px}
+.role-step-marker{font:600 .72rem/1.6 ui-monospace,Consolas,monospace;color:#b5d8a0;padding-top:2px}
+.role-evidence-step h3{font-size:1.06rem;line-height:1.4;margin:5px 0 6px}
+.role-evidence-step p{font-size:.78rem;line-height:1.76;color:#bfcfd5;margin:0 0 11px}
+.role-evidence-step a{font-size:.78rem}
+.role-interview-panel{padding:23px 25px;background:#182b2d;border:1px solid #4a635b;border-radius:8px;min-width:0}
+.role-interview-panel h3{font-size:1.2rem;margin:13px 0 10px}
+.role-interview-panel>p{font-size:.83rem;line-height:1.8;color:#c9d5d4}
+.role-interview-question{margin:20px 0;border:1px solid #53716a;background:#102420;border-radius:6px;padding:0 15px}
+.role-interview-question summary{cursor:pointer;padding:16px 0;font-size:.82rem;line-height:1.6;font-weight:600;color:#e3eddf}
+.role-interview-question p{font-size:.79rem;line-height:1.85;color:#c7d8d4;margin:0 0 17px}
+.role-followup-links{display:flex;flex-direction:column;gap:12px;border-top:1px solid #3f5a57;padding-top:17px;margin-top:19px}
+.role-followup-links strong{font-size:.78rem}
+.role-followup-links a{font-size:.75rem;line-height:1.6}
+.role-interview-panel>.role-scope{margin:23px 0 0;padding-top:15px;border-top:1px solid #3f5a57;font-size:.74rem;line-height:1.85;color:#bdd0ce}
+.role-path-final{display:flex;justify-content:space-between;gap:24px;align-items:center;background:#13252b;border:1px solid #45605f;border-radius:8px;padding:26px 30px;margin:30px 0 45px}
+.role-path-final h2{font-size:1.65rem;letter-spacing:-.025em;margin:8px 0 10px}
+.role-path-final p{font-size:.82rem;line-height:1.75;color:#bed1d4;max-width:640px;margin:0}
+.role-final-actions{display:flex;gap:11px;flex-wrap:wrap}
+.role-final-actions .button{white-space:nowrap;font-size:.78rem}
+@media(max-width:1050px){.role-route-card{padding:18px}.role-route-card strong{font-size:1.1rem}.role-track-body{grid-template-columns:1fr}.role-path-final{display:block}.role-final-actions{margin-top:21px}}
+@media(max-width:700px){.role-route-grid{grid-template-columns:1fr;gap:10px}.role-route-card{padding:18px}.role-route-card strong{margin:7px 0;font-size:1.08rem}.role-route-card small{font-size:.73rem}.role-track-section{padding:32px 0 23px}.role-track-heading{display:block}.role-track-back{display:inline-block;margin-top:12px}.role-interview-panel{padding:20px}.role-evidence-step{padding:15px}.role-path-final{padding:22px}.role-final-actions .button{width:100%;text-align:center}}
+@media(prefers-reduced-motion:reduce){.role-route-card{transition:none}}

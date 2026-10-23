@@ -137,6 +137,31 @@ def main() -> None:
             required(row["timestamp"] in visual and row["source_ip"] in visual,
                      "Illustrative alert must match the frozen oracle boundary case")
 
+    roles = get("roles.html")
+    for target in ("soc-analyst", "security-analyst", "security-automation"):
+        required(f'id="{target}"' in roles and f'href="#{target}"' in roles,
+                 "Role page missing working role destination: " + target)
+    required(roles.count('class="role-route-card"') == 3
+             and roles.count('class="role-interview-question"') == 3
+             and roles.count('class="role-scope"') == 3,
+             "Each role needs a route, question and evidence limit")
+    for case in ("projects/authentication-detection.html",
+                 "projects/windows-process-triage.html",
+                 "projects/network-traffic-analysis.html",
+                 "projects/vulnerability-remediation.html",
+                 "projects/celestial-resonance.html",
+                 "projects/research-ai-infrastructure.html",
+                 "test-lab.html#authentication-replay",
+                 "test-lab.html#evidence-coverage"):
+        required(case in roles, "Role page missing existing evidence path: " + case)
+    required("independently authored" in roles.lower()
+             and "private" in roles.lower()
+             and "not" in roles.lower(),
+             "Role page must retain limits of public/private evidence")
+    required('href="roles.html"' in get("index.html")
+             and 'href="roles.html"' in get("explore.html")
+             and 'roles.html#security-automation' in get("apply.html"),
+             "Homepage, explorer and application paths must all reach role guide")
     guide = get("verify.html")
     required(guide.count("data-evidence-card") == 7
              and guide.count('class="verification-limit"') == 7,
