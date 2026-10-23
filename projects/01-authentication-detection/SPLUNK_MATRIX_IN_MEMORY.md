@@ -20,7 +20,7 @@ Expected: **five finding rows**, each carrying `fixture_event_count=64` and `fix
 | interleaved_users | 2026-10-05T13:40:00Z | user_alpha | 203.0.113.20 | 5 |
 | interleaved_users | 2026-10-05T13:41:00Z | user_beta | 203.0.113.21 | 5 |
 
-Four other scenario families intentionally do **not** alert: below-threshold attempts, a non-alerting intervening success, expired window, other user and other source IP. (The total is nine scenario labels, including the multi-alert interleaved case.)
+Five other scenario families intentionally do **not** alert: below-threshold attempts, a non-alerting intervening success, expired window, other user and other source IP. (The total is nine scenario labels, including the multi-alert interleaved case.)
 
 ### What the in-memory test demonstrates
 

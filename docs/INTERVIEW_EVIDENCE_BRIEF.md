@@ -43,7 +43,7 @@ I built four independently reproducible defensive-security exercises covering au
 
 ## If asked about SIEM experience
 
-The portfolio includes Splunk SPL drafts, a smoke test and a documented export-comparison protocol. **No genuine Splunk runtime results have been produced**, and the portfolio explicitly marks this as pending.
+A screenshot from Splunk Enterprise, reviewed October 23, 2026, showed a seven-event synthetic authentication smoke test returning the expected single row with five failures. Full 64-event verification, exported results and job provenance remain pending. The screenshot has not been publicly committed; see the [observation record](../projects/01-authentication-detection/SPLUNK_SMOKE_OBSERVATION_2026-10-23.md).
 
 ## Answers to common challenges
 

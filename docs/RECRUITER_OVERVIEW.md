@@ -13,7 +13,7 @@
 
 | Competency | Evidence | Qualification |
 | --- | --- | --- |
-| Authentication log triage | [Synthetic login-detection lab](../projects/01-authentication-detection/), [LAB-AUTH-001 case report](../projects/01-authentication-detection/SOC_CASE_REPORT.md) | 31 Python tests and nine scenario families; SPL requires on-platform validation |
+| Authentication log triage | [Synthetic login-detection lab](../projects/01-authentication-detection/), [LAB-AUTH-001 case report](../projects/01-authentication-detection/SOC_CASE_REPORT.md) | 31 Python tests and nine scenario families; Seven-event Splunk smoke screenshot reviewed; 64-event matrix/ingestion still pending |
 | Windows process telemetry triage | [Synthetic Event 4688 lab](../projects/02-windows-process-triage/), [LAB-PROC-001 case report](../projects/02-windows-process-triage/CASE_REPORT.md) | 11 Python tests; rule findings, not deployed |
 | Network packet analysis | [Synthetic PCAP](../projects/03-network-pcap/) and [investigation report](../projects/03-network-pcap/CASE_REPORT.md) | Source-linked 20-packet timeline, two candidate rules and 18 tests; no real capture |
 | Python automation | Four synthetic standard-library security labs and JSON outputs | No third-party application dependencies |

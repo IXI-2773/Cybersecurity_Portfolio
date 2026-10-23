@@ -1,6 +1,6 @@
 # Splunk SOC Lab — Execution and Verification Runbook
 
-**Owner:** Don Lopez · **Data:** synthetic only · **Status:** offline Python scenarios checked; Splunk runtime execution **NOT YET VERIFIED**.
+**Owner:** Don Lopez · **Data:** synthetic only · **Status:** offline Python scenarios checked; seven-event Splunk smoke **PASS (operator screenshot, October 23, 2026)**; full 64-event and indexed-data qualification **PENDING**.
 
 ## Objective
 Detect >=5 failed logins within a rolling 10-minute window for the same user and source IP, followed by a success. Any success clears that key's previous failures, **including a non-alerting success**. A detection signals analyst review, not a real compromise.
@@ -15,9 +15,9 @@ Detect >=5 failed logins within a rolling 10-minute window for the same user and
 
 Paste [`SPLUNK_SMOKE_TEST.spl`](SPLUNK_SMOKE_TEST.spl) directly into **Splunk Search**. It generates seven entirely synthetic events in SPL and does **not** require an index or file ingestion.
 
-Expected: exactly **one** result: `smoke_user`, `192.0.2.99`, timestamp `2026-10-05T09:05:00Z`, count **5**. The second success at 09:06 must not produce another alert. This search is a **proposed smoke test**, not a recorded Splunk execution. Save the search job ID, version and a genuine screenshot if it runs.
+Expected: exactly **one** result: `smoke_user`, `192.0.2.99`, timestamp `2026-10-05T09:05:00Z`, count **5**. The second success at 09:06 must not produce another alert. This smoke query has a [screenshot-reviewed result from Splunk Enterprise](SPLUNK_SMOKE_OBSERVATION_2026-10-23.md); version, job ID and public screenshot provenance are still missing. Save the search job ID, version and a genuine screenshot if it runs.
 
-This small test checks basic SPL command semantics but **does not** establish the separate 64-event CSV ingestion and search qualification.
+**Next without an upload:** Run the [Stage B 64-event in-memory query](SPLUNK_MATRIX_IN_MEMORY.spl) using [Stage B instructions](SPLUNK_MATRIX_IN_MEMORY.md). The seven-event smoke result does **not** establish this nine-scenario matrix or CSV ingestion.
 
 ## 1. Upload and verify
 1. Open Splunk's **Add Data → Upload** (interface labels vary by version).

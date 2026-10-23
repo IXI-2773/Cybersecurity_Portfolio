@@ -11,7 +11,7 @@ The lab parses fabricated authentication events and flags **at least five failur
 | [Validation matrix](01-authentication-detection/expected_findings.json) | 64 artificial events; five expected findings across nine scenario families |
 | [Focused unit tests](01-authentication-detection/test_detect_auth.py) | Regression, isolation and malformed input behavior |
 | [Analyst case report](01-authentication-detection/SOC_CASE_REPORT.md) | Timeline, alternative explanations and uncertain findings |
-| [Splunk runbook](01-authentication-detection/SPLUNK_RUNBOOK.md) | **Prepared; not tested inside Splunk** |
+| [Splunk runbook](01-authentication-detection/SPLUNK_RUNBOOK.md) | **Seven-event Splunk smoke screenshot reviewed PASS; 64-event and ingestion qualification pending** |
 
 **ATT&CK:** T1110 is an investigative hypothesis only. Fabricated events do not prove compromised credentials, operational detection efficacy, or any real intrusion.
 

@@ -29,7 +29,7 @@ Public badge URLs, exam versions, dates and renewal status have not been supplie
 - [SOC Analyst evidence overview](https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/soc-analyst-evidence.html) — dedicated recruiter-ready index of four synthetic labs, each with a source-linked report and test references.
 - [GitHub-readable SOC Analyst evidence guide](docs/SOC_ANALYST_EVIDENCE_GUIDE.md) — brief verified-versus-pending qualifications.
 - [GitHub-readable project gallery](projects/CASE_STUDIES.md) — all six case studies without raw HTML or a 404.
-- [Authentication detection case study](projects/authentication-detection.md) — reproducible, synthetic Python lab, 31 authentication tests, a simulated SOC investigation report, and a **Splunk runtime qualification package (not yet executed in Splunk)**.
+- [Authentication detection case study](projects/authentication-detection.md) — reproducible, synthetic Python lab, 31 authentication tests, a simulated SOC investigation report, and a **seven-event Splunk smoke screenshot PASS; full 64-event verification pending**.
 - [Windows process execution triage case study](projects/windows-process-triage.md) — synthetic Windows Event ID 4688 exercise, 11 tests, ATT&CK hypotheses T1059.001 and T1105.
 - [Network Traffic Analysis](projects/network-traffic-analysis.md) — PCAP generator, DNS/HTTP inspection, 18 tests, synthetic case report, and three [offline evidence images](assets/network/pcap-evidence-overview.svg).
 - [Vulnerability Assessment & Remediation](projects/vulnerability-remediation.md) — localhost-only before/after HTTP hardening, 4 synthetic findings fixed, 16 tests.
@@ -76,7 +76,7 @@ Pages is configured for this repository. The current static site uses no JavaScr
 ## Public disclosure and accuracy
 - CR and RAI are **private** engineering projects. Do not publish their source, internal records, repository URLs, security-sensitive workflow details, or artifacts without a separate review.
 - Case studies are based on high-level architecture and development methods, and **do not** establish a production security system, an independent penetration test, or quantified business/security gains.
-- All four labs use synthetic events or localhost-only fixtures; no real systems are scanned and no real network packets are captured. The SPL query, upload-free smoke test and validation protocol are *drafts*, not an empirically validated deployed detection.
+- All four labs use synthetic events or localhost-only fixtures; no real systems are scanned and no real network packets are captured. Seven-event synthetic SPL smoke output matched an operator screenshot from Splunk; full 64-event and indexed-data qualification and production effectiveness remain unverified.
 - Project status and evidence limitations are visible on each case-study page.
 - CompTIA Security+ and CySA+ are listed based on the owner's report; no independent public verification or current-renewal status is asserted.
 
