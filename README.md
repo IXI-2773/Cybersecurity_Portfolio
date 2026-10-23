@@ -25,6 +25,10 @@ Automated deployment health checks are defined in [`check-live-pages.yml`](.gith
 
 Public badge URLs, exam versions, dates and renewal status have not been supplied. See the [credential record](docs/CREDENTIALS.md) for claim limits.
 
+## One-page recruiter evidence brief
+
+[Review Don Lopez's SOC Analyst evidence brief](docs/RECRUITER_QUICK_BRIEF.md) — a concise, source-linked summary of the screenshot-reviewed Splunk debugging result, all four public labs, qualification limits and interview evidence.
+
 ## Featured Splunk authentication investigation
 
 The [live homepage](https://ixi-2773.github.io/Cybersecurity_Portfolio/#featured-splunk) now leads with the **3/5 → 5/5** ten-minute boundary debugging case and a saved Splunk dashboard table. [Operator screenshot observations](splunk_workflow/NATIVE_DASHBOARD_RESULT_2026-10-23.md) document the five matched synthetic cases. The on-site data table is a summary of observed screenshot results, not a new live product screenshot.

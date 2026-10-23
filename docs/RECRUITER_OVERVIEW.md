@@ -5,6 +5,8 @@
 **Certifications (owner-reported):** CompTIA Security+ and CompTIA CySA+. Public verification and renewal dates pending; see [credentials](CREDENTIALS.md).  
 **Portfolio:** [GitHub repository](https://github.com/IXI-2773/Cybersecurity_Portfolio) · [Live portfolio website](https://ixi-2773.github.io/Cybersecurity_Portfolio/)
 
+**For a fast review, start with the [one-page recruiter evidence brief](RECRUITER_QUICK_BRIEF.md).** It puts the real Splunk investigation and three supporting security investigations in one place.
+
 ## Featured Splunk case — real tool, synthetic data
 
 **Quickest evidence path:** [Featured authentication investigation](https://ixi-2773.github.io/Cybersecurity_Portfolio/#featured-splunk) → [full case study](../projects/authentication-detection.html) → [screenshot-reviewed saved Splunk dashboard result](../splunk_workflow/NATIVE_DASHBOARD_RESULT_2026-10-23.md).
@@ -13,7 +15,7 @@ In Splunk Enterprise Search & Reporting, the original 64-event authentication co
 
 ## SOC Analyst starting point
 
-[Review the SOC Analyst evidence overview](https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/soc-analyst-evidence.html) for four source-linked synthetic investigations, or use the [GitHub-rendered evidence guide](SOC_ANALYST_EVIDENCE_GUIDE.md) for a five-minute verification path. Both explicitly distinguish completed local testing from Splunk, Wireshark and production outcomes still pending.
+[Review the SOC Analyst evidence overview](https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/soc-analyst-evidence.html) for four source-linked synthetic investigations, or use the [GitHub-rendered evidence guide](SOC_ANALYST_EVIDENCE_GUIDE.md) for a five-minute verification path. Both distinguish the observed Splunk search/dashboard results from unperformed indexed data, Wireshark GUI verification, and production outcomes.
 
 ## SOC authentication analysis visuals
 
@@ -53,7 +55,7 @@ See [interview discussion guide](INTERVIEW_EVIDENCE_BRIEF.md) for short, evidenc
 
 ## Work in progress
 
-- Execute the [documented Splunk verification runbook](../projects/01-authentication-detection/SPLUNK_RUNBOOK.md) in an authorized instance; publish genuine, scrubbed evidence and tuning notes.
+- Optionally reproduce the [indexed Splunk validation runbook](../projects/01-authentication-detection/SPLUNK_RUNBOOK.md); the in-memory search and native one-panel dashboard are already screenshot-reviewed, while indexed ingestion, job exports and triggered alerts remain unverified.
 - Analyze a licensed or owned packet capture and report evidence, uncertainty, and defensive observations.
 - Publish practical investigation reports with sanitized screenshots and time-stamped findings.
 

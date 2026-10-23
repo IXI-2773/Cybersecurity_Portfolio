@@ -155,6 +155,15 @@ def main() -> None:
         "Vulnerability Assessment", "Celestial Resonance", "Research AI Infrastructure")]
     required(all(x >= 0 for x in security_pos) and security_pos == sorted(security_pos),
              "Security labs must precede private engineering case studies")
+    # Resume/recruiter claims must remain grounded in completed screenshot review.
+    onepage = get("docs/RECRUITER_QUICK_BRIEF.md")
+    bullets = get("docs/RESUME_PORTFOLIO_BULLETS.md")
+    required("64 fabricated events" in onepage and "5/5" in onepage
+             and "not a public repository image artifact" in onepage,
+             "Recruiter one-pager must disclose synthetic data and evidence provenance")
+    required("Splunk Enterprise" in bullets and "5/5" in bullets
+             and "actual Splunk execution remains pending" not in bullets,
+             "Resume bullets drifted to unsupported or obsolete Splunk status")
     # Recruiter-facing landing page must expose all four fixture-backed reports
     # and must not silently omit pending Splunk/Wireshark status.
     home = get("index.html")
