@@ -25,6 +25,10 @@ PAGES = {
     "celestial-resonance": "projects/celestial-resonance.html",
     "network": "projects/network-traffic-analysis.html",
     "vulnerability": "projects/vulnerability-remediation.html",
+    "authentication": "projects/authentication-detection.html",
+    "windows": "projects/windows-process-triage.html",
+    "research-ai": "projects/research-ai-infrastructure.html",
+    "analyst-workflow": "projects/soc-analyst-workflow.html",
 }
 VIEWPORTS = {"mobile": (390, 844), "small-mobile": (320, 720),
              "tablet": (768, 900), "desktop": (1280, 900)}
@@ -50,9 +54,12 @@ def main() -> None:
         for name, relative in PAGES.items():
             url = (ROOT / relative).resolve().as_uri()
             for viewport, (width, height) in VIEWPORTS.items():
-                # Review 4 widths on homepage; 390 and 1280 on other pages.
+                # Check six rewritten cases at 320px as well as mobile/desktop.
+                case_pages = {"authentication", "windows", "network", "vulnerability",
+                              "celestial-resonance", "research-ai"}
                 if name != "home" and viewport not in ("mobile", "desktop"):
-                    continue
+                    if name not in case_pages or viewport != "small-mobile":
+                        continue
                 driver.set_window_size(width, height)
                 driver.get(url)
                 body = driver.find_element(By.TAG_NAME, "body")
@@ -67,6 +74,8 @@ def main() -> None:
                       mainWidth: document.querySelector('main').getBoundingClientRect().width
                     };
                 """)
+                if dimensions["viewport"] != width:
+                    failures.append(f"{name}/{viewport}: requested {width}px but observed {dimensions['viewport']}px")
                 if dimensions["scrollWidth"] > dimensions["viewport"] + 2:
                     failures.append(f"{name}/{viewport}: document horizontal overflow: {dimensions}")
                 if name == "application-toolkit":

@@ -15,3 +15,15 @@ Execution: inline, using the user's standing preference to proceed automatically
 Local verification: all 12 HTML pages pass the structural accessibility audit; 200 local links resolve; evidence consistency passes. Desktop hero and gallery visually inspected through the browser. Responsive checks extended to exercise both native evidence disclosures and run on PRs; narrow-screen browser results pending CI.
 
 PR #1 verification on bcac75d: both CI workflows passed. Chrome report: 18 page/viewport combinations, zero failures, actual homepage widths 320/390/768/1280 and matching document widths. Narrow-screen hero screenshots inspected. Independent review found one retained-anchor offset regression after moving IDs onto inner containers; corrected by applying the 100px scroll margin to those three targets. No other consequential findings. Update is on the PR branch, not deployed to main.
+
+## Second pass — full site and editorial development
+
+Requested: develop the passages, pages and UI further. Build on the same PR and static architecture.
+
+- [ ] Rewrite six case studies around problem, method, findings, decision and scope; preserve published evidence and private-project boundaries.
+- [ ] Unify brand, theme, navigation and footer across all twelve pages; preserve the recruiter print view.
+- [ ] Add section navigation, accessible evidence tables, case summaries and a next-project path.
+- [ ] Edit application and evidence-overview copy for a professional public audience.
+- [ ] Validate links, evidence, semantics, offline packaging, desktop preview and responsive CI; include all twelve pages in the browser review.
+
+No new dependencies, invented qualifications or detector changes. Keep source reports and prepared-versus-observed distinctions inspectable. Execute inline under the existing instruction to proceed.
