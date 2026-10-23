@@ -1167,3 +1167,17 @@ section[id]{scroll-margin-top:100px}
  .recruiter-block{padding:9pt 0 6pt;break-inside:avoid}
  .recruiter-section-title h2{font-size:12pt}
 }
+
+/* Print the white paper background through the page edge, with physical
+   padding rather than a dark @page margin. Protect the right text edge. */
+@media print{
+ @page{size:letter;margin:0;background:#fff}
+ html{background:#fff!important}
+ body.portfolio-shell{width:100%!important;max-width:100%!important;
+   min-height:0!important;margin:0!important;padding:.43in .52in!important;
+   background:#fff!important;color:#162734!important}
+ .recruiter-main,.recruiter-sheet{width:100%!important;max-width:100%!important;
+   min-width:0!important;box-sizing:border-box!important}
+ .recruiter-project-grid>div,.recruiter-skill-columns>div{min-width:0;overflow-wrap:anywhere}
+ .recruiter-detail,.recruiter-qualification{overflow-wrap:break-word}
+}
