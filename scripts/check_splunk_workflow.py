@@ -41,6 +41,10 @@ def main():
     alert = conf[conf.sections()[0]]
     require(alert.get("disabled") == "1" and alert.get("enablesched") == "0",
             "No automatic alert action or scheduling is permitted")
+    require(alert.get("counttype") == "number of events"
+            and alert.get("relation") == "greater than"
+            and alert.get("quantity") == "0",
+            "Alert threshold must be number of events greater than zero")
     require(alert.get("action.email") == "0" and alert.get("action.script") == "0",
             "External alert actions must be off")
     require(alert.get("dispatch.earliest_time") == "-20m",
