@@ -2,10 +2,14 @@
 
 **Career focus:** SOC Analyst · Cybersecurity Analyst · Junior Detection Engineering  
 **Email:** [frailtycraven@gmail.com](mailto:frailtycraven@gmail.com)  
-**Education:** B.S. Cybersecurity, December 2024  
-**Certifications:** CompTIA Security+ and CySA+ (owner-reported; public badges/validity dates not independently available). [Verification scope](CREDENTIALS.md)
+**Education:** B.S. Information Systems & Technology (Cybersecurity), California State University, San Bernardino, December 2024  
+**Certifications:** CompTIA Security+ and CySA+ (owner-résumé-reported; CySA+ earned October 2026 according to résumé; issuer badges not independently available). SCCDA planned, not earned. [Verification scope](CREDENTIALS.md)
 
 [**Two résumé versions and application toolkit**](https://ixi-2773.github.io/Cybersecurity_Portfolio/apply.html) · [**Printable recruiter profile**](https://ixi-2773.github.io/Cybersecurity_Portfolio/recruiter.html) · [**Live portfolio**](https://ixi-2773.github.io/Cybersecurity_Portfolio/) · [**Featured Splunk investigation**](https://ixi-2773.github.io/Cybersecurity_Portfolio/#featured-splunk) · [**GitHub source**](https://github.com/IXI-2773/Cybersecurity_Portfolio)
+
+## Professional security experience
+
+The supplied October 2026 résumé lists **Security Officer, Allied Universal (2019–present)**, involving secure-environment monitoring, incident documentation and escalation. This is résumé-reported physical-security experience, separate from the independent synthetic security labs and not a claim of paid SOC analyst tenure.
 
 ## Primary technical example — real Splunk Enterprise UI, controlled training data
 

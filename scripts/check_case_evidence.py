@@ -244,6 +244,19 @@ def main() -> None:
                  "authentication-detection", "windows-process-triage",
                  "network-traffic-analysis", "vulnerability-remediation")),
              "Guided analyst paths must link four separate, scoped cases")
+    for page, kind, key in (
+        ("projects/authentication-detection.html", "identity", "user_boundary"),
+        ("projects/windows-process-triage.html", "endpoint", "powershell.exe"),
+        ("projects/network-traffic-analysis.html", "network", "NXDOMAIN"),
+        ("projects/vulnerability-remediation.html", "web", "nosniff")):
+        html = get(page)
+        required(html.count('class="case-evidence-contrast"') == 1
+                 and f'data-case-contrast="{kind}"' in html
+                 and 'id="case-evidence-contrast-title"' in html
+                 and html.count('class="case-contrast-side"') == 2
+                 and key in html
+                 and "source" in html.lower(),
+                 "Evidence contrast missing grounded signal/control: " + page)
     roles = get("roles.html")
     for target in ("soc-analyst", "security-analyst", "security-automation"):
         required(f'id="{target}"' in roles and f'href="#{target}"' in roles,
@@ -302,7 +315,7 @@ def main() -> None:
              and 'href="#featured-splunk">See the Splunk evidence' in hiring_home
              and 'href="recruiter.html">One-page profile' in hiring_home,
              "First-screen primary and secondary actions must match their destinations")
-    required("B.S. Cybersecurity" in hiring_home
+    required("Information Systems &amp; Technology (Cybersecurity)" in hiring_home
              and "holder-reported" in get("recruiter.html").lower(),
              "Portfolio must retain credential scope context")
     # Homepage boundary preview must use the verified browser engine, not
@@ -431,10 +444,49 @@ def main() -> None:
             required(prohibited.lower() not in role.lower(),
                      "Resume has unsupported detail or placeholder: " + prohibited)
     application_doc = get("docs/APPLICATION_READINESS.md")
-    required("actual employment history" in application_doc
+    required("Allied Universal" in application_doc
              and "not a guarantee" in application_doc
              and "not established" in application_doc,
              "Application guide must give accurate contact/employment and ATS limitations")
+    import re as _pii_re
+    _phone_pattern = r"(?<!\\d)(?:\\(\\d{3}\\)|\\d{3})[-. ]*\\d{3}[-. ]*\\d{4}(?!\\d)"
+    # Public brand stays Don Lopez while the uploaded resume supplies
+    # accurately qualified education and past physical-security employment.
+    for page_name in ("index.html", "recruiter.html", "apply.html"):
+        public_content = get(page_name)
+        required("Don Lopez" in public_content
+                 and "Brandon" not in public_content
+                 and not _pii_re.search(_phone_pattern, public_content),
+                 "Public page lost chosen brand or exposed private PDF details: " + page_name)
+    for public_name in ("resumes/Don_Lopez_SOC_Analyst.txt",
+                        "resumes/Don_Lopez_Security_Analyst.txt"):
+        public_resume = get(public_name)
+        for term in ("DON LOPEZ", "Allied Universal", "Security Officer",
+                     "Information Systems & Technology (Cybersecurity)",
+                     "California State University, San Bernardino",
+                     "SOC", "2019", "October 2026", "SCCDA",
+                     "Planned", "not earned", "December 2024"):
+            required(term.lower() in public_resume.lower(),
+                     "Owner-resume fact or planned-status missing: " + public_name + " / " + term)
+        required("Brandon" not in public_resume and not _pii_re.search(_phone_pattern, public_resume),
+                 "Public ATS text exposed private source PDF identity: " + public_name)
+        required("PORTFOLIO LABS, NOT EMPLOYMENT" in public_resume
+                 and "5 of 5" in public_resume
+                 and "Allied Universal" in public_resume,
+                 "Public ATS resume must distinguish real employment from synthetic labs")
+    required("Information Systems &amp; Technology (Cybersecurity)" in get("index.html")
+             and "Allied Universal" in get("index.html")
+             and "Allied Universal" in get("recruiter.html"),
+             "Homepage and recruiter profile must show corrected education and job history")
+    required("résumé-reported" in get("recruiter.html")
+             and "not claimed as paid SOC" in get("recruiter.html"),
+             "Recruiter profile must qualify source and SOC employment boundary")
+    reconciliation = get("docs/RESUME_SOURCE_RECONCILIATION_2026-10-23.md")
+    required("Don Lopez" in reconciliation and "5,000" in reconciliation
+             and "not independently verified" in reconciliation.lower()
+             and "not earned" in reconciliation.lower()
+             and not _pii_re.search(_phone_pattern, reconciliation) and "Brandon" not in reconciliation,
+             "Source reconciliation must distinguish owner resume from public lab proof")
     # Public release gates: do not automatically publish prior application contact
     # details or claim employer histories/verified issuer badges without evidence.
     gates = get("docs/PUBLICATION_GATES.md")

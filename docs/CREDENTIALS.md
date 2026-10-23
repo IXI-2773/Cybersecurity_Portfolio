@@ -5,9 +5,11 @@ The portfolio owner reports holding **CompTIA Security+** and **CompTIA CySA+ (C
 | Credential | Issuer | Basis for claim | Public verification |
 | --- | --- | --- | --- |
 | CompTIA Security+ | CompTIA | Owner-reported | No verification link supplied |
-| CompTIA CySA+ | CompTIA | Owner-reported | No verification link supplied |
+| CompTIA CySA+ | CompTIA | Owner-résumé-reported; earned October 2026 | No verification link supplied |
 
-**Credential versions, issue and expiration dates, active renewal status and credential identifiers:** Not provided. No independent credential verification is asserted.
+**Credential versions, expiration dates, active renewal status and credential identifiers:** Not provided. The owner’s résumé lists **October 2026** as the CySA+ earning month; no independent issuer verification is asserted. The Security+ issuance date is not provided.
+
+**Splunk Certified Cybersecurity Defense Analyst (SCCDA)** is marked **planned**, not earned, in the source résumé and must not be listed as a completed credential.
 
 The certifications complement the public cybersecurity exercises in this repository; they do not, by themselves, establish employment experience or production SOC effectiveness.
 

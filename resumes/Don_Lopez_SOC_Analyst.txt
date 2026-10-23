@@ -1,43 +1,53 @@
 DON LOPEZ
-SOC ANALYST | CYBERSECURITY ANALYST
+Indio, CA | Email: frailtycraven@gmail.com
 Portfolio: https://ixi-2773.github.io/Cybersecurity_Portfolio/
-GitHub: https://github.com/IXI-2773/Cybersecurity_Portfolio
-Email: frailtycraven@gmail.com
+GitHub source: https://github.com/IXI-2773/Cybersecurity_Portfolio
 Public professional profile: https://github.com/IXI-2773
+LinkedIn: https://www.linkedin.com/in/ixi2773/
+
+SOC ANALYST | CYBERSECURITY ANALYST | SECURITY OPERATIONS
 
 PROFESSIONAL SUMMARY
-Cybersecurity graduate with CompTIA Security+ and CySA+ (holder-reported). Demonstrated Splunk Enterprise authentication searches and a saved results dashboard using controlled lab data. Develops Python-based detection exercises and source-attributed analyst reports with clear limits, negative tests, and evidence-based triage recommendations.
+Cybersecurity graduate with Security Officer experience in monitoring, incident documentation and escalation. CompTIA Security+ and CySA+ (résumé-reported). Demonstrates Splunk SPL authentication triage and Python-backed evidence validation through four reproducible public security labs with documented limitations.
+
+PROFESSIONAL EXPERIENCE
+Allied Universal — Security Officer | 2019–Present (as reported on supplied résumé)
+- Monitor a secure environment, maintain security logs and identify matters for escalation.
+- Prepare incident documentation and escalate operational concerns through the appropriate channels.
+- Apply observation, handoff and documentation disciplines transferable to security operations.
 
 TECHNICAL SKILLS
-Splunk Enterprise Search & Reporting; SPL correlation; authentication-log analysis; detection tuning and boundary tests; Windows Security Event ID 4688 triage; PowerShell/certutil command-line review; Python; CSV/JSON; DNS/HTTP packet analysis; PCAP; MITRE ATT&CK investigative mapping; GitHub Actions; regression testing; technical reporting.
+Demonstrated in published lab evidence: Splunk Enterprise Search & Reporting, SPL correlation, detection debugging, Python, Windows Event ID 4688, DNS/HTTP and synthetic PCAP analysis, source attribution, MITRE ATT&CK investigative mapping, GitHub Actions and unit tests.
+Also listed on original résumé (not independently established by these four public labs): Sigma, Snort, Wireshark, Nmap, Nessus, Linux, Bash, PowerShell, SQL and AWS basics.
 
-SELECTED CYBERSECURITY PROJECTS (PORTFOLIO LABS, NOT EMPLOYMENT)
-Splunk Authentication Detection and Debugging
-- Executed a real Splunk Enterprise SPL search over 64 fabricated login events across nine test scenarios; identified a 3-of-5 detection mismatch affecting exact ten-minute boundary cases.
-- Corrected the bounded SPL logic to include failures occurring 0-600 seconds before success; a saved Splunk Search & Reporting dashboard showed 5 of 5 expected synthetic results in a publicly archived cropped screenshot.
-- Documented missing evidence, false-positive considerations, and investigative steps; did not claim indexed-data qualification, live alerts, or production effectiveness.
+SELECTED CYBERSECURITY PROJECTS (INDEPENDENT PUBLIC LABS)
+Splunk Authentication Detection and Boundary Analysis | 2026
+- Ran an SPL training matrix containing 64 synthetic authentication events across nine scenarios. Diagnosed two missing exact ten-minute cases from a result of 3 of 5 expected matches.
+- Applied inclusive 600-second logic; the corrected search and saved one-panel Splunk dashboard displayed 5 of 5 expected findings in reviewed screenshots.
+- Maintained source CSV, expected findings, readable SPL and a record of unverified ingestion/alert behavior.
 Evidence: https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/authentication-detection.html
 
-Windows Process Creation Triage
-- Implemented Python triage of five fabricated Windows Security Event 4688 records; highlighted two PowerShell/certutil rule candidates while keeping three benign controls.
-- Wrote 11 focused tests and documented process ancestry, source, and endpoint corroboration needed before escalation.
-Evidence: https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/projects/02-windows-process-triage/CASE_REPORT.md
+Windows Process-Creation Triage | 2026
+- Used Python to review five synthetic Windows 4688 process events, isolating two PowerShell/certutil candidates and three benign controls.
+- Validated rule behavior and input handling with 11 focused tests. These candidate matches are not confirmed compromise.
+Evidence: https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/windows-process-triage.html
 
-Network Traffic Investigation
-- Built deterministic generation and analysis of a 20-packet practice PCAP; investigated DNS NXDOMAIN bursts and a reserved-host HTTP POST as review signals, not confirmed compromise.
-- Documented frame-level observations and validated the exercise using 18 focused Python tests.
-Evidence: https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/projects/03-network-pcap/CASE_REPORT.md
+DNS/HTTP Packet Investigation | 2026
+- Generated and parsed a 20-frame practice PCAP; extracted 12 bounded DNS/HTTP events and two analyst review candidates.
+- Documented frame-level reasoning and validation with 18 focused tests; no real network capture claimed.
+Evidence: https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/network-traffic-analysis.html
 
-ADDITIONAL LAB / VERIFICATION
-- Developed a localhost HTTP response-hardening exercise documenting four deliberately introduced rule violations reduced to zero after remediation; 16 focused tests.
-- Authentication lab contains 31 tests; four public labs total 76 focused Python tests. These counts describe unit coverage, not real-world detection accuracy.
+Additional: localhost HTTP header/cookie remediation verified four scoped checks changed from four matching findings to zero, with 16 focused tests.
+Evidence: https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/vulnerability-remediation.html
 
 EDUCATION
-Bachelor of Science (B.S.), Cybersecurity | December 2024
+California State University, San Bernardino
+B.S., Information Systems & Technology (Cybersecurity) | December 2024
 
-CERTIFICATIONS
-CompTIA Security+ | Holder-reported; public validation details not supplied
-CompTIA CySA+ | Holder-reported; public validation details not supplied
+CERTIFICATIONS / DEVELOPMENT
+CompTIA Security+ | Resume-reported certification; no public issuer-verification URL
+CompTIA CySA+ | Earned October 2026 according to supplied résumé; issuer verification pending
+Splunk Certified Cybersecurity Defense Analyst (SCCDA) | Planned; not earned
 
-EVIDENCE SCOPE
-Public labs use fabricated or localhost-only inputs. Splunk search and one-panel saved dashboard results were observed in the application; this does not establish real incidents, SOC employment, production alerts, or indexed telemetry. Employment history and phone details are not invented; this professional email was authorized for public use.
+EVIDENCE AND PUBLICATION SCOPE
+PORTFOLIO LABS, NOT EMPLOYMENT: Public security exercises use synthetic or localhost-only inputs. The one-panel Splunk saved dashboard was screenshot-reviewed; production SOC operations, scheduled alerts and real incidents were not demonstrated. Professional experience and credential dates are drawn from the owner's résumé and are not independently verified. Unsupported lab metrics are not invented or added to these public summaries. A private phone number and the full personal name used in the supplied PDF are deliberately excluded from this public portfolio.

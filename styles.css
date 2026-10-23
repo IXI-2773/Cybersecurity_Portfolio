@@ -1294,3 +1294,37 @@ section[id]{scroll-margin-top:100px}
 .explorer-playbook{padding:21px 16px}.explorer-playbook-steps{grid-template-columns:1fr}
 .explorer-playbook-steps a{padding:14px 15px;gap:8px}.explorer-playbook-steps a .playbook-go{padding-top:3px}}
 @media(prefers-reduced-motion:reduce){.explorer-playbook-steps a{transition:none}.explorer-playbook-steps a:hover{transform:none}}
+
+/* Owner résumé alignment, while preserving the public Don Lopez display name. */
+.portfolio-home .career-skills-note{margin:11px 0 0;font-size:.74rem;line-height:1.68;color:#afc5cc}
+.application-page .resume-source-note{border:1px solid #496e65;background:#172c2a;border-radius:9px;padding:22px 25px}
+.application-page .resume-source-note p{font-size:.87rem;line-height:1.78;color:#d5e1de;max-width:900px}
+.application-page .resume-source-note a{color:#a5e3bd;text-underline-offset:4px}
+.recruiter-credential-row span{overflow-wrap:break-word}
+.recruiter-experience .recruiter-detail{margin-bottom:0}
+@media(max-width:600px){.application-page .resume-source-note{padding:18px 16px}}
+@media print{
+ .recruiter-experience{padding:5pt 0 4pt}
+ .recruiter-experience .recruiter-detail{font-size:8.2pt;line-height:1.32}
+ .recruiter-credential-row span{font-size:7.7pt}
+ .recruiter-credential-row small{font-size:6.7pt}
+ .recruiter-links{gap:5pt 10pt;font-size:7.75pt}
+ .recruiter-section-title{margin-bottom:5pt}
+ .recruiter-project-grid p{font-size:8pt}
+}
+
+/* Source-grounded visual contrasts—not new runtime detections. */
+.case-evidence-contrast{margin:0 0 34px;border:1px solid #54766c;border-radius:10px;overflow:hidden;background:linear-gradient(125deg,#1a2f2b,#142429);scroll-margin-top:90px}
+.case-contrast-heading{padding:19px 22px 16px;border-bottom:1px solid #436159}
+.case-contrast-kicker{font:650 .59rem/1.5 ui-monospace,Consolas,monospace;letter-spacing:.06em;color:#a9d9b6}
+.case-evidence-contrast h2{color:#edf3e9;font-size:clamp(1.15rem,2.1vw,1.48rem);line-height:1.3;margin:7px 0 0}
+.case-contrast-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:#486159}
+.case-contrast-side{background:#15292a;padding:18px 21px;min-width:0}
+.case-contrast-side:nth-child(2){background:#20322e}
+.case-contrast-label{display:block;color:#b1dabb;font:650 .59rem/1.55 ui-monospace,Consolas,monospace;margin-bottom:10px}
+.case-contrast-side p{margin:0;color:#d8e5de;font-size:.79rem;line-height:1.75;overflow-wrap:anywhere}
+.case-contrast-side code{overflow-wrap:anywhere;white-space:normal;font-size:.8em;color:#c9eacb}
+.case-evidence-contrast figcaption{margin:0;padding:14px 22px;color:#c0d0c9;font-size:.71rem;line-height:1.7;border-top:1px solid #486159}
+.case-evidence-contrast figcaption a{color:#adf0c1;font-weight:600}
+.case-evidence-contrast figcaption a:focus-visible{outline:3px solid #baefbe;outline-offset:3px}
+@media(max-width:650px){.case-contrast-grid{grid-template-columns:1fr}.case-contrast-heading{padding:17px}.case-contrast-side{padding:15px 17px}.case-evidence-contrast figcaption{padding:13px 17px}}

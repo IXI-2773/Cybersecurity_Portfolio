@@ -140,6 +140,13 @@ def main() -> None:
                     if disclosure.get_attribute("open") is not None:
                         failures.append(f"{name}/{viewport}: source trail cannot close")
                     body.send_keys(Keys.CONTROL, Keys.HOME)
+                if name in {"authentication", "windows", "network", "vulnerability"}:
+                    diagram = driver.find_element(By.CSS_SELECTOR, ".case-evidence-contrast")
+                    panels = diagram.find_elements(By.CSS_SELECTOR, ".case-contrast-side")
+                    if not diagram.is_displayed() or len(panels) != 2:
+                        failures.append(f"{name}/{viewport}: evidence comparison missing")
+                    if not diagram.find_element(By.CSS_SELECTOR, "figcaption a").is_displayed():
+                        failures.append(f"{name}/{viewport}: comparison missing direct source link")
                 if name == "role-paths":
                     sections = ("soc-analyst", "security-analyst", "security-automation")
                     if len(driver.find_elements(By.CSS_SELECTOR, ".role-route-card")) != 3:
@@ -484,7 +491,7 @@ def main() -> None:
                         reader = PdfReader(str(pdf_path))
                         pages = len(reader.pages)
                         printed_text = "\n".join(page.extract_text() or "" for page in reader.pages)
-                        required_text = ("Don Lopez", "Featured: Splunk authentication",
+                        required_text = ("Don Lopez", "Allied Universal", "Information Systems", "Featured: Splunk authentication",
                                          "Additional security investigations",
                                          "Technical evidence & approach", "Evidence scope:")
                         missing_text = [item for item in required_text if item not in printed_text]
