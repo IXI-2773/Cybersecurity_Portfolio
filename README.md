@@ -45,7 +45,7 @@ The source artifact and genuine result screenshot are distinct from the [CSV-der
 
 ## New: installable Splunk SOC authentication lab
 
-**Splunk native dashboard verified:** An operator screenshot shows the one-panel **Don Lopez — SOC Authentication Investigation** dashboard within Search & Reporting displaying five expected synthetic results. [Observation and evidence limits](splunk_workflow/NATIVE_DASHBOARD_RESULT_2026-10-23.md). Six-panel XML, indexed ingestion and alerts remain unverified.
+**Splunk dashboard proof now published:** [View the actual cropped Splunk screenshot](assets/evidence/splunk-native-dashboard-results.png), which shows the one-panel **Don Lopez — SOC Authentication Investigation** dashboard within Search & Reporting displaying five expected synthetic results. [Observation and evidence limits](splunk_workflow/NATIVE_DASHBOARD_RESULT_2026-10-23.md). Six-panel XML, indexed ingestion and alerts remain unverified. The screenshot is genuine application evidence; generated design illustrations are identified separately.
 
 **If the custom Splunk application opens a 404**, use the [no-install native dashboard workaround](splunk_workflow/NO_APP_GUIDE.md). It starts in the working Search & Reporting UI and can be created by **Save As → Dashboard Panel**. A [standalone six-panel XML dashboard](splunk_workflow/NO_APP_DASHBOARD.xml) is also available to paste into a Classic dashboard, with no app installation, lookup, index or network calls.
 

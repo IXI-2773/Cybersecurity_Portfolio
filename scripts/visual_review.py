@@ -72,6 +72,9 @@ def main() -> None:
                     featured = driver.find_element(By.ID, "featured-splunk")
                     if not featured.is_displayed() or len(featured.find_elements(By.CSS_SELECTOR, ".splunk-evidence-table tbody tr")) != 5:
                         failures.append(f"{name}/{viewport}: missing featured five-row Splunk evidence section")
+                    proof_image = featured.find_element(By.CSS_SELECTOR, ".splunk-real-proof img")
+                    if driver.execute_script("return arguments[0].complete && arguments[0].naturalWidth > 0;", proof_image) is not True:
+                        failures.append(f"{name}/{viewport}: genuine Splunk screenshot failed to load")
                     quick_view = driver.find_element(By.ID, "soc-evidence")
                     if not quick_view.is_displayed():
                         failures.append(f"{name}/{viewport}: recruiter section hidden")

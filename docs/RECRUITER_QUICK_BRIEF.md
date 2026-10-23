@@ -14,7 +14,7 @@
 
 **What this demonstrates:** SPL event correlation, negative/boundary-case debugging, discrepancy investigation, test-oracle comparison, and saving a working dashboard in **Splunk Enterprise Search & Reporting**.
 
-**What this does not establish:** Live enterprise incidents, indexed ingestion, a six-panel Splunk dashboard, production alert performance, authenticated job SID or complete SIEM deployment. The Splunk screenshot was reviewed within the project discussion but is not a public repository image artifact.
+**What this does not establish:** Live enterprise incidents, indexed ingestion, a six-panel Splunk dashboard, production alert performance, authenticated job SID or complete SIEM deployment. A [cropped genuine Splunk dashboard screenshot](../assets/evidence/splunk-native-dashboard-results.png) is now public; the original full-sized capture remains in the project conversation.
 
 ## Three supporting reproducible investigations
 

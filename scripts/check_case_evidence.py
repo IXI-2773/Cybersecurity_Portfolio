@@ -108,7 +108,7 @@ def main() -> None:
     # Screenshot-reviewed native *one-panel* dashboard is separate from six-panel XML.
     native = get("splunk_workflow/NATIVE_DASHBOARD_RESULT_2026-10-23.md")
     required("ONE_PANEL_NATIVE_DASHBOARD_VERIFIED_BY_SCREENSHOT" in native
-             and "not yet stored in this public repository" in native
+             and "cropped and resized derivative" in native
              and "six-panel" in native and "real attack" in native,
              "Native dashboard evidence status or limitations drifted")
     for user in ("user_threshold", "user_reset", "user_boundary", "user_alpha", "user_beta"):
@@ -159,7 +159,7 @@ def main() -> None:
     onepage = get("docs/RECRUITER_QUICK_BRIEF.md")
     bullets = get("docs/RESUME_PORTFOLIO_BULLETS.md")
     required("64-event" in onepage and "5/5" in onepage
-             and "not a public repository image artifact" in onepage,
+             and "cropped genuine Splunk dashboard screenshot" in onepage,
              "Recruiter one-pager must disclose synthetic data and evidence provenance")
     required("Splunk Enterprise" in bullets and "5/5" in bullets
              and "actual Splunk execution remains pending" not in bullets,
@@ -171,12 +171,26 @@ def main() -> None:
              and "3 of 5" in profile and "5 of 5" in profile
              and "64 synthetic events" in profile,
              "Recruiter profile must preserve the observed synthetic debugging case")
-    required("Holder-reported" in profile and "not yet publicly archived" in profile
+    required("Holder-reported" in profile and "cropped, size-reduced derivative is published" in profile
              and "Indexed CSV ingestion" in profile,
              "Recruiter profile must disclose credential and runtime limitations")
     required('href="recruiter.html"' in home_v4
              and "recruiter.html" in get("sitemap.xml"),
              "Recruiter profile must be reachable from homepage and sitemap")
+    # Genuine operator evidence is a PNG asset; illustrative diagrams are
+    # separately labeled and can never substitute for a Splunk screen capture.
+    required('src="assets/evidence/splunk-native-dashboard-results.png"' in home_v4,
+             "Homepage missing genuine Splunk screenshot image")
+    auth = get("projects/authentication-detection.html")
+    required('src="../assets/evidence/splunk-native-dashboard-results.png"' in auth,
+             "Case study missing genuine Splunk screenshot")
+    required('authentication-investigation-flow.svg' in auth
+             and 'not a Splunk application screenshot' in auth,
+             "Generated workflow must be labeled as an illustration")
+    details = get("projects/soc-analyst-evidence.html")
+    required('soc-evidence-pipeline.svg' in details
+             and 'Workflow illustration' in details,
+             "SOC evidence illustration must be separated from real screenshots")
     # Recruiter-facing landing page must expose all four fixture-backed reports
     # and must not silently omit pending Splunk/Wireshark status.
     home = get("index.html")

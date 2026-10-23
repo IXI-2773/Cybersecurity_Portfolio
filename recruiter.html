@@ -44,7 +44,7 @@
 <section class="recruiter-block" aria-labelledby="recruiter-featured">
 <div class="recruiter-section-title"><span>01</span><h2 id="recruiter-featured">Featured: Splunk authentication investigation</h2></div>
 <p class="recruiter-detail">Executed an authentication-correlation SPL search in <strong>Splunk Enterprise Search &amp; Reporting</strong> against 64 synthetic events across nine test scenarios. The first full-matrix search returned <strong>3 of 5</strong> expected findings, omitting two detections at the exact ten-minute boundary. Reworked the bounded search to calculate an <strong>inclusive 600-second window</strong>; the corrected results and saved one-panel Splunk dashboard displayed <strong>5 of 5</strong> expected findings in screenshots supplied by the operator.</p>
-<div class="recruiter-comparison" role="group" aria-label="Splunk boundary-debugging results">
+<figure class="recruiter-evidence-img recruiter-screen-only"><a href="assets/evidence/splunk-native-dashboard-results.png"><img src="assets/evidence/splunk-native-dashboard-results.png" width="700" height="169" loading="lazy" decoding="async" alt="Cropped screenshot of an actual Splunk Enterprise saved dashboard showing all five synthetic findings"></a><figcaption>Actual user-submitted Splunk screenshot (cropped and compressed); training dataset, not a real incident.</figcaption></figure><div class="recruiter-comparison" role="group" aria-label="Splunk boundary-debugging results">
 <div><small>Original query</small><strong>3 / 5</strong><span>Two boundary misses</span></div>
 <div class="recruiter-arrow" aria-hidden="true">→</div>
 <div><small>Corrected query</small><strong>5 / 5</strong><span>Saved Splunk table reviewed</span></div>
@@ -71,7 +71,7 @@
 <div><h3>Analyst method</h3><p>Verify source and time → correlate user/IP/host → test alternative explanations → document missing corroboration → escalate only with authorized context.</p></div>
 </div>
 </section>
-<p class="recruiter-qualification"><strong>Evidence scope:</strong> All public lab inputs are fabricated or localhost-only; tests are not production detection metrics. The one-panel Splunk dashboard was screenshot-reviewed in conversation, but the original image is not yet publicly archived. Indexed CSV ingestion, scheduled Splunk alert triggering, and real incident response were not demonstrated. Certification validity dates and badges remain unverified publicly.</p>
+<p class="recruiter-qualification"><strong>Evidence scope:</strong> All public lab inputs are fabricated or localhost-only; tests are not production detection metrics. The one-panel Splunk dashboard was screenshot-reviewed in conversation, but a cropped, size-reduced derivative is published; the full original remains in the project conversation. Indexed CSV ingestion, scheduled Splunk alert triggering, and real incident response were not demonstrated. Certification validity dates and badges remain unverified publicly.</p>
 </article>
 <p class="recruiter-screen-only recruiter-after">For expanded investigations, source code and verification limits, see the <a href="projects/soc-analyst-evidence.html">SOC Analyst evidence index</a> or <a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/docs/RECRUITER_QUICK_BRIEF.md">GitHub-readable evidence brief</a>.</p>
 </main>

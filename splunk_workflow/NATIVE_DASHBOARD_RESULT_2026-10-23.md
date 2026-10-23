@@ -23,6 +23,8 @@ These include the two exact ten-minute boundary findings absent from the origina
 
 **Established by screenshot:** A native one-panel Splunk dashboard was saved, opened successfully in Search & Reporting, and displayed a table matching all five artificial findings. This bypasses the installed custom application's prior 404.
 
-**Not established:** The source query and search SID are not visible in the screenshot. The screenshot was received in chat but is **not yet stored in this public repository**, so a recruiter cannot independently inspect the image here. The separate six-panel Classic XML dashboard has not been shown rendering. Likewise, there is no verified indexed CSV ingest, scheduled alert firing, real attack, production telemetry, or SOC deployment.
+**Publication:** A [cropped and resized derivative of the actual operator-provided screenshot](../assets/evidence/splunk-native-dashboard-results.png) is now publicly archived. The original full-resolution capture remains in the project conversation. This derivative is a real screen capture, **not an AI-generated or recreated Splunk interface**.
+
+**Not established:** The source query and search SID are not visible in the cropped screenshot. The separate six-panel Classic XML dashboard has not been shown rendering. Likewise, there is no verified indexed CSV ingest, scheduled alert firing, real attack, production telemetry, or SOC deployment.
 
 **Disposition:** `ONE_PANEL_NATIVE_DASHBOARD_VERIFIED_BY_SCREENSHOT`. It is credible synthetic Splunk application evidence with bounded proof. Further work is optional.

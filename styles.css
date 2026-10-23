@@ -284,3 +284,17 @@ section[id]{scroll-margin-top:100px}
  .recruiter-qualification{font-size:7.1pt;line-height:1.35;color:#4a5e69!important;border-top:1px solid #cad6de;margin:7pt 0 0;padding-top:6pt}
  .recruiter-sheet a{text-decoration:underline;word-wrap:break-word}
 }
+
+/* Real screenshot is a cropped operator capture. SVG workflow diagrams are illustrations. */
+.splunk-real-proof,.proof-media,.analyst-illustration{margin:22px 0 26px;border:1px solid #375969;border-radius:12px;overflow:hidden;background:#101d29}
+.splunk-real-proof{border:0;border-radius:0;margin:0;background:#19252e}
+.splunk-real-proof img,.proof-media img,.analyst-illustration img{display:block;width:100%;height:auto;object-fit:contain}
+.splunk-real-proof a,.proof-media>a{display:block}
+.splunk-real-proof figcaption,.proof-media figcaption,.analyst-illustration figcaption{padding:11px 15px;margin:0;font-size:.77rem;color:#b9d0da;line-height:1.55}
+.splunk-real-proof a,.proof-media figcaption a{color:#9aebd8;text-underline-offset:3px}
+.analyst-illustration img{max-height:260px}
+.proof-illustration img{width:100%}
+.recruiter-evidence-img{margin:14px 0;border:1px solid #365968;border-radius:11px;overflow:hidden;background:#142b38}
+.recruiter-evidence-img img{width:100%;height:auto;display:block}
+.recruiter-evidence-img figcaption{font-size:.72rem;color:#bfdae3;padding:8px 12px}
+@media print{.recruiter-evidence-img{display:none!important}}

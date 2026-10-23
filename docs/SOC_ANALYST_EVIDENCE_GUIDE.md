@@ -33,7 +33,7 @@
 
 ## Native Splunk dashboard: screenshot-reviewed
 
-The [native Search & Reporting dashboard](../splunk_workflow/NATIVE_DASHBOARD_RESULT_2026-10-23.md) opened in Splunk Enterprise and displayed a saved table of **5/5 synthetic authentication findings**. Only the **one-panel** dashboard is verified by screenshot. The six-panel XML, indexed ingestion and scheduled alert are not validated. The screenshot remains in chat rather than the public repository.
+The [native Search & Reporting dashboard](../splunk_workflow/NATIVE_DASHBOARD_RESULT_2026-10-23.md) opened in Splunk Enterprise and displayed a saved table of **5/5 synthetic authentication findings**. Only the **one-panel** dashboard is verified by screenshot. The six-panel XML, indexed ingestion and scheduled alert are not validated. A [cropped genuine Splunk screenshot](../assets/evidence/splunk-native-dashboard-results.png) is now included publicly; the full original stays in the project conversation.
 
 ## Splunk development package — prepared, not deployed
 
