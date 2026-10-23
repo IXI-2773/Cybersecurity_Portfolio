@@ -58,6 +58,11 @@ def main() -> None:
 
     with webdriver.Chrome(service=Service(executable_path=driver_exe), options=opts) as driver:
         driver.set_page_load_timeout(20)
+        # Native WebDriver scrolling must settle before clicking offscreen controls.
+        # Exercise the site's reduced-motion mode instead of racing smooth scroll.
+        driver.execute_cdp_cmd("Emulation.setEmulatedMedia", {
+            "features": [{"name": "prefers-reduced-motion", "value": "reduce"}]
+        })
         for name, relative in PAGES.items():
             url = (ROOT / relative).resolve().as_uri()
             for viewport, (width, height) in VIEWPORTS.items():
@@ -231,6 +236,7 @@ def main() -> None:
 
     report = {"schema": "portfolio.chrome-responsive-review.v1",
               "browser": "Google Chrome or Chromium headless",
+              "motion_preference": "reduce",
               "pages": len(PAGES),
               "viewports_reviewed": len(results),
               "screenshots": results, "failures": failures,
