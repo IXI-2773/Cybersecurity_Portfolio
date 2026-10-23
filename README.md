@@ -2,6 +2,14 @@
 
 A public, static portfolio presenting **reproducible synthetic defensive security exercises** alongside **high-level case studies of private engineering work**.
 
+## Hiring-team tools
+
+The [project explorer](https://ixi-2773.github.io/Cybersecurity_Portfolio/explore.html) filters the six case studies and public verification workbench by role and skill. All entries and evidence links remain readable without JavaScript.
+
+The [verification workbench](https://ixi-2773.github.io/Cybersecurity_Portfolio/test-lab.html) runs two independent browser teaching engines: authentication replay over the existing 64-event fixture, and structured attributed-evidence coverage. Nine executable baseline checks and negative controls produce real calculated results. A receipt download records fixture SHA-256 values and completed runs. These are separate from private CR/RAI implementations, the Python suite, and Splunk execution.
+
+Reproduce the public engine checks: `python scripts/build_browser_fixture.py --check` and `node scripts/test_browser_engine.cjs`.
+
 ## Homepage refresh
 
 The recruiter-focused homepage combines four visual public-lab cards, the genuine Splunk screenshot, compact engineering summaries, a direct SOC resume download, and keyboard-expandable evidence tables. Native HTML and scoped CSS keep the site dependency-free.

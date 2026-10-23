@@ -13,11 +13,15 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support.ui import WebDriverWait
 
 ROOT = Path(__file__).resolve().parents[1]
 SCREENSHOTS = ROOT / "visual-review-screenshots"
 PAGES = {
     "home": "index.html",
+    "explorer": "explore.html",
+    "test-workbench": "test-lab.html",
     "synthetic-soc-preview": "projects/splunk-synthetic-preview.html",
     "soc-analyst-evidence": "projects/soc-analyst-evidence.html",
     "recruiter-profile": "recruiter.html",
@@ -46,6 +50,9 @@ def main() -> None:
         opts.add_argument(arg)
     opts.add_argument("--window-size=1280,900")
     SCREENSHOTS.mkdir(exist_ok=True)
+    downloads = SCREENSHOTS / "downloads"
+    downloads.mkdir(exist_ok=True)
+    opts.add_experimental_option("prefs", {"download.default_directory": str(downloads), "download.prompt_for_download": False})
     results = []
     failures = []
 
@@ -56,7 +63,7 @@ def main() -> None:
             for viewport, (width, height) in VIEWPORTS.items():
                 # Check six rewritten cases at 320px as well as mobile/desktop.
                 case_pages = {"authentication", "windows", "network", "vulnerability",
-                              "celestial-resonance", "research-ai"}
+                              "celestial-resonance", "research-ai", "explorer", "test-workbench"}
                 if name != "home" and viewport not in ("mobile", "desktop"):
                     if name not in case_pages or viewport != "small-mobile":
                         continue
@@ -78,6 +85,67 @@ def main() -> None:
                     failures.append(f"{name}/{viewport}: requested {width}px but observed {dimensions['viewport']}px")
                 if dimensions["scrollWidth"] > dimensions["viewport"] + 2:
                     failures.append(f"{name}/{viewport}: document horizontal overflow: {dimensions}")
+                if name == "explorer":
+                    def shown_cards():
+                        return [el for el in driver.find_elements(By.CSS_SELECTOR, "[data-project-entry]") if el.is_displayed()]
+                    query = driver.find_element(By.ID, "project-search")
+                    role = Select(driver.find_element(By.ID, "role-filter"))
+                    if len(shown_cards()) != 7:
+                        failures.append(f"{name}/{viewport}: all seven entries must be discoverable")
+                    for acronym in ("CR", "RAI"):
+                        query.clear()
+                        query.send_keys(acronym)
+                        if len(shown_cards()) != 1 or acronym not in shown_cards()[0].text:
+                            failures.append(f"{name}/{viewport}: acronym {acronym} should find its engineering project")
+                    role.select_by_value("soc")
+                    if len(shown_cards()) != 0:
+                        failures.append(f"{name}/{viewport}: role and keyword filters must combine")
+                    driver.find_element(By.CSS_SELECTOR, "#project-filters button[type=reset]").click()
+                    query.send_keys("unmatched-portfolio-query")
+                    if shown_cards() or not driver.find_element(By.ID, "filter-empty").is_displayed():
+                        failures.append(f"{name}/{viewport}: missing zero-result feedback")
+                    driver.find_element(By.CSS_SELECTOR, "#project-filters button[type=reset]").click()
+                    if len(shown_cards()) != 7:
+                        failures.append(f"{name}/{viewport}: clear filters failed")
+                    if viewport == "desktop":
+                        try:
+                            driver.execute_cdp_cmd("Emulation.setScriptExecutionDisabled", {"value": True})
+                            driver.get(url)
+                            if len(shown_cards()) != 7 or driver.find_element(By.CSS_SELECTOR,"#project-filters fieldset").is_displayed():
+                                failures.append("explorer/no-js: entries must remain visible and inert controls hidden")
+                        finally:
+                            driver.execute_cdp_cmd("Emulation.setScriptExecutionDisabled", {"value": False})
+                            driver.get(url)
+                            body = driver.find_element(By.TAG_NAME, "body")
+                    body.send_keys(Keys.CONTROL, Keys.HOME)
+                if name == "test-workbench":
+                    driver.find_element(By.ID, "run-checks").click()
+                    if "9 / 9" not in driver.find_element(By.ID,"checks-status").text:
+                        failures.append(f"{name}/{viewport}: real baseline checks did not pass")
+                    window = driver.find_element(By.ID,"auth-window")
+                    for seconds, count in ((599,3),(600,5)):
+                        window.clear()
+                        window.send_keys(str(seconds))
+                        driver.find_element(By.ID,"replay-submit").click()
+                        if len(driver.find_elements(By.CSS_SELECTOR,"#replay-rows tr")) != count:
+                            failures.append(f"{name}/{viewport}: {seconds}s must replay {count} fixture findings")
+                    for sample, expected in (("complete","PASS_COVERAGE"),("omitted","HOLD_INCOMPLETE_COVERAGE"),("mismatch","HOLD_ATTRIBUTION_MISMATCH")):
+                        Select(driver.find_element(By.ID,"coverage-case")).select_by_value(sample)
+                        driver.find_element(By.ID,"coverage-submit").click()
+                        if driver.find_element(By.ID,"coverage-status").text != expected:
+                            failures.append(f"{name}/{viewport}: incorrect structured coverage result for {sample}")
+                    receipt_path = downloads / "Don_Lopez_Public_Engine_Run.json"
+                    receipt_path.unlink(missing_ok=True)
+                    driver.find_element(By.ID,"download-run").click()
+                    WebDriverWait(driver, 5).until(lambda _: receipt_path.is_file())
+                    receipt = json.loads(receipt_path.read_text())
+                    if (len(receipt["baseline"]["checks"]) != 9 or
+                        not all(check["passed"] for check in receipt["baseline"]["checks"]) or
+                        len(receipt["replay"]["findings"]) != 5 or
+                        receipt["coverage"]["result"]["status"] != "HOLD_ATTRIBUTION_MISMATCH" or
+                        len(receipt["sources"]) != 2):
+                        failures.append(f"{name}/{viewport}: downloaded receipt differs from actual completed runs")
+                    body.send_keys(Keys.CONTROL, Keys.HOME)
                 if name == "application-toolkit":
                     role_cards = driver.find_elements(By.CSS_SELECTOR, ".application-role-card")
                     downloads = driver.find_elements(By.CSS_SELECTOR, ".application-role-actions a[download]")
