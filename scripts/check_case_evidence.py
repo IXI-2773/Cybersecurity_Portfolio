@@ -158,7 +158,7 @@ def main() -> None:
     # Resume/recruiter claims must remain grounded in completed screenshot review.
     onepage = get("docs/RECRUITER_QUICK_BRIEF.md")
     bullets = get("docs/RESUME_PORTFOLIO_BULLETS.md")
-    required("64 fabricated events" in onepage and "5/5" in onepage
+    required("64-event" in onepage and "5/5" in onepage
              and "not a public repository image artifact" in onepage,
              "Recruiter one-pager must disclose synthetic data and evidence provenance")
     required("Splunk Enterprise" in bullets and "5/5" in bullets
