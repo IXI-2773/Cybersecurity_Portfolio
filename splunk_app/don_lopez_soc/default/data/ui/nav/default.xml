@@ -1,1 +1,4 @@
-<nav search_view="search"><view name="auth_triage_demo" default="true"/><view name="auth_triage_indexed"/><view name="search"/><view name="reports"/></nav>
+<nav>
+  <view name="auth_triage_demo" default="true"/>
+  <view name="auth_triage_indexed"/>
+</nav>

@@ -15,10 +15,37 @@
 | Saved alert | Disabled `Portfolio SOC Auth Candidate - Indexed (DISABLED)` | Disabled; no automatic action |
 | Installation package | CI build artifact `don-lopez-splunk-soc-app` / generated `.spl` file | Source/build verification only |
 
+## Resolving a Splunk 404 after installation
+
+On October 23, 2026, an operator submitted a Splunk Enterprise **404 Not Found** screenshot after attempting the earlier v1.0.0 package. The screenshot did not show the request URL or app-install status. Thus, it is **not possible to prove the exact root cause** from that image. The following are defensible troubleshooting actions.
+
+The **v1.0.1 repair package** now:
+- removes navigation entries (`search`, `reports`) that had no view definitions in this custom application;
+- marks the bundled `auth_triage_demo` dashboard as the **only default landing view**;
+- adds `metadata/default.meta` granting app-scoped read access to its dashboard and synthetic lookup;
+- checks every navigation entry corresponds to an actual packaged XML view, and increments version/build.
+
+**Direct URL to try first (for local Splunk Enterprise):**
+
+```text
+http://localhost:8000/en-US/app/don_lopez_soc/auth_triage_demo
+```
+
+If the direct link works, the old app menu or cached navigation was likely the problem. If it still shows 404:
+
+1. **Settings → Apps → Manage Apps**: confirm `don_lopez_soc` exists, is enabled, and shows version **1.0.1** after update. If it is absent, the package did not install.
+2. Download the newly generated `don-lopez-splunk-soc-app` artifact from a **successful Actions run containing commit 1.0.1**, extract the `.spl` archive, and install with **Upgrade app** checked **only when updating this same `don_lopez_soc` app**. Never replace an unrelated app.
+3. After install/upgrade, follow Splunk's restart prompt. If Splunk has not refreshed its new views, an authorized administrator can use **Settings → Server controls → Restart Splunk** (this temporarily interrupts the local trial). After it starts, sign in again and hard-refresh the browser. A Splunk documentation example also uses `http://localhost:8000/debug/refresh` to refresh app navigation; use only on your own local instance.
+4. **Settings → User Interface → Views**, choose the Don Lopez app, and verify `auth_triage_demo` and `auth_triage_indexed` exist and have view permissions. Do not create or modify production app roles.
+5. If the view exists but is inaccessible, check **Settings → User Interface → Navigation Menus** in the same app. Its XML must point to `auth_triage_demo` (default) and `auth_triage_indexed`, not missing `search` or `reports`.
+6. If the direct URL still 404s, preserve the **browser address-bar URL** and the selected app/version rather than guessing. Do not share tokens, passwords, or internal logs.
+
+**No dashboard runtime success is claimed.** Source/package checks and static XML tests cannot prove a deployed view loads.
+
 ## Fastest path: deploy the demo dashboard without an index
 
 1. In [GitHub Actions](https://github.com/IXI-2773/Cybersecurity_Portfolio/actions), open a **successful Validate public portfolio** run. Under Artifacts download `don-lopez-splunk-soc-app` and extract its ZIP wrapper.
-2. Find the `don_lopez_soc.spl` file. In Splunk Enterprise as an authorized administrator, open **Apps → Manage Apps → Install app from file**, select the `.spl` archive, and follow any restart instructions. Review the package source first; it contains only CSV, dashboard XML, and a **disabled** saved search. Do not upload secrets.
+2. Find the `don_lopez_soc.spl` file (version **1.0.1**). In Splunk Enterprise as an authorized administrator, open **Apps → Manage Apps → Install app from file**, select the `.spl` archive, and follow any restart instructions. Review the package source first; it contains only CSV, dashboard XML, and a **disabled** saved search. Do not upload secrets.
 3. Open **Don Lopez | SOC Authentication Lab** → **SOC Authentication | Bundled Synthetic Demo**. This reads the app's lookup with `inputlookup`, not indexed events.
 4. Expected: 64 events, nine scenario labels, two counts/charts/tables, and five candidate detections under the inclusive 600-second rule. Take actual Splunk screenshots **only after viewing these results**.
 5. If the dashboard shows a missing lookup warning, verify installation and app context. Do not claim a successful dashboard until observed.

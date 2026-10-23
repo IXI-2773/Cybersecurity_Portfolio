@@ -15,12 +15,13 @@ import tarfile
 ROOT = Path(__file__).resolve().parents[1]
 APP = ROOT / "splunk_app" / "don_lopez_soc"
 DEST_DEFAULT = ROOT / "don_lopez_soc.spl"
-EXTENSIONS = {".xml", ".conf", ".csv"}
+EXTENSIONS = {".xml", ".conf", ".csv", ".meta"}
 EXPECTED = {
     "default/app.conf", "default/data/ui/nav/default.xml",
     "default/data/ui/views/auth_triage_demo.xml",
     "default/data/ui/views/auth_triage_indexed.xml",
     "default/savedsearches.conf", "lookups/portfolio_auth_validation.csv",
+    "metadata/default.meta",
 }
 
 

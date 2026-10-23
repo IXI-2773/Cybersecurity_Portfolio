@@ -86,8 +86,24 @@ def main():
 
     nav = ET.fromstring(read(APP / "default/data/ui/nav/default.xml"))
     names = [x.get("name") for x in nav.findall("view")]
-    require(names[:2] == ["auth_triage_demo", "auth_triage_indexed"],
-            "Navigation must expose synthetic demo and indexed investigations")
+    require(names == ["auth_triage_demo", "auth_triage_indexed"],
+            "Navigation must not reference nonexistent built-in app views")
+    require(nav.find("view").get("default") == "true",
+            "First valid installed dashboard must be the app home")
+    require(not nav.attrib.get("search_view"),
+            "Do not redirect search view to a page unavailable in this custom app")
+    for name in names:
+        require((APP / ("default/data/ui/views/" + name + ".xml")).is_file(),
+                f"App navigation references non-packaged view: {name}")
+    meta_file = read(APP / "metadata/default.meta")
+    require("[views]" in meta_file and "[lookups]" in meta_file
+            and "access = read : [ * ], write : [ admin ]" in meta_file,
+            "Package must include explicit public-safe view/lookup permissions")
+    app_config = configparser.ConfigParser(interpolation=None)
+    app_config.read_string(read(APP / "default/app.conf"))
+    require(app_config["launcher"]["version"] == "1.0.1"
+            and app_config["install"]["build"] == "2",
+            "App version/build must change for updated navigation release")
     for filename in ("07_indexed_auth_detection.spl", "06_lookup_auth_detection.spl"):
         q = read(WORK / "searches" / filename)
         require("age_seconds<=600" in q and "time_window=10m" not in q,
