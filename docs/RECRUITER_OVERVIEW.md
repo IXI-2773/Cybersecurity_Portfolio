@@ -5,6 +5,10 @@
 **Certifications (owner-reported):** CompTIA Security+ and CompTIA CySA+. Public verification and renewal dates pending; see [credentials](CREDENTIALS.md).  
 **Portfolio:** [GitHub repository](https://github.com/IXI-2773/Cybersecurity_Portfolio) · [Live portfolio website](https://ixi-2773.github.io/Cybersecurity_Portfolio/)
 
+## SOC Analyst starting point
+
+[Review the SOC Analyst evidence overview](../projects/soc-analyst-evidence.html) for four source-linked synthetic investigations, or use the [GitHub-rendered evidence guide](SOC_ANALYST_EVIDENCE_GUIDE.md) for a five-minute verification path. Both explicitly distinguish completed local testing from Splunk, Wireshark and production outcomes still pending.
+
 ## Demonstrable projects
 
 | Competency | Evidence | Qualification |

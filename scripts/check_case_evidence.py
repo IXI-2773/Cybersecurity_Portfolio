@@ -50,6 +50,25 @@ def main() -> None:
     required("LAB-WEB-001" in web_html and
              "projects/04-local-vulnerability-assessment/CASE_REPORT.md" in web_html,
              "Web page missing case ID or full rendered evidence link")
+    # Recruiter-facing landing page must expose all four fixture-backed reports
+    # and must not silently omit pending Splunk/Wireshark status.
+    home = get("index.html")
+    landing = get("projects/soc-analyst-evidence.html")
+    for report in (
+        "01-authentication-detection/SOC_CASE_REPORT.md",
+        "02-windows-process-triage/CASE_REPORT.md",
+        "03-network-pcap/CASE_REPORT.md",
+        "04-local-vulnerability-assessment/CASE_REPORT.md",
+    ):
+        required(report in home and report in landing,
+                 f"Recruiter landing evidence link missing: {report}")
+    required('id="soc-evidence"' in home and
+             'href="projects/soc-analyst-evidence.html"' in home,
+             "Homepage missing recruiter pathway")
+    for term in ("Splunk", "Wireshark", "76", "synthetic"):
+        required(term.lower() in landing.lower(),
+                 f"Dedicated recruiter page missing qualification: {term}")
+
     for source in (net_doc, web_doc):
         required("not" in source.lower() and "synthetic" in source.lower(),
                  "Evidence boundary disclosure missing")

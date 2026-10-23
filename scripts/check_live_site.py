@@ -89,7 +89,8 @@ def verify_response(path: str, status: int, content_type: str, body: bytes) -> d
             raise ValueError(f"{path or '/'} missing or duplicated CSS stylesheet")
         if path == "":
             for value in ("projects/celestial-resonance.html",
-                          "projects/vulnerability-remediation.html"):
+                          "projects/vulnerability-remediation.html",
+                          "projects/soc-analyst-evidence.html"):
                 if value not in parser.links:
                     raise ValueError(f"Homepage missing internal project link: {value}")
         return {"path": path or "/", "status": "PASS", "title": title}

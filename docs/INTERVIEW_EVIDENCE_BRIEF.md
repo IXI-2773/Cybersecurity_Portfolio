@@ -3,6 +3,8 @@
 **Audience:** SOC Analyst, junior Security Analyst, Detection Engineering and Security Automation interviewers  
 **Positioning:** B.S. Cybersecurity (2024); CompTIA Security+ and CySA+ **reported by holder**, public verification pending. The four public security labs are **synthetic portfolio exercises**, not paid SOC incident experience.
 
+**Recruiter navigation:** [SOC Analyst evidence index](../projects/soc-analyst-evidence.html) · [GitHub-readable evidence guide](SOC_ANALYST_EVIDENCE_GUIDE.md).
+
 ## 45-second introduction
 
 I built four independently reproducible defensive-security exercises covering authentication correlation, Windows process telemetry, network packet analysis and localhost HTTP hardening. Each includes source, tests, evidence boundaries and a case report. The design focus is to avoid escalating a rule match into a claim of compromise without corroboration. I also document test/regression engineering and authority boundaries from separate private software projects.

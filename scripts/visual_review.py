@@ -18,6 +18,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SCREENSHOTS = ROOT / "visual-review-screenshots"
 PAGES = {
     "home": "index.html",
+    "soc-analyst-evidence": "projects/soc-analyst-evidence.html",
     "celestial-resonance": "projects/celestial-resonance.html",
     "network": "projects/network-traffic-analysis.html",
     "vulnerability": "projects/vulnerability-remediation.html",
@@ -66,6 +67,14 @@ def main() -> None:
                 if dimensions["scrollWidth"] > dimensions["viewport"] + 2:
                     failures.append(f"{name}/{viewport}: document horizontal overflow: {dimensions}")
                 if name == "home":
+                    quick_view = driver.find_element(By.ID, "soc-evidence")
+                    if not quick_view.is_displayed():
+                        failures.append(f"{name}/{viewport}: recruiter section hidden")
+                    if len(quick_view.find_elements(By.CSS_SELECTOR, ".soc-proof-card")) != 4:
+                        failures.append(f"{name}/{viewport}: expected four SOC evidence cards")
+                    main_link = quick_view.find_element(By.CSS_SELECTOR, "a[href='projects/soc-analyst-evidence.html']")
+                    if not main_link.is_displayed():
+                        failures.append(f"{name}/{viewport}: SOC evidence detail link missing")
                     # The last line of the synthetic terminal must not be clipped.
                     status_box = driver.find_element(By.CSS_SELECTOR, ".terminal-result")
                     box_info = driver.execute_script("""
