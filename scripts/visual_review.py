@@ -288,9 +288,16 @@ def main() -> None:
                         # Follow the real recruiter route across pages, not merely its href.
                         path_link = driver.find_element(By.CSS_SELECTOR, '.hiring-route[href="roles.html"]')
                         click_control(path_link)
-                        if (not driver.current_url.endswith("/roles.html") or
-                                len(driver.find_elements(By.CSS_SELECTOR, ".role-route-card")) != 3):
-                            failures.append("home/recruiter: role route does not reach three role choices")
+                        # file:// navigation can complete asynchronously in a busy headless
+                        # runner; inspect the destination after its own DOM has loaded.
+                        try:
+                            WebDriverWait(driver, 5).until(
+                                lambda d: d.current_url.endswith("/roles.html")
+                                and len(d.find_elements(By.CSS_SELECTOR, ".role-route-card")) == 3)
+                        except Exception:
+                            failures.append(
+                                "home/recruiter: expected roles.html and 3 role cards; got "
+                                f"{driver.current_url} with {len(driver.find_elements(By.CSS_SELECTOR, '.role-route-card'))} cards")
                         else:
                             soc = driver.find_element(By.CSS_SELECTOR, '.role-route-card[href="#soc-analyst"]')
                             click_control(soc)
