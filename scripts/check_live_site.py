@@ -25,6 +25,7 @@ EXPECTED_PAGES = {
     "projects/celestial-resonance.html": "Celestial Resonance",
     "projects/research-ai-infrastructure.html": "RAI",
     "projects/soc-analyst-workflow.html": "SOC",
+    "projects/soc-analyst-evidence.html": "SOC Analyst",
 }
 STATIC_ASSETS = ("styles.css", "assets/network/pcap-evidence-overview.svg")
 MAX_BYTES = 1024 * 1024

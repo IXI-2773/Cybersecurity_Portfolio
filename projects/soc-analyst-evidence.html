@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Don Lopez SOC Analyst portfolio: four reproducible synthetic security labs, 76 Python tests, source-backed investigations, and honest runtime verification status.">
+<meta name="theme-color" content="#07131e">
+<link rel="canonical" href="https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/soc-analyst-evidence.html">
+<meta property="og:type" content="website"><meta property="og:url" content="https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/soc-analyst-evidence.html"><meta property="og:site_name" content="Don Lopez Cybersecurity Portfolio"><meta property="og:title" content="SOC Analyst Evidence | Don Lopez"><meta name="twitter:card" content="summary">
+<title>SOC Analyst Evidence | Don Lopez</title><link rel="stylesheet" href="../styles.css"></head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header class="topbar"><div class="container nav"><a class="logo" href="../index.html">DL<span class="dot">.</span> SECURITY</a>
+<nav aria-label="Main navigation"><a href="../index.html#soc-evidence">SOC Evidence</a><a href="../index.html#projects">Projects</a><a href="../index.html#certifications">Credentials</a><a href="../index.html#contact">Contact</a></nav>
+<details class="mobile-nav"><summary aria-label="Open site navigation">Menu</summary><nav aria-label="Mobile navigation"><a href="../index.html#soc-evidence">SOC Evidence</a><a href="../index.html#projects">Projects</a><a href="../index.html#certifications">Credentials</a><a href="../index.html#contact">Contact</a></nav></details></div></header>
+<main id="main" class="container article-main">
+<a class="back" href="../index.html#soc-evidence">← SOC evidence overview</a>
+<div class="eyebrow">SECURITY OPERATIONS / RECRUITER REVIEW</div>
+<h1 class="article-title">SOC Analyst — evidence-first portfolio</h1>
+<p class="article-deck">Four reproducible, synthetic defensive-security exercises with testable rule behavior, documented uncertainty, and source-linked analyst decisions. Designed for a quick technical review, not as a claim of production SOC experience.</p>
+<div class="pill-group"><span class="pill">B.S. Cybersecurity · 2024</span><span class="pill">Security+ and CySA+ · owner-reported</span><span class="pill">76 Python unit tests</span><span class="pill">Synthetic labs</span></div>
+<section class="analyst-review-section" aria-labelledby="analyst-path-heading">
+<div class="analyst-section-head"><div><p class="eyebrow">THE 5-MINUTE REVIEW</p><h2 id="analyst-path-heading">Start with a finding, then inspect the evidence.</h2></div><p>Each exercise links directly to the observed fixture, the analyst report and automated checks. A passing lab test confirms the stated synthetic condition—not malicious activity.</p></div>
+<div class="analyst-evidence-grid">
+<article class="analyst-evidence-card">
+<div class="analyst-card-meta"><span>01 / IDENTITY</span><span>31 tests</span></div>
+<h3>Authentication: failures followed by success</h3>
+<p>Six fabricated failures, then a success for the same account and source IP. The correlation rule produces a review signal and resets after every successful login.</p>
+<p class="analyst-outcome"><strong>Disposition:</strong> investigate MFA and session context; compromise unconfirmed.</p>
+<div class="analyst-link-row"><a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/projects/01-authentication-detection/SOC_CASE_REPORT.md">Case report ↗</a><a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/projects/01-authentication-detection/test_detect_auth.py">Tests ↗</a><a href="authentication-detection.html">Case-study page →</a></div></article>
+<article class="analyst-evidence-card">
+<div class="analyst-card-meta"><span>02 / ENDPOINT</span><span>11 tests</span></div>
+<h3>Windows 4688: process creation triage</h3>
+<p>Two fabricated command-line candidates—encoded PowerShell and certutil URL-cache arguments—are checked against three nonmatching controls.</p>
+<p class="analyst-outcome"><strong>Disposition:</strong> verify process lineage and telemetry; no executed malware or download established.</p>
+<div class="analyst-link-row"><a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/projects/02-windows-process-triage/CASE_REPORT.md">Case report ↗</a><a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/projects/02-windows-process-triage/test_process_triage.py">Tests ↗</a><a href="windows-process-triage.html">Case-study page →</a></div></article>
+<article class="analyst-evidence-card">
+<div class="analyst-card-meta"><span>03 / NETWORK</span><span>18 tests</span></div>
+<h3>DNS and HTTP: packet-level review</h3>
+<p>Twenty generated PCAP frames yield four matched NXDOMAIN responses and an HTTP POST to a reserved test hostname, alongside benign comparison traffic.</p>
+<p class="analyst-outcome"><strong>Disposition:</strong> correlate resolver, endpoint and proxy logs; no C2 or exfiltration confirmed.</p>
+<div class="analyst-link-row"><a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/projects/03-network-pcap/CASE_REPORT.md">Case report ↗</a><a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/projects/03-network-pcap/test_network_lab.py">Tests ↗</a><a href="network-traffic-analysis.html">Case-study page →</a></div></article>
+<article class="analyst-evidence-card">
+<div class="analyst-card-meta"><span>04 / HARDENING</span><span>16 tests</span></div>
+<h3>HTTP response controls: before and after</h3>
+<p>Four deliberate response-control omissions in a localhost-only fixture no longer match the same checks after remediation.</p>
+<p class="analyst-outcome"><strong>Disposition:</strong> rule checks resolved on the toy fixture; no HTTPS or browser security sign-off.</p>
+<div class="analyst-link-row"><a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/projects/04-local-vulnerability-assessment/CASE_REPORT.md">Case report ↗</a><a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/projects/04-local-vulnerability-assessment/test_vulnerability_lab.py">Tests ↗</a><a href="vulnerability-remediation.html">Case-study page →</a></div></article>
+</div></section>
+<section class="analyst-review-section" aria-labelledby="verification-heading">
+<div class="analyst-section-head"><div><p class="eyebrow">EVIDENCE STATUS / CLAIM BOUNDARIES</p><h2 id="verification-heading">What has—and has not—been validated.</h2></div></div>
+<div class="analyst-verification-grid">
+<div class="analyst-verification-panel"><h3>Reproduced in the repository</h3><ul><li>Four independently runnable synthetic security labs</li><li>76 focused Python unit tests across those labs</li><li>Expected outputs, negative cases, and source-attributed reports</li><li>CI validation plus browser and website availability checks</li></ul></div>
+<div class="analyst-verification-panel"><h3>Still pending direct validation</h3><ul><li><strong>Splunk:</strong> draft SPL and qualification runbook, no on-platform execution results</li><li><strong>Wireshark:</strong> generated PCAP and Python analysis, no genuine GUI screenshots</li><li><strong>Production:</strong> no live incident response, deployed SIEM/EDR detection metrics, or real website scan</li><li><strong>Credentials:</strong> Security+ and CySA+ reported by holder; public verification links not supplied</li></ul></div>
+</div></section>
+<section class="analyst-review-section" aria-labelledby="review-workflow-heading">
+<div class="analyst-section-head"><div><p class="eyebrow">HOW I INVESTIGATE</p><h2 id="review-workflow-heading">A detector match is a lead, not a verdict.</h2></div></div>
+<p class="section-description">Validate source/time and predicate → scope affected assets → seek independent corroboration → challenge with benign explanations → document provisional severity and uncertainty → hand off only authorized actions.</p>
+<div class="analyst-resources">
+<a href="soc-analyst-workflow.html">Read analyst workflow →</a>
+<a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/docs/SOC_TRIAGE_PLAYBOOK.md">SOC triage playbook ↗</a>
+<a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/docs/INTERVIEW_EVIDENCE_BRIEF.md">Interview evidence brief ↗</a>
+<a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/docs/RECRUITER_OVERVIEW.md">Recruiter overview ↗</a>
+</div></section>
+<p class="visual-disclaimer">All exercises use fabricated inputs or localhost-only toy fixtures. ATT&amp;CK mappings describe investigative hypotheses. No real intrusion, security product deployment or external security testing is claimed.</p>
+</main><footer><div class="container footer-inner"><span>© 2026 Don Lopez · Reproducible synthetic evidence</span><a href="../index.html">Portfolio home</a></div></footer></body></html>
