@@ -11,12 +11,26 @@ This guide accompanies the public [application toolkit](https://ixi-2773.github.
 
 **Source anchors:** [Genuine cropped Splunk screenshot](../assets/evidence/splunk-native-dashboard-results.png) · [Auth case](../projects/authentication-detection.html) · [Process case](../projects/windows-process-triage.html) · [Network case](../projects/network-traffic-analysis.html) · [Web remediation case](../projects/vulnerability-remediation.html).
 
+## Current readiness record
+
+| Application element | Status | Public handling |
+| --- | --- | --- |
+| Portfolio and case studies | **Ready** | Public GitHub website, source, genuine cropped Splunk screenshot and four synthetic security labs |
+| Two role-specific résumé drafts | **Ready to tailor** | Public text files contain no invented employer or direct contact details |
+| Professional profile | **Public** | [GitHub profile](https://github.com/IXI-2773); not represented as a guaranteed direct messaging channel |
+| Direct email or phone | **Not approved for public site** | Keep off GitHub; use a privately edited application copy |
+| Employment chronology | **Unverified for publication** | No supported employer names, positions and dates available; do not present project labs as employment |
+| Security+ / CySA+ | **Holder-reported** | Public badge URLs, issue and expiration dates not supplied; [issuer-backed sharing guidance](CREDENTIALS.md) |
+| Production SOC experience | **Not established** | No invented employment, real incident investigation or live SIEM deployments |
+
+[See publication gates](PUBLICATION_GATES.md) for a short controlled release record. The public GitHub profile is suitable as an evidence reference but should not be treated as a direct substitute for a preferred email or phone on a privately submitted résumé.
+
 ## Five-minute tailoring workflow
 
 1. Read the job posting and highlight no more than five **required** capabilities; check each against code or a genuinely completed task. Do not add a tool you have merely heard of or a credential not held.
 2. Choose the nearest résumé track and keep the text-only section headings **Professional Summary**, **Technical Skills**, **Selected Cybersecurity Projects**, **Education**, **Certifications**. Add actual employment history yourself when appropriate; never invent it.
 3. Reorder two or three project bullets to match the posting. For a SOC job, foreground Splunk, Windows Event 4688 and investigative judgement; for a security analyst role, foreground HTTP response controls, repeatable remediation checks and network evidence.
-4. Add your own professional contact information and, only if you want it published, issuer-verifiable certificate links. Neither was supplied to the project and none has been fabricated.
+4. Add a direct contact method to the **private application copy** you submit. Prior application details were not approved for republication in a public repository, so none were included. A credential verification URL should only be added publicly after reviewing its visibility settings and displayed issued-to name.
 5. Paste the plain text into your preferred résumé editor; proofread dates, links, line wrapping and final PDF before submitting. A text copy is provided for ease of ATS parsing, **not a guarantee of ATS performance or hiring success**.
 
 ## Interview verification map

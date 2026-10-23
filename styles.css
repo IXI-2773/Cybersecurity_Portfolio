@@ -337,3 +337,14 @@ section[id]{scroll-margin-top:100px}
 @media(max-width:500px){.application-stats{grid-template-columns:1fr;gap:9px;margin:23px 0}.application-stats>div{display:flex;gap:14px;align-items:center;padding:12px 15px}.application-stats strong{font-size:1.4rem;min-width:40px}.application-role-card{padding:18px}.application-role-actions .button{width:100%;text-align:center}.application-page{padding-top:22px}}
 
 .application-recruiter-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}@media(max-width:500px){.application-recruiter-actions{width:100%}.application-recruiter-actions .button{flex:1;text-align:center}}
+
+
+/* Transparent but concise public/private submission readiness workflow. */
+.application-finalize{scroll-margin-top:88px}
+.application-finalize-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:22px}
+.application-finalize-grid article{border:1px solid #345967;border-radius:13px;background:#102938;padding:19px;min-width:0}
+.application-finalize-kicker{color:#8dd6ca;display:block;font-size:.7rem;line-height:1.4;font-weight:750;letter-spacing:.06em}
+.application-finalize-grid h3{font-size:1.04rem;margin:9px 0}
+.application-finalize-grid p{font-size:.83rem;color:#bfd2dd;line-height:1.68;margin:0}
+.application-finalize-grid a{color:#97e9d6;text-underline-offset:3px}
+@media(max-width:800px){.application-finalize-grid{grid-template-columns:1fr}}

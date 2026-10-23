@@ -2,7 +2,7 @@
 
 **Career focus:** SOC Analyst · Cybersecurity Analyst · Junior Detection Engineering  
 **Education:** B.S. Cybersecurity, December 2024  
-**Certifications:** CompTIA Security+ and CySA+ (owner-reported; public badges/validity dates not independently available)
+**Certifications:** CompTIA Security+ and CySA+ (owner-reported; public badges/validity dates not independently available). [Verification scope](CREDENTIALS.md)
 
 [**Two résumé versions and application toolkit**](https://ixi-2773.github.io/Cybersecurity_Portfolio/apply.html) · [**Printable recruiter profile**](https://ixi-2773.github.io/Cybersecurity_Portfolio/recruiter.html) · [**Live portfolio**](https://ixi-2773.github.io/Cybersecurity_Portfolio/) · [**Featured Splunk investigation**](https://ixi-2773.github.io/Cybersecurity_Portfolio/#featured-splunk) · [**GitHub source**](https://github.com/IXI-2773/Cybersecurity_Portfolio)
 

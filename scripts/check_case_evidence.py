@@ -218,6 +218,30 @@ def main() -> None:
              and "not a guarantee" in application_doc
              and "not established" in application_doc,
              "Application guide must give accurate contact/employment and ATS limitations")
+    # Public release gates: do not automatically publish prior application contact
+    # details or claim employer histories/verified issuer badges without evidence.
+    gates = get("docs/PUBLICATION_GATES.md")
+    cred = get("docs/CREDENTIALS.md")
+    required("NOT PUBLISHED" in gates and "NOT INVENTED" in gates
+             and "explicit public-use approval not established" in gates,
+             "Public contact/credential publication gates are missing")
+    required("issued-to name" in cred and "Holder" not in cred[:100],
+             "Credential disclosure or legal-name visibility guidance missing")
+    required('id="application-status"' in application
+             and "NOT APPROVED" not in application
+             and "GitHub profile" in application,
+             "Application page missing professional public/private contact pathway")
+    for role_path in ("resumes/Don_Lopez_SOC_Analyst.txt",
+                      "resumes/Don_Lopez_Security_Analyst.txt"):
+        role = get(role_path)
+        required("Public professional profile: https://github.com/IXI-2773" in role
+                 and "Professional contact:" not in role,
+                 "GitHub profile must not be falsely labeled a direct-contact inbox")
+    # Guard only current public submission entry points, avoiding fixture data.
+    for public_page in ("index.html", "recruiter.html", "apply.html"):
+        page = get(public_page)
+        required("mailto:" not in page and "tel:" not in page,
+                 "Public direct contact needs an explicitly approved release")
     # Recruiter-facing landing page must expose all four fixture-backed reports
     # and must not silently omit pending Splunk/Wireshark status.
     home = get("index.html")

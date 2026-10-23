@@ -2,7 +2,7 @@ DON LOPEZ
 CYBERSECURITY ANALYST | SECURITY ANALYST
 Portfolio: https://ixi-2773.github.io/Cybersecurity_Portfolio/
 GitHub: https://github.com/IXI-2773/Cybersecurity_Portfolio
-Professional contact: https://github.com/IXI-2773
+Public professional profile: https://github.com/IXI-2773
 
 PROFESSIONAL SUMMARY
 Cybersecurity graduate with CompTIA Security+ and CySA+ (holder-reported). Creates reproducible security-analysis and remediation exercises spanning authentication detections, Windows process telemetry, network traffic, and web response hardening. Combines Python automation with negative testing, bounded conclusions, and analyst evidence documentation.

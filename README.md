@@ -25,6 +25,10 @@ Automated deployment health checks are defined in [`check-live-pages.yml`](.gith
 
 Public badge URLs, exam versions, dates and renewal status have not been supplied. See the [credential record](docs/CREDENTIALS.md) for claim limits.
 
+## Public profile and verification policy
+
+The [publication readiness record](docs/PUBLICATION_GATES.md) distinguishes public portfolio links and user-reported credentials from private job-application contact details, unverified employment chronology, and issuer-backed badge URLs. No personal email or phone from earlier applications is automatically republished.
+
 ## Role-targeted job application materials
 
 [Open the application toolkit](https://ixi-2773.github.io/Cybersecurity_Portfolio/apply.html) to download **two ATS-oriented plain-text résumé drafts** and review interviewer evidence prompts. The SOC Analyst and Security Analyst versions contain only owner-reported credentials and source-backed lab work, with no invented contact details, professional employment or production incidents. [Tailoring checklist](docs/APPLICATION_READINESS.md).

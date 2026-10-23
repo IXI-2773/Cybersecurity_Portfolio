@@ -2,7 +2,7 @@ DON LOPEZ
 SOC ANALYST | CYBERSECURITY ANALYST
 Portfolio: https://ixi-2773.github.io/Cybersecurity_Portfolio/
 GitHub: https://github.com/IXI-2773/Cybersecurity_Portfolio
-Professional contact: https://github.com/IXI-2773
+Public professional profile: https://github.com/IXI-2773
 
 PROFESSIONAL SUMMARY
 Cybersecurity graduate with CompTIA Security+ and CySA+ (holder-reported). Demonstrated Splunk Enterprise authentication searches and a saved results dashboard using controlled lab data. Develops Python-based detection exercises and source-attributed analyst reports with clear limits, negative tests, and evidence-based triage recommendations.
