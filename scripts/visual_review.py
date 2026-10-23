@@ -385,6 +385,21 @@ def main() -> None:
                         failures.append(f"{name}/{viewport}: recruiter section hidden")
                     if len(quick_view.find_elements(By.CSS_SELECTOR, ".soc-proof-card")) != 4:
                         failures.append(f"{name}/{viewport}: expected four SOC evidence cards")
+                    if driver.execute_script(
+                            "return arguments[0].compareDocumentPosition(arguments[1]) & Node.DOCUMENT_POSITION_FOLLOWING",
+                            quick_view, driver.find_element(By.ID, "boundary-replay")) == 0:
+                        failures.append(f"{name}/{viewport}: long replay interrupts project discovery")
+                    for card in quick_view.find_elements(By.CSS_SELECTOR, ".work-card"):
+                        proof = card.find_element(By.CSS_SELECTOR, "dl.work-proofline")
+                        descriptions = proof.find_elements(By.TAG_NAME, "dd")
+                        if len(descriptions) != 2 or any(not item.is_displayed() for item in descriptions):
+                            failures.append(f"{name}/{viewport}: project result or evidence scope hidden")
+                        for item in descriptions:
+                            if float(item.value_of_css_property("font-size").removesuffix("px")) < 14:
+                                failures.append(f"{name}/{viewport}: project evidence text below 14px")
+                        for action in card.find_elements(By.CSS_SELECTOR, ".work-footer > a"):
+                            if action.rect["height"] < 44:
+                                failures.append(f"{name}/{viewport}: project source action below 44px")
                     main_link = quick_view.find_element(By.CSS_SELECTOR, "a[href='projects/soc-analyst-evidence.html']")
                     if not main_link.is_displayed():
                         failures.append(f"{name}/{viewport}: SOC evidence detail link missing")
@@ -466,6 +481,11 @@ def main() -> None:
                 driver.execute_script("window.scrollTo({top:0,left:0,behavior:'instant'})")
                 out = SCREENSHOTS / f"{name}-{viewport}.png"
                 driver.save_screenshot(str(out))
+                if name == "home" and viewport in {"desktop", "mobile", "small-mobile"}:
+                    gallery = driver.find_element(By.CSS_SELECTOR, ".work-grid")
+                    # Separate gallery capture makes evidence hierarchy reviewable
+                    # without scaling down the entire long homepage.
+                    gallery.screenshot(str(SCREENSHOTS / f"home-project-evidence-{viewport}.png"))
                 if viewport == "desktop" and name in {
                         "home", "explorer", "test-workbench", "evidence-review",
                         "recruiter-profile", "role-paths", "soc-resume", "security-resume", "authentication",

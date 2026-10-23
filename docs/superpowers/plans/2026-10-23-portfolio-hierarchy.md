@@ -25,7 +25,7 @@ synthetic evidence, and printable résumé regressions are covered by existing
   selector functions conservatively. Remove earlier declarations superseded by
   the same selector/property/importance/condition. Preserve surviving order.
 - [x] Run existing source/link/accessibility/evidence checks; commit CSS cleanup.
-- [ ] Edit `index.html` and existing component CSS: remove repeated proof band,
+- [x] Edit `index.html` and existing component CSS: remove repeated proof band,
   move replay after gallery, improve card result/evidence hierarchy and actions.
 - [ ] Run focused checks and offline packaging; update the existing PR branch.
 - [ ] Run existing Chrome CI, inspect screenshots and print artifacts, and review
