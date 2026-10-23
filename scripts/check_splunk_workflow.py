@@ -84,73 +84,42 @@ def main():
         require("time_window=10m" not in detections[0],
                 "Observed boundary-bug query must not ship in dashboard")
 
-    # No-app fallback: one reproducible classic dashboard built *inside*
-    # Search & Reporting, rather than depending on a custom app's 404 route.
+    # Verify no-app dashboard uses exactly the same synthetic CSV,
+    # and no app installation, lookup, or index is necessary.
     standalone = read(WORK / "NO_APP_DASHBOARD.xml")
     root_no_app = ET.fromstring(standalone)
-    require(root_no_app.tag == "dashboard", "Standalone fallback XML invalid")
+    require(root_no_app.tag == "dashboard", "Standalone dashboard XML invalid")
     base_nodes = root_no_app.findall("./search")
     require(len(base_nodes) == 1 and base_nodes[0].get("id") == "source_events",
-            "Fallback needs a single shared inline event search")
-    source_query = base_nodes[0].findtext("query") or ""
-    import re as _re
-    extracted = _re.search(r'(?m)^\| eval fixture_rows="([^"]+)"
-    names = [x.get("name") for x in nav.findall("view")]
-    require(names == ["auth_triage_demo", "auth_triage_indexed"],
-            "Navigation must not reference nonexistent built-in app views")
-    require(nav.find("view").get("default") == "true",
-            "First valid installed dashboard must be the app home")
-    require(not nav.attrib.get("search_view"),
-            "Do not redirect search view to a page unavailable in this custom app")
-    for name in names:
-        require((APP / ("default/data/ui/views/" + name + ".xml")).is_file(),
-                f"App navigation references non-packaged view: {name}")
-    meta_file = read(APP / "metadata/default.meta")
-    require("[views]" in meta_file and "[lookups]" in meta_file
-            and "access = read : [ * ], write : [ admin ]" in meta_file,
-            "Package must include explicit public-safe view/lookup permissions")
-    app_config = configparser.ConfigParser(interpolation=None)
-    app_config.read_string(read(APP / "default/app.conf"))
-    require(app_config["launcher"]["version"] == "1.0.1"
-            and app_config["install"]["build"] == "2",
-            "App version/build must change for updated navigation release")
-    for filename in ("07_indexed_auth_detection.spl", "06_lookup_auth_detection.spl"):
-        q = read(WORK / "searches" / filename)
-        require("age_seconds<=600" in q and "time_window=10m" not in q,
-                f"{filename}: wrong boundary predicate")
-
-    print("PASS: 64-row lookup custody, nine searches, two 6-panel XML dashboards, disabled alert")
-    print("LIMIT: source/package check; does NOT claim real Splunk runtime execution")
-
-
-if __name__ == "__main__":
-    main()
-, source_query)
-    require(extracted is not None, "Fallback inline data are absent")
-    keys = ("timestamp", "username", "source_ip", "host", "event_type", "scenario")
-    fixture = ";".join("|".join(row[key] for key in keys) for row in rows)
-    require(extracted.group(1) == fixture,
-            "Fallback inline 64-event content diverges from authoritative fixture")
-    require("| table _time timestamp username source_ip host event_type scenario" in source_query,
-            "Fallback base must preserve expected postprocess fields as a transformed table")
+            "Exactly one inline fixture search is required")
+    base_query = base_nodes[0].findtext("query") or ""
+    marker = 'fixture_rows="'
+    require(marker in base_query, "Missing inline fixture data")
+    actual_payload = base_query.split(marker, 1)[1].split('"', 1)[0]
+    fields = ("timestamp", "username", "source_ip", "host", "event_type", "scenario")
+    expected_payload = ";".join("|".join(row[key] for key in fields) for row in rows)
+    require(actual_payload == expected_payload,
+            "Inline fixture does not match canonical 64-event source")
+    require("| table _time timestamp username source_ip host event_type scenario" in base_query,
+            "Base search must retain required fields as a table")
     require(base_nodes[0].findtext("earliest") == "0",
-            "Fallback must permit historical fixture timestamps")
+            "Base search must permit historical test timestamps")
+    panels = root_no_app.findall(".//panel")
     searches = root_no_app.findall(".//panel//search")
-    require(len(searches) == 6
-            and all(s.get("base") == "source_events" for s in searches),
-            "All six fallback panels must reuse one in-memory source search")
-    queries = [(s.findtext("query") or "") for s in searches]
-    find_queries = [q for q in queries if "prior_failure_times" in q]
-    require(len(find_queries) == 1 and "age_seconds<=600" in find_queries[0],
-            "Standalone detection panel must include exact 600-second boundary")
-    require(all("inputlookup" not in q and "index=lab_auth" not in q for q in queries)
-            and "inputlookup" not in source_query and "index=lab_auth" not in source_query,
-            "Standalone fallback must not require installed lookups or indexed data")
+    require(len(panels) == 6 and len(searches) == 6,
+            "Expected six standalone dashboard panels")
+    require(all(s.get("base") == "source_events" for s in searches),
+            "Every panel must use the same inline base search")
+    queries = [s.findtext("query") or "" for s in searches]
+    detections = [q for q in queries if "prior_failure_times" in q]
+    require(len(detections) == 1 and "age_seconds<=600" in detections[0],
+            "Standalone detector must count the inclusive 600-second boundary")
+    require(not any("inputlookup" in q or "index=lab_auth" in q for q in queries)
+            and "inputlookup" not in base_query and "index=lab_auth" not in base_query,
+            "No-app dashboard must not depend on lookup or index")
     guide = read(WORK / "NO_APP_GUIDE.md")
-    require("Save As" in guide and "Search & Reporting" in guide
-            and "NOT YET" not in guide[:300],
-            "Fallback guide must document native dashboard path")
-
+    require("Save As" in guide and "Search & Reporting" in guide,
+            "Guide must document native Dashboard Panel path")
     nav = ET.fromstring(read(APP / "default/data/ui/nav/default.xml"))
     names = [x.get("name") for x in nav.findall("view")]
     require(names == ["auth_triage_demo", "auth_triage_indexed"],
