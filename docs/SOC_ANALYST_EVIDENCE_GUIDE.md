@@ -27,6 +27,10 @@
 
 **Interpretation:** A rule match leads to corroboration and a documented decision; it does not authorize containment or prove compromise. All published case studies preserve this distinction.
 
+## Splunk development package — prepared, not deployed
+
+[Inspect the complete Splunk app kit](../splunk_workflow/README.md). It packages a synthetic lookup-backed SOC dashboard, an indexed-data dashboard, nine SPL searches and a disabled alert definition. Source and package validation is automated. **These new components have not yet been installed or validated in the actual Splunk Enterprise user interface.**
+
 ## Further reading
 
 - [Recruiter overview](RECRUITER_OVERVIEW.md)

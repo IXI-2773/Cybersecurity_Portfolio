@@ -25,6 +25,12 @@ Automated deployment health checks are defined in [`check-live-pages.yml`](.gith
 
 Public badge URLs, exam versions, dates and renewal status have not been supplied. See the [credential record](docs/CREDENTIALS.md) for claim limits.
 
+## New: installable Splunk SOC authentication lab
+
+The [Splunk workflow kit](splunk_workflow/README.md) now includes **two Six-panel Simple XML dashboards**, a matching 64-row CSV lookup, nine investigative SPL searches, and one **disabled** saved alert. The [CI-generated `.spl` application archive](https://github.com/IXI-2773/Cybersecurity_Portfolio/actions) is available as the `don-lopez-splunk-soc-app` artifact in successful workflow runs.
+
+The lookup-based dashboard can be inspected without creating an index. The indexed dashboard, true CSV ingestion, and alert firing still require your own authorized Splunk execution and are **not claimed as completed**. See [ingestion](splunk_workflow/INGESTION.md), [alerting](splunk_workflow/ALERTING.md), and [runtime status](splunk_workflow/VALIDATION_CHECKLIST.md).
+
 ## Start here
 - [SOC Analyst evidence overview](https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/soc-analyst-evidence.html) — dedicated recruiter-ready index of four synthetic labs, each with a source-linked report and test references.
 - [GitHub-readable SOC Analyst evidence guide](docs/SOC_ANALYST_EVIDENCE_GUIDE.md) — brief verified-versus-pending qualifications.

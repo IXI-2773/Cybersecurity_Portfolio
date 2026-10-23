@@ -9,6 +9,10 @@
 
 [Review the SOC Analyst evidence overview](https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/soc-analyst-evidence.html) for four source-linked synthetic investigations, or use the [GitHub-rendered evidence guide](SOC_ANALYST_EVIDENCE_GUIDE.md) for a five-minute verification path. Both explicitly distinguish completed local testing from Splunk, Wireshark and production outcomes still pending.
 
+## Prepared Splunk workflow (not executed in trial)
+
+The [installable Splunk source kit](../splunk_workflow/README.md) adds a bundled lookup dashboard, an indexed-data dashboard, nine analyst SPL searches and a default-disabled alert definition. CI checks the app package and CSV-source integrity. **Actual in-product dashboard rendering, indexed ingestion and alert firing have not been verified** and are not portfolio accomplishments yet. These are separate from the screenshot-reviewed seven-event and 64-event in-memory detections.
+
 ## Demonstrable projects
 
 | Competency | Evidence | Qualification |

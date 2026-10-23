@@ -23,6 +23,7 @@ The test suite covers positive fixture, negative threshold, expired window, per-
 ## SOC investigation expansion — v2.1
 
 - [Simulated incident report](SOC_CASE_REPORT.md): observable timeline, hypothesis, gaps and explicitly synthetic disposition.
+- [Installable SOC dashboard, indexing and disabled alert package](../../splunk_workflow/README.md) — fully prepared in GitHub; runtime verification of the new components pending.
 - [Splunk ingestion and comparison runbook](SPLUNK_RUNBOOK.md): required on-platform steps and artifact capture checklist.
 - [Independent scenario fixture](validation_events.csv) and [expected findings](expected_findings.json): nine constructed scenario families, **five expected findings**.
 - [Offline and optional CSV comparison tool](validate_matrix.py): `python projects/01-authentication-detection/validate_matrix.py`. This verifies Python behavior; it **does not** validate the Splunk runtime without a genuine Splunk export.

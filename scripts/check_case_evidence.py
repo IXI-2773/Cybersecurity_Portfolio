@@ -99,6 +99,12 @@ def main() -> None:
              "Stage B2 report must retain matching output and evidence limitations")
     for user in ("user_threshold", "user_reset", "user_boundary", "user_alpha", "user_beta"):
         required(user in reviewed, "Stage B2 observation missing expected account: " + user)
+    # The new SOC integration package must stay visibly marked as pending real
+    # dashboard and alert execution; source verification is not runtime proof.
+    pack = get("splunk_workflow/README.md")
+    require("PREPARED" in pack and "NOT YET VERIFIED" in pack
+             and "disabled" in pack.lower() and "64" in pack,
+             "Splunk app must retain synthetic/demo vs runtime evidence boundary")
     # Recruiter-facing landing page must expose all four fixture-backed reports
     # and must not silently omit pending Splunk/Wireshark status.
     home = get("index.html")
