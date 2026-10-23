@@ -1152,3 +1152,18 @@ section[id]{scroll-margin-top:100px}
 .replay-preset-bar>span{flex-basis:100%}.replay-preset-bar button{flex:1;font-size:.67rem;min-width:0}
 .verification-jump{grid-template-columns:1fr;gap:8px}.verification-jump>a{padding:12px}.verification-page .verification-card:hover,.explorer-page .explore-card:hover{transform:none}}
 @media(prefers-reduced-motion:reduce){.toolkit-pipeline a,.explorer-role-pills button,.explorer-page .explore-card,.replay-preset-bar button,.verification-jump>a,.verification-page .verification-card{transition:none}}
+
+/* Legible one-page recruiter printout, assessed against a real Chrome US-letter PDF. */
+@media print{
+ .recruiter-sheet-head .recruiter-intro{font-size:9pt;line-height:1.38}
+ .recruiter-links{font-size:8.25pt}
+ .recruiter-credential-row span{font-size:8.4pt}
+ .recruiter-credential-row small{font-size:7pt}
+ .recruiter-detail{font-size:9pt;line-height:1.44}
+ .recruiter-evidence-links{font-size:8pt;line-height:1.45}
+ .recruiter-project-grid h3,.recruiter-skill-columns h3{font-size:8.9pt}
+ .recruiter-project-grid p,.recruiter-skill-columns p{font-size:8.4pt;line-height:1.4}
+ .recruiter-qualification{font-size:7.85pt;line-height:1.43}
+ .recruiter-block{padding:9pt 0 6pt;break-inside:avoid}
+ .recruiter-section-title h2{font-size:12pt}
+}

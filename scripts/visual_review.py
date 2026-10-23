@@ -7,11 +7,10 @@ from __future__ import annotations
 
 import base64
 import json
-import re
-import subprocess
 from pathlib import Path
 import shutil
 
+from pypdf import PdfReader
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
@@ -418,16 +417,25 @@ def main() -> None:
                             "printBackground": True, "displayHeaderFooter": False,
                             "preferCSSPageSize": True})
                         pdf_path.write_bytes(base64.b64decode(pdf["data"]))
-                        info = subprocess.run(
-                            ["pdfinfo", str(pdf_path)], capture_output=True,
-                            text=True, check=True, timeout=10)
-                        match = re.search(r"^Pages:\\s+(\\d+)", info.stdout, re.M)
-                        pages = int(match.group(1)) if match else None
-                        print_review = {"status": "PASS" if pages == 1 else "FAIL",
+                        reader = PdfReader(str(pdf_path))
+                        pages = len(reader.pages)
+                        printed_text = "\n".join(page.extract_text() or "" for page in reader.pages)
+                        required_text = ("Don Lopez", "Featured: Splunk authentication",
+                                         "Additional security investigations",
+                                         "Technical evidence & approach", "Evidence scope:")
+                        missing_text = [item for item in required_text if item not in printed_text]
+                        media_box = reader.pages[0].mediabox if pages else None
+                        letter = bool(media_box and abs(float(media_box.width) - 612) < 1
+                                      and abs(float(media_box.height) - 792) < 1)
+                        if missing_text or not letter:
+                            failures.append(
+                                "recruiter/print: content or paper-size regression "
+                                f"(missing={missing_text}, letter={letter})")
+                        print_review = {"status": "PASS" if pages == 1 and not missing_text and letter else "FAIL",
                                         "pages": pages, "filename": "recruiter-print.pdf"}
                         if pages != 1:
                             failures.append(f"recruiter/print: expected one US-letter page, got {pages}")
-                    except (OSError, ValueError, subprocess.SubprocessError, KeyError) as error:
+                    except (OSError, ValueError, KeyError) as error:
                         print_review = {"status": "FAIL", "pages": None,
                                         "reason": type(error).__name__}
                         failures.append("recruiter/print: could not inspect generated PDF")

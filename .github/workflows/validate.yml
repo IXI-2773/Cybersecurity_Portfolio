@@ -61,6 +61,8 @@ jobs:
           retention-days: 30
       - name: Validate genuine Splunk screenshot PNG integrity
         run: python scripts/verify_splunk_screenshot.py
+      - name: Test deployment-response checker offline
+        run: python scripts/check_live_site.py --self-test
       - name: Check local HTML links
         run: python scripts/check_links.py
       - name: Build downloadable offline website preview
