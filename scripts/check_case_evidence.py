@@ -125,8 +125,10 @@ def main() -> None:
                        ("data-expected-findings", 5)):
         required(f'{key}="{value}"' in visual,
                  "Simulated overview diverges from canonical fixture: " + key)
-    required("SIMULATED — NOT CAPTURED FROM SPLUNK" in visual
-             and "NOT A TRIGGERED SPLUNK ALERT" in visual
+    required("Practice dataset" in visual
+             and "Training example" in visual
+             and "not exported from Splunk" in visual
+             and "not an actual triggered Splunk alert" in visual
              and "splunk_workflow/NATIVE_DASHBOARD_RESULT_2026-10-23.md" in visual,
              "Visual preview must keep synthetic/real evidence boundaries explicit")
     for row in __import__("json").loads(get(
