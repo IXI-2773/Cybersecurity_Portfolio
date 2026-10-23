@@ -20,11 +20,11 @@ ALLOWED = {
     "projects": {".html", ".md", ".py", ".json", ".csv", ".spl"},
 }
 ROOT_FILES = {
-    "index.html", "apply.html", "recruiter.html", "explore.html", "test-lab.html", "styles.css", "README.md", "SECURITY.md",
+    "index.html", "apply.html", "recruiter.html", "explore.html", "test-lab.html", "verify.html", "styles.css", "README.md", "SECURITY.md",
     "PUBLICATION_CHECKLIST.md",
 }
 REQUIRED_SITE_FILES = {
-    "index.html", "apply.html", "recruiter.html", "explore.html", "test-lab.html", "styles.css",
+    "index.html", "apply.html", "recruiter.html", "explore.html", "test-lab.html", "verify.html", "styles.css",
     "resumes/Don_Lopez_SOC_Analyst.txt",
     "resumes/Don_Lopez_Security_Analyst.txt",
     "assets/evidence/splunk-native-dashboard-results.png",

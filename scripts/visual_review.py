@@ -21,6 +21,7 @@ SCREENSHOTS = ROOT / "visual-review-screenshots"
 PAGES = {
     "home": "index.html",
     "explorer": "explore.html",
+    "evidence-review": "verify.html",
     "test-workbench": "test-lab.html",
     "synthetic-soc-preview": "projects/splunk-synthetic-preview.html",
     "soc-analyst-evidence": "projects/soc-analyst-evidence.html",
@@ -74,7 +75,7 @@ def main() -> None:
             for viewport, (width, height) in VIEWPORTS.items():
                 # Check six rewritten cases at 320px as well as mobile/desktop.
                 case_pages = {"authentication", "windows", "network", "vulnerability",
-                              "celestial-resonance", "research-ai", "explorer", "test-workbench"}
+                              "celestial-resonance", "research-ai", "explorer", "test-workbench", "evidence-review"}
                 if name != "home" and viewport not in ("mobile", "desktop"):
                     if name not in case_pages or viewport != "small-mobile":
                         continue
@@ -96,6 +97,13 @@ def main() -> None:
                     failures.append(f"{name}/{viewport}: requested {width}px but observed {dimensions['viewport']}px")
                 if dimensions["scrollWidth"] > dimensions["viewport"] + 2:
                     failures.append(f"{name}/{viewport}: document horizontal overflow: {dimensions}")
+                if name == "evidence-review":
+                    if len(driver.find_elements(By.CSS_SELECTOR, "[data-evidence-card]")) != 7:
+                        failures.append(f"{name}/{viewport}: expected seven claim-to-source cards")
+                    if len(driver.find_elements(By.CSS_SELECTOR, ".verification-limit")) != 7:
+                        failures.append(f"{name}/{viewport}: every evidence item must state its limit")
+                    if not driver.find_element(By.CSS_SELECTOR, 'a[href="splunk_workflow/NATIVE_DASHBOARD_RESULT_2026-10-23.md"]').is_displayed():
+                        failures.append(f"{name}/{viewport}: missing native Splunk observation")
                 if name == "explorer":
                     def shown_cards():
                         return [el for el in driver.find_elements(By.CSS_SELECTOR, "[data-project-entry]") if el.is_displayed()]

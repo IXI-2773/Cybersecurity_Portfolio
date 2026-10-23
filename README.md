@@ -4,6 +4,8 @@ A public, static portfolio presenting **reproducible synthetic defensive securit
 
 ## Hiring-team tools
 
+The [evidence review guide](https://ixi-2773.github.io/Cybersecurity_Portfolio/verify.html) maps four public security labs, two private engineering summaries, and the public verification workbench to inspectable sources and explicit limitations. This new page is available on the review branch until merged and deployed.
+
 The [project explorer](https://ixi-2773.github.io/Cybersecurity_Portfolio/explore.html) filters the six case studies and public verification workbench by role and skill. All entries and evidence links remain readable without JavaScript.
 
 The [verification workbench](https://ixi-2773.github.io/Cybersecurity_Portfolio/test-lab.html) runs two independent browser teaching engines: authentication replay over the existing 64-event fixture, and structured attributed-evidence coverage. Nine executable baseline checks and negative controls produce real calculated results. A receipt download records fixture SHA-256 values and completed runs. These are separate from private CR/RAI implementations, the Python suite, and Splunk execution.

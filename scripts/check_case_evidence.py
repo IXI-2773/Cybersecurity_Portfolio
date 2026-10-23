@@ -137,6 +137,18 @@ def main() -> None:
             required(row["timestamp"] in visual and row["source_ip"] in visual,
                      "Illustrative alert must match the frozen oracle boundary case")
 
+    guide = get("verify.html")
+    required(guide.count("data-evidence-card") == 7
+             and guide.count('class="verification-limit"') == 7,
+             "Evidence review guide must contain seven source/limit entries")
+    for source in ("splunk_workflow/NATIVE_DASHBOARD_RESULT_2026-10-23.md",
+                   "assets/evidence/splunk-native-dashboard-results.png",
+                   "projects/03-network-pcap/CASE_REPORT.md",
+                   "projects/04-local-vulnerability-assessment/CASE_REPORT.md"):
+        required(source in guide, "Evidence review guide missing artifact: " + source)
+    required("independently authored" in guide.lower()
+             and "private" in guide.lower(),
+             "Public teaching engines must remain distinct from private implementations")
     # Feature only demonstrated Splunk scope; prevent stale "not run" homepage copy.
     home_v4 = get("index.html")
     required('id="featured-splunk"' in home_v4 and "3 / 5" in home_v4 and "5 / 5" in home_v4,
