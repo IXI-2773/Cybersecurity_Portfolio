@@ -13,7 +13,7 @@ Splunk Enterprise Search & Reporting; SPL correlation; authentication-log analys
 SELECTED CYBERSECURITY PROJECTS (PORTFOLIO LABS, NOT EMPLOYMENT)
 Splunk Authentication Detection and Debugging
 - Executed a real Splunk Enterprise SPL search over 64 fabricated login events across nine test scenarios; identified a 3-of-5 detection mismatch affecting exact ten-minute boundary cases.
-- Corrected the bounded SPL logic to include failures occurring 0-600 seconds before success; a saved Splunk Search & Reporting dashboard showed all 5 expected synthetic results in a publicly archived cropped screenshot.
+- Corrected the bounded SPL logic to include failures occurring 0-600 seconds before success; a saved Splunk Search & Reporting dashboard showed 5 of 5 expected synthetic results in a publicly archived cropped screenshot.
 - Documented missing evidence, false-positive considerations, and investigative steps; did not claim indexed-data qualification, live alerts, or production effectiveness.
 Evidence: https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/authentication-detection.html
 

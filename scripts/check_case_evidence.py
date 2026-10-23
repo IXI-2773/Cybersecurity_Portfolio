@@ -203,9 +203,7 @@ def main() -> None:
                       "resumes/Don_Lopez_Security_Analyst.txt"):
         role = get(role_path)
         for fact in ("DON LOPEZ", "CompTIA Security+", "CompTIA CySA+",
-                     "December 2024", "64 fabricated", "3-of-5", "5 of 5"):
-            if fact == "64 fabricated" or fact == "3-of-5":
-                continue  # Wording varies between role-specific variants.
+                     "December 2024", "5 of 5"):
             required(fact in role, "Resume missing supported fact: " + role_path + " / " + fact)
         required("PORTFOLIO LABS, NOT EMPLOYMENT" in role
                  and "not invented" in role

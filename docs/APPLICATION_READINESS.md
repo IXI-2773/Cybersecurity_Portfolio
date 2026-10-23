@@ -32,4 +32,6 @@ This guide accompanies the public [application toolkit](https://ixi-2773.github.
 - No real breach, attacker attribution, production Splunk alert, indexed ingestion, Wireshark screenshot, independently audited credential status, or enterprise remediation was established.
 - No unverifiable precision/recall, detection latency, avoided losses, or threat statistics.
 
+**Production incident-response and indexed Splunk deployment evidence are not established.**
+
 **Document purpose:** evidence-backed job-application preparation, not credential endorsement or employment verification.
