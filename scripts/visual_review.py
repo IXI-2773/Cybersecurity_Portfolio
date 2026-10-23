@@ -458,7 +458,8 @@ def main() -> None:
                 driver.save_screenshot(str(out))
                 if viewport == "desktop" and name in {
                         "home", "explorer", "test-workbench", "evidence-review",
-                        "recruiter-profile", "role-paths"}:
+                        "recruiter-profile", "role-paths", "authentication",
+                        "windows", "network", "vulnerability"}:
                     # Reviewer can inspect complete page hierarchy, not only the
                     # top viewport. This is still a raw Chrome screenshot.
                     metrics = driver.execute_cdp_cmd("Page.getLayoutMetrics", {})
@@ -467,7 +468,9 @@ def main() -> None:
                         "format": "png", "captureBeyondViewport": True,
                         "clip": {"x": 0, "y": 0,
                                  "width": min(1280, content_size["width"]),
-                                 "height": min(12000, content_size["height"]),
+                                 "height": min(3200 if name in {
+                                     "authentication", "windows", "network", "vulnerability"
+                                 } else 12000, content_size["height"]),
                                  "scale": 1}})
                     (SCREENSHOTS / f"{name}-full-desktop.png").write_bytes(
                         base64.b64decode(full["data"]))
