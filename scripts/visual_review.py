@@ -63,6 +63,12 @@ def main() -> None:
         driver.execute_cdp_cmd("Emulation.setEmulatedMedia", {
             "features": [{"name": "prefers-reduced-motion", "value": "reduce"}]
         })
+        def click_control(element):
+            # A native nearest-edge scroll can leave a target behind the sticky header.
+            # Center the real control first, then use WebDriver's normal pointer click.
+            driver.execute_script("arguments[0].scrollIntoView({block:'center', behavior:'instant'});", element)
+            element.click()
+
         for name, relative in PAGES.items():
             url = (ROOT / relative).resolve().as_uri()
             for viewport, (width, height) in VIEWPORTS.items():
@@ -105,11 +111,11 @@ def main() -> None:
                     role.select_by_value("soc")
                     if len(shown_cards()) != 0:
                         failures.append(f"{name}/{viewport}: role and keyword filters must combine")
-                    driver.find_element(By.CSS_SELECTOR, "#project-filters button[type=reset]").click()
+                    click_control(driver.find_element(By.CSS_SELECTOR, "#project-filters button[type=reset]"))
                     query.send_keys("unmatched-portfolio-query")
                     if shown_cards() or not driver.find_element(By.ID, "filter-empty").is_displayed():
                         failures.append(f"{name}/{viewport}: missing zero-result feedback")
-                    driver.find_element(By.CSS_SELECTOR, "#project-filters button[type=reset]").click()
+                    click_control(driver.find_element(By.CSS_SELECTOR, "#project-filters button[type=reset]"))
                     if len(shown_cards()) != 7:
                         failures.append(f"{name}/{viewport}: clear filters failed")
                     if viewport == "desktop":
@@ -124,24 +130,24 @@ def main() -> None:
                             body = driver.find_element(By.TAG_NAME, "body")
                     body.send_keys(Keys.CONTROL, Keys.HOME)
                 if name == "test-workbench":
-                    driver.find_element(By.ID, "run-checks").click()
+                    click_control(driver.find_element(By.ID, "run-checks"))
                     if "9 / 9" not in driver.find_element(By.ID,"checks-status").text:
                         failures.append(f"{name}/{viewport}: real baseline checks did not pass")
                     window = driver.find_element(By.ID,"auth-window")
                     for seconds, count in ((599,3),(600,5)):
                         window.clear()
                         window.send_keys(str(seconds))
-                        driver.find_element(By.ID,"replay-submit").click()
+                        click_control(driver.find_element(By.ID,"replay-submit"))
                         if len(driver.find_elements(By.CSS_SELECTOR,"#replay-rows tr")) != count:
                             failures.append(f"{name}/{viewport}: {seconds}s must replay {count} fixture findings")
                     for sample, expected in (("complete","PASS_COVERAGE"),("omitted","HOLD_INCOMPLETE_COVERAGE"),("mismatch","HOLD_ATTRIBUTION_MISMATCH")):
                         Select(driver.find_element(By.ID,"coverage-case")).select_by_value(sample)
-                        driver.find_element(By.ID,"coverage-submit").click()
+                        click_control(driver.find_element(By.ID,"coverage-submit"))
                         if driver.find_element(By.ID,"coverage-status").text != expected:
                             failures.append(f"{name}/{viewport}: incorrect structured coverage result for {sample}")
                     receipt_path = downloads / "Don_Lopez_Public_Engine_Run.json"
                     receipt_path.unlink(missing_ok=True)
-                    driver.find_element(By.ID,"download-run").click()
+                    click_control(driver.find_element(By.ID,"download-run"))
                     WebDriverWait(driver, 5).until(lambda _: receipt_path.is_file())
                     receipt = json.loads(receipt_path.read_text())
                     if (len(receipt["baseline"]["checks"]) != 9 or
