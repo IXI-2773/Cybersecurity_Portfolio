@@ -656,3 +656,5 @@ section[id]{scroll-margin-top:100px}
 
 
 .portfolio-home .work-card{padding:0}
+/* Retained deep links target inner containers as well as sections. */
+.portfolio-home #soc-evidence,.portfolio-home #certifications,.portfolio-home #skills{scroll-margin-top:100px}
