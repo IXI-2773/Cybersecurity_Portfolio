@@ -3,7 +3,7 @@
 **Date received/reviewed:** October 23, 2026  
 **Environment:** Operator-provided Splunk Statistics screenshot; earlier full-screen evidence showed Splunk Enterprise free-trial user interface.  
 **Data:** Same frozen **64 fabricated authentication events** across **nine scenarios**.  
-**Observed:** **Five rows, all five match the unchanged independent expected findings**.  
+**Observed:** **5/5 rows match the unchanged independent expected findings**.  
 **Qualification:** `STAGE_B2_RESULT_SCREENSHOT_MATCH_5_OF_5` — the user says this followed the [corrected in-memory SPL](SPLUNK_MATRIX_BOUNDARY_RETEST.spl).
 
 ## Results visible in the screenshot
