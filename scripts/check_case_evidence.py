@@ -50,6 +50,60 @@ def main() -> None:
     required("LAB-WEB-001" in web_html and
              "projects/04-local-vulnerability-assessment/CASE_REPORT.md" in web_html,
              "Web page missing case ID or full rendered evidence link")
+    # The Stage B in-memory Splunk data must exactly match the authoritative
+    # independent CSV fixture. This check does not execute Splunk.
+    import csv
+    import re
+    from io import StringIO
+    matrix_csv = get("projects/01-authentication-detection/validation_events.csv")
+    rows = list(csv.DictReader(StringIO(matrix_csv)))
+    required(len(rows) == 64 and len({r["scenario"] for r in rows}) == 9,
+             "Authentication corpus drifted from 64 records / nine scenarios")
+    keys = ("timestamp", "username", "source_ip", "host", "event_type", "scenario")
+    expected_spl_payload = ";".join("|".join(row[key] for key in keys)
+                                    for row in rows)
+    matrix_spl = get("projects/01-authentication-detection/SPLUNK_MATRIX_IN_MEMORY.spl")
+    match = re.search(r'(?m)^\| eval fixture_rows="([^"]+)"
+    # and must not silently omit pending Splunk/Wireshark status.
+    home = get("index.html")
+    landing = get("projects/soc-analyst-evidence.html")
+    for report in (
+        "01-authentication-detection/SOC_CASE_REPORT.md",
+        "02-windows-process-triage/CASE_REPORT.md",
+        "03-network-pcap/CASE_REPORT.md",
+        "04-local-vulnerability-assessment/CASE_REPORT.md",
+    ):
+        required(report in home and report in landing,
+                 f"Recruiter landing evidence link missing: {report}")
+    required('id="soc-evidence"' in home and
+             'href="projects/soc-analyst-evidence.html"' in home,
+             "Homepage missing recruiter pathway")
+    for term in ("Splunk", "Wireshark", "76", "synthetic"):
+        required(term.lower() in landing.lower(),
+                 f"Dedicated recruiter page missing qualification: {term}")
+
+    for source in (net_doc, web_doc):
+        required("not" in source.lower() and "synthetic" in source.lower(),
+                 "Evidence boundary disclosure missing")
+
+    print("PASS: 2 source-linked case reports, frozen rule IDs/times, and webpage links")
+    print("Scope: static evidence consistency; not a live security assessment")
+
+
+if __name__ == "__main__":
+    main()
+, matrix_spl)
+    required(match is not None and match.group(1) == expected_spl_payload,
+             "Stage B SPL fixture must match original 64-event CSV exactly")
+    required("fixture_event_count" in matrix_spl
+             and "fixture_scenario_count" in matrix_spl
+             and "streamstats time_window=10m" in matrix_spl,
+             "Stage B SPL missing fixture counters or expected detection sequence")
+    stage_a = get("projects/01-authentication-detection/SPLUNK_SMOKE_OBSERVATION_2026-10-23.md")
+    required("screenshot" in stage_a.lower() and "has not been committed" in stage_a
+             and "PENDING" in stage_a and "64-event" in stage_a,
+             "Smoke evidence record must distinguish screenshot review from full validation")
+
     # Recruiter-facing landing page must expose all four fixture-backed reports
     # and must not silently omit pending Splunk/Wireshark status.
     home = get("index.html")
