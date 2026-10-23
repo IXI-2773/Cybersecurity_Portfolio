@@ -29,7 +29,7 @@
 <aside class="role-interview-panel" aria-label="Security Analyst interview preparation">
 <div class="eyebrow">INTERVIEW / CONCISE EXPLANATION</div><h3>How to frame this work</h3><p>I compare before and after under the same controlled conditions, state the fixed findings precisely, and avoid claiming that a small test proves an entire system is secure.</p>
 <details class="role-interview-question"><summary>Did fixing four findings make the application secure?</summary><p>No. The same localhost-focused checks stopped detecting four deliberately introduced weaknesses. That does not establish browser behavior, full application security, TLS configuration, or penetration-test coverage. I would define additional acceptance criteria before making a wider claim.</p></details>
-<div class="role-followup-links"><strong>Supporting evidence</strong><a href="projects/04-local-vulnerability-assessment/CASE_REPORT.md">Inspect the before-and-after case report ↗</a>
+<div class="role-followup-links"><strong>Supporting evidence</strong><a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/projects/04-local-vulnerability-assessment/CASE_REPORT.md">Inspect the before-and-after case report ↗</a>
 <a href="verify.html">Review all source and limitation links ↗</a>
 <a href="resumes/Don_Lopez_Security_Analyst.txt">Security Analyst résumé draft ↗</a></div>
 <p class="role-scope"><strong>Evidence limit:</strong> The HTTP target is a deliberate loopback training fixture. No external web application or production environment was scanned.</p>
@@ -42,8 +42,8 @@
 <aside class="role-interview-panel" aria-label="Security Automation and Engineering interview preparation">
 <div class="eyebrow">INTERVIEW / CONCISE EXPLANATION</div><h3>How to frame this work</h3><p>I design around preserved inputs, explainable failure conditions, explicit authority boundaries, and targeted regression checks. The public demonstrations let reviewers inspect those habits without private source access.</p>
 <details class="role-interview-question"><summary>Are the browser engines the private CR or RAI test engines?</summary><p>No. They are independently authored public examples. Authentication replay demonstrates a fixed boundary and expected-output comparison; evidence coverage demonstrates holds for missing or mismatched source declarations. Neither proves the private systems' performance, semantic truth, or authority to act.</p></details>
-<div class="role-followup-links"><strong>Supporting evidence</strong><a href="assets/js/test-engine.js">Inspect public engine code ↗</a>
-<a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/scripts/test_browser_engine.cjs">Read independent test assertions ↗</a>
+<div class="role-followup-links"><strong>Supporting evidence</strong><a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/d8aee1e38d4931e32a057980b4fdffbf82c68901/assets/js/test-engine.js">Inspect public engine code ↗</a>
+<a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/d8aee1e38d4931e32a057980b4fdffbf82c68901/scripts/test_browser_engine.cjs">Read independent test assertions ↗</a>
 <a href="test-lab.html#evidence-coverage">Try evidence-coverage holds ↗</a>
 <a href="verify.html">Review the source/claim boundary ↗</a></div>
 <p class="role-scope"><strong>Evidence limit:</strong> CR and RAI are private. Their engineering summaries convey architectural practices, not inspected runtime output or claims of production autonomous cybersecurity operations.</p>

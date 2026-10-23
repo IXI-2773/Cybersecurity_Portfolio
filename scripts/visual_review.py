@@ -126,7 +126,7 @@ def main() -> None:
                         failures.append(f"{name}/{viewport}: expected seven claim-to-source cards")
                     if len(driver.find_elements(By.CSS_SELECTOR, ".verification-limit")) != 7:
                         failures.append(f"{name}/{viewport}: every evidence item must state its limit")
-                    if not driver.find_element(By.CSS_SELECTOR, 'a[href="splunk_workflow/NATIVE_DASHBOARD_RESULT_2026-10-23.md"]').is_displayed():
+                    if not driver.find_element(By.CSS_SELECTOR, 'a[href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/splunk_workflow/NATIVE_DASHBOARD_RESULT_2026-10-23.md"]').is_displayed():
                         failures.append(f"{name}/{viewport}: missing native Splunk observation")
                 if name == "explorer":
                     def shown_cards():
@@ -198,6 +198,17 @@ def main() -> None:
                         relative_resume = link.get_attribute("href")
                         if not relative_resume or not relative_resume.endswith(".txt"):
                             failures.append(f"{name}/{viewport}: missing real text resume link")
+                if name == "recruiter-profile" and viewport == "desktop":
+                    # A profile is not itself an ATS text résumé; follow the actual choice.
+                    download_choice = driver.find_element(By.CSS_SELECTOR, '.recruiter-actions a[href="apply.html"]')
+                    if "Choose ATS résumé" not in download_choice.text:
+                        failures.append("recruiter/profile: résumé choice is labeled as an immediate download")
+                    click_control(download_choice)
+                    if not driver.current_url.endswith("/apply.html") or len(
+                            driver.find_elements(By.CSS_SELECTOR, ".application-role-actions a[download]")) != 2:
+                        failures.append("recruiter/profile: choice does not reach both résumé downloads")
+                    driver.get(url)
+                    body = driver.find_element(By.TAG_NAME, "body")
                 if name == "home":
                     featured = driver.find_element(By.ID, "featured-splunk")
                     if not featured.is_displayed() or len(featured.find_elements(By.CSS_SELECTOR, ".splunk-evidence-table tbody tr")) != 5:
@@ -245,6 +256,20 @@ def main() -> None:
                             failures.append(
                                 f"{name}/{viewport}: CTA bottom {cta_bottom:.1f}px exceeds "
                                 f"actual visible height {dimensions['viewportHeight']}px")
+                    if viewport == "desktop":
+                        # Follow the real recruiter route across pages, not merely its href.
+                        path_link = driver.find_element(By.CSS_SELECTOR, '.hiring-route[href="roles.html"]')
+                        click_control(path_link)
+                        if (not driver.current_url.endswith("/roles.html") or
+                                len(driver.find_elements(By.CSS_SELECTOR, ".role-route-card")) != 3):
+                            failures.append("home/recruiter: role route does not reach three role choices")
+                        else:
+                            soc = driver.find_element(By.CSS_SELECTOR, '.role-route-card[href="#soc-analyst"]')
+                            click_control(soc)
+                            if driver.execute_script("return location.hash") != "#soc-analyst":
+                                failures.append("home/recruiter: SOC evidence anchor did not open")
+                        driver.get(url)
+                        body = driver.find_element(By.TAG_NAME, "body")
                 desktop_nav = driver.find_element(By.CSS_SELECTOR, ".nav > nav")
                 menu = driver.find_element(By.CSS_SELECTOR, ".nav > details.mobile-nav")
                 if dimensions["viewport"] <= 800:

@@ -192,6 +192,33 @@ def main() -> None:
         "Vulnerability Assessment", "Celestial Resonance", "Research AI Infrastructure")]
     required(all(x >= 0 for x in security_pos) and security_pos == sorted(security_pos),
              "Security labs must precede private engineering case studies")
+    # Focused recruiter journey contract: no falsely labeled download, readable
+    # source reports, and direct role/resume/evidence navigation.
+    required('href="recruiter.html">One-page profile' in home_v4,
+             "Homepage must distinguish printable profile from an ATS résumé")
+    required('class="hero-resume-download"' in home_v4
+             and 'href="resumes/Don_Lopez_SOC_Analyst.txt"' in home_v4,
+             "Homepage needs a direct SOC résumé download")
+    required('href="roles.html"' in home_v4,
+             "Homepage must expose the three-role hiring guide")
+    onepage_html = get("recruiter.html")
+    required('href="apply.html">Choose ATS résumé' in onepage_html,
+             "Recruiter profile must not falsely label a link as a download")
+    github_source = "https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/"
+    for name, document in (
+        ("role paths", roles),
+        ("evidence guide", guide),
+        ("analyst workflow", get("projects/soc-analyst-workflow.html")),
+    ):
+        import re as _re
+        raw_reports = _re.findall(r'href="(?!(?:https?://))[^"]+\.md(?:#[^"]*)?"', document)
+        required(not raw_reports,
+                 name + " has non-rendered relative Markdown links: " + repr(raw_reports))
+    for report in ("splunk_workflow/NATIVE_DASHBOARD_RESULT_2026-10-23.md",
+                   "projects/03-network-pcap/CASE_REPORT.md",
+                   "projects/04-local-vulnerability-assessment/CASE_REPORT.md"):
+        required(f'href="{github_source}{report}"' in guide,
+                 "Review guide must open the readable GitHub source: " + report)
     # Resume/recruiter claims must remain grounded in completed screenshot review.
     onepage = get("docs/RECRUITER_QUICK_BRIEF.md")
     bullets = get("docs/RESUME_PORTFOLIO_BULLETS.md")

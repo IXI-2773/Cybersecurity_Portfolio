@@ -918,3 +918,8 @@ section[id]{scroll-margin-top:100px}
 @media(max-width:1050px){.role-route-card{padding:18px}.role-route-card strong{font-size:1.1rem}.role-track-body{grid-template-columns:1fr}.role-path-final{display:block}.role-final-actions{margin-top:21px}}
 @media(max-width:700px){.role-route-grid{grid-template-columns:1fr;gap:10px}.role-route-card{padding:18px}.role-route-card strong{margin:7px 0;font-size:1.08rem}.role-route-card small{font-size:.73rem}.role-track-section{padding:32px 0 23px}.role-track-heading{display:block}.role-track-back{display:inline-block;margin-top:12px}.role-interview-panel{padding:20px}.role-evidence-step{padding:15px}.role-path-final{padding:22px}.role-final-actions .button{width:100%;text-align:center}}
 @media(prefers-reduced-motion:reduce){.role-route-card{transition:none}}
+
+/* Recruiter quick-access résumé route, distinct from the printable profile. */
+.portfolio-home .hero-resume-download{display:inline-flex;align-items:center;gap:6px;margin:-8px 0 12px;color:var(--teal);font-size:.78rem;line-height:1.65;text-decoration:underline;text-underline-offset:4px;font-weight:600}
+.portfolio-home .hero-resume-download:focus-visible{outline:3px solid var(--teal);outline-offset:4px;border-radius:3px}
+@media(max-width:370px){.portfolio-home .hero-resume-download{font-size:.73rem;margin:-5px 0 10px}}
