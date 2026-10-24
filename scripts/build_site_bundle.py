@@ -24,6 +24,9 @@ ROOT_FILES = {
     "PUBLICATION_CHECKLIST.md", "portfolio.css", "awards.html",
 }
 REQUIRED_SITE_FILES = {
+    "projects/e3-digital-forensics.html", "projects/kali-defender-visibility.html",
+    "projects/splunk-threat-hunting.html", "assets/js/signal-display.js",
+    "assets/artwork/kali-lab.webp", "assets/artwork/splunk-investigation.webp", "assets/artwork/e3-forensics.webp",
     "awards.html", "assets/js/portfolio-systems.js",
     "projects/detection-engineering.html", "projects/splunk-siem-investigation.html",
     "projects/network-intrusion-lab.html", "projects/phishing-investigation.html",

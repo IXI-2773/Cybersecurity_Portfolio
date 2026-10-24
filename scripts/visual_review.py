@@ -22,7 +22,7 @@ CASES = ("authentication-detection", "windows-process-triage", "network-traffic-
          "vulnerability-remediation", "celestial-resonance", "research-ai-infrastructure",
          "certification-learning-engine", "detection-engineering", "splunk-siem-investigation",
          "network-intrusion-lab", "phishing-investigation", "identity-mfa-investigation",
-         "soc-triage-automation")
+         "soc-triage-automation", "e3-digital-forensics", "kali-defender-visibility", "splunk-threat-hunting")
 PAGES = {"home": "index.html", "choice": "explore.html", "role-paths": "roles.html", "awards": "awards.html",
          **{slug: f"projects/{slug}.html" for slug in CASES}}
 VIEWPORTS = {"desktop": (1280, 1000), "mobile": (390, 844), "small-mobile": (320, 720)}
@@ -158,6 +158,23 @@ def main() -> None:
         play.click()
         driver.execute_script("window.scrollTo({top:0,behavior:'instant'})")
         WebDriverWait(driver,3).until(lambda d: play.text == 'Play')
+        # Decorative homepage animation: one profile link each, progressive
+        # controls, normal pause/resume, offscreen pause and reduced-motion stop.
+        driver.set_window_size(1280,1000)
+        driver.get((ROOT/'index.html').resolve().as_uri())
+        display=driver.find_element(By.CSS_SELECTOR,'[data-signal-display]')
+        WebDriverWait(driver,3).until(lambda d: display.get_attribute('data-running') == 'true')
+        toggle=display.find_element(By.TAG_NAME,'button'); toggle.click()
+        assert display.get_attribute('data-running') == 'false'
+        toggle.click(); assert display.get_attribute('data-running') == 'true'
+        driver.execute_script("window.scrollTo({top:document.body.scrollHeight,behavior:'instant'})")
+        WebDriverWait(driver,3).until(lambda d: display.get_attribute('data-running') == 'false')
+        driver.execute_script("window.scrollTo({top:0,behavior:'instant'})")
+        driver.execute_cdp_cmd('Emulation.setEmulatedMedia', {'features':[{'name':'prefers-reduced-motion','value':'reduce'}]})
+        WebDriverWait(driver,3).until(lambda d: display.get_attribute('data-running') == 'false')
+        assert not toggle.is_displayed()
+        assert len(driver.find_elements(By.CSS_SELECTOR,'a[href="https://github.com/IXI-2773"]')) == 1
+        assert len(driver.find_elements(By.CSS_SELECTOR,'a[href="https://www.linkedin.com/in/ixi2773/"]')) == 1
     summary = {"status":"PASS" if not failures else "FAIL","captures":captures,
                "interactive_review":"CR/RAI controls, keyboard, normal and reduced motion passed",
                "javascript":"disabled for employer navigation review","failures":failures}

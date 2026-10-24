@@ -25,3 +25,9 @@ The public [browser workbench](https://ixi-2773.github.io/Cybersecurity_Portfoli
 - [Phishing Email Investigation](phishing-investigation.md) — planned, not executed.
 - [Identity & MFA Investigation](identity-mfa-investigation.md) — planned, not executed.
 - [Python SOC Triage Assistant](soc-triage-automation.md) — planned, not executed.
+
+## Classroom and applied investigations
+
+- [Paraben E3 classroom experience](e3-digital-forensics.md) — tool usage confirmed by the owner; assignment details and actual captures to follow.
+- [Kali reconnaissance and defender visibility](kali-defender-visibility.md) — investigation design, not a new executed result.
+- [Splunk threat investigation playbook](splunk-threat-hunting.md) — source-aware scenarios and illustrative starting searches.
