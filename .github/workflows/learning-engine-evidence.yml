@@ -1,0 +1,40 @@
+name: Capture learning engine evidence
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/capture_learning_engine.py'
+      - '.github/workflows/learning-engine-evidence.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: IXI-2773/Microsoft_SC-900_Test_Learning_Engine
+          ref: 250e55565582f9e6dc1f5608f7701aea5e9e953f
+          path: engine-source
+          persist-credentials: false
+      - name: Install isolated Linux UI capture dependencies
+        run: sudo apt-get update && sudo apt-get install -y xvfb python3-tk python3-pil
+      - name: Run existing focused selection and session tests
+        working-directory: engine-source
+        run: |
+          xvfb-run -a /usr/bin/python3 -m unittest discover -s tests -p 'test_smart_practice_core.py'
+          xvfb-run -a /usr/bin/python3 -m unittest discover -s tests -p 'test_smart_practice_continuity_spacing_tranche_a.py'
+          /usr/bin/python3 -m unittest discover -s tests -p 'test_backlog1_segment2_session_app_integration.py'
+      - name: Capture the real app with original synthetic example questions
+        run: xvfb-run -a -s '-screen 0 1280x1000x24' /usr/bin/python3 scripts/capture_learning_engine.py engine-source learning-engine-capture
+      - uses: actions/upload-artifact@v4
+        with:
+          name: learning-engine-runtime-evidence
+          path: learning-engine-capture/
+          retention-days: 30
