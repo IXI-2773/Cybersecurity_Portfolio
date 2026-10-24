@@ -19,10 +19,32 @@ confidence tracking, and saved learner state into one Windows desktop workflow.
 - Question-quality validation and issue-reporting tools.
 - Regression checks, smoke checks, and Windows packaging workflows.
 
-The public READMEs describe these capabilities. This case study does not claim a
-fresh Windows runtime validation or measured improvement in exam performance.
-Readiness indicators are study heuristics and do not guarantee a certification
-pass. The portfolio browser workbench is a separate teaching demonstration.
+## Two concrete engineering examples
+
+**Adaptive review:** the SC-900 tests check a 72-hour exact-item spacing rule.
+An item seen just under 72 hours ago is excluded from normal eligibility while
+an eligible alternative is available; exactly at 72 hours it becomes eligible.
+Selection also balances review roles rather than filling a set with one kind
+of question.
+
+**Session continuity:** a test reorders two questions, then confirms that a
+saved answer remains with the same canonical question ID. Other checks reject
+changed bank content and quarantine an unverifiable legacy session. This avoids
+attaching saved learner state to the wrong material.
+
+## Runtime evidence and limits
+
+The real SC-900 interface was captured on Linux/Tk using five original portfolio
+example questions and no learner history. All 49 focused SC-900 checks passed,
+including the named selection, spacing and session modules. Five focused
+Security+ checks also passed locally. Exact revisions, screenshot hash, test
+scope and the successful run are in the
+[evidence record](../docs/LEARNING_ENGINE_EVIDENCE_2026-10-24.md).
+
+This does not establish Windows executable behavior or measured improvement in
+exam performance. Readiness indicators are study heuristics and do not guarantee
+a certification pass. The portfolio browser workbench is a separate teaching
+demonstration.
 
 ## Public sources reviewed October 24, 2026
 

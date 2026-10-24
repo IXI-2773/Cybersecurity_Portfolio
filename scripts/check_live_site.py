@@ -42,6 +42,7 @@ STATIC_ASSETS = (
     "styles.css",
     "portfolio.css",
     "resumes/Don_Lopez_Cybersecurity_Resume.pdf",
+    "assets/evidence/sc900-practice-linux.png",
     "assets/network/pcap-evidence-overview.svg",
     "assets/js/explorer.js",
     "assets/js/lab-data.js",
@@ -133,6 +134,9 @@ def verify_response(path: str, status: int, content_type: str, body: bytes) -> d
     elif path.endswith(".pdf"):
         if "application/pdf" not in content_type.lower() or not body.startswith(b"%PDF-"):
             raise ValueError("Public resume was not served as a PDF")
+    elif path.endswith(".png"):
+        if "image/png" not in content_type.lower() or not body.startswith(b"\x89PNG\r\n\x1a\n"):
+            raise ValueError("Application screenshot was not served as a PNG")
     elif path.endswith(".svg"):
         if "svg" not in content_type.lower():
             raise ValueError("SVG asset served with unexpected MIME type")
@@ -154,7 +158,7 @@ def fetch_once(path: str) -> dict:
     opener = urllib.request.build_opener(BlockRedirect)
     request = urllib.request.Request(url, headers={
         "User-Agent": "DonLopezPortfolioHealthcheck/1.0",
-        "Accept": "text/html,text/css,image/svg+xml,application/pdf",
+        "Accept": "text/html,text/css,image/svg+xml,image/png,application/pdf",
     })
     try:
         with opener.open(request, timeout=15) as r:
@@ -224,11 +228,14 @@ def self_test() -> None:
     verify_response("portfolio.css", 200, "text/css", (root / "portfolio.css").read_bytes())
     resume = "resumes/Don_Lopez_Cybersecurity_Resume.pdf"
     verify_response(resume, 200, "application/pdf", (root / resume).read_bytes())
+    screenshot = "assets/evidence/sc900-practice-linux.png"
+    verify_response(screenshot, 200, "image/png", (root / screenshot).read_bytes())
     broken_catalog = (root / "explore.html").read_bytes().replace(
         b"projects/certification-learning-engine.html", b"missing-case.html")
     for path, mime, body in [
         ("explore.html", "text/html", broken_catalog),
         (resume, "text/html", b"<!doctype html>not a resume"),
+        (screenshot, "text/html", b"<!doctype html>missing image"),
     ]:
         try:
             verify_response(path, 200, mime, body)

@@ -12,6 +12,19 @@ Research AI Infrastructure (RAI) addresses a common failure mode in analysis: co
 - **Bounded authority:** research may inform decisions but does not independently authorize external effects.
 - **Replaceability:** avoid irreversible coupling to one model, library or service.
 
+## A public example of the principle
+
+The independent generated packet lab records DNS failures and an HTTP POST.
+The decoded observations justify review but do not independently establish
+command-and-control or exfiltration. A useful case separates what was decoded,
+what an analyst suspects, and what corroborating evidence is still missing.
+
+That distinction illustrates RAI's evidence-handling design focus. It is a
+teaching example from the public lab, not output from the private RAI runtime.
+
+- [Packet case report](03-network-pcap/CASE_REPORT.md)
+- [Deterministic expected findings](03-network-pcap/expected_findings.json)
+
 ## Relation to defensive security
 
 SOC analysts face similar problems: alerts can be incomplete, telemetry can disagree, and case notes can overstate what happened. These practices motivate a cautious [analyst triage playbook](../docs/SOC_TRIAGE_PLAYBOOK.md) and the public [evidence matrix](../docs/DETECTION_EVIDENCE_MATRIX.md).

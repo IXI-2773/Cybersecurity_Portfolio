@@ -11,6 +11,20 @@ Celestial Resonance (CR) is a research and experimentation platform. The central
 - **Evidence records:** distinguish observed output, inference and unresolved uncertainty.
 - **Execution controls:** keep research recommendations separate from authorization to modify systems or perform consequential actions.
 
+## A public example of the principle
+
+In the independent authentication lab, the original Splunk time-window logic
+returned three of five expected findings. The revised inclusive 600-second
+boundary returned all five on the same 64-event scenario matrix. Preserving the
+input events, expected findings, original query, revised query, and observed
+result made the change inspectable.
+
+This is an example of the traceability that informs my CR engineering approach,
+not a CR runtime result or a claim that CR produced the security findings.
+
+- [Original observation](01-authentication-detection/SPLUNK_MATRIX_FIRST_RUN_2026-10-23.md)
+- [Boundary retest and result](01-authentication-detection/SPLUNK_MATRIX_BOUNDARY_RETEST_RESULT_2026-10-23.md)
+
 ## Cybersecurity relevance
 
 A security detection or automated remediation recommendation should also preserve source integrity, reviewable rationale, explicit limits and authorization boundaries. The engineering principles above inform the independent [synthetic security labs](CASE_STUDIES.md) without presenting CR as a deployed security product.

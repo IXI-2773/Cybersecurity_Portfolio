@@ -50,3 +50,22 @@ compared with the master and preserved. The private original remains unchanged
 and outside this repository. Older role drafts are retained as legacy routes;
 they are not the primary resume. The distinctions above between broader resume
 lab work and the smaller public fixtures still apply.
+
+## October 24 evidence follow-up
+
+The public repository and the available file searches did not yield the original
+artifacts for the larger resume labs. This is a retrieval limit, not evidence
+that the original work was not done. Preserve the supplied resume and collect
+the corresponding artifacts before claiming that the small public exercises
+verify those projects.
+
+| Resume project | Public evidence available now | Original material needed to connect the project |
+| --- | --- | --- |
+| Detection engineering: 5+ SPL/Sigma rules and roughly 30% fewer false positives | [Authentication query and boundary retest](../projects/01-authentication-detection/SPLUNK_MATRIX_BOUNDARY_RETEST_RESULT_2026-10-23.md); [Windows triage source](../projects/02-windows-process-triage) | The original SPL/Sigma rule files; representative input events; before/after false-positive counts with their denominator and tuning procedure |
+| Splunk investigation using 3+ log sources | [Public synthetic Splunk workflow](../splunk_workflow/README.md), one genuine result-panel crop and reproducible training queries | Original source inventory, field mappings, query/dashboard exports and an investigation showing how those sources were correlated |
+| Kali/Wireshark/Snort investigation of 5,000+ packets | [Generated 20-frame packet lab](../projects/03-network-pcap/CASE_REPORT.md) and its analyzer | Original shareable capture or trace, packet-count evidence, relevant Snort rules/alerts and analyst notes identifying the actual finding |
+
+Each recovered artifact should retain its date, tool/version context and data
+origin, with sensitive fields removed where appropriate. The 20-frame fixture
+must not be relabeled as the larger capture, and the 5-of-5 synthetic finding
+result must not be presented as the resume's false-positive reduction.

@@ -39,9 +39,9 @@
           </p>
         </header>
         <figure class="case-figure">
-          <a href="../assets/illustrations/learning-engine.svg" aria-label="Open evidence image at full size"><img src="../assets/illustrations/learning-engine.svg" alt="Conceptual study workflow: practice, answer feedback, targeted review" width="720" height="360"></a>
+          <a href="../assets/evidence/sc900-practice-linux.png" aria-label="Open the real study application screenshot at full size"><img src="../assets/evidence/sc900-practice-linux.png" alt="Running SC-900 study application showing an original multi-factor authentication practice question and session navigation" width="1240" height="620"></a>
           <figcaption>
-            Conceptual study workflow. This is not a screenshot of either application.
+            Real SC-900 application running on Linux/Tk with five original portfolio example questions and no learner history. Open the image for full size.
           </figcaption>
         </figure>
         <section class="case-section" id="section-1">
@@ -62,10 +62,16 @@
         </section>
         <section class="case-section" id="section-3">
           <h2>
-            The engineering focus
+            Adaptive review
           </h2>
           <p>
-            Keep study sessions bounded, preserve learner state between launches, and expose question explanations and reporting. Smart Practice uses learner history to prioritize review; its readiness indicators are study heuristics.
+            Smart Practice balances weak material, due review, and new coverage. In the SC-900 spacing tests, an exact question seen less than 72 hours ago waits while an eligible alternative exists. At exactly 72 hours it becomes eligible. This is a tested scheduling rule, not evidence of improved exam scores.
+          </p>
+        </section>
+        <section class="case-section" id="session-continuity">
+          <h2>Restoring the right session</h2>
+          <p>
+            Saved answers belong to question identities, not their display positions. A focused SC-900 test reorders two questions and confirms the answer stays with the correct question. Other checks reject changed bank content and quarantine an unverifiable legacy session.
           </p>
         </section>
         <section class="scope-note" id="scope-and-limits">
@@ -73,7 +79,7 @@
             Scope
           </h2>
           <p>
-            Independent study tools, not official CompTIA or Microsoft products. Practice scores do not guarantee a certification pass. Features are described from the public repositories; no new Windows runtime or learning-effectiveness measurement was performed for this case study.
+            Independent study tools, not official CompTIA or Microsoft products. Practice scores do not guarantee a certification pass. The SC-900 interface was captured on Linux and 49 focused checks passed. Windows executable behavior and learning effectiveness were not measured for this case study.
           </p>
         </section>
         <section class="source-links">
@@ -92,6 +98,14 @@
             The portfolio’s <a href="../test-lab.html">browser workbench</a> is a separate demonstration, not either desktop study app.
           </p>
         </section>
+        <details class="technical-details">
+          <summary>Source and verification details</summary>
+          <ul>
+            <li><a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/docs/LEARNING_ENGINE_EVIDENCE_2026-10-24.md">Capture receipt, exact revisions, and test scope ↗</a></li>
+            <li><a href="https://github.com/IXI-2773/Microsoft_SC-900_Test_Learning_Engine/blob/250e55565582f9e6dc1f5608f7701aea5e9e953f/tests/test_smart_practice_continuity_spacing_tranche_a.py">Adaptive selection and spacing tests ↗</a></li>
+            <li><a href="https://github.com/IXI-2773/Microsoft_SC-900_Test_Learning_Engine/blob/250e55565582f9e6dc1f5608f7701aea5e9e953f/tests/test_backlog1_segment2_session_app_integration.py">Session identity and restoration tests ↗</a></li>
+          </ul>
+        </details>
         <p class="case-back">
           <a href="../explore.html">Choose another case study ↗</a>
         </p>
