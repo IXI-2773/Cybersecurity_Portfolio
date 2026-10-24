@@ -16,12 +16,12 @@ ARCHIVE_DATE = (2026, 10, 22, 0, 0, 0)
 ALLOWED = {
     "assets": {".svg", ".png", ".jpg", ".jpeg", ".webp", ".js"},
     "docs": {".md"},
-    "resumes": {".txt"},
+    "resumes": {".txt", ".pdf"},
     "projects": {".html", ".md", ".py", ".json", ".csv", ".spl"},
 }
 ROOT_FILES = {
     "index.html", "apply.html", "recruiter.html", "resume-soc.html", "resume-security.html", "explore.html", "test-lab.html", "verify.html", "roles.html", "styles.css", "README.md", "SECURITY.md",
-    "PUBLICATION_CHECKLIST.md",
+    "PUBLICATION_CHECKLIST.md", "portfolio.css",
 }
 REQUIRED_SITE_FILES = {
     "index.html", "apply.html", "recruiter.html", "explore.html", "test-lab.html", "verify.html", "roles.html", "styles.css",
@@ -36,6 +36,8 @@ REQUIRED_SITE_FILES = {
     "projects/network-traffic-analysis.html",
     "projects/vulnerability-remediation.html",
     "projects/CASE_STUDIES.md",
+    "portfolio.css", "projects/certification-learning-engine.html",
+    "resumes/Don_Lopez_Cybersecurity_Resume.pdf",
 }
 
 

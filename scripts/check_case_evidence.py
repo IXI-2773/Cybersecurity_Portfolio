@@ -137,439 +137,69 @@ def main() -> None:
             required(row["timestamp"] in visual and row["source_ip"] in visual,
                      "Illustrative alert must match the frozen oracle boundary case")
 
-    # Project dossier structure: six consistent navigation bars, with private
-    # architecture clearly distinct from testable public training fixtures.
-    home_cards = get("index.html")
-    required(home_cards.count('class="work-proofline"') == 4
-             and home_cards.count('class="engineering-proofline"') == 2,
-             "Four public-lab and two private architecture cards need matching proof labels")
-    public_cases = (
-        ("projects/authentication-detection.html", "scope-and-further-work"),
-        ("projects/windows-process-triage.html", "scope-and-limits"),
-        ("projects/network-traffic-analysis.html", "scope-and-limits"),
-        ("projects/vulnerability-remediation.html", "scope-and-limits"),
-    )
-    private_cases = ("projects/celestial-resonance.html",
-                     "projects/research-ai-infrastructure.html")
-    for page, anchor in public_cases:
-        source = get(page)
-        required(source.count('class="case-review-strip"') == 1
-                 and 'data-case-scope="public-lab"' in source
-                 and f'href="#{anchor}"' in source
-                 and 'class="case-review-actions"' in source,
-                 "Public lab missing common review bar or scope anchor: " + page)
-        required("Controlled evidence" in source
-                 and "private implementation" not in source.split('class="case-review-strip"', 1)[1].split('class="article-layout"', 1)[0].lower(),
-                 "Public lab review banner has incorrect disclosure: " + page)
-    for page in private_cases:
-        source = get(page)
-        required(source.count('class="case-review-strip"') == 1
-                 and 'data-case-scope="private-summary"' in source
-                 and 'href="#public-scope"' in source
-                 and 'Separate public' in source,
-                 "Private case must label its independent teaching demonstration: " + page)
-    for page in [p for p, _ in public_cases] + list(private_cases):
-        source = get(page)
-        required(source.index('class="case-snapshot"') < source.index('class="case-review-strip"')
-                 < source.index('class="article-layout"'),
-                 "Case review shortcuts must follow the summary and precede the report: " + page)
-    # Shared recruiting tool design and real, connected interaction contracts.
-    for page, active in (("explore.html", "explore"), ("test-lab.html", "lab"),
-                         ("verify.html", "verify")):
-        source = get(page)
-        required(source.count('class="toolkit-masthead"') == 1
-                 and source.count('class="toolkit-pipeline"') == 1,
-                 "Tool page missing shared design system: " + page)
-        required(source.count('data-toolkit-step=') == 3
-                 and f'data-toolkit-step="{active}" aria-current="page"' in source,
-                 "Tool page needs navigable and labeled active path: " + page)
-    explorer = get("explore.html")
-    required(explorer.count('data-quick-role=') == 4
-             and 'class="explorer-role-pills"' in explorer,
-             "Explorer needs all four functional role shortcuts")
-    explorer_js = get("assets/js/explorer.js")
-    required("button.dataset.quickRole" in explorer_js
-             and "role.value = button.dataset.quickRole" in explorer_js
-             and "aria-pressed" in explorer_js,
-             "Explorer role shortcuts must update and announce filter state")
-    lab = get("test-lab.html")
-    required(lab.count('data-window-preset=') == 2
-             and 'data-window-preset="599"' in lab
-             and 'data-window-preset="600"' in lab,
-             "Test lab needs both public authentication boundary presets")
-    lab_script = get("assets/js/lab-ui.js")
-    required("requestSubmit()" in lab_script
-             and "updatePreset()" in lab_script
-             and "button.dataset.windowPreset" in lab_script,
-             "Lab presets must execute existing public engine and synchronize state")
-    evidence_guide = get("verify.html")
-    required(evidence_guide.count('class="verification-jump"') == 1
-             and all(f'href="#{anchor}"' in evidence_guide for anchor in
-                     ("public-lab-title", "engineering-title", "browser-title")),
-             "Evidence guide must retain all three in-page scope links")
-    # Four genuinely separate labs now have concise analyst-facing source
-    # summaries, not a fabricated unified response case.
-    briefs = (
-        ("projects/authentication-detection.html", "64-event synthetic matrix",
-         "validation_events.csv", "Expected findings", "SPLUNK_MATRIX_BOUNDARY_RETEST.spl"),
-        ("projects/windows-process-triage.html", "two of five",
-         "events_4688.csv", "CASE_REPORT.md", "process lineage"),
-        ("projects/network-traffic-analysis.html", "20-frame PCAP",
-         "generate_fixture.py", "CASE_REPORT.md", "Wireshark GUI"),
-        ("projects/vulnerability-remediation.html", "four scoped fixture findings",
-         "audit_demo.py", "CASE_REPORT.md", "Localhost-only"),
-    )
-    for page, finding, source_a, source_b, guardrail in briefs:
-        public_case = get(page)
-        required(public_case.count('class="case-analyst-brief"') == 1
-                 and 'id="case-brief-title"' in public_case
-                 and 'data-reviewed-case="public-lab"' in public_case
-                 and public_case.count('class="case-brief-fact"') == 4
-                 and public_case.count('data-brief-limit="true"') == 1,
-                 "Public case must disclose question/observation/decision/limit: " + page)
-        required(all(phrase.lower() in public_case.lower() for phrase in
-                     (finding, source_a, source_b, guardrail)),
-                 "Public case summary missing supported evidence and scope: " + page)
-        required('href="#case-brief-title"' in public_case
-                 and 'class="case-brief-details"' in public_case
-                 and public_case.index('class="case-review-strip"')
-                 < public_case.index('class="case-analyst-brief"')
-                 < public_case.index('class="article-layout"'),
-                 "Public case summary must lead to evidence without replacing report: " + page)
-    guided = get("explore.html")
-    required(guided.count('class="explorer-playbook"') == 1
-             and guided.count('class="playbook-go"') == 4
-             and "independent training scenarios" in guided
-             and all(f'projects/{slug}.html#case-brief-title' in guided for slug in (
-                 "authentication-detection", "windows-process-triage",
-                 "network-traffic-analysis", "vulnerability-remediation")),
-             "Guided analyst paths must link four separate, scoped cases")
-    for page, kind, key in (
-        ("projects/authentication-detection.html", "identity", "user_boundary"),
-        ("projects/windows-process-triage.html", "endpoint", "powershell.exe"),
-        ("projects/network-traffic-analysis.html", "network", "NXDOMAIN"),
-        ("projects/vulnerability-remediation.html", "web", "nosniff")):
-        html = get(page)
-        required(html.count('class="case-evidence-contrast"') == 1
-                 and f'data-case-contrast="{kind}"' in html
-                 and 'id="case-evidence-contrast-title"' in html
-                 and html.count('class="case-contrast-side"') == 2
-                 and key in html
-                 and "source" in html.lower(),
-                 "Evidence contrast missing grounded signal/control: " + page)
-    roles = get("roles.html")
-    for target in ("soc-analyst", "security-analyst", "security-automation"):
-        required(f'id="{target}"' in roles and f'href="#{target}"' in roles,
-                 "Role page missing working role destination: " + target)
-    required(roles.count('class="role-route-card"') == 3
-             and roles.count('class="role-interview-question"') == 3
-             and roles.count('class="role-scope"') == 3,
-             "Each role needs a route, question and evidence limit")
-    for case in ("projects/authentication-detection.html",
-                 "projects/windows-process-triage.html",
-                 "projects/network-traffic-analysis.html",
-                 "projects/vulnerability-remediation.html",
-                 "projects/celestial-resonance.html",
-                 "projects/research-ai-infrastructure.html",
-                 "test-lab.html#authentication-replay",
-                 "test-lab.html#evidence-coverage"):
-        required(case in roles, "Role page missing existing evidence path: " + case)
-    required("independently authored" in roles.lower()
-             and "private" in roles.lower()
-             and "not" in roles.lower(),
-             "Role page must retain limits of public/private evidence")
-    required('href="roles.html"' in get("index.html")
-             and 'href="roles.html"' in get("explore.html")
-             and 'roles.html#security-automation' in get("apply.html"),
-             "Homepage, explorer and application paths must all reach role guide")
-    guide = get("verify.html")
-    required(guide.count("data-evidence-card") == 7
-             and guide.count('class="verification-limit"') == 7,
-             "Evidence review guide must contain seven source/limit entries")
-    for source in ("splunk_workflow/NATIVE_DASHBOARD_RESULT_2026-10-23.md",
-                   "assets/evidence/splunk-native-dashboard-results.png",
-                   "projects/03-network-pcap/CASE_REPORT.md",
-                   "projects/04-local-vulnerability-assessment/CASE_REPORT.md"):
-        required(source in guide, "Evidence review guide missing artifact: " + source)
-    required("independently authored" in guide.lower()
-             and "private" in guide.lower(),
-             "Public teaching engines must remain distinct from private implementations")
-    # Landing-page role clarity and genuine evidence must survive redesigns.
-    hiring_home = get("index.html")
-    import re as _hiring_re
-    hiring_h1 = _hiring_re.search(r"<h1[^>]*>(.*?)</h1>", hiring_home,
-                                  flags=_hiring_re.DOTALL | _hiring_re.IGNORECASE)
-    required(bool(hiring_h1) and "SOC Analyst" in hiring_h1.group(1),
-             "Homepage heading must identify target analyst role before scrolling")
-    required('class="hero-evidence-image"' in hiring_home
-             and 'src="assets/evidence/splunk-native-dashboard-results.png"' in hiring_home
-             and "Actual cropped screenshot" in hiring_home
-             and "Training data." in hiring_home
-             and "no production incidents" in hiring_home,
-             "Landing panel must show actual, scoped Splunk training evidence")
-    required(hiring_home.index('id="featured-splunk"') <
-             hiring_home.index('id="hiring-start"') <
-             hiring_home.index('id="boundary-replay"'),
-             "Source-first featured investigation should precede secondary recruiter routing")
-    required(hiring_home.count('class="hero-evidence-image"') == 1
-             and 'href="#featured-splunk">See the Splunk evidence' in hiring_home
-             and 'href="recruiter.html">One-page profile' in hiring_home,
-             "First-screen primary and secondary actions must match their destinations")
-    required("Information Systems &amp; Technology (Cybersecurity)" in hiring_home
-             and "holder-reported" in get("recruiter.html").lower(),
-             "Portfolio must retain credential scope context")
-    # Homepage boundary preview must use the verified browser engine, not
-    # hardcoded substitute detections. The static labels are only expected rows.
-    source = get("index.html")
-    required('id="boundary-replay"' in source
-             and 'assets/js/lab-data.js' in source
-             and 'assets/js/test-engine.js' in source
-             and 'assets/js/home-replay.js' in source,
-             "Homepage boundary preview must reference public source/engine")
-    required(source.count("data-replay-username=") == 5
-             and source.count("data-replay-window=") == 2,
-             "Homepage preview must expose five expected identities and two time windows")
-    reference = json.loads(get("projects/01-authentication-detection/expected_findings.json"))
-    expected_users = {row["username"] for row in reference["expected_findings"]}
-    import re as _replay_re
-    shown_users = set(_replay_re.findall(r'data-replay-username="([^"]+)"', source))
-    required(shown_users == expected_users,
-             "Homepage preview labels do not match the frozen expected finding identities")
-    script = get("assets/js/home-replay.js")
-    required("PortfolioEngine" in script and "PortfolioLabData" in script
-             and "detectAuth" in script and "actual.has(key(reference))" in script
-             and "seconds}-second inclusive" in script,
-             "Homepage replay must calculate fixture findings using the public engine")
-    # Feature only demonstrated Splunk scope; prevent stale "not run" homepage copy.
-    home_v4 = get("index.html")
-    required('id="featured-splunk"' in home_v4 and "3 / 5" in home_v4 and "5 / 5" in home_v4,
-             "Homepage missing featured Splunk debugging evidence")
-    required("Splunk execution still pending" not in home_v4
-             and "have not been executed in Splunk" not in home_v4
-             and "Splunk on-platform execution" not in home_v4,
-             "Homepage contains obsolete pre-Splunk execution status")
-    required("indexed ingestion and alerts not verified" in home_v4
-             and "training events" in home_v4.lower()
-             and "NATIVE_DASHBOARD_RESULT_2026-10-23.md" in home_v4,
-             "Homepage must distinguish real Splunk UI evidence from untested deployment")
-    project_slice = home_v4.split('id="projects"', 1)[1].split('id="evidence"', 1)[0]
-    security_pos = [project_slice.find(s) for s in (
-        "Authentication Detection", "Windows Process", "Network Traffic",
-        "Vulnerability Assessment", "Celestial Resonance", "Research AI Infrastructure")]
-    required(all(x >= 0 for x in security_pos) and security_pos == sorted(security_pos),
-             "Security labs must precede private engineering case studies")
-    # Focused recruiter journey contract: no falsely labeled download, readable
-    # source reports, and direct role/resume/evidence navigation.
-    required('href="recruiter.html">One-page profile' in home_v4,
-             "Homepage must distinguish printable profile from an ATS résumé")
-    required('class="hero-resume-download"' in home_v4
-             and 'href="resumes/Don_Lopez_SOC_Analyst.txt"' in home_v4,
-             "Homepage needs a direct SOC résumé download")
-    required('href="roles.html"' in home_v4,
-             "Homepage must expose the three-role hiring guide")
-    onepage_html = get("recruiter.html")
-    required('href="apply.html">Choose full résumé' in onepage_html,
-             "Recruiter profile must not falsely label a link as a download")
-    github_source = "https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/"
-    for name, document in (
-        ("role paths", roles),
-        ("evidence guide", guide),
-        ("analyst workflow", get("projects/soc-analyst-workflow.html")),
-    ):
-        import re as _re
-        raw_reports = _re.findall(r'href="(?!(?:https?://))[^"]+\.md(?:#[^"]*)?"', document)
-        required(not raw_reports,
-                 name + " has non-rendered relative Markdown links: " + repr(raw_reports))
-    for report in ("splunk_workflow/NATIVE_DASHBOARD_RESULT_2026-10-23.md",
-                   "projects/03-network-pcap/CASE_REPORT.md",
-                   "projects/04-local-vulnerability-assessment/CASE_REPORT.md"):
-        required(f'href="{github_source}{report}"' in guide,
-                 "Review guide must open the readable GitHub source: " + report)
-    # Resume/recruiter claims must remain grounded in completed screenshot review.
-    onepage = get("docs/RECRUITER_QUICK_BRIEF.md")
-    bullets = get("docs/RESUME_PORTFOLIO_BULLETS.md")
-    required("64-event" in onepage and "5/5" in onepage
-             and "cropped genuine Splunk dashboard screenshot" in onepage,
-             "Recruiter one-pager must disclose synthetic data and evidence provenance")
-    required("Splunk Enterprise" in bullets and "5/5" in bullets
-             and "actual Splunk execution remains pending" not in bullets,
-             "Resume bullets drifted to unsupported or obsolete Splunk status")
-    # Employer-facing website profile must remain a sourced, honest resume
-    # companion and never imply live production SOC employment.
-    profile = get("recruiter.html")
-    required("Splunk Enterprise Search &amp; Reporting" in profile
-             and "3 of 5" in profile and "5 of 5" in profile
-             and "64 synthetic events" in profile,
-             "Recruiter profile must preserve the observed synthetic debugging case")
-    required("Holder-reported" in profile and "cropped, size-reduced derivative is published" in profile
-             and "Indexed CSV ingestion" in profile,
-             "Recruiter profile must disclose credential and runtime limitations")
-    required('href="recruiter.html"' in home_v4
-             and "recruiter.html" in get("sitemap.xml"),
-             "Recruiter profile must be reachable from homepage and sitemap")
-    # Genuine operator evidence is a PNG asset; illustrative diagrams are
-    # separately labeled and can never substitute for a Splunk screen capture.
-    required('src="assets/evidence/splunk-native-dashboard-results.png"' in home_v4,
-             "Homepage missing genuine Splunk screenshot image")
-    auth = get("projects/authentication-detection.html")
-    required('src="../assets/evidence/splunk-native-dashboard-results.png"' in auth,
-             "Case study missing genuine Splunk screenshot")
-    required('authentication-investigation-flow.svg' in auth
-             and 'not a Splunk application screenshot' in auth,
-             "Generated workflow must be labeled as an illustration")
-    details = get("projects/soc-analyst-evidence.html")
-    required('soc-evidence-pipeline.svg' in details
-             and 'Workflow illustration' in details,
-             "SOC evidence illustration must be separated from real screenshots")
-    # ATS-friendly portfolio resume tracks must be genuinely source-backed.
-    application = get("apply.html")
-    required("id=\"soc-role\"" in application and "id=\"security-role\"" in application
-             and "apply.html" in home_v4,
-             "Application kit is not linked or role-specific")
-    required('download="Don_Lopez_SOC_Analyst.txt"' in application
-             and 'download="Don_Lopez_Security_Analyst.txt"' in application,
-             "Downloadable text versions must remain available")
-    for role_path in ("resumes/Don_Lopez_SOC_Analyst.txt",
-                      "resumes/Don_Lopez_Security_Analyst.txt"):
-        role = get(role_path)
-        for fact in ("DON LOPEZ", "CompTIA Security+", "CompTIA CySA+",
-                     "December 2024", "5 of 5"):
-            required(fact in role, "Resume missing supported fact: " + role_path + " / " + fact)
-        required("PORTFOLIO LABS, NOT EMPLOYMENT" in role
-                 and "not invented" in role
-                 and "https://github.com/IXI-2773/Cybersecurity_Portfolio" in role,
-                 "Resume must preserve synthetic/employment boundary and evidence links")
-        for prohibited in ("phone@example", "[your", "123-456", "Work Experience: SOC",
-                           "SOC Analyst at ", "production incident resolved"):
-            required(prohibited.lower() not in role.lower(),
-                     "Resume has unsupported detail or placeholder: " + prohibited)
-    application_doc = get("docs/APPLICATION_READINESS.md")
-    required("Allied Universal" in application_doc
-             and "not a guarantee" in application_doc
-             and "not established" in application_doc,
-             "Application guide must give accurate contact/employment and ATS limitations")
-    import re as _pii_re
-    _phone_pattern = r"(?<!\\d)(?:\\(\\d{3}\\)|\\d{3})[-. ]*\\d{3}[-. ]*\\d{4}(?!\\d)"
-    # Public brand stays Don Lopez while the uploaded resume supplies
-    # accurately qualified education and past physical-security employment.
-    for page_name in ("index.html", "recruiter.html", "apply.html"):
-        public_content = get(page_name)
-        required("Don Lopez" in public_content
-                 and "Brandon" not in public_content
-                 and not _pii_re.search(_phone_pattern, public_content),
-                 "Public page lost chosen brand or exposed private PDF details: " + page_name)
-    for public_name in ("resumes/Don_Lopez_SOC_Analyst.txt",
-                        "resumes/Don_Lopez_Security_Analyst.txt"):
-        public_resume = get(public_name)
-        for term in ("DON LOPEZ", "Allied Universal", "Security Officer",
-                     "Information Systems & Technology (Cybersecurity)",
-                     "California State University, San Bernardino",
-                     "SOC", "2019", "October 2026", "SCCDA",
-                     "Planned", "not earned", "December 2024"):
-            required(term.lower() in public_resume.lower(),
-                     "Owner-resume fact or planned-status missing: " + public_name + " / " + term)
-        required("Brandon" not in public_resume and not _pii_re.search(_phone_pattern, public_resume),
-                 "Public ATS text exposed private source PDF identity: " + public_name)
-        required("PORTFOLIO LABS, NOT EMPLOYMENT" in public_resume
-                 and "5 of 5" in public_resume
-                 and "Allied Universal" in public_resume,
-                 "Public ATS resume must distinguish real employment from synthetic labs")
-    required("Information Systems &amp; Technology (Cybersecurity)" in get("index.html")
-             and "Allied Universal" in get("index.html")
-             and "Allied Universal" in get("recruiter.html"),
-             "Homepage and recruiter profile must show corrected education and job history")
-    required("résumé-reported" in get("recruiter.html")
-             and "not claimed as paid SOC" in get("recruiter.html"),
-             "Recruiter profile must qualify source and SOC employment boundary")
-    reconciliation = get("docs/RESUME_SOURCE_RECONCILIATION_2026-10-23.md")
-    required("Don Lopez" in reconciliation and "5,000" in reconciliation
-             and "not independently verified" in reconciliation.lower()
-             and "not earned" in reconciliation.lower()
-             and not _pii_re.search(_phone_pattern, reconciliation) and "Brandon" not in reconciliation,
-             "Source reconciliation must distinguish owner resume from public lab proof")
-    # Print-ready versions complement, rather than substitute, owner-reported work history.
-    for pathname, role, leading_project in (
-        ("resume-soc.html", "SOC Analyst", "Authentication correlation"),
-        ("resume-security.html", "Security Analyst", "Localhost web hardening"),
-    ):
-        html = get(pathname)
-        for fact in ("Don Lopez", "Allied Universal", "Security Officer",
-                     "Information Systems &amp; Technology (Cybersecurity)",
-                     "California State University, San Bernardino",
-                     "CompTIA Security+", "CompTIA CySA+", "2019–Present",
-                     "Dec 2024", "not independently verified"):
-            required(fact.lower() in html.lower(), pathname + ": missing sourced fact " + fact)
-        required(role in html and leading_project in html
-                 and "window.print()" in html
-                 and 'href="apply.html"' in html,
-                 pathname + ": formatted résumé or print action incomplete")
-        required("Brandon" not in html and not _pii_re.search(_phone_pattern, html)
-                 and "tel:" not in html
-                 and "mailto:frailtycraven@gmail.com" in html,
-                 pathname + ": private source identity/contact leaked")
-        required('href="resumes/Don_Lopez_' in html,
-                 pathname + ": missing editable ATS text alternative")
-    required('href="resume-soc.html"' in application
-             and 'href="resume-security.html"' in application
-             and 'download="Don_Lopez_SOC_Analyst.txt"' in application
-             and 'download="Don_Lopez_Security_Analyst.txt"' in application,
-             "Application toolkit missing both accessible HTML and ATS text formats")
-    required("resume-soc.html" in get("sitemap.xml")
-             and "resume-security.html" in get("sitemap.xml"),
-             "Both printable resume documents must be discoverable in the sitemap")
-    # Public release gates: do not automatically publish prior application contact
-    # details or claim employer histories/verified issuer badges without evidence.
-    gates = get("docs/PUBLICATION_GATES.md")
-    cred = get("docs/CREDENTIALS.md")
-    required("APPROVED FOR PUBLICATION" in gates and "NOT PUBLISHED" in gates
-             and "NOT INVENTED" in gates and "frailtycraven@gmail.com" in gates,
-             "Public contact approval and other withholding controls must both remain explicit")
-    required("issued-to name" in cred and "Holder" not in cred[:100],
-             "Credential disclosure or legal-name visibility guidance missing")
-    required('id="application-status"' in application
-             and "mailto:frailtycraven@gmail.com" in application
-             and "GitHub profile" in application,
-             "Application page missing approved email and professional profile")
-    for role_path in ("resumes/Don_Lopez_SOC_Analyst.txt",
-                      "resumes/Don_Lopez_Security_Analyst.txt"):
-        role = get(role_path)
-        required("Email: frailtycraven@gmail.com" in role
-                 and "Public professional profile: https://github.com/IXI-2773" in role
-                 and "Professional contact:" not in role,
-                 "Resumes must show approved email separately from public GitHub profile")
-    # Guard only approved public contact on the three submission entry points.
-    for public_page in ("index.html", "recruiter.html", "apply.html"):
-        page = get(public_page)
-        required("mailto:frailtycraven@gmail.com" in page and "tel:" not in page,
-                 "Public page missing approved email or discloses unapproved phone link")
-        import re
-        used = set(re.findall(r'mailto:([^"\\s<>?]+)', page))
-        required(used == {"frailtycraven@gmail.com"},
-                 "An unapproved alternate email was inserted into a public page")
-    # Recruiter-facing landing page must expose all four fixture-backed reports
-    # and must not silently omit pending Splunk/Wireshark status.
+    # Employer navigation must expose the full reviewed catalog without scripts.
+    import re
     home = get("index.html")
-    landing = get("projects/soc-analyst-evidence.html")
-    for report in (
-        "01-authentication-detection/SOC_CASE_REPORT.md",
-        "02-windows-process-triage/CASE_REPORT.md",
-        "03-network-pcap/CASE_REPORT.md",
-        "04-local-vulnerability-assessment/CASE_REPORT.md",
-    ):
-        required(report in home and report in landing,
-                 f"Recruiter landing evidence link missing: {report}")
-    required('id="soc-evidence"' in home and
-             'href="projects/soc-analyst-evidence.html"' in home,
-             "Homepage missing recruiter pathway")
-    for term in ("Splunk", "Wireshark", "76", "synthetic"):
-        required(term.lower() in landing.lower(),
-                 f"Dedicated recruiter page missing qualification: {term}")
-
-    for source in (net_doc, web_doc):
-        required("not" in source.lower() and "synthetic" in source.lower(),
-                 "Evidence boundary disclosure missing")
-
-    print("PASS: 2 source-linked case reports, frozen rule IDs/times, and webpage links")
+    catalog = get("explore.html")
+    heading = re.search(r"<h1[^>]*>(.*?)</h1>", home, re.S)
+    required(heading is not None and "Don Lopez" in heading.group(1),
+             "Homepage must introduce Don Lopez directly")
+    required("Cybersecurity Analyst" in home and 'href="explore.html"' in home
+             and "Explore all work" in home,
+             "Homepage needs a clear employer choice action")
+    resume = "resumes/Don_Lopez_Cybersecurity_Resume.pdf"
+    required(f'href="{resume}"' in home and (ROOT / resume).read_bytes().startswith(b"%PDF-"),
+             "Primary resume must be the master-derived public PDF")
+    cases = ("authentication-detection", "windows-process-triage", "network-traffic-analysis",
+             "vulnerability-remediation", "celestial-resonance", "research-ai-infrastructure",
+             "certification-learning-engine")
+    for slug in cases:
+        required(f'href="projects/{slug}.html"' in catalog,
+                 "Employer choice page missing case: " + slug)
+        required(slug + ".html" in get("sitemap.xml"), "Case missing from sitemap: " + slug)
+    required('href="roles.html"' in catalog, "Retain the existing role-based review choice")
+    for slug in ("authentication-detection", "windows-process-triage", "network-traffic-analysis"):
+        required(f'href="projects/{slug}.html"' in home,
+                 "Homepage missing selected investigation: " + slug)
+    for slug in ("celestial-resonance", "research-ai-infrastructure"):
+        case = get("projects/" + slug + ".html")
+        required('data-case-scope="private-summary"' in case and "private" in case.lower(),
+                 "Private engineering case must disclose its public scope: " + slug)
+        required("https://github.com/IXI-2773/Celestial_Resonance" not in case
+                 and "https://github.com/IXI-2773/Research-AI-Infrastructure" not in case,
+                 "Private source URL must not enter public case")
+    learning = get("projects/certification-learning-engine.html")
+    for repo in ("Comptia-SY0-701-Test-Learning-Engine", "Microsoft_SC-900_Test_Learning_Engine"):
+        required("https://github.com/IXI-2773/" + repo in learning,
+                 "Study-engine case missing real source: " + repo)
+    required("independent" in learning.lower() and "study" in learning.lower()
+             and "guarantee" in learning.lower(),
+             "Study-engine case must retain its independent study-tool scope")
+    auth = get("projects/authentication-detection.html")
+    required("64" in auth and "5 of 5" in auth and "synthetic" in auth.lower()
+             and "indexed ingestion and alert firing" in auth.lower()
+             and "not verified" in auth.lower()
+             and "SPLUNK_MATRIX_BOUNDARY_RETEST.spl" in auth
+             and "NATIVE_DASHBOARD_RESULT_2026-10-23.md" in auth,
+             "Authentication case must retain source evidence and runtime limits")
+    required('src="../assets/evidence/splunk-native-dashboard-results.png"' in auth
+             and "cropped" in auth.lower(), "Keep the actual scoped Splunk image")
+    for path in ("index.html", "explore.html", "projects/certification-learning-engine.html"):
+        public = get(path)
+        required("Brandon" not in public and "tel:" not in public,
+                 "Public page exposed private master-resume details: " + path)
+    for path in ("index.html", "explore.html"):
+        required("CompTIA" in get(path) or "Security+" in get(path) or "case" in get(path).lower(),
+                 "Employer page lost its professional context")
+    reconciliation = get("docs/RESUME_SOURCE_RECONCILIATION_2026-10-23.md")
+    required("5,000" in reconciliation and "20-frame" in reconciliation
+             and "not independently verified" in reconciliation.lower(),
+             "Keep broader resume projects distinct from public training fixtures")
+    for path in ("resumes/Don_Lopez_SOC_Analyst.txt", "resumes/Don_Lopez_Security_Analyst.txt"):
+        legacy = get(path)
+        required("PORTFOLIO LABS, NOT EMPLOYMENT" in legacy and "Planned" in legacy,
+                 "Legacy resume must preserve experience and certification scope")
+    print("PASS: source evidence, seven employer case destinations, public resume and claim boundaries")
     print("Scope: static evidence consistency; not a live security assessment")
 
 

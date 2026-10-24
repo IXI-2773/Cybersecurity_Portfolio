@@ -39,3 +39,14 @@ Those entries are **source-reported, not independently verified here**. They do 
 The public portfolio intentionally uses **Don Lopez**, not the complete identity shown on the supplied document. It does not publish the private phone number or original uploaded résumé PDF. The existing approved professional email is retained. Employment and credential information is visibly attributed to the owner's résumé, not described as third-party-verified. A private job submission can use appropriate legal/contact details after the owner reviews the final copy.
 
 **This is a provenance and résumé-alignment record, not an employer reference check, issuer verification, or assertion that all source résumé claims have been independently reproduced.**
+
+
+## October 24 public derivative
+
+The primary public resume is now `resumes/Don_Lopez_Cybersecurity_Resume.pdf`.
+It is derived from the privately supplied master by changing the display name to
+Don Lopez and omitting the private phone. All remaining substantive text was
+compared with the master and preserved. The private original remains unchanged
+and outside this repository. Older role drafts are retained as legacy routes;
+they are not the primary resume. The distinctions above between broader resume
+lab work and the smaller public fixtures still apply.
