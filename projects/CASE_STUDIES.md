@@ -7,7 +7,10 @@ Choose a readable case below, or [browse the visual portfolio](https://ixi-2773.
 | [Authentication detection](authentication-detection.md) | Synthetic authentication fixtures; corrected 5/5 result in a reviewed Splunk screenshot. Indexed ingestion and fired alerts remain unverified. |
 | [Windows process triage](windows-process-triage.md) | Fabricated Event 4688 records, analyzer and analyst report. |
 | [Network packet analysis](network-traffic-analysis.md) | Generated 20-frame PCAP, decoder and packet report; Wireshark GUI review pending. |
-| [Local web hardening](vulnerability-remediation.md) | Four deliberate localhost HTTP findings, with the same checks after remediation. |
+| [Web attack-log and hardening](vulnerability-remediation.md) | Five live loopback requests, three bounded log signals, and four deliberate HTTP findings retested after remediation. |
+| [Phishing email investigation](phishing-investigation.md) | Lab-created RFC 5322 message, safe indicator extraction, and three evidence-backed findings. |
+| [Enterprise account investigation](identity-mfa-investigation.md) | Six normalized events correlated into a failure, sign-in and privilege-change chain with alternative explanations. |
+| [Forensic evidence examination](e3-digital-forensics.md) | Deterministic evidence package, verified working copy, artifact inventory and two qualified findings; E3 experience is separately owner-confirmed. |
 | [Celestial Resonance](celestial-resonance.md) | Public architecture summary of private research infrastructure. |
 | [Research AI Infrastructure](research-ai-infrastructure.md) | Public architecture summary of private evidence-aware research tooling. |
 | [Certification learning engines](certification-learning-engine.md) | Public Security+ and SC-900 desktop study software. |
@@ -20,14 +23,13 @@ The public [browser workbench](https://ixi-2773.github.io/Cybersecurity_Portfoli
 - [Multi-source Splunk Investigation](splunk-siem-investigation.md) — completed lab work described in the supplied resume; original artifacts to be added.
 - [Network Intrusion Investigation](network-intrusion-lab.md) — completed isolated Kali/VM work with Wireshark packet review and Snort tuning, described in the supplied résumé.
 
-## Planned project briefs
+## Prior training and expanded résumé lab stories
 
-- [Phishing Email Investigation](phishing-investigation.md) — planned, not executed.
-- [Identity & MFA Investigation](identity-mfa-investigation.md) — planned, not executed.
+- [Offensive Security VM Training](offensive-security-vm-labs.md) — owner-confirmed Kali, VMware, Necromancer and HackThisSite experience; original session evidence is not available.
 - [Python SOC Triage Assistant](soc-triage-automation.md) — planned, not executed.
 
 ## Classroom and applied investigations
 
-- [Paraben E3 classroom experience](e3-digital-forensics.md) — tool usage confirmed by the owner; assignment details and actual captures to follow.
+- [Forensic evidence examination and Paraben E3 experience](e3-digital-forensics.md) — current reproducible evidence plus separately owner-confirmed classroom tool use.
 - [Kali VM and network visibility](kali-defender-visibility.md) — completed owner-confirmed experience connected to separate, reproducible public network artifacts.
 - [Splunk threat investigation playbook](splunk-threat-hunting.md) — source-aware scenarios and illustrative starting searches.

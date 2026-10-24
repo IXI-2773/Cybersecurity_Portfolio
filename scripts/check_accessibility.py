@@ -96,7 +96,11 @@ def check_page(path: Path, targets: dict[Path, set[str]]) -> list[str]:
         "projects/windows-process-triage.html": "Windows Process Execution Triage",
         "projects/authentication-detection.html": "Authentication Detection",
         "projects/network-traffic-analysis.html": "Network Traffic Analysis",
-        "projects/vulnerability-remediation.html": "Vulnerability Assessment",
+        "projects/vulnerability-remediation.html": "Web Attack-Log",
+        "projects/phishing-investigation.html": "Phishing Email Investigation",
+        "projects/identity-mfa-investigation.html": "Enterprise Account Investigation",
+        "projects/e3-digital-forensics.html": "Forensic Evidence Examination",
+        "projects/offensive-security-vm-labs.html": "Offensive Security VM Training",
         "projects/celestial-resonance.html": "Celestial Resonance",
         "projects/research-ai-infrastructure.html": "Research AI Infrastructure (RAI)",
     }

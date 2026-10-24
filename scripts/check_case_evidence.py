@@ -143,8 +143,9 @@ def main() -> None:
     required((ROOT / 'projects/e3-digital-forensics.html').exists(),
              "E3 classroom experience needs its own case")
     e3 = get('projects/e3-digital-forensics.html')
-    required('data-case-scope="classroom-experience"' in e3 and 'reference photograph' in e3.lower(),
-             "Forensic classroom experience and reference-photo scope must be explicit")
+    required('data-case-scope="completed-reproducible-lab"' in e3
+             and 'owner-confirmed tool experience' in e3.lower(),
+             "Forensic case must separate reproducible evidence from E3 classroom experience")
     kali_vm = get('projects/kali-defender-visibility.html')
     required('data-case-scope="completed-owner-confirmed-experience"' in kali_vm,
              "Kali/VM case must present the owner-confirmed work as completed experience")
@@ -180,8 +181,9 @@ def main() -> None:
     required(f'href="{resume}"' in home and (ROOT / resume).read_bytes().startswith(b"%PDF-"),
              "Primary resume must be the master-derived public PDF")
     cases = ("authentication-detection", "windows-process-triage", "network-traffic-analysis",
-             "vulnerability-remediation", "celestial-resonance", "research-ai-infrastructure",
-             "certification-learning-engine")
+             "vulnerability-remediation", "phishing-investigation", "identity-mfa-investigation",
+             "e3-digital-forensics", "offensive-security-vm-labs", "celestial-resonance",
+             "research-ai-infrastructure", "certification-learning-engine")
     for slug in cases:
         required(f'href="projects/{slug}.html"' in catalog,
                  "Employer choice page missing case: " + slug)
@@ -194,11 +196,32 @@ def main() -> None:
         required('data-case-scope="resume-lab"' in rendered and "original" in rendered.lower(),
                  "Resume case must identify its evidence scope: " + slug)
         required(f'href="projects/{slug}.html"' in catalog, "Resume case missing from catalog: " + slug)
-    for slug in ("phishing-investigation", "identity-mfa-investigation", "soc-triage-automation"):
+    for slug in ("soc-triage-automation",):
         rendered = get("projects/" + slug + ".html")
         required('data-case-scope="planned-project"' in rendered and "Not yet executed" in rendered,
                  "Planned brief must not claim completed work: " + slug)
         required(f'href="projects/{slug}.html"' in catalog, "Planned brief missing from catalog: " + slug)
+
+    # Evidence expansion contract: completed cases provide inspectable artifacts.
+    for slug, evidence_path in (
+        ("phishing-investigation", "projects/05-phishing-email/CASE_REPORT.md"),
+        ("identity-mfa-investigation", "projects/06-enterprise-account/CASE_REPORT.md"),
+        ("vulnerability-remediation", "projects/04-local-vulnerability-assessment/access.log"),
+        ("e3-digital-forensics", "projects/07-forensic-evidence/CASE_REPORT.md"),
+    ):
+        rendered = get("projects/" + slug + ".html")
+        required('data-case-scope="completed-reproducible-lab"' in rendered,
+                 "Expanded case must be completed and reproducible: " + slug)
+        required(evidence_path in rendered,
+                 "Expanded case missing direct evidence link: " + slug)
+        required("Reproducible lab result" in rendered,
+                 "Expanded case missing visual evidence label: " + slug)
+    offensive = get("projects/offensive-security-vm-labs.html")
+    for phrase in ("Owner-confirmed prior training", "Necromancer", "HackThisSite", "VMware"):
+        required(phrase in offensive, "Offensive experience missing: " + phrase)
+    required("https://www.vulnhub.com/entry/the-necromancer-1%2C154/" in offensive
+             and "https://www.hackthissite.org/info/about" in offensive,
+             "Offensive experience must cite official training sources")
     required("Dean’s List" in get("awards.html") and "Spring 2023" in get("awards.html")
              and "Fall 2024" in get("awards.html"), "Keep both transcript-supported honors")
     required((ROOT/'education.html').exists(), "Transcript coursework needs a readable academic page")

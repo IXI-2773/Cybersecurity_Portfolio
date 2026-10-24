@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="628" viewBox="0 0 1200 628" role="img" aria-labelledby="case-title case-desc">
+<title id="case-title">Phishing email investigation</title>
+<desc id="case-desc">Evidence summary for LAB-MAIL-001: Completed offline analysis</desc>
+<style>.label{font:700 15px Inter,Segoe UI,Arial,sans-serif;letter-spacing:1.6px}.title{font:800 40px Inter,Segoe UI,Arial,sans-serif}.status{font:500 17px Inter,Segoe UI,Arial,sans-serif}.metric{font:800 34px Inter,Segoe UI,Arial,sans-serif;fill:#75e0ca}.metric-label{font:700 14px Inter,Segoe UI,Arial,sans-serif;fill:#b7ced3;letter-spacing:.6px}.section{font:700 14px Inter,Segoe UI,Arial,sans-serif;fill:#8db1b9;letter-spacing:1px}.time{font:700 13px Inter,Segoe UI,Arial,sans-serif;fill:#cce0e4}.event{font:600 13px Inter,Segoe UI,Arial,sans-serif;fill:#a9c1c7}.finding-id{font:800 14px ui-monospace,SFMono-Regular,Consolas,monospace;fill:#75e0ca}.finding{font:600 16px Inter,Segoe UI,Arial,sans-serif;fill:#eaf4f2}.severity{font:800 13px Inter,Segoe UI,Arial,sans-serif;fill:#f4c686;letter-spacing:1px}</style>
+<rect width="1200" height="628" fill="#071820"/>
+<text x="56" y="54" class="label" fill="#63d4bc">DON LOPEZ / LAB-MAIL-001</text>
+<text x="56" y="112" class="title" fill="#f3faf8">Phishing email investigation</text>
+<text x="56" y="148" class="status" fill="#a8c2c7">Completed offline analysis</text>
+<rect x="56.0" y="174" width="332.7" height="106" rx="12" fill="#102f3a" stroke="#315460"/><text x="78.0" y="222" class="metric">1</text><text x="78.0" y="252" class="metric-label">URLs reviewed</text>
+<rect x="402.7" y="174" width="332.7" height="106" rx="12" fill="#102f3a" stroke="#315460"/><text x="424.7" y="222" class="metric">3</text><text x="424.7" y="252" class="metric-label">Auth concerns</text>
+<rect x="749.3" y="174" width="332.7" height="106" rx="12" fill="#102f3a" stroke="#315460"/><text x="771.3" y="222" class="metric">3</text><text x="771.3" y="252" class="metric-label">Findings</text>
+<text x="56" y="326" class="section">EVIDENCE TIMELINE</text>
+<line x1="92" y1="376" x2="1108" y2="376" stroke="#355963" stroke-width="2"/>
+<circle cx="92.0" cy="376" r="10" fill="#63d4bc" stroke="#071820" stroke-width="4"/><text x="92.0" y="344" class="time" text-anchor="middle">01</text><text x="92.0" y="414" class="event" text-anchor="middle">Preserved</text>
+<circle cx="430.7" cy="376" r="10" fill="#63d4bc" stroke="#071820" stroke-width="4"/><text x="430.7" y="344" class="time" text-anchor="middle">02</text><text x="430.7" y="414" class="event" text-anchor="middle">Headers parsed</text>
+<circle cx="769.3" cy="376" r="10" fill="#f4b86b" stroke="#071820" stroke-width="4"/><text x="769.3" y="344" class="time" text-anchor="middle">03</text><text x="769.3" y="414" class="event" text-anchor="middle">Indicators reviewed</text>
+<circle cx="1108.0" cy="376" r="10" fill="#63d4bc" stroke="#071820" stroke-width="4"/><text x="1108.0" y="344" class="time" text-anchor="middle">04</text><text x="1108.0" y="414" class="event" text-anchor="middle">Handoff written</text>
+<text x="56" y="452" class="section">FINDINGS</text>
+<text x="72" y="482" class="finding-id">MAIL_REPLY_TO_MIS…</text><text x="242" y="482" class="finding">Sender and Reply-To domains differ</text><text x="1118" y="482" class="severity" text-anchor="end">HIGH</text>
+<text x="72" y="536" class="finding-id">MAIL_AUTH_FAILURES</text><text x="242" y="536" class="finding">SPF, DKIM or DMARC did not pass</text><text x="1118" y="536" class="severity" text-anchor="end">HIGH</text>
+<text x="72" y="590" class="finding-id">MAIL_LINK_DOMAIN_…</text><text x="242" y="590" class="finding">Linked host differs from sender domain</text><text x="1118" y="590" class="severity" text-anchor="end">MEDIUM</text>
+</svg>

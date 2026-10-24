@@ -1,34 +1,11 @@
-# Identity & MFA Investigation
+# Enterprise Account Investigation
 
-A planned identity case that follows a suspicious sign-in through account and session context.
+Completed correlation of six lab-created Windows-style identity events.
 
-Sign-in logs · MFA · Account audit events
+![Reproducible enterprise account investigation](../assets/evidence/enterprise-account-investigation.svg)
 
-A scoped project brief with a clear investigation question and deliverables.
+The case connects a three-failure burst, later successful sign-in and privileged group change into a five-event timeline while preserving authorized-administration and automation as alternative explanations.
 
-Planned project · Not yet executed
+[Case report](06-enterprise-account/CASE_REPORT.md) · [Fixture and analyzer](06-enterprise-account/README.md) · [All case studies](CASE_STUDIES.md)
 
-## The scenario
-
-A training account shows repeated authentication attempts followed by a successful sign-in. The proposed case asks whether account changes, MFA events and session activity strengthen or weaken the initial compromise hypothesis.
-
-## The investigation plan
-
-- Build synthetic sign-in, MFA and account-change records with explicit timestamps.
-- Correlate by stable account and session identifiers.
-- Compare an attack-like sequence with legitimate retries and administrative activity.
-- Document a provisional decision and the evidence an authorized response team would need.
-
-## What I intend to publish
-
-The fixture, event timeline, correlation queries, negative cases and an analyst handoff. The exercise will distinguish an authentication signal from a confirmed account takeover.
-
-## Scope and evidence
-
-This is a proposed project brief. There are no completed investigation results, screenshots or performance claims yet. They will be added after the work is performed.
-
-Research reference
-
-[MITRE ATT&CK: brute-force context ↗](https://attack.mitre.org/techniques/T1110/)
-
-[Choose another case study ↗](../explore.html)
+Academic foundation: IST 4910 Enterprise Systems Administration and IST 5250 Incident Handling & Cyber Investigation (Fall 2024).

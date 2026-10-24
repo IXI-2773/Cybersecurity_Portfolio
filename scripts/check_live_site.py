@@ -20,7 +20,8 @@ BASE = "https://ixi-2773.github.io/Cybersecurity_Portfolio/"
 EXPECTED_PAGES = {
     "education.html": "Academic Experience",
     "visual-credits.html": "Image Credits",
-    "projects/e3-digital-forensics.html": "Paraben E3",
+    "projects/e3-digital-forensics.html": "Forensic Evidence",
+    "projects/offensive-security-vm-labs.html": "Offensive Security",
     "projects/kali-defender-visibility.html": "Kali",
     "projects/splunk-threat-hunting.html": "Splunk Threat",
     "awards.html": "Awards",
@@ -28,7 +29,7 @@ EXPECTED_PAGES = {
     "projects/splunk-siem-investigation.html": "Multi-source Splunk",
     "projects/network-intrusion-lab.html": "Network Intrusion",
     "projects/phishing-investigation.html": "Phishing",
-    "projects/identity-mfa-investigation.html": "Identity",
+    "projects/identity-mfa-investigation.html": "Enterprise Account",
     "projects/soc-triage-automation.html": "Python SOC",
     "": "Don Lopez",
     "apply.html": "Application Toolkit",
@@ -43,7 +44,7 @@ EXPECTED_PAGES = {
     "projects/authentication-detection.html": "Authentication",
     "projects/windows-process-triage.html": "Windows",
     "projects/network-traffic-analysis.html": "Network",
-    "projects/vulnerability-remediation.html": "Vulnerability",
+    "projects/vulnerability-remediation.html": "Web Attack-Log",
     "projects/celestial-resonance.html": "Celestial Resonance",
     "projects/research-ai-infrastructure.html": "RAI",
     "projects/certification-learning-engine.html": "Certification Learning Engines",
@@ -54,6 +55,10 @@ STATIC_ASSETS = (
     "assets/reference/kali-desktop-2020.4.png", "assets/reference/forensic-write-blocker.webp", "assets/reference/csusb-pfau-library.webp",
     "assets/reference/csusb-jack-brown-hall.webp", "assets/reference/csusb-university-entrance.webp",
     "assets/evidence/splunk-native-dashboard-results.png",
+    "assets/evidence/phishing-investigation.svg",
+    "assets/evidence/enterprise-account-investigation.svg",
+    "assets/evidence/web-attack-log-investigation.svg",
+    "assets/evidence/forensic-evidence-examination.svg",
     "assets/js/signal-display.js",
     "assets/js/portfolio-systems.js",
     "styles.css",
@@ -134,6 +139,10 @@ def verify_response(path: str, status: int, content_type: str, body: bytes) -> d
                     "projects/windows-process-triage.html",
                     "projects/network-traffic-analysis.html",
                     "projects/vulnerability-remediation.html",
+                    "projects/phishing-investigation.html",
+                    "projects/identity-mfa-investigation.html",
+                    "projects/e3-digital-forensics.html",
+                    "projects/offensive-security-vm-labs.html",
                     "projects/celestial-resonance.html",
                     "projects/research-ai-infrastructure.html",
                     "projects/certification-learning-engine.html",
@@ -160,7 +169,7 @@ def verify_response(path: str, status: int, content_type: str, body: bytes) -> d
     elif path.endswith(".svg"):
         if "svg" not in content_type.lower():
             raise ValueError("SVG asset served with unexpected MIME type")
-        if b"<svg" not in body or b"OFFLINE VISUALIZATION" not in body:
+        if b"<svg" not in body or not (b"OFFLINE VISUALIZATION" in body or (b"<title" in body and b"<desc" in body)):
             raise ValueError("SVG evidence content missing")
     elif path.endswith(".js"):
         if "javascript" not in content_type.lower():
