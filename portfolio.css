@@ -984,3 +984,8 @@ button,input {
 .signal-display .field-list { color:#e2f1e8; font-size:.72rem; margin:10px 0; }
 .signal-display .field-list dt { color:#bed8c8; }
 .signal-display .field-list > div { border-color:#486754; }
+@media(max-width:650px) {
+  .technical-workbench .workbench-toolbar { flex-direction:column; align-items:stretch; }
+  .technical-workbench .workbench-toolbar label { width:100%; flex-basis:auto; }
+  .technical-workbench .workbench-toolbar .replay-controls { align-self:flex-start; }
+}

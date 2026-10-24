@@ -28,7 +28,7 @@ def main():
             wait.until(lambda _:d.execute_script('const r=arguments[0].getBoundingClientRect();return r.top>=0 && r.bottom<=innerHeight',target))
             target.click()
         def capture_panel(panel,name):
-            d.execute_script('arguments[0].scrollIntoView({block:"start",behavior:"instant"})',panel)
+            d.execute_script('window.scrollTo({top:0,left:0,behavior:"instant"})')
             box=d.execute_script('const r=arguments[0].getBoundingClientRect();return {x:r.x+scrollX,y:r.y+scrollY,width:r.width,height:r.height,scale:1}',panel)
             shot=d.execute_cdp_cmd('Page.captureScreenshot',{'format':'png','captureBeyondViewport':True,'clip':box})
             (OUT/name).write_bytes(base64.b64decode(shot['data']))
@@ -49,6 +49,10 @@ def main():
                 for image in d.find_elements(By.CSS_SELECTOR,'img'):
                     d.execute_script('arguments[0].scrollIntoView({block:"center"})',image)
                     wait.until(lambda _:d.execute_script('return arguments[0].complete && arguments[0].naturalWidth>0',image))
+                if width<=390:
+                    for select in d.find_elements(By.CSS_SELECTOR,'.technical-workbench .workbench-toolbar select'):
+                        panel=select.find_element(By.XPATH,'ancestor::section[1]')
+                        assert select.rect['width']>=panel.rect['width']-50,(path,width,'selector too narrow')
                 if width in [1280,390]:
                     d.execute_script('window.scrollTo(0,0)')
                     d.save_screenshot(str(OUT/(Path(path).stem+f'-technical-{width}.png')))

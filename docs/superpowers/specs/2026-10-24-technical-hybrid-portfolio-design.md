@@ -1,6 +1,6 @@
 # Technical hybrid portfolio design
 
-Status: selected direction; detailed design for review. No website implementation in this change.
+Status: approved and implemented on the feature branch; awaiting integration. See the verification receipt.
 
 ## Intent and audience
 
@@ -116,4 +116,4 @@ Acceptance: the visitor can inspect an event's rule inclusion, reproduce exact-b
 
 Builder may choose SVG geometry, exact spacing, and minor copy within the established identity. Use semantic controls and local SVG/data-driven rendering; do not generate bitmap replacements for technical diagrams. Preserve factual metrics and source boundaries. Suggested implementation tasks: fixture-backed detection/replay; CR/RAI inspectors; image integration and responsive verification.
 
-The owner approved the hybrid concept; this detailed spec and its implementation plan are the concrete review artifacts. This documentation-only change does not update the deployed website.
+The owner approved the hybrid concept; this detailed spec and its implementation plan are the concrete review artifacts. The implementation is in PR #12. The deployed website changes only after integration.
