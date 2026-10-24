@@ -55,6 +55,8 @@ jobs:
           python-version: '3.11'
       - name: Install lightweight browser driver library
         run: python -m pip install 'selenium==4.36.0' 'pypdf==5.9.0'
+      - name: Verify technical workbench controls and evidence
+        run: python scripts/test_technical_workbenches_browser.py
       - name: Capture responsive screenshots and test keyboard menu and page overflow
         run: python scripts/visual_review.py
       - name: Upload browser screenshots and review summary

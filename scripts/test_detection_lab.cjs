@@ -1,0 +1,25 @@
+const assert = require('node:assert/strict');
+const {evaluateAuthentication, decisionForSelection} = require('../assets/js/detection-lab.js');
+const {authentication: fixture} = require('../assets/js/technical-fixtures.js');
+const {createReplay} = require('../assets/js/portfolio-replay.js');
+let checks = 0;
+function check(name, fn) { fn(); checks++; }
+const event = (id, seconds, type='login_failure', user='alice', ip='192.0.2.1') => ({id,timestamp:new Date(Date.UTC(2026,0,1)+seconds*1000).toISOString().replace('.000Z','Z'), username:user,source_ip:ip,host:'LAB',event_type:type,scenario:'test'});
+const five = [0,1,2,3,4].map((s,i)=>event('f'+i,s));
+check('matches entire independent oracle',()=>assert.deepEqual(evaluateAuthentication(fixture.events).findings,fixture.expectedFindings));
+check('exact boundary included',()=>assert.equal(evaluateAuthentication([...five,event('s',600,'login_success')]).findings.length,1));
+check('601 seconds excluded with reason',()=>{const r=evaluateAuthentication([...five,event('s',601,'login_success')]);assert.equal(r.findings.length,0);assert.equal(r.decisions[0].exclusions.find(x=>x.id==='f0').reason,'outside window');});
+check('other user cannot contribute',()=>assert.equal(evaluateAuthentication([...five,event('s',60,'login_success','bob')]).findings.length,0));
+check('other IP cannot contribute',()=>assert.equal(evaluateAuthentication([...five,event('s',60,'login_success','alice','192.0.2.2')]).findings.length,0));
+check('every success resets stream',()=>assert.equal(evaluateAuthentication([...five,event('s1',10,'login_success'),event('f6',11),event('s2',12,'login_success')]).findings.length,1));
+check('input unchanged',()=>{const copy=JSON.stringify(fixture.events);evaluateAuthentication(fixture.events);assert.equal(JSON.stringify(fixture.events),copy);});
+check('equal times preserve source order',()=>assert.equal(evaluateAuthentication([...five,event('s',4,'login_success')]).findings.length,1));
+check('later same-time failure cannot leak backward',()=>assert.equal(evaluateAuthentication([event('s',0,'login_success'),...five.map(x=>({...x,timestamp:event('x',0).timestamp}))]).findings.length,0));
+for(const bad of [{...five[0],timestamp:'2026-02-30T00:00:00Z'},{...five[0],username:''},{...five[0],event_type:'unknown'},{...five[0],epochMs:NaN}])check('invalid data rejected',()=>assert.throws(()=>evaluateAuthentication([bad])));
+check('duplicate event IDs rejected',()=>assert.throws(()=>evaluateAuthentication([five[0],five[0]])));
+check('invalid threshold rejected',()=>assert.throws(()=>evaluateAuthentication(five,{threshold:0})));
+check('replay finite, no duplicate timers, selection pauses',()=>{let cb,active=0,last;const scheduler={setInterval(fn){cb=fn;active++;return 1;},clearInterval(){active--;}};const r=createReplay({count:4,intervalMs:10,scheduler,onChange:(i,running)=>last={i,running}});assert.deepEqual(last,{i:0,running:false});r.play();r.play();assert.equal(active,1);cb();assert.equal(last.i,1);r.select(2);assert.equal(active,0);assert.equal(last.running,false);r.play();cb();assert.deepEqual(last,{i:3,running:false});assert.equal(active,0);r.step();assert.equal(last.i,3);r.reset();assert.equal(last.i,0);r.dispose();r.play();assert.equal(active,0);});
+check('bad replay size rejected',()=>assert.throws(()=>createReplay({count:0,onChange(){}})));
+check('inspector explains selected earlier success',()=>{const events=fixture.events.filter(e=>e.scenario==='post_success_burst');const evaluation=evaluateAuthentication(events);const early=events.find(e=>e.event_type==='login_success');const d=decisionForSelection(events,evaluation.decisions,early.id);assert.equal(d.successId,early.id);assert.equal(d.triggered,false);assert.equal(d.count,3);});
+check('interleaved user selection uses their own decision',()=>{const events=fixture.events.filter(e=>e.scenario==='interleaved_users');const evaluation=evaluateAuthentication(events);const alpha=events.find(e=>e.username==='user_alpha');const d=decisionForSelection(events,evaluation.decisions,alpha.id);assert.equal(events.find(e=>e.id===d.successId).username,'user_alpha');assert.ok(d.contributingIds.includes(alpha.id));});
+console.log(`PASS: ${checks} authentication and replay checks`);

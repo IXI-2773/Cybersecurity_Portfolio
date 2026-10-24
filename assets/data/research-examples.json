@@ -1,0 +1,278 @@
+{
+  "versions": [
+    {
+      "record_id": "release-v1",
+      "observation_time": "2026-02-28T00:00:00Z",
+      "available_at": "2026-03-04T00:00:00Z",
+      "vintage_id": "v1",
+      "value": 2.4
+    },
+    {
+      "record_id": "release-v2",
+      "observation_time": "2026-02-28T00:00:00Z",
+      "available_at": "2026-03-20T00:00:00Z",
+      "vintage_id": "v2",
+      "value": 2.7
+    },
+    {
+      "record_id": "next-period",
+      "observation_time": "2026-03-31T00:00:00Z",
+      "available_at": "2026-04-04T00:00:00Z",
+      "vintage_id": "v3",
+      "value": 2.6
+    }
+  ],
+  "claims": [
+    {
+      "id": "support",
+      "title": "Comparable sources support the claim",
+      "claim": "Both sources indicate tighter business credit in February.",
+      "requiredSourceIds": [
+        "A",
+        "B"
+      ],
+      "sources": [
+        {
+          "source_id": "A",
+          "title": "Fictional lending survey A",
+          "period": "2026-02",
+          "scope": "business credit",
+          "passage_id": "A:p1",
+          "text": "In February, respondents reported tighter conditions for business credit.",
+          "observation": "tightening"
+        },
+        {
+          "source_id": "B",
+          "title": "Fictional lending survey B",
+          "period": "2026-02",
+          "scope": "business credit",
+          "passage_id": "B:p1",
+          "text": "In February, the survey indicated tighter business-credit conditions.",
+          "observation": "tightening"
+        }
+      ],
+      "citations": [
+        {
+          "source_id": "A",
+          "passage_id": "A:p1"
+        },
+        {
+          "source_id": "B",
+          "passage_id": "B:p1"
+        }
+      ]
+    },
+    {
+      "id": "conflict",
+      "title": "Comparable observations disagree",
+      "claim": "Both sources indicate tighter business credit in February.",
+      "requiredSourceIds": [
+        "A",
+        "B"
+      ],
+      "sources": [
+        {
+          "source_id": "A",
+          "title": "Fictional lending survey A",
+          "period": "2026-02",
+          "scope": "business credit",
+          "passage_id": "A:p1",
+          "text": "In February, respondents reported tighter conditions for business credit.",
+          "observation": "tightening"
+        },
+        {
+          "source_id": "B",
+          "title": "Fictional lending survey B",
+          "period": "2026-02",
+          "scope": "business credit",
+          "passage_id": "B:p1",
+          "text": "In February, the survey indicated easier business-credit conditions.",
+          "observation": "easing"
+        }
+      ],
+      "citations": [
+        {
+          "source_id": "A",
+          "passage_id": "A:p1"
+        },
+        {
+          "source_id": "B",
+          "passage_id": "B:p1"
+        }
+      ]
+    },
+    {
+      "id": "missing",
+      "title": "One required source is missing",
+      "claim": "Both sources indicate tighter business credit in February.",
+      "requiredSourceIds": [
+        "A",
+        "B"
+      ],
+      "sources": [
+        {
+          "source_id": "A",
+          "title": "Fictional lending survey A",
+          "period": "2026-02",
+          "scope": "business credit",
+          "passage_id": "A:p1",
+          "text": "In February, respondents reported tighter conditions for business credit.",
+          "observation": "tightening"
+        }
+      ],
+      "citations": [
+        {
+          "source_id": "A",
+          "passage_id": "A:p1"
+        }
+      ]
+    },
+    {
+      "id": "attribution",
+      "title": "A passage is assigned to the wrong source",
+      "claim": "Both sources indicate tighter business credit in February.",
+      "requiredSourceIds": [
+        "A",
+        "B"
+      ],
+      "sources": [
+        {
+          "source_id": "A",
+          "title": "Fictional lending survey A",
+          "period": "2026-02",
+          "scope": "business credit",
+          "passage_id": "A:p1",
+          "text": "In February, respondents reported tighter conditions for business credit.",
+          "observation": "tightening"
+        },
+        {
+          "source_id": "B",
+          "title": "Fictional lending survey B",
+          "period": "2026-02",
+          "scope": "business credit",
+          "passage_id": "B:p1",
+          "text": "In February, the survey indicated tighter business-credit conditions.",
+          "observation": "tightening"
+        }
+      ],
+      "citations": [
+        {
+          "source_id": "A",
+          "passage_id": "A:p1"
+        },
+        {
+          "source_id": "A",
+          "passage_id": "B:p1"
+        }
+      ]
+    },
+    {
+      "id": "scope",
+      "title": "Different credit markets",
+      "claim": "Both sources indicate tighter business credit in February.",
+      "requiredSourceIds": [
+        "A",
+        "B"
+      ],
+      "sources": [
+        {
+          "source_id": "A",
+          "title": "Fictional lending survey A",
+          "period": "2026-02",
+          "scope": "business credit",
+          "passage_id": "A:p1",
+          "text": "In February, respondents reported tighter conditions for business credit.",
+          "observation": "tightening"
+        },
+        {
+          "source_id": "B",
+          "title": "Fictional lending survey B",
+          "period": "2026-02",
+          "scope": "household mortgages",
+          "passage_id": "B:p1",
+          "text": "In February, respondents reported easier mortgage conditions for households.",
+          "observation": "easing"
+        }
+      ],
+      "citations": [
+        {
+          "source_id": "A",
+          "passage_id": "A:p1"
+        },
+        {
+          "source_id": "B",
+          "passage_id": "B:p1"
+        }
+      ]
+    },
+    {
+      "id": "period",
+      "title": "Different observation periods",
+      "claim": "Both sources indicate tighter business credit in February.",
+      "requiredSourceIds": [
+        "A",
+        "B"
+      ],
+      "sources": [
+        {
+          "source_id": "A",
+          "title": "Fictional lending survey A",
+          "period": "2026-02",
+          "scope": "business credit",
+          "passage_id": "A:p1",
+          "text": "In February, respondents reported tighter conditions for business credit.",
+          "observation": "tightening"
+        },
+        {
+          "source_id": "B",
+          "title": "Fictional lending survey B",
+          "period": "2026-01",
+          "scope": "business credit",
+          "passage_id": "B:p1",
+          "text": "In January, respondents reported easier conditions for business credit.",
+          "observation": "easing"
+        }
+      ],
+      "citations": [
+        {
+          "source_id": "A",
+          "passage_id": "A:p1"
+        },
+        {
+          "source_id": "B",
+          "passage_id": "B:p1"
+        }
+      ]
+    }
+  ],
+  "ambiguityVersions": [
+    {
+      "record_id": "release-v1",
+      "observation_time": "2026-02-28T00:00:00Z",
+      "available_at": "2026-03-04T00:00:00Z",
+      "vintage_id": "v1",
+      "value": 2.4
+    },
+    {
+      "record_id": "release-v2",
+      "observation_time": "2026-02-28T00:00:00Z",
+      "available_at": "2026-03-20T00:00:00Z",
+      "vintage_id": "v2",
+      "value": 2.7
+    },
+    {
+      "record_id": "next-period",
+      "observation_time": "2026-03-31T00:00:00Z",
+      "available_at": "2026-04-04T00:00:00Z",
+      "vintage_id": "v3",
+      "value": 2.6
+    },
+    {
+      "record_id": "conflicting-v2",
+      "observation_time": "2026-02-28T00:00:00Z",
+      "available_at": "2026-03-20T00:00:00Z",
+      "vintage_id": "v2",
+      "value": 9
+    }
+  ]
+}
