@@ -13,6 +13,7 @@
   line-height:1.65;
 }
 .intro-with-display { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); gap:48px; align-items:center; }
+.intro.intro-with-display { max-width:none; }
 .intro-content { min-width:0; }
 .intro-content .actions { gap:18px; }
 .social-profiles { display:flex; flex-wrap:wrap; gap:25px; margin-top:22px; font-size:.96rem; font-weight:600; }

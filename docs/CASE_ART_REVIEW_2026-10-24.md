@@ -22,3 +22,9 @@ Existing lab source, fixtures and both resume files are unchanged.
 
 Browser review and exact release checks are recorded in the pull request after
 the bounded desktop/mobile review. The same assistant implements and reviews.
+
+First browser pass: 66 captures and the display controls passed. Inspected the
+home, E3, Kali and Splunk layouts on desktop/mobile. Corrected the inherited
+intro width cap so the new two-column hero uses the full content width; also
+qualified the illustrative process query to Sysmon sources. Confirm with the
+final browser run before release.

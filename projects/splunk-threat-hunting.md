@@ -30,7 +30,7 @@ This table preserves events for review; it is not a deployed correlation alert. 
 Review parent process, user, command line and host context in available Sysmon process-creation events. Correlate relevant PowerShell logging and network events when collected. An encoded command or unusual parent relationship is a lead; legitimate automation remains a competing explanation.
 
 ```spl
-index=lab EventCode=1
+index=lab source="*Sysmon*" EventCode=1
 | table _time host User ParentImage Image CommandLine
 | sort 0 _time
 ```
