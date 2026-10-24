@@ -12,7 +12,7 @@ The executed Python suite has 23 focused tests. Full-capture regeneration agrees
 
 Chrome checks cover 1280, 390 and 320-pixel viewports, source/target selection, collection-clock movement, packet tuple inspection, negative controls, focus retention, reduced motion, offscreen pause and no-script fallbacks. The first run passed all behavioral checks and site validation. One batched visual review of desktop/mobile panels found a material readability issue: mobile SVG labels scaled to approximately five pixels.
 
-A rendered-label-size regression now requires a minimum 10-pixel height at each supported viewport. The regression failed as intended at 390px with a rendered label height of 6px (Chrome run40118829662). The bounded correction preserves the chart's width inside a keyboard-focusable horizontal scrolling region while containing page overflow. Final run/deployment references will be recorded after verification.
+A rendered-label-size regression now requires a minimum 10-pixel height at each supported viewport. The regression failed as intended at 390px with a rendered label height of 6px (Chrome run40118829662). The bounded correction preserves the chart's width inside a keyboard-focusable horizontal scrolling region while containing page overflow. [Final Chrome run40118976281](https://github.com/IXI-2773/Cybersecurity_Portfolio/actions/runs/40118976281) passed the rendered-size regression, all interaction checks and full responsive review on commit0e883020. [Site validation run40118976287](https://github.com/IXI-2773/Cybersecurity_Portfolio/actions/runs/40118976287) also passed. Publication and live-file verification are recorded in [PR13](https://github.com/IXI-2773/Cybersecurity_Portfolio/pull/13).
 
 ## Deferred minor
 
