@@ -55,7 +55,7 @@ def main() -> None:
         window = app.tk.Tk()
         try:
             engine = app.TestingEngineApp(window)
-            window.geometry("1240x940+0+0")
+            window.geometry("1240x620+0+0")
             engine.session_mode_var.set(app.MODE_PRACTICE)
             engine.session_count_var.set("5")
             engine.session_random_var.set(False)
@@ -64,7 +64,7 @@ def main() -> None:
                 raise ValueError("The real app did not start the five-question example session")
             window.update_idletasks()
             window.update()
-            image = ImageGrab.grab(bbox=(0, 0, 1240, 940))
+            image = ImageGrab.grab(bbox=(0, 0, 1240, 620))
             image.save(output / "sc900-practice-linux.png")
             report = {
                 "status": "PASS", "source_repository": "IXI-2773/Microsoft_SC-900_Test_Learning_Engine",
