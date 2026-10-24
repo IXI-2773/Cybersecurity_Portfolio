@@ -20,6 +20,8 @@ on:
       - 'portfolio.css'
       - 'resumes/**'
       - 'projects/*.html'
+      - 'projects/08-ad-investigation/**'
+      - 'scripts/test_technical_workbenches_browser.py'
       - 'scripts/visual_review.py'
       - '.github/workflows/visual-review.yml'
   push:
@@ -38,6 +40,8 @@ on:
       - 'portfolio.css'
       - 'resumes/**'
       - 'projects/*.html'
+      - 'projects/08-ad-investigation/**'
+      - 'scripts/test_technical_workbenches_browser.py'
       - '.github/workflows/visual-review.yml'
       - 'scripts/visual_review.py'
 
@@ -55,6 +59,10 @@ jobs:
           python-version: '3.11'
       - name: Install lightweight browser driver library
         run: python -m pip install 'selenium==4.36.0' 'pypdf==5.9.0'
+      - name: Verify recorded AD analysis and generated evidence
+        run: |
+          python -m unittest discover -s projects/08-ad-investigation -p 'test_*.py'
+          python projects/08-ad-investigation/analyze.py --source-dir /tmp/portfolio-ad-source --download --check
       - name: Verify technical workbench controls and evidence
         run: python scripts/test_technical_workbenches_browser.py
       - name: Capture responsive screenshots and test keyboard menu and page overflow

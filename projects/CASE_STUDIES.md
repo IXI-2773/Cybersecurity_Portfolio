@@ -4,6 +4,7 @@ Choose a readable case below, or [browse the visual portfolio](https://ixi-2773.
 
 | Case | Evidence and scope |
 | --- | --- |
+| [Active Directory attack-chain investigation](ad-attack-chain.md) | Independent OTRF capture analysis: 25,993 host events, 1,121 packets, six qualified findings, exact source references and tested counterexamples. |
 | [Authentication detection](authentication-detection.md) | Synthetic authentication fixtures; corrected 5/5 result in a reviewed Splunk screenshot. Indexed ingestion and fired alerts remain unverified. |
 | [Windows process triage](windows-process-triage.md) | Fabricated Event 4688 records, analyzer and analyst report. |
 | [Network packet analysis](network-traffic-analysis.md) | Generated 20-frame PCAP, decoder and packet report; Wireshark GUI review pending. |

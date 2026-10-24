@@ -1,4 +1,4 @@
-"""Bounded Chrome verification of the four technical portfolio routes."""
+"""Bounded Chrome verification of the technical portfolio routes."""
 import base64
 import json
 import shutil
@@ -10,7 +10,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select, WebDriverWait
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'visual-review-screenshots'
-ROUTES=['index.html','projects/detection-engineering.html','projects/celestial-resonance.html','projects/research-ai-infrastructure.html']
+ROUTES=['index.html','projects/detection-engineering.html','projects/celestial-resonance.html','projects/research-ai-infrastructure.html','projects/ad-attack-chain.html']
 def main():
     opts=Options()
     binary=shutil.which('google-chrome') or shutil.which('chromium')
@@ -35,7 +35,8 @@ def main():
 
         def open_page(path):
             d.get((ROOT/path).as_uri())
-            if 'detection-engineering' in path:wait.until(lambda _:len(d.find_elements(By.CSS_SELECTOR,'[data-event-index]'))>0)
+            if 'ad-attack-chain' in path:wait.until(lambda _:len(d.find_elements(By.CSS_SELECTOR,'[data-ad-record]'))>0)
+            elif 'detection-engineering' in path:wait.until(lambda _:len(d.find_elements(By.CSS_SELECTOR,'[data-event-index]'))>0)
             elif 'celestial-resonance' in path:wait.until(lambda _:'release-v1' in el('[data-vintage-outcome]').text)
             elif 'research-ai' in path:wait.until(lambda _:len(d.find_elements(By.CSS_SELECTOR,'[data-passage-id]'))>0)
             else:wait.until(lambda _:'auth-052' in el('[data-signal-detail]').get_attribute('innerHTML') or len(d.find_elements(By.CSS_SELECTOR,'.signal-data-dot'))>0)
@@ -100,6 +101,37 @@ def main():
         wait.until(lambda _:el('[data-signal-display]').get_attribute('data-running')=='true')
         old=d.current_window_handle;d.switch_to.new_window('tab');d.switch_to.window(old)
         wait.until(lambda _:el('[data-signal-display]').get_attribute('data-running')=='false')
+        open_page('projects/ad-attack-chain.html')
+        click('[data-ad-phase="3"]')
+        Select(el('[data-ad-target]')).select_by_value('mordordc.theshire.local')
+        assert 'H24051' in el('[data-ad-inspector]').text
+        assert '39.812' in el('[data-ad-inspector]').text
+        before=el('[data-ad-point="5"]').get_attribute('style')
+        Select(el('[data-ad-clock]')).select_by_value('collection_time')
+        assert before!=el('[data-ad-point="5"]').get_attribute('style'),'Clock change must move DC dot'
+        assert 'Collection time' in el('[data-ad-clock-label]').text
+        click('[data-ad-record="H23781"]')
+        assert d.execute_script('return document.activeElement.dataset.adRecord')=='H23781'
+        assert 'fddc55f3-4305' in el('[data-ad-inspector]').text
+        click('[data-ad-record="P00843"]')
+        assert '58215' in el('[data-ad-inspector]').text
+        assert 'POST /wsman' in el('[data-ad-inspector]').text
+        Select(el('[data-ad-view]')).select_by_value('controls')
+        assert len(d.find_elements(By.CSS_SELECTOR,'[data-ad-record]'))==12
+        assert '12 nonmatching' in el('[data-ad-outcome]').text
+        click('[data-ad-record]')
+        assert 'Security 4769' in el('[data-ad-inspector]').text
+        capture_panel(el('[data-ad-case]'),'ad-controls-inspector.png')
+        click('[data-ad-reset]')
+        click('[data-ad-play]')
+        wait.until(lambda _:el('[data-ad-case]').get_attribute('data-running')=='true')
+        d.execute_script('window.scrollTo(0,document.body.scrollHeight)')
+        wait.until(lambda _:el('[data-ad-case]').get_attribute('data-running')=='false')
+        d.execute_cdp_cmd('Emulation.setEmulatedMedia',{'features':[{'name':'prefers-reduced-motion','value':'reduce'}]})
+        open_page('projects/ad-attack-chain.html');click('[data-ad-play]')
+        assert el('[data-ad-case]').get_attribute('data-running')=='false'
+        assert el('[data-ad-phase="1"]').get_attribute('aria-pressed')=='true'
+        checks.append('AD source selection, target session, two clocks, PCAP tuple, negative controls, offscreen pause and reduced motion passed')
         checks.append('keyboard, selected evidence, scope/attribution, hidden/offscreen pause, reduced motion passed')
         d.execute_cdp_cmd('Emulation.setScriptExecutionDisabled',{'value':True})
         for path in ROUTES:
@@ -111,6 +143,7 @@ def main():
                 assert '600 seconds' in el('[data-auth-inspector]').text
             if 'celestial-resonance' in path:assert 'release-v1' in el('[data-vintage-outcome]').text
             if 'research-ai' in path:assert 'Not directly comparable' in el('[data-claim-outcome]').text
+            if 'ad-attack-chain' in path:assert 'both clocks' in el('[data-ad-inspector]').text
         checks.append('no-JavaScript representative explanations, image, and source links retained')
     (OUT/'technical-review.json').write_text(json.dumps({'status':'PASS','checks':checks},indent=2))
     print('PASS:',len(checks),'technical browser check groups')

@@ -989,3 +989,26 @@ button,input {
   .technical-workbench .workbench-toolbar label { width:100%; flex-basis:auto; }
   .technical-workbench .workbench-toolbar .replay-controls { align-self:flex-start; }
 }
+
+/* Recorded AD investigation: the coordinates are sourced, not decorative. */
+.ad-phases { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:24px; }
+.ad-phases button[aria-pressed="true"] { background:#245840; color:white; border-color:#245840; }
+.ad-timeline { display:block; width:100%; height:auto; margin:18px 0 24px; }
+.ad-grid { stroke:#dce6df; stroke-width:1; }
+.ad-track { stroke:#dce6df; stroke-dasharray:3 5; }
+.ad-time-dot { fill:#8ba496; transition:transform .45s ease-out; }
+.ad-time-dot.is-active { fill:#245840; }
+.ad-summary { margin:18px 0 25px; padding:20px; border-left:3px solid #457858; background:#e8f0eb; }
+.ad-summary h3 { font-size:1.13rem; margin-bottom:12px; }
+.ad-summary p { font-size:.88rem; margin-top:13px; }
+.ad-summary .field-list { display:grid; grid-template-columns:1fr 1fr; gap:0 25px; }
+.ad-summary .field-list > div { grid-template-columns:1fr 1.8fr; }
+.ad-column-title { font-size:.88rem; margin-bottom:14px; }
+.ad-playbar { display:flex; flex-wrap:wrap; gap:15px; justify-content:space-between; align-items:center; border-top:1px solid var(--line); padding-top:20px; margin-top:20px; }
+.ad-playbar > span { font-size:.8rem; color:var(--muted); }
+.ad-feature { background:#142e25; color:#e6f0e9; padding:25px; border-radius:9px; text-decoration:none; display:flex; flex-direction:column; gap:16px; justify-content:space-between; min-height:245px; }
+.ad-feature strong { color:#fff; font-size:1.3rem; }
+.ad-feature svg { width:100%; height:auto; }
+.ad-feature span { font:.76rem/1.7 ui-monospace,monospace; color:#bbd6c6; }
+.ad-feature:hover { background:#204635; }
+@media(max-width:650px) { .ad-phases { grid-template-columns:1fr 1fr; } .ad-summary { padding:15px; } .ad-summary .field-list { display:block; } .ad-summary .field-list > div { grid-template-columns:1fr; } .ad-timeline .chart-note { font-size:14px; } .ad-timeline { min-height:160px; } }
