@@ -13,3 +13,15 @@ Choose a readable case below, or [browse the visual portfolio](https://ixi-2773.
 | [Certification learning engines](certification-learning-engine.md) | Public Security+ and SC-900 desktop study software. |
 
 The public [browser workbench](https://ixi-2773.github.io/Cybersecurity_Portfolio/test-lab.html) is a separate teaching demonstration.
+
+## Expanded resume lab stories
+
+- [Detection Engineering & Rule Development](detection-engineering.html) — completed lab work described in the supplied resume; original artifacts to be added.
+- [Multi-source Splunk Investigation](splunk-siem-investigation.html) — completed lab work described in the supplied resume; original artifacts to be added.
+- [Network Intrusion Investigation](network-intrusion-lab.html) — completed lab work described in the supplied resume; original artifacts to be added.
+
+## Planned project briefs
+
+- [Phishing Email Investigation](phishing-investigation.html) — planned, not executed.
+- [Identity & MFA Investigation](identity-mfa-investigation.html) — planned, not executed.
+- [Python SOC Triage Assistant](soc-triage-automation.html) — planned, not executed.

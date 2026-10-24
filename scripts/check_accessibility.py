@@ -98,7 +98,7 @@ def check_page(path: Path, targets: dict[Path, set[str]]) -> list[str]:
         "projects/network-traffic-analysis.html": "Network Traffic Analysis",
         "projects/vulnerability-remediation.html": "Vulnerability Assessment",
         "projects/celestial-resonance.html": "Celestial Resonance",
-        "projects/research-ai-infrastructure.html": "RAI — Evidence-Aware Research Infrastructure",
+        "projects/research-ai-infrastructure.html": "Research AI Infrastructure (RAI)",
     }
     expectation = expected_headings.get(rel)
     if expectation:

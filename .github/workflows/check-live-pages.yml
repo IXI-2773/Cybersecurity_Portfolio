@@ -6,6 +6,8 @@ on:
     paths:
       - 'index.html'
       - 'explore.html'
+      - 'awards.html'
+      - 'assets/js/portfolio-systems.js'
       - 'projects/*.html'
       - 'styles.css'
       - 'portfolio.css'

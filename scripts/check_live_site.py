@@ -18,6 +18,13 @@ import urllib.request
 
 BASE = "https://ixi-2773.github.io/Cybersecurity_Portfolio/"
 EXPECTED_PAGES = {
+    "awards.html": "Awards",
+    "projects/detection-engineering.html": "Detection Engineering",
+    "projects/splunk-siem-investigation.html": "Multi-source Splunk",
+    "projects/network-intrusion-lab.html": "Network Intrusion",
+    "projects/phishing-investigation.html": "Phishing",
+    "projects/identity-mfa-investigation.html": "Identity",
+    "projects/soc-triage-automation.html": "Python SOC",
     "": "Don Lopez",
     "apply.html": "Application Toolkit",
     "resume-soc.html": "SOC Analyst Résumé",
@@ -39,6 +46,7 @@ EXPECTED_PAGES = {
     "projects/soc-analyst-evidence.html": "SOC Analyst",
 }
 STATIC_ASSETS = (
+    "assets/js/portfolio-systems.js",
     "styles.css",
     "portfolio.css",
     "resumes/Don_Lopez_Cybersecurity_Resume.pdf",

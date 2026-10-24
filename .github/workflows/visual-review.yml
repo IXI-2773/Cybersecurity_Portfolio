@@ -5,6 +5,7 @@ on:
   pull_request:
     paths:
       - 'explore.html'
+      - 'awards.html'
       - 'test-lab.html'
       - 'assets/js/**'
       - 'assets/evidence/**'
@@ -22,6 +23,7 @@ on:
     branches: [main]
     paths:
       - 'explore.html'
+      - 'awards.html'
       - 'test-lab.html'
       - 'assets/js/**'
       - 'assets/evidence/**'
