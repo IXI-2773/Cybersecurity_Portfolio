@@ -14,16 +14,19 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 ARCHIVE_DATE = (2026, 10, 22, 0, 0, 0)
 ALLOWED = {
-    "assets": {".svg", ".png", ".jpg", ".jpeg", ".webp", ".js"},
+    "assets": {".svg", ".png", ".jpg", ".jpeg", ".webp", ".js", ".txt"},
     "docs": {".md"},
     "resumes": {".txt", ".pdf"},
     "projects": {".html", ".md", ".py", ".json", ".csv", ".spl"},
 }
 ROOT_FILES = {
     "index.html", "apply.html", "recruiter.html", "resume-soc.html", "resume-security.html", "explore.html", "test-lab.html", "verify.html", "roles.html", "styles.css", "README.md", "SECURITY.md",
-    "PUBLICATION_CHECKLIST.md", "portfolio.css", "awards.html",
+    "PUBLICATION_CHECKLIST.md", "portfolio.css", "awards.html", "education.html", "visual-credits.html",
 }
 REQUIRED_SITE_FILES = {
+    "education.html", "visual-credits.html", "assets/reference/kali-desktop-2020.4.png",
+    "assets/reference/forensic-write-blocker.webp", "assets/reference/csusb-pfau-library.webp",
+    "assets/reference/GPL-2.0-or-later.txt",
     "projects/e3-digital-forensics.html", "projects/kali-defender-visibility.html",
     "projects/splunk-threat-hunting.html", "assets/js/signal-display.js",
     "assets/artwork/kali-lab.webp", "assets/artwork/splunk-investigation.webp", "assets/artwork/e3-forensics.webp",

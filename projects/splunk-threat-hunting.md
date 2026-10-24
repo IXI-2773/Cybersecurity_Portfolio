@@ -4,7 +4,7 @@ Work through authentication, endpoint execution and persistence questions with s
 
 Splunk SPL · Event correlation · Investigation playbook
 
-Conceptual AI artwork accompanies the website case; it is not an evidence screenshot.
+Authentic reference visuals accompany the website case, with credit and scope captions.
 
 ## Three useful investigation paths
 
@@ -56,3 +56,9 @@ Investigation playbook and example searches, not newly executed Splunk results. 
 [Splunk Security Content and analytic stories ↗](https://research.splunk.com/)
 
 
+
+## Academic foundation
+
+Completed coursework: IST 5250 Incident Handling & Cyber Investigation and IST 4910 Enterprise Systems Administration (Fall 2024).
+
+[Explore the academic background](../education.html).

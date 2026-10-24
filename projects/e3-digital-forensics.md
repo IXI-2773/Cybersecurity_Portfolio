@@ -4,7 +4,7 @@ Classroom experience with digital evidence examination and a clear framework for
 
 Paraben E3 · Classroom experience · Digital forensics
 
-Conceptual AI artwork accompanies the website case; it is not an evidence screenshot.
+Authentic reference visuals accompany the website case, with credit and scope captions.
 
 ## My classroom experience
 
@@ -41,3 +41,9 @@ Classroom E3 usage is owner-confirmed. No specific recovered file, device examin
 [Paraben’s E3 workflow overview ↗](https://paraben.com/paraben-e3-forensic-platform/)
 
 
+
+## Academic foundation
+
+Completed coursework: IST 5250 Incident Handling & Cyber Investigation and IST 4210 Advanced Networking & Security (Fall 2024). E3 classroom use is separately confirmed by me.
+
+[Explore the academic background](../education.html).

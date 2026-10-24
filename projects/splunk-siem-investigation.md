@@ -49,3 +49,9 @@ Background reference
 [Splunk documentation: detections and source correlation ↗](https://help.splunk.com/en/splunk-enterprise-security-8/administer/8.5/detections/use-detections-to-search-for-threats-in-splunk-enterprise-security). This reference informs the investigation approach; it does not verify my lab results.
 
 [Choose another case study ↗](../explore.html)
+
+## Academic foundation
+
+Completed coursework: IST 5250 Incident Handling & Cyber Investigation (Fall 2024), alongside database management and big data analytics coursework.
+
+[Explore the academic background](../education.html).

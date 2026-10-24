@@ -23,7 +23,7 @@ CASES = ("authentication-detection", "windows-process-triage", "network-traffic-
          "certification-learning-engine", "detection-engineering", "splunk-siem-investigation",
          "network-intrusion-lab", "phishing-investigation", "identity-mfa-investigation",
          "soc-triage-automation", "e3-digital-forensics", "kali-defender-visibility", "splunk-threat-hunting")
-PAGES = {"home": "index.html", "choice": "explore.html", "role-paths": "roles.html", "awards": "awards.html",
+PAGES = {"home": "index.html", "choice": "explore.html", "role-paths": "roles.html", "awards": "awards.html", "education":"education.html", "image-credits":"visual-credits.html",
          **{slug: f"projects/{slug}.html" for slug in CASES}}
 VIEWPORTS = {"desktop": (1280, 1000), "mobile": (390, 844), "small-mobile": (320, 720)}
 
