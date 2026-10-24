@@ -11,6 +11,7 @@ on:
       - 'portfolio.css'
       - 'resumes/*.pdf'
       - 'assets/network/*.svg'
+      - 'assets/evidence/*.png'
       - 'sitemap.xml'
       - 'robots.txt'
       - 'scripts/check_live_site.py'
