@@ -8,6 +8,7 @@ from __future__ import annotations
 import argparse
 from html.parser import HTMLParser
 import json
+from pathlib import Path
 import ssl
 import sys
 import time
@@ -21,7 +22,7 @@ EXPECTED_PAGES = {
     "apply.html": "Application Toolkit",
     "resume-soc.html": "SOC Analyst Résumé",
     "resume-security.html": "Security Analyst Résumé",
-    "explore.html": "Project Explorer",
+    "explore.html": "Explore the work",
     "recruiter.html": "SOC Analyst Recruiter Profile",
     "roles.html": "Role Paths",
     "test-lab.html": "Verification Workbench",
@@ -33,11 +34,14 @@ EXPECTED_PAGES = {
     "projects/vulnerability-remediation.html": "Vulnerability",
     "projects/celestial-resonance.html": "Celestial Resonance",
     "projects/research-ai-infrastructure.html": "RAI",
+    "projects/certification-learning-engine.html": "Certification Learning Engines",
     "projects/soc-analyst-workflow.html": "SOC",
     "projects/soc-analyst-evidence.html": "SOC Analyst",
 }
 STATIC_ASSETS = (
     "styles.css",
+    "portfolio.css",
+    "resumes/Don_Lopez_Cybersecurity_Resume.pdf",
     "assets/network/pcap-evidence-overview.svg",
     "assets/js/explorer.js",
     "assets/js/lab-data.js",
@@ -104,20 +108,31 @@ def verify_response(path: str, status: int, content_type: str, body: bytes) -> d
             raise ValueError(f"{path or '/'} requires exactly one H1")
         if len(parser.styles) != 1:
             raise ValueError(f"{path or '/'} missing or duplicated CSS stylesheet")
-        if path == "":
-            for value in ("projects/celestial-resonance.html",
-                          "projects/vulnerability-remediation.html",
-                          "projects/soc-analyst-evidence.html",
-                          "explore.html", "recruiter.html", "roles.html",
-                          "test-lab.html", "verify.html"):
+        if path in ("", "explore.html"):
+            required = ("explore.html", "resumes/Don_Lopez_Cybersecurity_Resume.pdf")
+            if path == "explore.html":
+                required += (
+                    "projects/authentication-detection.html",
+                    "projects/windows-process-triage.html",
+                    "projects/network-traffic-analysis.html",
+                    "projects/vulnerability-remediation.html",
+                    "projects/celestial-resonance.html",
+                    "projects/research-ai-infrastructure.html",
+                    "projects/certification-learning-engine.html",
+                )
+            for value in required:
                 if value not in parser.links:
-                    raise ValueError(f"Homepage missing internal project link: {value}")
+                    raise ValueError(f"{path or '/'} missing employer navigation link: {value}")
         return {"path": path or "/", "status": "PASS", "title": title}
     if path.endswith(".css"):
         if "text/css" not in content_type.lower():
             raise ValueError("Stylesheet served with wrong MIME type")
-        if b"--bg" not in body or b"--teal" not in body:
+        tokens = (b"--ink", b"--accent") if path == "portfolio.css" else (b"--bg", b"--teal")
+        if any(token not in body for token in tokens):
             raise ValueError("Stylesheet contents did not match portfolio styles")
+    elif path.endswith(".pdf"):
+        if "application/pdf" not in content_type.lower() or not body.startswith(b"%PDF-"):
+            raise ValueError("Public resume was not served as a PDF")
     elif path.endswith(".svg"):
         if "svg" not in content_type.lower():
             raise ValueError("SVG asset served with unexpected MIME type")
@@ -139,7 +154,7 @@ def fetch_once(path: str) -> dict:
     opener = urllib.request.build_opener(BlockRedirect)
     request = urllib.request.Request(url, headers={
         "User-Agent": "DonLopezPortfolioHealthcheck/1.0",
-        "Accept": "text/html,text/css,image/svg+xml",
+        "Accept": "text/html,text/css,image/svg+xml,application/pdf",
     })
     try:
         with opener.open(request, timeout=15) as r:
@@ -201,6 +216,25 @@ def self_test() -> None:
         pass
     else:
         raise AssertionError("Unsafe JavaScript content type passed")
+    # Exercise the real release documents too, so stale routes/titles cannot
+    # pass the offline check and fail only after deployment.
+    root = Path(__file__).resolve().parents[1]
+    for path in EXPECTED_PAGES:
+        verify_response(path, 200, "text/html", (root / (path or "index.html")).read_bytes())
+    verify_response("portfolio.css", 200, "text/css", (root / "portfolio.css").read_bytes())
+    resume = "resumes/Don_Lopez_Cybersecurity_Resume.pdf"
+    verify_response(resume, 200, "application/pdf", (root / resume).read_bytes())
+    broken_catalog = (root / "explore.html").read_bytes().replace(
+        b"projects/certification-learning-engine.html", b"missing-case.html")
+    for path, mime, body in [
+        ("explore.html", "text/html", broken_catalog),
+        (resume, "text/html", b"<!doctype html>not a resume"),
+    ]:
+        try:
+            verify_response(path, 200, mime, body)
+        except ValueError:
+            continue
+        raise AssertionError(f"Invalid release response passed: {path}")
     print("Local healthcheck self-tests: PASS; no external HTTP requests made")
 
 
