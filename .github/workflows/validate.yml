@@ -21,6 +21,7 @@ jobs:
         run: |
           python scripts/build_browser_fixture.py --check
           node scripts/test_browser_engine.cjs
+          node scripts/test_portfolio_systems.cjs
       - name: Authentication detection tests (31)
         run: python -m unittest discover -s projects/01-authentication-detection -p 'test_*.py' -v
       - name: Independent synthetic SOC validation matrix

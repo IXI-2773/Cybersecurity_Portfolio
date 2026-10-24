@@ -20,8 +20,10 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "visual-review-screenshots"
 CASES = ("authentication-detection", "windows-process-triage", "network-traffic-analysis",
          "vulnerability-remediation", "celestial-resonance", "research-ai-infrastructure",
-         "certification-learning-engine")
-PAGES = {"home": "index.html", "choice": "explore.html", "role-paths": "roles.html",
+         "certification-learning-engine", "detection-engineering", "splunk-siem-investigation",
+         "network-intrusion-lab", "phishing-investigation", "identity-mfa-investigation",
+         "soc-triage-automation")
+PAGES = {"home": "index.html", "choice": "explore.html", "role-paths": "roles.html", "awards": "awards.html",
          **{slug: f"projects/{slug}.html" for slug in CASES}}
 VIEWPORTS = {"desktop": (1280, 1000), "mobile": (390, 844), "small-mobile": (320, 720)}
 
@@ -95,7 +97,69 @@ def main() -> None:
                 failures.append('Public resume missing master content: '+term)
         if 'Brandon' in content or '(760)' in content:
             failures.append('Private master identity or phone exposed in public resume')
+    # The new explainers must also work with JavaScript enabled. Use the real
+    # controls, including keyboard input, and force reduced motion before load.
+    from selenium.webdriver.support.ui import Select, WebDriverWait
+    enabled = webdriver.ChromeOptions()
+    enabled.binary_location = chrome
+    for arg in ("--headless=new", "--no-sandbox", "--disable-dev-shm-usage", "--hide-scrollbars"):
+        enabled.add_argument(arg)
+    with webdriver.Chrome(service=Service(driver_exe), options=enabled) as driver:
+        driver.execute_cdp_cmd('Emulation.setEmulatedMedia', {'features':[{'name':'prefers-reduced-motion','value':'reduce'}]})
+        for width,height in VIEWPORTS.values():
+            driver.set_window_size(width,height)
+            driver.get((ROOT/'projects/celestial-resonance.html').resolve().as_uri())
+            panel = driver.find_element(By.CSS_SELECTOR,'[data-system-demo="cr"]')
+            revision = panel.find_element(By.CSS_SELECTOR,'[data-cr-revision]')
+            revision.send_keys(Keys.SPACE)
+            assert 'Hold:' in panel.find_element(By.CSS_SELECTOR,'[data-demo-status]').text
+            Select(panel.find_element(By.CSS_SELECTOR,'[data-cr-date]')).select_by_value('2026-03-20')
+            assert 'Eligible' in panel.find_element(By.CSS_SELECTOR,'[data-demo-status]').text
+            panel.find_element(By.CSS_SELECTOR,'[data-cr-play]').click()
+            assert driver.execute_script("return document.querySelectorAll('[data-cr-stage]')[1].dataset.state") == 'current'
+            panel.find_element(By.CSS_SELECTOR,'[data-cr-step]').click()
+            assert driver.execute_script("return document.querySelectorAll('[data-cr-stage]')[2].dataset.state") == 'current'
+            panel.find_element(By.CSS_SELECTOR,'[data-cr-reset]').click()
+            assert driver.execute_script("return document.querySelectorAll('[data-cr-stage]')[0].dataset.state") == 'current'
+            assert driver.execute_script("return getComputedStyle(document.querySelector('[data-cr-token]')).transitionDuration") == '0s'
+            driver.execute_script("arguments[0].scrollIntoView({block:'center'})",panel)
+            filename=f'cr-demo-enabled-{width}.png'; driver.save_screenshot(str(OUT/filename))
+            captures.append({'page':'projects/celestial-resonance.html','viewport':str(width),'screenshot':filename})
+            driver.get((ROOT/'projects/research-ai-infrastructure.html').resolve().as_uri())
+            panel = driver.find_element(By.CSS_SELECTOR,'[data-system-demo="rai"]')
+            status = panel.find_element(By.CSS_SELECTOR,'[data-demo-status]')
+            assert 'Conflict:' in status.text
+            Select(panel.find_element(By.CSS_SELECTOR,'[data-rai-observation]')).select_by_value('tightening')
+            assert 'Supported' in status.text
+            include = panel.find_element(By.CSS_SELECTOR,'[data-rai-include]'); include.click()
+            assert 'source is missing' in status.text
+            include.click(); panel.find_element(By.CSS_SELECTOR,'[data-rai-attribution]').click()
+            assert 'attribution does not match' in status.text
+            panel.find_element(By.CSS_SELECTOR,'[data-rai-trace]').click()
+            assert panel.get_attribute('data-trace-stage') == '2'
+            panel.find_element(By.CSS_SELECTOR,'[data-rai-reset]').click()
+            assert 'Conflict:' in status.text
+            dims=driver.execute_script('return [document.documentElement.clientWidth,document.documentElement.scrollWidth]')
+            assert dims[1] <= dims[0]+1
+            driver.execute_script("arguments[0].scrollIntoView({block:'center'})",panel)
+            filename=f'rai-demo-enabled-{width}.png'; driver.save_screenshot(str(OUT/filename))
+            captures.append({'page':'projects/research-ai-infrastructure.html','viewport':str(width),'screenshot':filename})
+        # Normal-motion controls must run, pause and reset, not just jump states.
+        driver.execute_cdp_cmd('Emulation.setEmulatedMedia', {'features':[{'name':'prefers-reduced-motion','value':'no-preference'}]})
+        driver.get((ROOT/'projects/celestial-resonance.html').resolve().as_uri())
+        play=driver.find_element(By.CSS_SELECTOR,'[data-cr-play]')
+        driver.execute_script("arguments[0].scrollIntoView({block:'center',behavior:'instant'})",play)
+        play.click()
+        assert play.text == 'Pause'
+        WebDriverWait(driver,4).until(lambda d: d.execute_script("return document.querySelectorAll('[data-cr-stage]')[2].dataset.state") == 'current')
+        play.click(); assert play.text == 'Play'
+        driver.find_element(By.CSS_SELECTOR,'[data-cr-reset]').click()
+        assert driver.execute_script("return document.querySelectorAll('[data-cr-stage]')[0].dataset.state") == 'current'
+        play.click()
+        driver.execute_script("window.scrollTo({top:0,behavior:'instant'})")
+        WebDriverWait(driver,3).until(lambda d: play.text == 'Play')
     summary = {"status":"PASS" if not failures else "FAIL","captures":captures,
+               "interactive_review":"CR/RAI controls, keyboard, normal and reduced motion passed",
                "javascript":"disabled for employer navigation review","failures":failures}
     (OUT/'review-summary.json').write_text(json.dumps(summary,indent=2))
     print(json.dumps({"status":summary['status'],"captures":len(captures),"failures":failures},indent=2))

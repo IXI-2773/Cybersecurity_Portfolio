@@ -4,6 +4,23 @@
 
 Celestial Resonance (CR) is a research and experimentation platform. The central engineering question is how to make experimental claims reviewable: which inputs were used, what they were compared against, what evidence exists, and whether the result can be repeated.
 
+Its economic/market research and separate celestial research tracks preserve
+independent evidence. This portfolio focuses on the engineering: source review,
+versioned inputs, normalization, point-in-time research datasets, baseline
+comparison and explicit research decisions. Forecasting is a research objective;
+the public case does not claim established predictive accuracy.
+
+## Interactive public explanation
+
+The [website case](celestial-resonance.html#cr-demo-title) follows one fictional
+indicator through source, snapshot, time gate, dataset and decision. A version
+released March 20 cannot enter a research run dated March 10. The example retains
+the earlier value rather than overwriting it and calculates no forecast.
+
+This is independent teaching code with fictional data, not a CR runtime or
+private-source demonstration. Play, Step and Reset are user controlled; all
+written content remains available without scripts.
+
 ## Transferable engineering practices
 
 - **Reproducibility:** retain experiment context, comparison baselines and artifacts.

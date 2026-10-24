@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Network Intrusion Investigation | Don Lopez</title><meta name="description" content="Use packet evidence and IDS rules to investigate activity in an isolated lab.">
+<meta property="og:title" content="Network Intrusion Investigation | Don Lopez"><meta property="og:description" content="Use packet evidence and IDS rules to investigate activity in an isolated lab."><meta property="og:type" content="website">
+<link rel="canonical" href="https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/network-intrusion-lab.html"><link rel="stylesheet" href="../portfolio.css"></head>
+<body><a class="skip-link" href="#main">Skip to content</a><header class="site-header">
+      <div class="shell header-inner">
+        <a class="brand" href="../index.html">Don Lopez</a>
+        <nav aria-label="Main navigation" class="desktop-nav">
+          <a href="../explore.html">Work</a><a href="../index.html#about">About</a><a href="../awards.html">Awards &amp; Honors</a><a href="../resumes/Don_Lopez_Cybersecurity_Resume.pdf">Résumé <span class="file-type">PDF</span></a><a href="../index.html#contact">Contact</a>
+        </nav>
+        <details class="mobile-nav">
+          <summary>
+            Menu
+          </summary>
+          <nav aria-label="Mobile navigation">
+            <a href="../explore.html">Work</a><a href="../index.html#about">About</a><a href="../awards.html">Awards &amp; Honors</a><a href="../resumes/Don_Lopez_Cybersecurity_Resume.pdf">Résumé <span class="file-type">PDF</span></a><a href="../index.html#contact">Contact</a>
+          </nav>
+        </details>
+      </div>
+    </header>
+<main id="main"><article class="reading" data-case-scope="resume-lab">
+<header class="case-intro"><a class="back-link" href="../explore.html">Back to all work</a><h1 id="case-brief-title">Network Intrusion Investigation</h1>
+<p class="case-lead">Use packet evidence and IDS rules to investigate activity in an isolated lab.</p><p class="project-meta">Kali Linux · Wireshark · Snort · 2025</p><p class="case-result">Résumé lab: 5,000+ packets analyzed, with Snort rule implementation and tuning.</p></header>
+<section class="case-section"><h2>The investigation problem</h2><p>A scan, repeated connection attempt or unusual application request needs context. Packet analysis makes the exchange inspectable; an IDS rule turns a chosen pattern into a repeatable signal. Neither removes the need for an analyst to explain the behavior.</p></section><section class="case-section"><h2>My lab work</h2><p>My résumé describes simulating scanning, brute-force and exploitation activity in a Kali Linux lab, analyzing more than 5,000 packets in Wireshark, and implementing and tuning Snort rules for the simulated attacks.</p><p>The case will pair the original packet evidence with the corresponding rule and alert context. The smaller generated DNS/HTTP exercise already in this portfolio is a separate investigation.</p></section><section class="case-section"><h2>From packet to finding</h2><ol class="case-steps"><li><strong>Bound the scenario.</strong> Identify the lab systems, activity and capture interval.</li><li><strong>Inspect the exchange.</strong> Use protocol fields and conversation timing to explain the observed behavior.</li><li><strong>Compare the alert.</strong> Relate the Snort predicate and triggering traffic, and consider legitimate matches.</li><li><strong>Document the conclusion.</strong> Preserve packet references, rule context, limitations and the recommended next step.</li></ol></section><section class="case-section"><h2>What a useful case report contains</h2><p>A readable timeline, relevant Wireshark filters, packet references, the Snort rule, the alert it produced and an explanation of what tuning changed. Screenshots should support the reasoning rather than substitute for it.</p></section><section class="case-section"><h2>A public packet exercise</h2><p>The generated 20-frame PCAP demonstrates DNS and HTTP analysis with a deterministic analyzer and expected findings. It is immediately inspectable, but it is not the original 5,000+ packet lab.</p><p><a href="network-traffic-analysis.html">Explore the generated packet case ↗</a></p></section><section class="scope-note" id="public-scope"><h2>Scope and evidence</h2><p>Completed lab work described in my supplied résumé. The original lab artifacts and screenshots will be added here; the linked public exercises have their own, smaller scope. This is lab experience, not a claim of a production incident or paid SOC employment.</p></section><details class="technical-details"><summary>Background reference</summary><p><a href="https://attack.mitre.org/techniques/T1110/">MITRE ATT&amp;CK: credential attack context ↗</a>. This reference informs the investigation approach; it does not verify my lab results.</p></details><p class="case-back"><a href="../explore.html">Choose another case study ↗</a></p></article></main><footer class="site-footer shell">
+      <span>© 2026 Don Lopez</span>
+      <div>
+        <a href="../explore.html">All work</a><a href="../awards.html">Awards &amp; Honors</a><a href="https://github.com/IXI-2773">GitHub</a><a href="https://www.linkedin.com/in/ixi2773/">LinkedIn</a><a href="mailto:frailtycraven@gmail.com">Email</a>
+      </div>
+    </footer></body></html>

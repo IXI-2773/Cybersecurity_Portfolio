@@ -158,6 +158,20 @@ def main() -> None:
                  "Employer choice page missing case: " + slug)
         required(slug + ".html" in get("sitemap.xml"), "Case missing from sitemap: " + slug)
     required('href="roles.html"' in catalog, "Retain the existing role-based review choice")
+    required("B.S. Information Systems" in home.split('<section class="work-section"')[0],
+             "Degree must be visible in the opening introduction")
+    for slug in ("detection-engineering", "splunk-siem-investigation", "network-intrusion-lab"):
+        rendered = get("projects/" + slug + ".html")
+        required('data-case-scope="resume-lab"' in rendered and "original" in rendered.lower(),
+                 "Resume case must identify its evidence scope: " + slug)
+        required(f'href="projects/{slug}.html"' in catalog, "Resume case missing from catalog: " + slug)
+    for slug in ("phishing-investigation", "identity-mfa-investigation", "soc-triage-automation"):
+        rendered = get("projects/" + slug + ".html")
+        required('data-case-scope="planned-project"' in rendered and "Not yet executed" in rendered,
+                 "Planned brief must not claim completed work: " + slug)
+        required(f'href="projects/{slug}.html"' in catalog, "Planned brief missing from catalog: " + slug)
+    required("Details and images coming soon" in get("awards.html"),
+             "Awards must retain its honest empty state until material is supplied")
     for slug in ("authentication-detection", "windows-process-triage", "network-traffic-analysis"):
         required(f'href="projects/{slug}.html"' in home,
                  "Homepage missing selected investigation: " + slug)
@@ -199,7 +213,7 @@ def main() -> None:
         legacy = get(path)
         required("PORTFOLIO LABS, NOT EMPLOYMENT" in legacy and "Planned" in legacy,
                  "Legacy resume must preserve experience and certification scope")
-    print("PASS: source evidence, seven employer case destinations, public resume and claim boundaries")
+    print("PASS: source evidence, employer case destinations, public resume and claim boundaries")
     print("Scope: static evidence consistency; not a live security assessment")
 
 

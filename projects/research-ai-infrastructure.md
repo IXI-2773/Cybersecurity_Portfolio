@@ -4,6 +4,23 @@
 
 Research AI Infrastructure (RAI) addresses a common failure mode in analysis: confident-sounding output despite missing, conflicting or misattributed evidence. Its high-level design separates evidence-backed findings from unsupported conclusions and keeps research output distinct from permission to take action.
 
+The architecture includes research memory and retrieval, document ingestion,
+source attribution, deterministic calculation tools and replaceable model/provider
+components. RAI remains an independent project; a future CR boundary must preserve
+the separate authority of each system. Historical implementation and verification
+are distinct from activation of a live research service.
+
+## Interactive public explanation
+
+The [website case](research-ai-infrastructure.html#rai-demo-title) traces a
+structured claim to two fictional source records. Removing a required source
+produces a coverage gap. Incorrect attribution produces a separate hold.
+Conflicting observations stay visible; an agreement result requires both
+correctly attributed records to support it.
+
+This narrow public example checks structured coverage and attribution, not
+arbitrary prose or source truth. It does not run private RAI code or a live model.
+
 ## Design principles
 
 - **Evidence coverage:** identify the source basis for a claim and whether a conclusion is fully supported.

@@ -21,9 +21,13 @@ ALLOWED = {
 }
 ROOT_FILES = {
     "index.html", "apply.html", "recruiter.html", "resume-soc.html", "resume-security.html", "explore.html", "test-lab.html", "verify.html", "roles.html", "styles.css", "README.md", "SECURITY.md",
-    "PUBLICATION_CHECKLIST.md", "portfolio.css",
+    "PUBLICATION_CHECKLIST.md", "portfolio.css", "awards.html",
 }
 REQUIRED_SITE_FILES = {
+    "awards.html", "assets/js/portfolio-systems.js",
+    "projects/detection-engineering.html", "projects/splunk-siem-investigation.html",
+    "projects/network-intrusion-lab.html", "projects/phishing-investigation.html",
+    "projects/identity-mfa-investigation.html", "projects/soc-triage-automation.html",
     "index.html", "apply.html", "recruiter.html", "explore.html", "test-lab.html", "verify.html", "roles.html", "styles.css",
     "resumes/Don_Lopez_SOC_Analyst.txt",
     "resumes/Don_Lopez_Security_Analyst.txt",
