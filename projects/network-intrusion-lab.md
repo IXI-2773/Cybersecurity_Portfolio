@@ -42,3 +42,9 @@ Background reference
 [MITRE ATT&CK: credential attack context ↗](https://attack.mitre.org/techniques/T1110/). This reference informs the investigation approach; it does not verify my lab results.
 
 [Choose another case study ↗](../explore.html)
+
+## Academic foundation
+
+Completed coursework: IST 4210 Advanced Networking & Security and IST 4620 Penetration Testing & Ethical Hacking (Fall 2024).
+
+[Explore the academic background](../education.html).

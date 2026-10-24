@@ -52,3 +52,9 @@ demonstration.
 - [SC-900 learning engine](https://github.com/IXI-2773/Microsoft_SC-900_Test_Learning_Engine)
 
 [Read the visual case study](https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/certification-learning-engine.html)
+
+## Academic foundation
+
+Completed coursework: IST 4320 Advanced Application Development and the IST 5930 Coding seminar (Fall 2024), alongside database and analytics coursework.
+
+[Explore the academic background](../education.html).

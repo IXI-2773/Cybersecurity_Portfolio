@@ -1,7 +1,9 @@
 # Adding Awards & Honors
 
-The public page is `awards.html`. It currently has one intentional empty state;
-no awards, images or verification claims have been invented.
+The public page is `awards.html`. It now contains two transcript-reviewed
+Dean's List entries: Spring 2023 and Fall 2024. The campus photo is credited
+reference photography, not an award certificate. Preserve those entries when
+adding further recognition; do not publish the private transcript itself.
 
 For each entry, supply:
 

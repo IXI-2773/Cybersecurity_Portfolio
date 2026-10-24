@@ -47,3 +47,9 @@ The primary PDF preserves the supplied master resume's substantive content, uses
 Run static checks with `python scripts/check_links.py`, `python scripts/check_accessibility.py`, and `python scripts/check_case_evidence.py`. Build an offline copy with `python scripts/build_site_bundle.py`. The validation workflow checks the lab fixtures and browser engines; the visual workflow captures actual Chrome layouts.
 
 Professional contact: [frailtycraven@gmail.com](mailto:frailtycraven@gmail.com).
+
+## Academic background and authentic visuals
+
+[Academic Experience](https://ixi-2773.github.io/Cybersecurity_Portfolio/education.html) links selected completed coursework to the cases. The private transcript confirmed degree completion in December 2024 and Dean's List entries for Spring 2023 and Fall 2024; the transcript and its personal identifiers are not published.
+
+[Image Credits](https://ixi-2773.github.io/Cybersecurity_Portfolio/visual-credits.html) identifies the genuine Splunk panel and the attributed Kali, forensic-hardware and campus reference visuals. Previously generated raster artwork is no longer displayed.

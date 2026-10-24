@@ -4,7 +4,7 @@ Follow scoped lab activity from service discovery to network observations and an
 
 Kali Linux · Nmap · Network telemetry · Investigation design
 
-Conceptual AI artwork accompanies the website case; it is not an evidence screenshot.
+Authentic reference visuals accompany the website case, with credit and scope captions.
 
 ## The investigation design
 
@@ -34,8 +34,14 @@ A lab topology, exact scope, a genuine tool capture, a packet or event timeline,
 
 ## Scope
 
-Investigation design, not a newly completed scan or detection result. The artwork is illustrative. All execution belongs in the isolated lab; this page performs no scanning.
+Investigation design, not a newly completed scan or detection result. The desktop reference screenshot is credited on the website. All execution belongs in the isolated lab; this page performs no scanning.
 
 [Kali’s Nmap documentation ↗](https://www.kali.org/tools/nmap/)
 
 
+
+## Academic foundation
+
+Completed coursework: IST 4620 Penetration Testing & Ethical Hacking and IST 4210 Advanced Networking & Security (Fall 2024).
+
+[Explore the academic background](../education.html).

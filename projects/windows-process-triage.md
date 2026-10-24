@@ -18,3 +18,9 @@ No real endpoints were monitored. No production EDR deployment is claimed.
 [All case studies](CASE_STUDIES.md) · [Designed page, after Pages activation](https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/windows-process-triage.html)
 
 **Detailed analyst write-up:** [LAB-PROC-001 source timeline and evidence-based disposition](02-windows-process-triage/CASE_REPORT.md).
+
+## Academic foundation
+
+Completed coursework: IST 4910 Enterprise Systems Administration and IST 5250 Incident Handling & Cyber Investigation (Fall 2024).
+
+[Explore the academic background](../education.html).

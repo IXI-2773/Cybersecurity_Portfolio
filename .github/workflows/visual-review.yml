@@ -6,6 +6,9 @@ on:
     paths:
       - 'explore.html'
       - 'awards.html'
+      - 'education.html'
+      - 'visual-credits.html'
+      - 'assets/reference/**'
       - 'test-lab.html'
       - 'assets/js/**'
       - 'assets/evidence/**'
@@ -24,6 +27,9 @@ on:
     paths:
       - 'explore.html'
       - 'awards.html'
+      - 'education.html'
+      - 'visual-credits.html'
+      - 'assets/reference/**'
       - 'test-lab.html'
       - 'assets/js/**'
       - 'assets/evidence/**'

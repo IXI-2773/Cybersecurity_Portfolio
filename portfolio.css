@@ -12,6 +12,18 @@
   font-synthesis:none;
   line-height:1.65;
 }
+.course-list > div { padding:19px 0; border-bottom:1px solid var(--line); }
+.course-list dt { font-size:1.06rem; line-height:1.5; }
+.course-list dt span { display:block; font-size:.8rem; color:var(--muted); font-weight:400; margin-bottom:5px; }
+.course-list dd { font-size:1rem; margin-top:7px; }
+.academic-links { padding-left:22px; line-height:2; color:var(--muted); }
+.honor-entry { padding:24px 0; border-bottom:1px solid var(--line); }
+.honor-entry h3 { font-size:1.3rem; margin-bottom:10px; }
+.honor-entry p + p { font-size:.95rem; margin-top:7px; }
+.honor-source { font-size:.9rem !important; margin-top:20px; }
+.campus-photo img { object-fit:contain; }
+.project-visual img[src*="splunk-native-dashboard"] { object-fit:contain; background:#151a19; }
+.reference-figure img { object-fit:contain; }
 .intro-with-display { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); gap:48px; align-items:center; }
 .intro.intro-with-display { max-width:none; }
 .intro-content { min-width:0; }

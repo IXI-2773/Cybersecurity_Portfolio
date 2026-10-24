@@ -18,6 +18,8 @@ import urllib.request
 
 BASE = "https://ixi-2773.github.io/Cybersecurity_Portfolio/"
 EXPECTED_PAGES = {
+    "education.html": "Academic Experience",
+    "visual-credits.html": "Image Credits",
     "projects/e3-digital-forensics.html": "Paraben E3",
     "projects/kali-defender-visibility.html": "Kali",
     "projects/splunk-threat-hunting.html": "Splunk Threat",
@@ -49,7 +51,8 @@ EXPECTED_PAGES = {
     "projects/soc-analyst-evidence.html": "SOC Analyst",
 }
 STATIC_ASSETS = (
-    "assets/artwork/kali-lab.webp", "assets/artwork/splunk-investigation.webp", "assets/artwork/e3-forensics.webp",
+    "assets/reference/kali-desktop-2020.4.png", "assets/reference/forensic-write-blocker.webp", "assets/reference/csusb-pfau-library.webp",
+    "assets/evidence/splunk-native-dashboard-results.png",
     "assets/js/signal-display.js",
     "assets/js/portfolio-systems.js",
     "styles.css",

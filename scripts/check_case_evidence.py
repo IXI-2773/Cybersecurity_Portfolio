@@ -143,8 +143,8 @@ def main() -> None:
     required((ROOT / 'projects/e3-digital-forensics.html').exists(),
              "E3 classroom experience needs its own case")
     e3 = get('projects/e3-digital-forensics.html')
-    required('data-case-scope="classroom-experience"' in e3 and 'AI-generated' in e3,
-             "Forensic classroom experience and conceptual artwork must be explicit")
+    required('data-case-scope="classroom-experience"' in e3 and 'reference photograph' in e3.lower(),
+             "Forensic classroom experience and reference-photo scope must be explicit")
     required(home.count('https://github.com/IXI-2773"') == 1
              and home.count('https://www.linkedin.com/in/ixi2773/"') == 1,
              "Keep one prominent profile link for each social destination")
@@ -178,8 +178,14 @@ def main() -> None:
         required('data-case-scope="planned-project"' in rendered and "Not yet executed" in rendered,
                  "Planned brief must not claim completed work: " + slug)
         required(f'href="projects/{slug}.html"' in catalog, "Planned brief missing from catalog: " + slug)
-    required("Details and images coming soon" in get("awards.html"),
-             "Awards must retain its honest empty state until material is supplied")
+    required("Dean’s List" in get("awards.html") and "Spring 2023" in get("awards.html")
+             and "Fall 2024" in get("awards.html"), "Keep both transcript-supported honors")
+    required((ROOT/'education.html').exists(), "Transcript coursework needs a readable academic page")
+    for code in ('4210','4620','4910','5250','2410','2510'):
+        required(code in get('education.html'), "Academic page missing reviewed course: "+code)
+    for path in ROOT.rglob('*.html'):
+        if '.git' not in path.parts:
+            required('assets/artwork/' not in path.read_text(), "Generated artwork remains displayed: "+str(path))
     for slug in ("authentication-detection", "windows-process-triage", "network-traffic-analysis"):
         required(f'href="projects/{slug}.html"' in home,
                  "Homepage missing selected investigation: " + slug)
