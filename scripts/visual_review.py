@@ -172,7 +172,9 @@ def main() -> None:
         driver.execute_script("window.scrollTo({top:0,behavior:'instant'})")
         driver.execute_cdp_cmd('Emulation.setEmulatedMedia', {'features':[{'name':'prefers-reduced-motion','value':'reduce'}]})
         WebDriverWait(driver,3).until(lambda d: display.get_attribute('data-running') == 'false')
-        assert not toggle.is_displayed()
+        # The panel may already be paused offscreen before the media-change
+        # callback runs; wait for that callback's visible control update too.
+        WebDriverWait(driver,3).until(lambda d: not toggle.is_displayed())
         assert len(driver.find_elements(By.CSS_SELECTOR,'a[href="https://github.com/IXI-2773"]')) == 1
         assert len(driver.find_elements(By.CSS_SELECTOR,'a[href="https://www.linkedin.com/in/ixi2773/"]')) == 1
     summary = {"status":"PASS" if not failures else "FAIL","captures":captures,
