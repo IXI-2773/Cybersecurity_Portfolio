@@ -3,7 +3,7 @@
 **Analyst:** Don Lopez · **Classification:** Fabricated SOC exercise, **not a real incident**  
 **Data:** [16 synthetic login events](auth_events.csv) · **Rule:** five or more failures within 10 minutes, then success for the same user/IP  
 **Observed synthetic outcome:** One alert · **Disposition:** `SIMULATED_REVIEW_REQUIRED`  
-**Runtime:** [Python detector](detect_auth.py) verified in focused tests; **Splunk execution remains unverified**
+**Runtime:** [Python detector](detect_auth.py) verified in focused tests; **Separate synthetic Splunk smoke and corrected-matrix screenshots have been reviewed; indexed ingestion and alert firing remain unverified**
 
 ## 30-second analyst summary
 
@@ -50,6 +50,6 @@ python projects/01-authentication-detection/validate_matrix.py
 - [Expected findings](expected_findings.json) and [64-event validation corpus](validation_events.csv) cover **nine scenario families** with **five expected findings**.
 - Regressions include boundary times, missing success, identity/IP isolation, CSV validation, and **a successful login breaking a failure streak even below the alert threshold**.
 - The lab currently has **31 focused unit tests**. A prior bug carried old failures across a non-alerting success; the corrected Python implementation clears the streak on **every** success.
-- [Splunk SPL draft](splunk.spl), [smoke test](SPLUNK_SMOKE_TEST.spl), and [runtime qualification runbook](SPLUNK_RUNBOOK.md) exist, but **no genuine Splunk execution or screenshot is claimed**.
+- [Splunk SPL draft](splunk.spl), [smoke test](SPLUNK_SMOKE_TEST.spl), and [runtime qualification runbook](SPLUNK_RUNBOOK.md) exist, with separate [reviewed corrected-matrix screenshot evidence](SPLUNK_MATRIX_BOUNDARY_RETEST_RESULT_2026-10-23.md). This 16-event report and that 64-event matrix are distinct exercises; indexed ingestion and alert firing remain unverified.
 
 **Verification boundary:** Tests establish behavior against fabricated fixtures. They do not establish operational accuracy, false-positive rate, runtime equivalence in Splunk, or response authority.

@@ -1,20 +1,15 @@
-# Don Lopez — Cybersecurity Portfolio Case Studies
+# Don Lopez - Case studies
 
-**GitHub-readable edition.** These Markdown pages display properly in GitHub **today**. They are an alternative to HTML files, which GitHub's Code tab always displays as source instead of rendering. The separate GitHub Pages website has been enabled.
+Choose a readable case below, or [browse the visual portfolio](https://ixi-2773.github.io/Cybersecurity_Portfolio/explore.html).
 
-| Case study | Public evidence | Status |
-| --- | --- | --- |
-| [Authentication detection and triage](authentication-detection.md) | Synthetic login correlation, expected findings, case report, 31 tests | Offline verified; Splunk pending |
-| [Windows process execution triage](windows-process-triage.md) | Fabricated Windows Event 4688 data and rule analyzer, 11 tests | Offline verified |
-| [Network traffic analysis](network-traffic-analysis.md) | Generated PCAP, visual evidence, incident report, 18 tests | Offline verified; Wireshark GUI pending |
-| [Vulnerability remediation](vulnerability-remediation.md) | Loopback-only before/after assessment, four resolved toy findings, 16 tests | Offline verified |
-| [Celestial Resonance](celestial-resonance.md) | Review-safe engineering principles | Private implementation; no production security claim |
-| [Research AI Infrastructure](research-ai-infrastructure.md) | Evidence provenance, uncertainty and authority controls | Private implementation; no autonomous SOC claim |
+| Case | Evidence and scope |
+| --- | --- |
+| [Authentication detection](authentication-detection.md) | Synthetic authentication fixtures; corrected 5/5 result in a reviewed Splunk screenshot. Indexed ingestion and fired alerts remain unverified. |
+| [Windows process triage](windows-process-triage.md) | Fabricated Event 4688 records, analyzer and analyst report. |
+| [Network packet analysis](network-traffic-analysis.md) | Generated 20-frame PCAP, decoder and packet report; Wireshark GUI review pending. |
+| [Local web hardening](vulnerability-remediation.md) | Four deliberate localhost HTTP findings, with the same checks after remediation. |
+| [Celestial Resonance](celestial-resonance.md) | Public architecture summary of private research infrastructure. |
+| [Research AI Infrastructure](research-ai-infrastructure.md) | Public architecture summary of private evidence-aware research tooling. |
+| [Certification learning engines](certification-learning-engine.md) | Public Security+ and SC-900 desktop study software. |
 
-**SOC Analyst recruiter view:** [Dedicated evidence overview](https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/soc-analyst-evidence.html) · [GitHub-readable evidence guide](../docs/SOC_ANALYST_EVIDENCE_GUIDE.md).
-
-**Credentials:** [CompTIA Security+ and CySA+](../docs/CREDENTIALS.md), reported by the portfolio owner; public badge verification not yet linked.
-
-**Total:** 76 automated Python tests across four public synthetic labs. The [GitHub CI workflow](../.github/workflows/validate.yml) runs them.
-
-For the fully styled HTML site, [open the published homepage](https://ixi-2773.github.io/Cybersecurity_Portfolio/) or consult the [Pages site guide](../docs/SITE_LAUNCH.md). For an **offline styled preview** that does not require Pages, download `cybersecurity-portfolio-site.zip` from the latest successful [GitHub Actions run](https://github.com/IXI-2773/Cybersecurity_Portfolio/actions) and open `index.html` inside the extracted folder.
+The public [browser workbench](https://ixi-2773.github.io/Cybersecurity_Portfolio/test-lab.html) is a separate teaching demonstration.

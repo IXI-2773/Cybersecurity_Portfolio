@@ -1,26 +1,118 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0b1014">
-<meta name="description" content="Don Lopez network traffic investigation: synthetic 20-packet PCAP, DNS and HTTP detection, 18 unit tests and analyst case report.">
-<link rel="canonical" href="https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/network-traffic-analysis.html"><meta property="og:type" content="website"><meta property="og:url" content="https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/network-traffic-analysis.html"><meta property="og:site_name" content="Don Lopez Cybersecurity Portfolio"><meta name="twitter:card" content="summary"><meta property="og:title" content="Network Traffic Analysis | Don Lopez"><title>Network Traffic Analysis | Don Lopez</title><link rel="stylesheet" href="../styles.css"></head>
-<body class="portfolio-shell portfolio-inner case-page"><a class="skip-link" href="#main">Skip to content</a><header class="topbar"><div class="container nav"><a class="logo" href="../index.html" aria-label="Don Lopez, home"><span class="brand-symbol" aria-hidden="true">[</span> DON LOPEZ <span class="brand-symbol" aria-hidden="true">]</span><span class="brand-discipline"> / SECURITY</span></a><nav aria-label="Main navigation"><a href="../explore.html">Projects</a><a href="../test-lab.html">Test lab</a><a href="../index.html#about">About</a><a href="../recruiter.html">Resume</a><a class="nav-contact" href="../index.html#contact">Contact <span aria-hidden="true">↗</span></a></nav><details class="mobile-nav"><summary aria-label="Open site navigation">Menu</summary><nav aria-label="Mobile navigation"><a href="../explore.html">Projects</a><a href="../test-lab.html">Test lab</a><a href="../index.html#about">About</a><a href="../recruiter.html">Resume</a><a class="nav-contact" href="../index.html#contact">Contact <span aria-hidden="true">↗</span></a></nav></details></div></header>
-<main id="main" class="container article-main"><a class="back" href="../explore.html">← All projects</a><div class="case-masthead"><div class="eyebrow">03 / NETWORK INVESTIGATION</div><h1 class="article-title">Network Traffic Analysis &amp; Threat Hunting</h1><p class="article-deck">Follow a DNS failure burst and an HTTP POST from packet observations to a measured analyst decision.</p><div class="pill-group"><span class="pill">PCAP</span><span class="pill">DNS + HTTP</span><span class="pill">Python</span></div></div><div class="case-snapshot" aria-label="Case summary"><div><span>Capture</span><strong>20 frames</strong><p>Generated Ethernet/IPv4 traffic</p></div><div><span>Decoded</span><strong>12 events</strong><p>DNS and HTTP observations</p></div><div><span>Review signals</span><strong>2 candidates</strong><p>Validated by 18 focused tests</p></div></div>
-<div class="case-review-strip" data-case-scope="public-lab" aria-label="Case review shortcuts"><div class="case-review-marker"><span class="case-review-code">03 / NETWORK</span><strong>From claim to source</strong><small>Controlled evidence · documented test boundaries</small></div><nav class="case-review-actions" aria-label="Review this case"><a href="#the-investigation">Read analysis <span aria-hidden="true">↗</span></a><a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/projects/03-network-pcap/CASE_REPORT.md">Inspect the source report <span aria-hidden="true">↗</span></a><a href="#scope-and-limits">Evidence limits <span aria-hidden="true">↓</span></a></nav></div>
-<section class="case-analyst-brief" aria-labelledby="case-brief-title" data-reviewed-case="public-lab">
-<div class="case-brief-heading"><div><span class="case-brief-code">NET–03 / NETWORK · 30-SECOND REVIEW</span><h2 id="case-brief-title">Packets can justify questions, not conclusions.</h2><p>Claim, observed source behavior, and the decision boundary—kept separate.</p></div><a href="#the-analyst-decision" class="case-brief-decision-link">Read analyst decision <span aria-hidden="true">↓</span></a></div>
-<div class="case-brief-grid"><div class="case-brief-fact"><span class="case-brief-fact-label">01 / The question</span><p>Can packet-level observations support a bounded DNS/HTTP triage decision?</p></div><div class="case-brief-fact"><span class="case-brief-fact-label">02 / Observed in the fixture</span><p>A generated 20-frame PCAP yielded 12 decoded events and two review signals: a DNS failure burst and an HTTP request candidate.</p></div><div class="case-brief-fact"><span class="case-brief-fact-label">03 / Analyst disposition</span><p>Preserve packet context; compare DNS responses and HTTP request evidence with host/proxy context before labeling malicious activity.</p></div><div class="case-brief-fact" data-brief-limit="true"><span class="case-brief-fact-label">04 / Not established</span><p>Synthetic fixed-shape PCAP. No real network capture, full TCP/TLS reconstruction, or independently verified Wireshark GUI inspection.</p></div></div>
-<details class="case-brief-details"><summary>Open the evidence trail and next investigation questions <span aria-hidden="true">+</span></summary><div class="case-brief-expanded"><div><h3>Inspect the actual public artifacts</h3><div class="case-brief-source-links"><a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/projects/03-network-pcap/CASE_REPORT.md">Generated PCAP report <span aria-hidden="true">↗</span></a><a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/projects/03-network-pcap/README.md">Reproduction guide <span aria-hidden="true">↗</span></a><a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/projects/03-network-pcap/generate_fixture.py">Deterministic PCAP generator <span aria-hidden="true">↗</span></a></div></div><div><h3>Questions to check next</h3><ol><li>Rebuild the bounded capture and compare its documented source counts</li><li>Contrast NXDOMAIN responses with benign DNS control traffic</li><li>Separate an unusual POST from a confirmed data-exfiltration claim</li></ol></div></div></details>
-</section>
-<figure class="case-evidence-contrast" data-case-contrast="network" aria-labelledby="case-evidence-contrast-title">
-<div class="case-contrast-heading"><span class="case-contrast-kicker">EVIDENCE EXCERPT / PUBLIC TRAINING SOURCE</span><h2 id="case-evidence-contrast-title">A DNS pattern requires a comparison</h2></div>
-<div class="case-contrast-grid"><div class="case-contrast-side"><span class="case-contrast-label">01 / SIGNAL OR INITIAL STATE</span><p>The generated capture contains <strong>four NXDOMAIN replies</strong> linked to reserved example address <code>192.0.2.10</code>, supporting a bounded review candidate.</p></div><div class="case-contrast-side"><span class="case-contrast-label">02 / CONTROL OR CORRECTION</span><p>A normal DNS reply associated with <code>192.0.2.11</code> provides a comparison. An HTTP POST is another review signal, not verified exfiltration.</p></div></div>
-<figcaption>Illustrative, deterministic PCAP: no live packet source, full stream reassembly or TLS interpretation. <a href="../assets/network/dns-nxdomain-investigation.svg">Open the labeled DNS visualization <span aria-hidden="true">↗</span></a></figcaption>
-</figure>
-<div class="article-layout"><aside class="case-sidebar"><nav aria-label="On this page"><span class="eyebrow">IN THIS CASE STUDY</span><a href="#case-brief-title">30-second review</a><a href="#the-investigation">The investigation</a><a href="#read-the-packet-evidence">Read the packet evidence</a><a href="#the-two-findings">The two findings</a><a href="#the-analyst-decision">The analyst decision</a><a href="#reproduce-the-capture">Reproduce the capture</a><a href="#scope-and-limits">Scope and limits</a></nav><div class="case-sidebar-scope"><span class="eyebrow">EVIDENCE SCOPE</span><p>Deterministic training PCAP and offline Python analysis. GUI inspection and operational detection coverage remain unverified.</p><a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/tree/main/projects/03-network-pcap">Inspect public source ↗</a></div></aside><article class="prose"><h2 id="the-investigation">The investigation</h2><p>Can a compact packet analyzer surface a DNS failure burst and an unusual HTTP request while keeping the evidence traceable? I generated a deterministic PCAP, decoded the supported traffic, and compared candidate patterns against benign requests.</p><p>The training capture contains 20 Ethernet/IPv4 frames: ten DNS packets and ten TCP/HTTP packets. The bounded parser extracts 12 events and returns two review signals. Reserved addresses and hostnames keep the example self-contained.</p><h2 id="read-the-packet-evidence">Read the packet evidence</h2><section class="network-evidence-gallery" aria-label="Synthetic PCAP analysis images">
-<a href="../assets/network/pcap-evidence-overview.svg" class="evidence-visual"><img loading="lazy" src="../assets/network/pcap-evidence-overview.svg" alt="Offline visualization of 20 synthetic PCAP frames, 12 decoded events and two triage candidate events across an 80-second timeline." width="1200" height="700"><span><strong>01 · PCAP evidence overview</strong><small>20 packets · 12 decoded events · 2 triage signals</small></span></a>
-<a href="../assets/network/dns-nxdomain-investigation.svg" class="evidence-visual"><img loading="lazy" src="../assets/network/dns-nxdomain-investigation.svg" alt="Synthetic DNS analysis showing four NXDOMAIN replies from 192.0.2.10 and one normal DNS reply from 192.0.2.11." width="1200" height="700"><span><strong>02 · DNS anomaly review</strong><small>Four matched NXDOMAIN responses · threshold review</small></span></a>
-<a href="../assets/network/http-request-comparison.svg" class="evidence-visual"><img loading="lazy" src="../assets/network/http-request-comparison.svg" alt="Synthetic comparison between benign GET to portal.example and triage candidate POST to collector.invalid, both using reserved documentation addresses." width="1200" height="700"><span><strong>03 · HTTP request comparison</strong><small>Benign GET versus flagged synthetic POST</small></span></a>
-</section><p class="visual-disclaimer">These figures are rendered from the generated PCAP observations. They are not Wireshark screenshots or live captures. Open a figure to inspect the full-size evidence view.</p><h2 id="the-two-findings">The two findings</h2><h3>DNS: repeated name-resolution failures</h3><p><strong>Four NXDOMAIN replies</strong> are associated with client <code>192.0.2.10</code> within approximately 36 seconds. The threshold-crossing observation is at 12:00:36.200 UTC. This creates a DNS-review hypothesis; it does not demonstrate tunneling.</p><h3>HTTP: a POST to the test collector</h3><p>A <code>POST</code> to <code>collector.invalid/upload</code> appears at 12:01:15.030 UTC. The reserved hostname is part of the fixture. Request method and destination alone cannot establish command-and-control, sensitive content, or exfiltration.</p><p>The <a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/projects/03-network-pcap/CASE_REPORT.md">LAB-NET-001 report ↗</a> maps the observations to exact frames and timestamps, alongside the comparison traffic.</p><h2 id="the-analyst-decision">The analyst decision</h2><p><strong>Disposition: correlate before classifying.</strong> For comparable authorized telemetry, I would check resolver history, the originating process, proxy records, destination ownership, and any available request content. A benign failure burst or expected application request can change the interpretation.</p><div class="case-takeaway"><span class="eyebrow">WHY PACKET CONTEXT MATTERS</span><p>A rule can identify a pattern. The analyst still has to establish who generated it, what happened around it, and whether the proposed explanation fits.</p></div><h2 id="reproduce-the-capture">Reproduce the capture</h2><pre><code>python projects/03-network-pcap/generate_fixture.py --output projects/03-network-pcap/synthetic_traffic.pcap
-python projects/03-network-pcap/analyze_pcap.py projects/03-network-pcap/synthetic_traffic.pcap
-python -m unittest discover -s projects/03-network-pcap -p 'test_*.py' -v</code></pre><p>The generator produces a real PCAP binary with deterministic contents. The <a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/projects/03-network-pcap/README.md">runbook ↗</a> records the expected hash and analysis steps. Eighteen tests cover expected findings, malformed captures, pairing, deduplication, isolation, and benign controls.</p><h2 id="scope-and-limits">Scope and limits</h2><p>The parser covers the packet forms in this fixture. It does not reassemble TCP streams or support TLS analysis, pcapng, fragmented IPv4, compressed DNS names, or IPv6. Wireshark GUI inspection remains pending. No real network packets or production incidents are represented.</p></article></div>
-<div class="case-next"><div><span class="eyebrow">KEEP EXPLORING</span><a href="vulnerability-remediation.html">Vulnerability Assessment &amp; Remediation <span aria-hidden="true">↗</span></a></div><a class="case-next-home" href="../explore.html">All six case studies →</a></div>
-</main><footer class="site-footer"><div class="container footer-inner"><span>© 2026 Don Lopez</span><div><a href="../explore.html">Projects</a><a href="../test-lab.html">Test lab</a><a href="../apply.html">Application materials</a><a href="../index.html#contact">Contact</a></div></div></footer></body></html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Network Traffic Analysis | Don Lopez</title><meta name="description" content="A packet investigation using a deterministic DNS and HTTP training capture."><meta property="og:title" content="Network Traffic Analysis | Don Lopez"><meta property="og:description" content="A packet investigation using a deterministic DNS and HTTP training capture."><meta property="og:type" content="website"><link rel="canonical" href="https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/network-traffic-analysis.html"><link rel="stylesheet" href="../portfolio.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="shell header-inner">
+        <a class="brand" href="../index.html">Don Lopez</a>
+        <nav aria-label="Main navigation" class="desktop-nav">
+          <a href="../explore.html">Work</a><a href="../index.html#about">About</a><a href="../resumes/Don_Lopez_Cybersecurity_Resume.pdf">Résumé <span class="file-type">PDF</span></a><a href="../index.html#contact">Contact</a>
+        </nav>
+        <details class="mobile-nav">
+          <summary>
+            Menu
+          </summary>
+          <nav aria-label="Mobile navigation">
+            <a href="../explore.html">Work</a><a href="../index.html#about">About</a><a href="../resumes/Don_Lopez_Cybersecurity_Resume.pdf">Résumé <span class="file-type">PDF</span></a><a href="../index.html#contact">Contact</a>
+          </nav>
+        </details>
+      </div>
+    </header>
+    <main id="main">
+      <article class="reading" data-case-scope="public-lab">
+        <header class="case-intro">
+          <a class="back-link" href="../explore.html">Back to all work</a>
+          <h1 id="case-brief-title">
+            Network Traffic Analysis
+          </h1>
+          <p class="case-lead">
+            A packet investigation using a deterministic DNS and HTTP training capture.
+          </p>
+          <p class="project-meta">
+            Python · PCAP · Generated traffic
+          </p>
+          <p class="case-result">
+            20 frames, 12 decoded observations, and two review signals.
+          </p>
+        </header>
+        <figure class="case-figure">
+          <a href="../assets/network/pcap-evidence-overview.svg" aria-label="Open evidence image at full size"><img src="../assets/network/pcap-evidence-overview.svg" alt="Illustration of the generated PCAP: twenty frames, twelve decoded observations and two review signals" width="720" height="360"></a>
+          <figcaption>
+            Offline diagram derived from the generated capture. This is an illustration, not a Wireshark screenshot.
+          </figcaption>
+        </figure>
+        <section class="case-section" id="section-1">
+          <h2>
+            The question
+          </h2>
+          <p>
+            Can a compact packet analyzer identify useful review leads while preserving the packets behind each observation? The capture contains generated Ethernet/IPv4 traffic, not traffic recorded from a real network.
+          </p>
+        </section>
+        <section class="case-section" id="section-2">
+          <h2>
+            What I did
+          </h2>
+          <p>
+            Generated the capture, decoded the supported DNS and HTTP records, and traced each candidate to source frames and timestamps. Compared unusual behavior with benign DNS and HTTP controls.
+          </p>
+        </section>
+        <section class="case-section" id="section-3">
+          <h2>
+            What I found
+          </h2>
+          <p>
+            Four DNS NXDOMAIN replies and a POST to a reserved test destination produced two review signals. Neither establishes command-and-control or exfiltration. The analyst report records alternatives and missing corroboration under LAB-NET-001.
+          </p>
+        </section>
+        <section class="scope-note" id="scope-and-limits">
+          <h2>
+            Scope
+          </h2>
+          <p>
+            Generated 20-frame PCAP with a deliberately bounded parser. Wireshark GUI validation remains pending. This is separate from the larger Kali/Wireshark/Snort lab listed on my résumé.
+          </p>
+        </section>
+        <p class="case-source">
+          <a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/projects/03-network-pcap/CASE_REPORT.md">Read the full analyst report on GitHub ↗</a>
+        </p>
+        <details class="technical-details">
+          <summary>
+            Data, source code, and reproduction
+          </summary>
+          <ul>
+            <li><a href="../assets/network/dns-nxdomain-investigation.svg">DNS evidence figure ↗</a></li>
+            <li><a href="../assets/network/http-request-comparison.svg">HTTP comparison figure ↗</a></li>
+            <li>
+              <a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/projects/03-network-pcap/expected_findings.json">Frozen expected findings ↗</a>
+            </li>
+            <li>
+              <a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/projects/03-network-pcap/generate_fixture.py">Capture generator ↗</a>
+            </li>
+            <li>
+              <a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/projects/03-network-pcap/analyze_pcap.py">Packet analyzer ↗</a>
+            </li>
+            <li>
+              <a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/projects/03-network-pcap/README.md">Reproduction guide ↗</a>
+            </li>
+          </ul>
+        </details>
+        <p class="case-back">
+          <a href="../explore.html">Choose another case study ↗</a>
+        </p>
+      </article>
+      <div class="shell legacy-anchors">
+        <span class="anchor-alias" id="case-evidence-contrast-title" aria-hidden="true"></span><span class="anchor-alias" id="the-investigation" aria-hidden="true"></span><span class="anchor-alias" id="read-the-packet-evidence" aria-hidden="true"></span><span class="anchor-alias" id="the-two-findings" aria-hidden="true"></span><span class="anchor-alias" id="the-analyst-decision" aria-hidden="true"></span><span class="anchor-alias" id="reproduce-the-capture" aria-hidden="true"></span>
+      </div>
+    </main>
+    <footer class="site-footer shell">
+      <span>© 2026 Don Lopez</span>
+      <div>
+        <a href="../explore.html">All work</a><a href="https://github.com/IXI-2773">GitHub</a><a href="https://www.linkedin.com/in/ixi2773/">LinkedIn</a><a href="mailto:frailtycraven@gmail.com">Email</a>
+      </div>
+    </footer>
+  </body>
+</html>

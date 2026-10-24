@@ -5,8 +5,11 @@ on:
     branches: [main]
     paths:
       - 'index.html'
+      - 'explore.html'
       - 'projects/*.html'
       - 'styles.css'
+      - 'portfolio.css'
+      - 'resumes/*.pdf'
       - 'assets/network/*.svg'
       - 'sitemap.xml'
       - 'robots.txt'
