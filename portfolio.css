@@ -22,6 +22,12 @@
 .honor-entry p + p { font-size:.95rem; margin-top:7px; }
 .honor-source { font-size:.9rem !important; margin-top:20px; }
 .campus-photo img { object-fit:contain; }
+.campus-gallery { display:grid; grid-template-columns:1.35fr .9fr; grid-template-rows:repeat(2,minmax(0,1fr)); gap:12px; margin:36px 0 14px; }
+.campus-gallery figure { position:relative; min-width:0; overflow:hidden; border-radius:7px; background:var(--soft); }
+.campus-gallery figure:first-child { grid-row:1 / span 2; }
+.campus-gallery img { width:100%; height:100%; min-height:175px; object-fit:cover; }
+.campus-gallery figcaption { position:absolute; left:10px; bottom:10px; padding:5px 9px; border-radius:4px; background:rgba(17,38,33,.88); color:#fff; font-size:.76rem; line-height:1.4; }
+.gallery-credit { color:var(--muted); font-size:.84rem; line-height:1.55; }
 .project-visual img[src*="splunk-native-dashboard"] { object-fit:contain; background:#151a19; }
 .reference-figure img { object-fit:contain; }
 .intro-with-display { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); gap:48px; align-items:center; }
@@ -86,6 +92,13 @@
 .planned-list .text-link { display:inline-block; margin-top:12px; }
 .project-status { margin-top:27px; display:inline-block; padding:7px 12px; background:var(--soft); border-radius:6px; font-size:.9rem; color:var(--accent); font-weight:600; }
 .case-section p + p { margin-top:15px; }
+.evidence-gallery { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin-top:24px; }
+.evidence-card { border:1px solid var(--line); border-radius:8px; overflow:hidden; background:var(--soft); }
+.evidence-card:first-child { grid-column:1 / -1; }
+.evidence-card a { display:block; }
+.evidence-card img { width:100%; aspect-ratio:2/1; object-fit:contain; background:#fff; }
+.evidence-card figcaption { padding:12px 14px 14px; color:var(--muted); font-size:.82rem; line-height:1.5; }
+.evidence-card figcaption strong { color:var(--ink); }
 .case-facts { margin-top:5px; }
 .case-facts > div { padding:18px 0; border-bottom:1px solid var(--line); }
 .case-facts dt { font-size:1.03rem; }
@@ -148,6 +161,10 @@
 .demo-fallback { margin-top:20px; color:var(--muted); font-size:.85rem; }
 @keyframes evidence-trace { from { background-color:#c9e1d5; } to { background-color:transparent; } }
 @media(max-width:760px) {
+  .campus-gallery { grid-template-columns:1fr 1fr; grid-template-rows:auto auto; }
+  .campus-gallery figure:first-child { grid-column:1 / -1; grid-row:auto; }
+  .campus-gallery img { min-height:150px; aspect-ratio:4/3; }
+  .campus-gallery figure:first-child img { aspect-ratio:16/9; }
   .research-preview { grid-template-columns:1fr; gap:22px; }
   .research-preview-map { flex-direction:row; justify-content:space-around; gap:12px; padding:22px 15px; font-size:.8rem; }
   .research-preview-map i { width:22px; height:1px; flex-shrink:0; margin:0; }
@@ -155,6 +172,11 @@
   .planned-work { width:100%; }
 }
 @media(max-width:440px) {
+  .evidence-gallery { grid-template-columns:1fr; }
+  .evidence-card:first-child { grid-column:auto; }
+  .campus-gallery { grid-template-columns:1fr; }
+  .campus-gallery figure:first-child { grid-column:auto; }
+  .campus-gallery img,.campus-gallery figure:first-child img { aspect-ratio:16/10; }
   .system-demo { padding:21px 16px; margin-inline:-3px; }
   .demo-heading h2 { font-size:1.25rem; }
   .demo-controls { gap:12px; }

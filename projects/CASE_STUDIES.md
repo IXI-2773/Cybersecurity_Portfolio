@@ -18,7 +18,7 @@ The public [browser workbench](https://ixi-2773.github.io/Cybersecurity_Portfoli
 
 - [Detection Engineering & Rule Development](detection-engineering.md) — completed lab work described in the supplied resume; original artifacts to be added.
 - [Multi-source Splunk Investigation](splunk-siem-investigation.md) — completed lab work described in the supplied resume; original artifacts to be added.
-- [Network Intrusion Investigation](network-intrusion-lab.md) — completed lab work described in the supplied resume; original artifacts to be added.
+- [Network Intrusion Investigation](network-intrusion-lab.md) — completed isolated Kali/VM work with Wireshark packet review and Snort tuning, described in the supplied résumé.
 
 ## Planned project briefs
 
@@ -29,5 +29,5 @@ The public [browser workbench](https://ixi-2773.github.io/Cybersecurity_Portfoli
 ## Classroom and applied investigations
 
 - [Paraben E3 classroom experience](e3-digital-forensics.md) — tool usage confirmed by the owner; assignment details and actual captures to follow.
-- [Kali reconnaissance and defender visibility](kali-defender-visibility.md) — investigation design, not a new executed result.
+- [Kali VM and network visibility](kali-defender-visibility.md) — completed owner-confirmed experience connected to separate, reproducible public network artifacts.
 - [Splunk threat investigation playbook](splunk-threat-hunting.md) — source-aware scenarios and illustrative starting searches.

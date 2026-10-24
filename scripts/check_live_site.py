@@ -52,6 +52,7 @@ EXPECTED_PAGES = {
 }
 STATIC_ASSETS = (
     "assets/reference/kali-desktop-2020.4.png", "assets/reference/forensic-write-blocker.webp", "assets/reference/csusb-pfau-library.webp",
+    "assets/reference/csusb-jack-brown-hall.webp", "assets/reference/csusb-university-entrance.webp",
     "assets/evidence/splunk-native-dashboard-results.png",
     "assets/js/signal-display.js",
     "assets/js/portfolio-systems.js",
