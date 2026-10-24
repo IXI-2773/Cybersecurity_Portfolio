@@ -44,3 +44,13 @@ Implementation and review stay with the same assistant, as previously requested.
 - Offline live-response self-test and preview packaging passed.
 - Browser CI and final self-review are recorded in the pull request on the exact
   revision that is published; do not infer completion from this preparation note.
+
+## First browser inspection
+
+All 51 no-script page/viewport captures and six enabled-demo captures were
+produced. Personally inspected the homepage on desktop/mobile, both interactive
+panels on mobile, and the Awards empty state. The final normal-motion automated
+click hit Chrome's smooth-scroll transition before the control reached the
+viewport. Added an explicit instant scroll before the real click; the same
+check now also waits for an automatic stage advance and tests offscreen pause.
+This corrects test timing rather than bypassing the actual control.

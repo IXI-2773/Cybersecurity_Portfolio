@@ -213,7 +213,7 @@ def main() -> None:
         legacy = get(path)
         required("PORTFOLIO LABS, NOT EMPLOYMENT" in legacy and "Planned" in legacy,
                  "Legacy resume must preserve experience and certification scope")
-    print("PASS: source evidence, seven employer case destinations, public resume and claim boundaries")
+    print("PASS: source evidence, employer case destinations, public resume and claim boundaries")
     print("Scope: static evidence consistency; not a live security assessment")
 
 

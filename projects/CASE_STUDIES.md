@@ -16,12 +16,12 @@ The public [browser workbench](https://ixi-2773.github.io/Cybersecurity_Portfoli
 
 ## Expanded resume lab stories
 
-- [Detection Engineering & Rule Development](detection-engineering.html) — completed lab work described in the supplied resume; original artifacts to be added.
-- [Multi-source Splunk Investigation](splunk-siem-investigation.html) — completed lab work described in the supplied resume; original artifacts to be added.
-- [Network Intrusion Investigation](network-intrusion-lab.html) — completed lab work described in the supplied resume; original artifacts to be added.
+- [Detection Engineering & Rule Development](detection-engineering.md) — completed lab work described in the supplied resume; original artifacts to be added.
+- [Multi-source Splunk Investigation](splunk-siem-investigation.md) — completed lab work described in the supplied resume; original artifacts to be added.
+- [Network Intrusion Investigation](network-intrusion-lab.md) — completed lab work described in the supplied resume; original artifacts to be added.
 
 ## Planned project briefs
 
-- [Phishing Email Investigation](phishing-investigation.html) — planned, not executed.
-- [Identity & MFA Investigation](identity-mfa-investigation.html) — planned, not executed.
-- [Python SOC Triage Assistant](soc-triage-automation.html) — planned, not executed.
+- [Phishing Email Investigation](phishing-investigation.md) — planned, not executed.
+- [Identity & MFA Investigation](identity-mfa-investigation.md) — planned, not executed.
+- [Python SOC Triage Assistant](soc-triage-automation.md) — planned, not executed.

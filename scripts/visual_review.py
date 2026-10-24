@@ -147,11 +147,17 @@ def main() -> None:
         # Normal-motion controls must run, pause and reset, not just jump states.
         driver.execute_cdp_cmd('Emulation.setEmulatedMedia', {'features':[{'name':'prefers-reduced-motion','value':'no-preference'}]})
         driver.get((ROOT/'projects/celestial-resonance.html').resolve().as_uri())
-        play=driver.find_element(By.CSS_SELECTOR,'[data-cr-play]'); play.click()
+        play=driver.find_element(By.CSS_SELECTOR,'[data-cr-play]')
+        driver.execute_script("arguments[0].scrollIntoView({block:'center',behavior:'instant'})",play)
+        play.click()
         assert play.text == 'Pause'
+        WebDriverWait(driver,4).until(lambda d: d.execute_script("return document.querySelectorAll('[data-cr-stage]')[2].dataset.state") == 'current')
         play.click(); assert play.text == 'Play'
         driver.find_element(By.CSS_SELECTOR,'[data-cr-reset]').click()
         assert driver.execute_script("return document.querySelectorAll('[data-cr-stage]')[0].dataset.state") == 'current'
+        play.click()
+        driver.execute_script("window.scrollTo({top:0,behavior:'instant'})")
+        WebDriverWait(driver,3).until(lambda d: play.text == 'Play')
     summary = {"status":"PASS" if not failures else "FAIL","captures":captures,
                "interactive_review":"CR/RAI controls, keyboard, normal and reduced motion passed",
                "javascript":"disabled for employer navigation review","failures":failures}

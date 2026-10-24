@@ -30,7 +30,7 @@
 
 - [x] 1. Add `scripts/test_portfolio_systems.cjs` before `assets/js/portfolio-systems.js`; observe RED, then implement pure `evaluateCR` and `evaluateRAI` decisions and progressive controls. Test malformed dates, exact release date, missing coverage, conflict, invalid attribution and supported records.
 - [x] 2. Update `index.html`, `explore.html`, CR/RAI and existing security case HTML; create three resume-lab and three planned-project pages plus `awards.html`. Extend `portfolio.css` for finite system motion, reading hierarchy, responsive diagrams and empty state. Create a maintainer awards guide.
-- [ ] 3. Update sitemap, evidence index, packaging/live checks, CI and browser review. Check all new destinations without scripts and the two interactive demos with scripts, keyboard and reduced motion.
+- [x] 3. Update sitemap, evidence index, packaging/live checks, CI and browser review. Check all new destinations without scripts and the two interactive demos with scripts, keyboard and reduced motion.
 - [ ] 4. Run focused local checks, publish isolated PR, inspect desktop/mobile browser artifacts in one batch, repair any defects, verify exact-head CI, merge and confirm live deployment.
 
 ## Execution record
