@@ -975,3 +975,12 @@ button,input {
 .research-mechanism button { background:transparent; color:var(--accent); border:1px solid #8da99b; border-radius:5px; min-height:44px; padding:8px 14px; font-size:.8rem; cursor:pointer; }
 @media(max-width:650px) { .claim-graph { display:grid; grid-template-columns:1fr 1fr; gap:8px; } .claim-graph > span { display:none; } .record-inspector blockquote { font-size:.92rem; } }
 @media(prefers-reduced-motion:reduce) { .research-mechanism * { transition:none !important; } }
+.claim-edges { display:flex; flex-wrap:wrap; gap:8px; margin:4px 0 20px; }
+.claim-edges button { font-size:.75rem; min-height:44px; }
+.claim-edges button[aria-pressed="true"] { background:#deeee4; }
+.signal-event-buttons { display:flex; flex-wrap:wrap; gap:6px; margin:12px 0; }
+.signal-event-buttons button { min-height:38px; border:1px solid #729f87; border-radius:4px; padding:6px; color:#d9f0e3; background:#213f33; font:.7rem ui-monospace,monospace; cursor:pointer; }
+.signal-event-buttons button[aria-pressed="true"] { background:#3e6b54; }
+.signal-display .field-list { color:#e2f1e8; font-size:.72rem; margin:10px 0; }
+.signal-display .field-list dt { color:#bed8c8; }
+.signal-display .field-list > div { border-color:#486754; }

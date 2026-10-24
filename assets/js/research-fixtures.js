@@ -249,5 +249,39 @@
       ]
     }
   ],
-  "sourceHash": "9cbacea659faa62f8bfaccfbfca86956955275953f712bcef200093d1c33a264"
+  "ambiguityVersions": [
+    {
+      "record_id": "release-v1",
+      "observation_time": "2026-02-28T00:00:00Z",
+      "available_at": "2026-03-04T00:00:00Z",
+      "vintage_id": "v1",
+      "value": 2.4,
+      "source_hash": "36c5ae36a5f661f0ba4596408148b225fa0af2f32bd719abbc0867b38ddae883"
+    },
+    {
+      "record_id": "release-v2",
+      "observation_time": "2026-02-28T00:00:00Z",
+      "available_at": "2026-03-20T00:00:00Z",
+      "vintage_id": "v2",
+      "value": 2.7,
+      "source_hash": "a397b052b1228e74732a857eca06a36195a719a360fc4ecf5f5f0a06e2dd2e11"
+    },
+    {
+      "record_id": "next-period",
+      "observation_time": "2026-03-31T00:00:00Z",
+      "available_at": "2026-04-04T00:00:00Z",
+      "vintage_id": "v3",
+      "value": 2.6,
+      "source_hash": "8b7d2dfe050f56ff94169b7c5e2bc913b058394d9c0feffe400f77d7bdb80e0c"
+    },
+    {
+      "record_id": "conflicting-v2",
+      "observation_time": "2026-02-28T00:00:00Z",
+      "available_at": "2026-03-20T00:00:00Z",
+      "vintage_id": "v2",
+      "value": 9,
+      "source_hash": "384be89ee638171739b7936475e2a7e93ace9a1b91dfa66f2478a98cad9b4bc3"
+    }
+  ],
+  "sourceHash": "06edb09e30dcbbc5ade52f15f1dbcd8fbd138963dcea1330d35ac2d8d6a83507"
 };root.PortfolioResearchFixtures=data;if(typeof module!=="undefined")module.exports=data;})(globalThis);

@@ -244,5 +244,35 @@
         }
       ]
     }
+  ],
+  "ambiguityVersions": [
+    {
+      "record_id": "release-v1",
+      "observation_time": "2026-02-28T00:00:00Z",
+      "available_at": "2026-03-04T00:00:00Z",
+      "vintage_id": "v1",
+      "value": 2.4
+    },
+    {
+      "record_id": "release-v2",
+      "observation_time": "2026-02-28T00:00:00Z",
+      "available_at": "2026-03-20T00:00:00Z",
+      "vintage_id": "v2",
+      "value": 2.7
+    },
+    {
+      "record_id": "next-period",
+      "observation_time": "2026-03-31T00:00:00Z",
+      "available_at": "2026-04-04T00:00:00Z",
+      "vintage_id": "v3",
+      "value": 2.6
+    },
+    {
+      "record_id": "conflicting-v2",
+      "observation_time": "2026-02-28T00:00:00Z",
+      "available_at": "2026-03-20T00:00:00Z",
+      "vintage_id": "v2",
+      "value": 9
+    }
   ]
 }

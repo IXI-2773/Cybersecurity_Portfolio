@@ -18,4 +18,5 @@ for(const [id,state] of [['support','supported'],['conflict','conflict'],['missi
 check('all returned passage IDs exist',()=>{for(const s of f.claims){const r=traceClaim(s);for(const p of r.passageIds)assert.ok(s.sources.some(x=>x.passage_id===p));}});
 check('no decorative confidence',()=>assert.equal(traceClaim(f.claims[0]).confidence,undefined));
 check('missing scenario held',()=>assert.notEqual(traceClaim({}).state,'supported'));
+check('ambiguity scenario has canonical record provenance',()=>{const crypto=require('node:crypto');assert.ok(f.ambiguityVersions);for(const record of f.ambiguityVersions){const data=Object.fromEntries(Object.keys(record).filter(k=>k!=='source_hash').sort().map(k=>[k,record[k]]));assert.equal(record.source_hash,crypto.createHash('sha256').update(JSON.stringify(data)).digest('hex'));}assert.equal(resolveVintage(f.ambiguityVersions,'2026-03-20T00:00:00Z').state,'ambiguous');});
 console.log(`PASS: ${checks} vintage and claim checks`);

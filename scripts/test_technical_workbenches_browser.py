@@ -1,4 +1,5 @@
 """Bounded Chrome verification of the four technical portfolio routes."""
+import base64
 import json
 import shutil
 from pathlib import Path
@@ -21,6 +22,12 @@ def main():
     with webdriver.Chrome(options=opts) as d:
         wait=WebDriverWait(d,8)
         def el(css):return d.find_element(By.CSS_SELECTOR,css)
+        def capture_panel(panel,name):
+            d.execute_script('arguments[0].scrollIntoView({block:"start",behavior:"instant"})',panel)
+            box=d.execute_script('const r=arguments[0].getBoundingClientRect();return {x:r.x+scrollX,y:r.y+scrollY,width:r.width,height:r.height,scale:1}',panel)
+            shot=d.execute_cdp_cmd('Page.captureScreenshot',{'format':'png','captureBeyondViewport':True,'clip':box})
+            (OUT/name).write_bytes(base64.b64decode(shot['data']))
+
         def open_page(path):
             d.get((ROOT/path).as_uri())
             if 'detection-engineering' in path:wait.until(lambda _:len(d.find_elements(By.CSS_SELECTOR,'[data-event-index]'))>0)
@@ -41,7 +48,7 @@ def main():
                     d.execute_script('window.scrollTo(0,0)')
                     d.save_screenshot(str(OUT/(Path(path).stem+f'-technical-{width}.png')))
                     panels=d.find_elements(By.CSS_SELECTOR,'.technical-workbench')
-                    if panels:panels[0].screenshot(str(OUT/(Path(path).stem+f'-inspector-{width}.png')))
+                    if panels:capture_panel(panels[0],Path(path).stem+f'-inspector-{width}.png')
                 checks.append(f'{path}/{width}: images, no overflow, no JS errors')
         d.execute_cdp_cmd('Emulation.setDeviceMetricsOverride',{'width':1280,'height':950,'deviceScaleFactor':1,'mobile':False})
         open_page('projects/detection-engineering.html')
@@ -49,6 +56,10 @@ def main():
         assert 'login_success' in el('[data-auth-inspector]').text
         assert d.execute_script('return document.activeElement.dataset.eventIndex')=='5','Event selection must retain keyboard focus'
         assert '5 qualifying failures' in el('[data-auth-outcome]').text
+        Select(el('[data-auth-scenario]')).select_by_value('post_success_burst')
+        early=d.find_elements(By.CSS_SELECTOR,'[data-event-index]')[3];early.send_keys(Keys.ENTER)
+        assert 'Rule not triggered' in el('[data-auth-outcome]').text
+        assert 'auth-022' in el('[data-auth-inspector]').text
         Select(el('[data-auth-scenario]')).select_by_value('below')
         assert 'Rule not triggered' in el('[data-auth-outcome]').text
         el('[data-replay-play]').click();wait.until(lambda _:el('[data-detection-lab]').get_attribute('data-running')=='true')
@@ -64,7 +75,9 @@ def main():
         assert 'release-v2' in el('[data-vintage-outcome]').text
         Select(el('[data-vintage-mode]')).select_by_value('ambiguous')
         assert 'Hold: conflicting' in el('[data-vintage-outcome]').text
-        el('[data-vintage-workbench]').screenshot(str(OUT/'cr-held-inspector.png'))
+        el('[data-record-id="release-v2"]').send_keys(Keys.ENTER)
+        assert d.execute_script('return document.activeElement.dataset.recordId')=='release-v2'
+        capture_panel(el('[data-vintage-workbench]'),'cr-held-inspector.png')
         open_page('projects/research-ai-infrastructure.html')
         el('[data-passage-id="B:p1"]').send_keys(Keys.ENTER)
         assert 'mortgage' in el('[data-claim-inspector]').text
@@ -72,7 +85,7 @@ def main():
         assert 'Not directly comparable' in el('[data-claim-outcome]').text
         Select(el('[data-claim-scenario]')).select_by_value('attribution')
         assert 'attribution mismatch' in el('[data-claim-outcome]').text
-        el('[data-claim-workbench]').screenshot(str(OUT/'rai-attribution-inspector.png'))
+        capture_panel(el('[data-claim-workbench]'),'rai-attribution-inspector.png')
         open_page('index.html');el('[data-signal-play]').click()
         wait.until(lambda _:el('[data-signal-display]').get_attribute('data-running')=='true')
         old=d.current_window_handle;d.switch_to.new_window('tab');d.switch_to.window(old)

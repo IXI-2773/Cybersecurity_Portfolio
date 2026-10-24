@@ -35,7 +35,16 @@
     }
     return {findings,decisions};
   }
-  const api={evaluateAuthentication};root.PortfolioDetection=api;if(typeof module!=='undefined')module.exports=api;
+  function decisionForSelection(events,decisions,selectedId){
+    const ordered=events.map((e,i)=>({e,i})).sort((a,b)=>Date.parse(a.e.timestamp)-Date.parse(b.e.timestamp)||a.i-b.i).map(x=>x.e);
+    const index=ordered.findIndex(e=>e.id===selectedId);if(index<0)return null;
+    const selected=ordered[index];
+    if(selected.event_type==='login_success')return decisions.find(d=>d.successId===selected.id)||null;
+    const following=ordered.slice(index+1).filter(e=>e.event_type==='login_success');
+    const target=following.find(e=>e.username===selected.username&&e.source_ip===selected.source_ip)||following[0];
+    return target?decisions.find(d=>d.successId===target.id)||null:null;
+  }
+  const api={evaluateAuthentication,decisionForSelection};root.PortfolioDetection=api;if(typeof module!=='undefined')module.exports=api;
   if(!root.document)return;
   const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const fixture=root.PortfolioTechnicalFixtures.authentication;
@@ -45,28 +54,30 @@
     const scenarios=[...new Set(fixture.events.map(x=>x.scenario))];
     select.innerHTML=scenarios.map(s=>`<option value="${s}">${esc(labels[s])}</option>`).join('');select.value='ten_minute_boundary';
     const result=evaluateAuthentication(fixture.events);
-    panel.querySelector('[data-auth-validation]').textContent=`${result.findings.length} of ${fixture.expectedFindings.length} expected findings match in this browser replay · ${fixture.events.length} source events · ${scenarios.length} scenarios`;
+    panel.querySelector('[data-auth-validation]').textContent=`${result.findings.length} of ${fixture.expectedFindings.length} expected finding counts in this browser replay · ${fixture.events.length} source events · ${scenarios.length} scenarios`;
     panel.querySelector('[data-auth-spl]').textContent=fixture.splExcerpt;
-    panel.querySelector('[data-auth-hash]').textContent=fixture.sourceHash;
-    let replay=null,events=[],decision=null;
+    panel.querySelector('[data-auth-hash]').textContent=fixture.sourceHash;panel.querySelector('[data-auth-python]').textContent=fixture.pythonExcerpt;
+    let replay=null,events=[],decisions=[];
     function render(index,running){
       panel.dataset.running=String(running);
       panel.querySelector('[data-replay-play]').textContent=running?'Pause':'Play';
-      const current=events[index];
+      const current=events[index],decision=decisionForSelection(events,decisions,current.id);
+      const focusedIndex=panel.querySelector('[data-auth-events]').contains(document.activeElement)?document.activeElement.dataset.eventIndex:null;
       const end=events.find(x=>x.id===(decision&&decision.successId))||events[events.length-1];
       const min=Math.min(...events.map(e=>e.epochMs),end.epochMs-600000),span=Math.max(end.epochMs-min,1000);
       const x=e=>45+((e.epochMs-min)/span)*610;
       const cutoff=45+((end.epochMs-600000-min)/span)*610;
       panel.querySelector('[data-auth-timeline]').innerHTML=`<rect class="window-zone" x="${cutoff}" y="16" width="${655-cutoff}" height="90" rx="4"/><text x="${cutoff+8}" y="34" class="chart-note">inclusive 600 s window</text><path class="axis-line" d="M40 75H665"/>`+events.map((e,i)=>`<circle class="event-dot ${e.event_type==='login_success'?'success-dot':''} ${i===index?'selected-dot':''} ${i>index?'pending-dot':''}" cx="${x(e)}" cy="75" r="${i===index?9:6}"/><text x="${x(e)}" y="${i%2?130:112}" class="chart-time">${esc(e.timestamp.slice(11,19))}</text>`).join('');
       panel.querySelector('[data-auth-events]').innerHTML=events.map((e,i)=>`<button type="button" data-event-index="${i}" aria-pressed="${i===index}"><span>${esc(e.timestamp.slice(11,19))}</span><strong>${e.event_type==='login_failure'?'Failure':'Success'}</strong><span>${esc(e.username)}</span></button>`).join('');
+      if(focusedIndex!==null)panel.querySelector(`[data-event-index="${focusedIndex}"]`)?.focus({preventScroll:true});
       const excluded=decision&&decision.exclusions.find(e=>e.id===current.id);
       const included=decision&&decision.contributingIds.includes(current.id);
       const reason=included?'Included: same account/IP, since previous success, age ≤ 600 s':excluded?'Excluded: '+excluded.reason:current.event_type==='login_success'?'Success event: evaluates and then resets this account/IP streak':'Not a preceding failure for this decision';
-      panel.querySelector('[data-auth-inspector]').innerHTML=`<h3>${esc(current.id)} · ${esc(current.event_type)}</h3><dl class="field-list">${Object.entries({timestamp:current.timestamp,username:current.username,source_ip:current.source_ip,host:current.host,age_at_success:((end.epochMs-current.epochMs)/1000)+' s',scenario:current.scenario}).map(([k,v])=>`<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl><p class="decision-reason">${esc(reason)}</p>`;
-      panel.querySelector('[data-auth-outcome]').textContent=decision&&decision.triggered?`${decision.count} qualifying failures → investigate. Compromise is not established.`:'Rule not triggered. Absence of a match does not establish benign activity.';
+      panel.querySelector('[data-auth-inspector]').innerHTML=`<h3>${esc(current.id)} · ${esc(current.event_type)}</h3><dl class="field-list">${Object.entries({timestamp:current.timestamp,username:current.username,source_ip:current.source_ip,host:current.host,reference_success:decision?end.id+" · "+end.username:"none supplied",age_at_success:((end.epochMs-current.epochMs)/1000)+' s',scenario:current.scenario}).map(([k,v])=>`<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl><p class="decision-reason">${esc(reason)}</p>`;
+      panel.querySelector('[data-auth-outcome]').textContent=decision&&decision.triggered?`At ${end.id}: ${decision.count} qualifying failures → investigate. Compromise is not established.`:'Rule not triggered. Absence of a match does not establish benign activity.';
       panel.querySelector('[data-replay-step]').disabled=index===events.length-1;
     }
-    function load(){if(replay)replay.dispose();events=fixture.events.filter(e=>e.scenario===select.value);const evaluation=evaluateAuthentication(events);decision=evaluation.decisions.at(-1);replay=root.PortfolioReplay.createReplay({count:events.length,onChange:render,element:panel,intervalMs:950});}
+    function load(){if(replay)replay.dispose();events=fixture.events.filter(e=>e.scenario===select.value);const evaluation=evaluateAuthentication(events);decisions=evaluation.decisions;replay=root.PortfolioReplay.createReplay({count:events.length,onChange:render,element:panel,intervalMs:950});}
     panel.querySelector('[data-auth-events]').addEventListener('click',e=>{const b=e.target.closest('[data-event-index]');if(b)replay.select(Number(b.dataset.eventIndex));});
     panel.querySelector('[data-replay-play]').addEventListener('click',()=>panel.dataset.running==='true'?replay.pause():replay.play());
     panel.querySelector('[data-replay-step]').addEventListener('click',()=>replay.step());panel.querySelector('[data-replay-reset]').addEventListener('click',()=>replay.reset());select.addEventListener('change',load);
