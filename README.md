@@ -2,7 +2,7 @@
 
 [Open the visual portfolio](https://ixi-2773.github.io/Cybersecurity_Portfolio/) · [Choose a case study](https://ixi-2773.github.io/Cybersecurity_Portfolio/explore.html) · [Resume PDF](resumes/Don_Lopez_Cybersecurity_Resume.pdf) · [LinkedIn](https://www.linkedin.com/in/ixi2773/)
 
-Security investigations, research infrastructure, and independent certification study software. The main website offers a short introduction and three selected investigations; the work directory lets employers choose what to review.
+Security investigations, research infrastructure, and independent certification study software. The main website offers a short introduction and selected investigations; the work directory lets employers choose what to review.
 
 ## Case studies
 
@@ -15,16 +15,18 @@ Security investigations, research infrastructure, and independent certification 
 - Authentication detection and Splunk boundary debugging
 - Windows process triage
 - Network packet analysis
-- Local web hardening
+- Live local web attack-log analysis and hardening
+- Phishing email investigation
+- Enterprise account investigation
+- Forensic evidence examination with E3 classroom context
+- Offensive security VM training
 - Celestial Resonance (private architecture summary)
 - Research AI Infrastructure (private architecture summary)
 - Security+ and SC-900 certification learning engines
 
-The four security exercises use synthetic or localhost inputs. The saved Splunk panel is screenshot-reviewed; indexed ingestion and alert firing remain unverified. CR/RAI summaries do not publish their private implementations. The study applications are independent products and do not guarantee exam results.
+The reproducible security exercises use synthetic, generated or localhost inputs. The saved Splunk panel is screenshot-reviewed; indexed ingestion and alert firing remain unverified. CR/RAI summaries do not publish their private implementations. The study applications are independent products and do not guarantee exam results.
 
-The three expanded resume labs preserve the owner's reported work and identify
-the original artifacts still to be added. Phishing, identity/MFA and Python SOC
-automation have separate planned briefs with no completed results claimed.
+The three expanded résumé labs preserve the owner's reported work and identify the original artifacts still to be added. Phishing and enterprise-account investigations now have completed, reproducible evidence. Python SOC automation remains a planned brief. Prior Kali, VMware, Necromancer, HackThisSite and Paraben E3 experience is owner-confirmed and kept distinct from current repository evidence.
 
 CR and RAI now include independent, fictional-data interactive explainers:
 point-in-time data admission and structured evidence support. They do not run
@@ -52,4 +54,4 @@ Professional contact: [frailtycraven@gmail.com](mailto:frailtycraven@gmail.com).
 
 [Academic Experience](https://ixi-2773.github.io/Cybersecurity_Portfolio/education.html) links selected completed coursework to the cases. The private transcript confirmed degree completion in December 2024 and Dean's List entries for Spring 2023 and Fall 2024; the transcript and its personal identifiers are not published.
 
-[Image Credits](https://ixi-2773.github.io/Cybersecurity_Portfolio/visual-credits.html) identifies the genuine Splunk panel and the attributed Kali, forensic-hardware and campus reference visuals. Previously generated raster artwork is no longer displayed.
+[Image Credits](https://ixi-2773.github.io/Cybersecurity_Portfolio/visual-credits.html) identifies the genuine Splunk panel, the attributed Kali reference image, the generated forensic result visual and campus photographs. Previously generated raster artwork is no longer displayed.
