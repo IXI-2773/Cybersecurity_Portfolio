@@ -12,6 +12,39 @@
   font-synthesis:none;
   line-height:1.65;
 }
+.intro-with-display { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); gap:48px; align-items:center; }
+.intro-content { min-width:0; }
+.intro-content .actions { gap:18px; }
+.social-profiles { display:flex; flex-wrap:wrap; gap:25px; margin-top:22px; font-size:.96rem; font-weight:600; }
+.signal-display { background:#172b28; color:#f4f8f5; border-radius:16px; padding:24px; box-shadow:0 16px 34px rgba(24,47,39,.12); }
+.signal-top { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:12px; }
+.signal-top h2 { font-size:1.28rem; color:#f4f8f5; }
+.signal-top span { font-size:.72rem; color:#c1d4cb; }
+.signal-display svg { width:100%; height:auto; display:block; overflow:visible; margin-top:12px; }
+.signal-route { fill:none; stroke:#7cbd9e; stroke-width:2; }
+.signal-return { fill:none; stroke:#385d50; stroke-width:1; stroke-dasharray:4 7; }
+.signal-nodes rect { fill:#213f36; stroke:#6a9d84; stroke-width:1.5; }
+.signal-glyphs { fill:none; stroke:#d4e9dd; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+.signal-labels { fill:#d4e9dd; font-size:17px; text-anchor:middle; }
+.signal-runner { fill:#c2f4d4; stroke:#3f8860; stroke-width:6; paint-order:stroke; animation:signal-travel 12s ease-in-out infinite; }
+.signal-event { fill:none; stroke:#80b399; stroke-width:3; stroke-linecap:round; animation:signal-record 12s ease-in-out infinite; }
+.signal-display :is(.signal-runner,.signal-event) { animation-play-state:paused; }
+.signal-display[data-running="true"] :is(.signal-runner,.signal-event) { animation-play-state:running; }
+.signal-bottom { display:flex; gap:12px; align-items:center; justify-content:space-between; }
+.signal-bottom p { font-size:.78rem; color:#c1d4cb; }
+.signal-bottom button { color:#e8f4ec; background:transparent; border:1px solid #759c87; border-radius:5px; min-height:40px; padding:7px 10px; font-size:.75rem; cursor:pointer; white-space:nowrap; }
+.signal-bottom button:hover { background:#2d5143; }
+.signal-bottom button:focus-visible { outline:3px solid #c2f4d4; outline-offset:4px; }
+.editorial-art img { max-height:410px; object-fit:cover; }
+.project-visual img[src*="assets/artwork/"] { object-fit:cover; }
+.applied-cases { border-top:1px solid var(--line); padding-top:40px; margin-top:40px; }
+.case-section pre { background:var(--soft); color:var(--ink); padding:20px; border-radius:8px; overflow-x:auto; max-width:100%; margin:20px 0; font-size:.86rem; line-height:1.75; }
+.case-section pre:focus-visible { outline:3px solid var(--accent); outline-offset:4px; }
+@keyframes signal-travel { 0%,5% { transform:translateX(0); opacity:1; } 28% { transform:translateX(176px); opacity:1; } 53% { transform:translateX(352px); opacity:1; } 78%,90% { transform:translateX(528px); opacity:1; } 96%,100% { transform:translateX(528px); opacity:0; } }
+@keyframes signal-record { 0%,20% { opacity:.2; } 60%,90% { opacity:1; } 100% { opacity:.2; } }
+@media(max-width:1000px) { .intro-with-display { grid-template-columns:1fr; gap:36px; } .signal-display { width:min(100%,620px); } }
+@media(max-width:440px) { .signal-display { padding:20px 16px; } .signal-labels { font-size:20px; } .signal-bottom { align-items:flex-start; flex-direction:column; } .signal-top span { font-size:.72rem; } }
+@media(prefers-reduced-motion:reduce) { .signal-display :is(.signal-runner,.signal-event) { animation:none !important; } }
 /* Expanded stories keep the same quiet reading surface. Motion belongs only
    to the two user-controlled research demonstrations. */
 .intro-degree { margin-top:24px; font-size:1.04rem; color:var(--ink); max-width:55ch; }
@@ -787,3 +820,5 @@ button,input {
     break-inside:avoid;
   }
 }
+.project-visual:has(.art-label) { position:relative; }
+.art-label { position:absolute; right:7px; bottom:7px; background:#f4f8f3; color:#294b3c; padding:3px 7px; border-radius:4px; font-size:.66rem; line-height:1.5; }

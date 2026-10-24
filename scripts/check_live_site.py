@@ -18,6 +18,9 @@ import urllib.request
 
 BASE = "https://ixi-2773.github.io/Cybersecurity_Portfolio/"
 EXPECTED_PAGES = {
+    "projects/e3-digital-forensics.html": "Paraben E3",
+    "projects/kali-defender-visibility.html": "Kali",
+    "projects/splunk-threat-hunting.html": "Splunk Threat",
     "awards.html": "Awards",
     "projects/detection-engineering.html": "Detection Engineering",
     "projects/splunk-siem-investigation.html": "Multi-source Splunk",
@@ -46,6 +49,8 @@ EXPECTED_PAGES = {
     "projects/soc-analyst-evidence.html": "SOC Analyst",
 }
 STATIC_ASSETS = (
+    "assets/artwork/kali-lab.webp", "assets/artwork/splunk-investigation.webp", "assets/artwork/e3-forensics.webp",
+    "assets/js/signal-display.js",
     "assets/js/portfolio-systems.js",
     "styles.css",
     "portfolio.css",
@@ -142,6 +147,9 @@ def verify_response(path: str, status: int, content_type: str, body: bytes) -> d
     elif path.endswith(".pdf"):
         if "application/pdf" not in content_type.lower() or not body.startswith(b"%PDF-"):
             raise ValueError("Public resume was not served as a PDF")
+    elif path.endswith(".webp"):
+        if "image/webp" not in content_type.lower() or body[:4] != b"RIFF" or body[8:12] != b"WEBP":
+            raise ValueError("Conceptual artwork was not served as a WebP image")
     elif path.endswith(".png"):
         if "image/png" not in content_type.lower() or not body.startswith(b"\x89PNG\r\n\x1a\n"):
             raise ValueError("Application screenshot was not served as a PNG")

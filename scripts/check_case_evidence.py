@@ -140,6 +140,14 @@ def main() -> None:
     # Employer navigation must expose the full reviewed catalog without scripts.
     import re
     home = get("index.html")
+    required((ROOT / 'projects/e3-digital-forensics.html').exists(),
+             "E3 classroom experience needs its own case")
+    e3 = get('projects/e3-digital-forensics.html')
+    required('data-case-scope="classroom-experience"' in e3 and 'AI-generated' in e3,
+             "Forensic classroom experience and conceptual artwork must be explicit")
+    required(home.count('https://github.com/IXI-2773"') == 1
+             and home.count('https://www.linkedin.com/in/ixi2773/"') == 1,
+             "Keep one prominent profile link for each social destination")
     catalog = get("explore.html")
     heading = re.search(r"<h1[^>]*>(.*?)</h1>", home, re.S)
     required(heading is not None and "Don Lopez" in heading.group(1),
