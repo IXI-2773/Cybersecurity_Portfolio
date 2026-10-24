@@ -145,6 +145,27 @@ def main() -> None:
     e3 = get('projects/e3-digital-forensics.html')
     required('data-case-scope="classroom-experience"' in e3 and 'reference photograph' in e3.lower(),
              "Forensic classroom experience and reference-photo scope must be explicit")
+    kali_vm = get('projects/kali-defender-visibility.html')
+    required('data-case-scope="completed-owner-confirmed-experience"' in kali_vm,
+             "Kali/VM case must present the owner-confirmed work as completed experience")
+    for phrase in ('Completed hands-on experience', 'VMware', 'Wireshark', 'Snort', 'Splunk'):
+        required(phrase.lower() in kali_vm.lower(),
+                 "Kali/VM completed case missing experience marker: " + phrase)
+    for stale in ('proposed walkthrough', 'has not been executed', 'design, not a newly completed'):
+        required(stale not in kali_vm.lower(),
+                 "Kali/VM completed case retained stale proposal wording: " + stale)
+    required('Reproducible public artifact' in kali_vm
+             and 'Attributed reference image' in kali_vm,
+             "Kali/VM visuals must distinguish public artifacts from reference imagery")
+    for asset in ('assets/reference/csusb-jack-brown-hall.webp',
+                  'assets/reference/csusb-university-entrance.webp'):
+        required((ROOT / asset).exists(), "Missing licensed CSUSB image: " + asset)
+        required((ROOT / asset).stat().st_size <= 1024 * 1024,
+                 "CSUSB image exceeds live response size ceiling: " + asset)
+        required(asset in get('education.html'), "Academic gallery missing image: " + asset)
+        required(asset in get('visual-credits.html'), "Image credits missing image: " + asset)
+    required('class="campus-gallery"' in get('education.html'),
+             "Academic experience needs the responsive campus gallery")
     required(home.count('https://github.com/IXI-2773"') == 1
              and home.count('https://www.linkedin.com/in/ixi2773/"') == 1,
              "Keep one prominent profile link for each social destination")

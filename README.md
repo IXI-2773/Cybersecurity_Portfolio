@@ -10,7 +10,7 @@ Security investigations, research infrastructure, and independent certification 
 
 - Detection engineering and rule development (resume lab)
 - Multi-source Splunk investigation (resume lab)
-- Network intrusion investigation (resume lab)
+- Completed Kali/VM and network intrusion experience (résumé lab)
 
 - Authentication detection and Splunk boundary debugging
 - Windows process triage

@@ -12,9 +12,9 @@ A scan, repeated connection attempt or unusual application request needs context
 
 ## My lab work
 
-My résumé describes simulating scanning, brute-force and exploitation activity in a Kali Linux lab, analyzing more than 5,000 packets in Wireshark, and implementing and tuning Snort rules for the simulated attacks.
+I simulated scanning, brute-force and exploitation activity from Kali Linux in an isolated VMware lab, analyzed more than 5,000 packets in Wireshark, and implemented and tuned Snort rules for the simulated attacks.
 
-The case will pair the original packet evidence with the corresponding rule and alert context. The smaller generated DNS/HTTP exercise already in this portfolio is a separate investigation.
+The original capture and exact rule output are not stored in this repository. The separate generated DNS/HTTP exercise preserves the way I now present packet references and bounded findings publicly.
 
 ## From packet to finding
 
@@ -23,9 +23,9 @@ The case will pair the original packet evidence with the corresponding rule and 
 - **Compare the alert.** Relate the Snort predicate and triggering traffic, and consider legitimate matches.
 - **Document the conclusion.** Preserve packet references, rule context, limitations and the recommended next step.
 
-## What a useful case report contains
+## Network and VM walkthrough
 
-A readable timeline, relevant Wireshark filters, packet references, the Snort rule, the alert it produced and an explanation of what tuning changed. Screenshots should support the reasoning rather than substitute for it.
+The completed lab connected attacker-side VM activity, captured traffic and IDS review. [See the visual Kali VM and network-visibility walkthrough ↗](kali-defender-visibility.md).
 
 ## A public packet exercise
 
@@ -35,7 +35,7 @@ The generated 20-frame PCAP demonstrates DNS and HTTP analysis with a determinis
 
 ## Scope and evidence
 
-Completed lab work described in my supplied résumé. The original lab artifacts and screenshots will be added here; the linked public exercises have their own, smaller scope. This is lab experience, not a claim of a production incident or paid SOC employment.
+Completed lab work confirmed by me and described in my supplied résumé. Reference imagery and the linked smaller fixture are clearly separated from the unavailable original artifacts. This is lab experience, not a claim of a production incident or paid SOC employment.
 
 Background reference
 

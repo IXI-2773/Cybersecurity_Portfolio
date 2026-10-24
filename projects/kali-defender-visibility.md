@@ -1,40 +1,38 @@
-# Kali Reconnaissance & Defender Visibility
+# Kali VM & Network Visibility
 
-Follow scoped lab activity from service discovery to network observations and analyst review.
+Completed hands-on experience connecting isolated attack activity to packet evidence, IDS alerts and analyst review.
 
-Kali Linux · Nmap · Network telemetry · Investigation design
+Kali Linux · VMware · Nmap · Wireshark · Snort · Splunk
 
 Authentic reference visuals accompany the website case, with credit and scope captions.
 
-## The investigation design
+## My completed lab experience
 
-This proposed walkthrough connects a service-discovery exercise in an isolated Kali lab to the observations a defender can inspect. It extends the Kali/Wireshark/Snort work described in my résumé; this particular walkthrough has not been executed for the portfolio.
+I used an isolated VMware environment with Kali Linux to simulate scanning, brute-force and exploitation activity against lab targets. I reviewed more than 5,000 captured packets in Wireshark, then implemented and tuned Snort rules for the simulated traffic.
 
-## The lab scene
+The value of the exercise was seeing the same activity from both sides: what the Kali VM generated, what appeared on the network and what an analyst could support from retained evidence.
 
-A Kali workstation and an intentionally configured target share an isolated test network. A separate collection point preserves the relevant network observations. The scope is a known lab target, with a baseline of ordinary traffic for comparison.
+## How I worked through the network evidence
 
-## From reconnaissance to a defender’s question
+- Bound the virtual lab. Keep the Kali VM and target systems on an isolated network with known scope.
 
-- Establish the baseline. Record expected services and ordinary connection behavior.
+- Generate controlled activity. Produce reconnaissance and attack-like traffic without targeting public systems.
 
-- Run scoped discovery. Use Nmap against the lab target and preserve the activity and timing.
+- Inspect packets in Wireshark. Review protocols, conversations, ports and timing.
 
-- Inspect the network side. Compare connection attempts, destination ports and timing in captured traffic or available sensor logs.
+- Tune Snort detections and carry the question into Splunk. Compare rule logic with captured traffic and organize available context into a timeline.
 
-- Investigate in Splunk. Search the imported observations, explain the pattern and compare it with authorized administrative discovery.
+## Network evidence you can inspect here
 
-## What would make the case convincing
-
-A lab topology, exact scope, a genuine tool capture, a packet or event timeline, the corresponding Splunk searches and a short report. The report should explain whether the activity is merely observable, matches a detection candidate or supports a stronger conclusion.
+The original 5,000+ packet capture is not stored in this public repository. The website displays three visuals from a separate, reproducible 20-frame portfolio fixture. They show the current packet-to-finding documentation method without pretending to be the original capture.
 
 ## Existing work to inspect
 
 [Résumé network-intrusion lab ↗](network-intrusion-lab.html) · [Reproducible generated packet case ↗](network-traffic-analysis.html)
 
-## Scope
+## Scope and evidence
 
-Investigation design, not a newly completed scan or detection result. The desktop reference screenshot is credited on the website. All execution belongs in the isolated lab; this page performs no scanning.
+The completed Kali, VMware, Wireshark, Snort and broader packet-analysis experience is owner-confirmed and described in the supplied résumé. The desktop screenshot is an attributed reference image, while the network visuals are separate reproducible public artifacts. This page performs no scanning.
 
 [Kali’s Nmap documentation ↗](https://www.kali.org/tools/nmap/)
 
