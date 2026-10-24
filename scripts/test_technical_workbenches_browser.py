@@ -50,6 +50,10 @@ def main():
                 if 'ad-attack-chain' in path:
                     label_height=d.execute_script('return document.querySelector("[data-ad-timeline] .chart-note").getBoundingClientRect().height')
                     assert label_height>=10,(path,width,'timeline labels below readable rendered size',label_height)
+                    if width<=390:
+                        chart=el('.ad-chart-scroll')
+                        assert chart.get_attribute('tabindex')=='0'
+                        assert d.execute_script('return arguments[0].scrollWidth>arguments[0].clientWidth',chart),'Timeline must retain readable width inside its scroll region'
                 for image in d.find_elements(By.CSS_SELECTOR,'img'):
                     d.execute_script('arguments[0].scrollIntoView({block:"center"})',image)
                     wait.until(lambda _:d.execute_script('return arguments[0].complete && arguments[0].naturalWidth>0',image))
