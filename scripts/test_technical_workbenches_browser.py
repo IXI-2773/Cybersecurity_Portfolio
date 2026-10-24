@@ -47,6 +47,9 @@ def main():
             for path in ROUTES:
                 open_page(path)
                 assert d.execute_script('return document.documentElement.scrollWidth <= innerWidth + 1'),(path,width,'overflow')
+                if 'ad-attack-chain' in path:
+                    label_height=d.execute_script('return document.querySelector("[data-ad-timeline] .chart-note").getBoundingClientRect().height')
+                    assert label_height>=10,(path,width,'timeline labels below readable rendered size',label_height)
                 for image in d.find_elements(By.CSS_SELECTOR,'img'):
                     d.execute_script('arguments[0].scrollIntoView({block:"center"})',image)
                     wait.until(lambda _:d.execute_script('return arguments[0].complete && arguments[0].naturalWidth>0',image))
