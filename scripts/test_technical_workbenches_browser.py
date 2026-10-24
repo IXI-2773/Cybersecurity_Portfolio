@@ -22,6 +22,11 @@ def main():
     with webdriver.Chrome(options=opts) as d:
         wait=WebDriverWait(d,8)
         def el(css):return d.find_element(By.CSS_SELECTOR,css)
+        def click(css):
+            target=el(css)
+            d.execute_script('arguments[0].scrollIntoView({block:"center",behavior:"instant"})',target)
+            wait.until(lambda _:d.execute_script('const r=arguments[0].getBoundingClientRect();return r.top>=0 && r.bottom<=innerHeight',target))
+            target.click()
         def capture_panel(panel,name):
             d.execute_script('arguments[0].scrollIntoView({block:"start",behavior:"instant"})',panel)
             box=d.execute_script('const r=arguments[0].getBoundingClientRect();return {x:r.x+scrollX,y:r.y+scrollY,width:r.width,height:r.height,scale:1}',panel)
@@ -50,6 +55,7 @@ def main():
                     panels=d.find_elements(By.CSS_SELECTOR,'.technical-workbench')
                     if panels:capture_panel(panels[0],Path(path).stem+f'-inspector-{width}.png')
                 checks.append(f'{path}/{width}: images, no overflow, no JS errors')
+        d.set_window_size(1280,1100)
         d.execute_cdp_cmd('Emulation.setDeviceMetricsOverride',{'width':1280,'height':950,'deviceScaleFactor':1,'mobile':False})
         open_page('projects/detection-engineering.html')
         b=el('[data-event-index="5"]');b.send_keys(Keys.ENTER)
@@ -62,11 +68,11 @@ def main():
         assert 'auth-022' in el('[data-auth-inspector]').text
         Select(el('[data-auth-scenario]')).select_by_value('below')
         assert 'Rule not triggered' in el('[data-auth-outcome]').text
-        el('[data-replay-play]').click();wait.until(lambda _:el('[data-detection-lab]').get_attribute('data-running')=='true')
+        click('[data-replay-play]');wait.until(lambda _:el('[data-detection-lab]').get_attribute('data-running')=='true')
         d.execute_script('window.scrollTo(0,document.body.scrollHeight)')
         wait.until(lambda _:el('[data-detection-lab]').get_attribute('data-running')=='false')
         d.execute_cdp_cmd('Emulation.setEmulatedMedia',{'features':[{'name':'prefers-reduced-motion','value':'reduce'}]})
-        open_page('projects/detection-engineering.html');el('[data-replay-play]').click()
+        open_page('projects/detection-engineering.html');click('[data-replay-play]')
         assert el('[data-detection-lab]').get_attribute('data-running')=='false'
         assert el('[data-event-index="1"]').get_attribute('aria-pressed')=='true'
         d.execute_cdp_cmd('Emulation.setEmulatedMedia',{'features':[]})
@@ -86,7 +92,7 @@ def main():
         Select(el('[data-claim-scenario]')).select_by_value('attribution')
         assert 'attribution mismatch' in el('[data-claim-outcome]').text
         capture_panel(el('[data-claim-workbench]'),'rai-attribution-inspector.png')
-        open_page('index.html');el('[data-signal-play]').click()
+        open_page('index.html');click('[data-signal-play]')
         wait.until(lambda _:el('[data-signal-display]').get_attribute('data-running')=='true')
         old=d.current_window_handle;d.switch_to.new_window('tab');d.switch_to.window(old)
         wait.until(lambda _:el('[data-signal-display]').get_attribute('data-running')=='false')
