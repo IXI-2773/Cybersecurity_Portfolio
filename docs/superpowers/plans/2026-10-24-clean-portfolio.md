@@ -44,5 +44,5 @@
 **Interfaces:** Reuse existing source/evidence checks; include the new stylesheet, case and PDF in the offline bundle.
 
 - [x] Run evidence, semantics, local-link and bundle checks; require success.
-- [ ] Check desktop, 390px and 320px rendering together, including no-JavaScript navigation and the PDF. Fix findings in one bounded pass and confirm.
-- [ ] Review the whole diff myself, record results, commit, push the feature branch and open a draft PR. Keep main unchanged.
+- [x] Check desktop, 390px and 320px rendering together, including no-JavaScript navigation and the PDF. Fix findings in one bounded pass and confirm.
+- [x] Review the whole diff myself, record results, commit, push the feature branch and open a draft PR. Keep main unchanged.
