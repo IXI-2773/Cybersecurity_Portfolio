@@ -24,6 +24,32 @@
 .featured-investigations .project-copy .text-link { min-height:44px; display:inline-flex; align-items:center; }
 .featured-investigations .network-feature img { height:auto; }
 .case-brief { display:grid; gap:13px; }
+.home-jump-nav { display:flex; flex-wrap:wrap; gap:4px 30px; padding:16px 0; border-top:1px solid var(--line); }
+.home-jump-nav a { display:inline-flex; align-items:center; min-height:44px; font-size:.94rem; text-decoration:none; }
+.home-jump-nav a:hover { text-decoration:underline; }
+.work-directory { padding-bottom:50px; }
+.directory-nav { display:flex; flex-wrap:wrap; gap:6px 26px; padding:16px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); scroll-margin-top:20px; }
+.directory-nav a { display:inline-flex; align-items:center; min-height:44px; font-weight:600; text-decoration:none; }
+.directory-section { padding-top:40px; scroll-margin-top:24px; }
+.directory-heading { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px 25px; }
+.directory-heading>a { font-size:.85rem; min-height:44px; display:inline-flex; align-items:center; }
+.directory-section .section-intro { margin:10px 0 6px; }
+.directory-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); column-gap:44px; }
+.directory-entry { padding:24px 0; border-bottom:1px solid var(--line); min-width:0; }
+.directory-entry h3 { font-size:1.15rem; margin-bottom:12px; }
+.directory-entry h3 a { display:inline-block; text-decoration:none; min-height:44px; }
+.directory-entry h3 a:hover { text-decoration:underline; text-underline-offset:4px; }
+.directory-entry>p { font-size:.96rem; color:var(--muted); line-height:1.7; max-width:62ch; }
+.directory-entry .project-meta { font-size:.8rem; margin:12px 0 0; }
+.directory-resources { border-top:1px solid var(--line); padding-top:35px; margin-top:45px; }
+.directory-resources p { color:var(--muted); font-size:1rem; margin-top:12px; }
+.directory-resources nav { display:flex; flex-wrap:wrap; gap:6px 28px; margin-top:18px; }
+.directory-resources nav a { display:inline-flex; align-items:center; min-height:44px; }
+@media(max-width:700px) {
+  .directory-grid { grid-template-columns:minmax(0,1fr); }
+  .directory-nav { column-gap:24px; }
+  .home-jump-nav { column-gap:24px; }
+}
 .analyst-brief .brief-scope { font-size:.88rem; margin-top:12px; }
 .analyst-brief .brief-assessment { background:var(--soft); padding:18px 20px; margin-top:20px; }
 .brief-facts { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px 32px; margin:24px 0; }

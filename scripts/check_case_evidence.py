@@ -230,7 +230,7 @@ def main() -> None:
     for path in ROOT.rglob('*.html'):
         if '.git' not in path.parts:
             required('assets/artwork/' not in path.read_text(), "Generated artwork remains displayed: "+str(path))
-    for slug in ("authentication-detection", "windows-process-triage", "network-traffic-analysis"):
+    for slug in ("ad-attack-chain", "detection-engineering", "network-traffic-analysis"):
         required(f'href="projects/{slug}.html"' in home,
                  "Homepage missing selected investigation: " + slug)
     for slug in ("celestial-resonance", "research-ai-infrastructure"):
