@@ -20,8 +20,8 @@ The public [browser workbench](https://ixi-2773.github.io/Cybersecurity_Portfoli
 
 ## Expanded resume lab stories
 
-- [Detection Engineering & Rule Development](detection-engineering.md) — completed lab work described in the supplied resume; original artifacts to be added.
-- [Multi-source Splunk Investigation](splunk-siem-investigation.md) — completed lab work described in the supplied resume; original artifacts to be added.
+- [Detection Engineering & Rule Development](detection-engineering.md) — published authentication result and existing rule/control links; earlier résumé metrics are separately attributed.
+- [Splunk Investigation & Evidence Correlation](splunk-siem-investigation.md) — public Splunk authentication evidence and separate recorded AD analysis; the broader résumé lab remains separately attributed.
 - [Network Intrusion Investigation](network-intrusion-lab.md) — completed isolated Kali/VM work with Wireshark packet review and Snort tuning, described in the supplied résumé.
 
 ## Prior training and expanded résumé lab stories

@@ -1,20 +1,22 @@
-# Multi-source Splunk Investigation
+# Splunk Investigation & Evidence Correlation
 
-Connect authentication, endpoint and network activity into a readable investigation.
+Inspect an authentication result in Splunk, then follow a separate host-and-packet investigation.
 
-Splunk · Log correlation · Incident timelines · 2025
+Splunk · Python · Evidence correlation · 2026
 
-Résumé lab: dashboards, alert triage and correlation across 3+ log sources.
+**Published Splunk evidence:** five expected findings on 64 synthetic authentication events. Multi-source AD correlation is separately demonstrated in Python.
 
 ## The investigation problem
 
 An authentication alert answers only part of an incident question. Understanding what happened requires connecting the account activity to relevant endpoint and network observations, while keeping the sequence and source of each event clear.
 
-## My lab work
+## Two inspectable investigation paths
 
-My résumé describes building Splunk dashboards and alerts for authentication anomalies and rapid login attempts. I correlated authentication, network and endpoint logs across three or more sources, constructed event timelines and documented investigations.
+**Splunk authentication:** the [source events](01-authentication-detection/validation_events.csv), [corrected SPL](01-authentication-detection/SPLUNK_MATRIX_BOUNDARY_RETEST.spl) and [saved native panel](../assets/evidence/splunk-native-dashboard-results.png) preserve the original three-of-five discrepancy and corrected five-of-five expected result. Indexed ingestion, scheduled alert firing and independent search-job exports remain open.
 
-I also optimized SPL queries to reduce false positives. This case describes that broader lab work; original dashboard exports and multi-source event samples are being organized for publication.
+**Recorded AD evidence:** a separate Python analysis links OTRF authentication, Sysmon, Kerberos and packet records with same-host process GUIDs, logon sessions and bounded network context. It preserves the 39.812-second difference between a DC execution and its collection. This does not establish that the AD sources were ingested or correlated in Splunk.
+
+[Inspect the Splunk case](authentication-detection.md) · [Inspect recorded AD correlation](ad-attack-chain.md) · [Read the AD analyst report](08-ad-investigation/CASE_REPORT.md).
 
 ## The investigation structure
 
@@ -36,13 +38,17 @@ The report should explain whether the reviewed evidence supports escalation, fur
 
 ## Public work available now
 
-The independent Splunk authentication case contains the published training fixture, corrected query and observed dashboard panel. The analyst workflow shows how I structure validation, corroboration and handoff.
+Follow the source events, corrected query and observed panel in the authentication case. The AD analyst report provides the separately executed host/packet correlation, exact references and competing explanations. The analyst workflow shows how I structure validation and handoff.
 
 [Inspect the public Splunk case ↗](authentication-detection.md) · [Read my analyst workflow ↗](soc-analyst-workflow.html)
 
+## Earlier multi-source résumé lab
+
+My résumé describes Splunk dashboards, alert triage and correlation across three or more log sources. Its original source inventory, field mappings, dashboard/query exports and source-linked timeline are not published here. The public authentication panel and separate AD Python analysis do not independently verify that broader Splunk lab.
+
 ## Scope and evidence
 
-Completed lab work described in my supplied résumé. The original lab artifacts and screenshots will be added here; the linked public exercises have their own, smaller scope. This is lab experience, not a claim of a production incident or paid SOC employment.
+Splunk results use a synthetic authentication fixture; the separate AD analysis uses OTRF recorded emulation. Neither is a production incident. The AD SPL/Sigma candidates, indexed Splunk ingestion and scheduled alert firing remain unverified.
 
 Background reference
 
