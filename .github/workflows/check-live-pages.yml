@@ -11,6 +11,8 @@ on:
       - 'visual-credits.html'
       - 'assets/reference/**'
       - 'assets/js/portfolio-systems.js'
+      - 'assets/js/signal-animation.js'
+      - 'assets/animation/**'
       - 'projects/*.html'
       - 'styles.css'
       - 'portfolio.css'

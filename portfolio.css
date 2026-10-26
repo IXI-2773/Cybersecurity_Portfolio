@@ -81,6 +81,16 @@
 .intro-content .actions { gap:18px; }
 .social-profiles { display:flex; flex-wrap:wrap; gap:25px; margin-top:22px; font-size:.96rem; font-weight:600; }
 .signal-display { background:#172b28; color:#f4f8f5; border-radius:16px; padding:24px; box-shadow:0 16px 34px rgba(24,47,39,.12); }
+.signal-visual { aspect-ratio:8 / 3; margin:14px 0 0; }
+.signal-film, .signal-film img { display:block; width:100%; height:100%; object-fit:contain; }
+.signal-display .signal-evidence-flow { width:100%; height:100%; margin:0; }
+.signal-display[data-visual="film"] .signal-evidence-flow,
+.signal-display[data-visual="events"] .signal-film { display:none; }
+.signal-display[data-visual="events"] .signal-film-caption span { display:none; }
+.signal-film-caption { display:flex; flex-wrap:wrap; gap:8px 16px; justify-content:space-between; align-items:center; margin:8px 0 18px; }
+.signal-film-caption span { font-size:.75rem; line-height:1.6; color:#c8ded1; }
+.signal-film-caption button { min-height:44px; padding:6px 0; border:0; border-bottom:1px solid #729f87; border-radius:0; color:#c4efd4; background:transparent; font:inherit; font-size:.76rem; cursor:pointer; }
+.signal-film-caption button:disabled { border-color:transparent; color:#c8ded1; cursor:default; }
 .signal-top { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:12px; }
 .signal-top h2 { font-size:1.28rem; color:#f4f8f5; }
 .signal-top span { font-size:.72rem; color:#c1d4cb; }

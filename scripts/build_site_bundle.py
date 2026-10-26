@@ -14,7 +14,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 ARCHIVE_DATE = (2026, 10, 22, 0, 0, 0)
 ALLOWED = {
-    "assets": {".svg", ".png", ".jpg", ".jpeg", ".webp", ".js", ".txt"},
+    "assets": {".svg", ".png", ".jpg", ".jpeg", ".webp", ".gif", ".js", ".txt"},
     "docs": {".md"},
     "resumes": {".txt", ".pdf"},
     "projects": {".html", ".md", ".py", ".json", ".csv", ".spl"},
@@ -24,6 +24,7 @@ ROOT_FILES = {
     "PUBLICATION_CHECKLIST.md", "portfolio.css", "awards.html", "education.html", "visual-credits.html",
 }
 REQUIRED_SITE_FILES = {
+    "assets/animation/signal-to-case.gif", "assets/animation/signal-to-case-still.png", "assets/js/signal-animation.js",
     "education.html", "visual-credits.html", "assets/reference/kali-desktop-2020.4.png",
     "assets/reference/forensic-write-blocker.webp", "assets/reference/csusb-pfau-library.webp",
     "assets/reference/GPL-2.0-or-later.txt",

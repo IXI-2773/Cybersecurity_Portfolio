@@ -104,6 +104,33 @@ def main():
         Select(el('[data-claim-scenario]')).select_by_value('attribution')
         assert 'attribution mismatch' in el('[data-claim-outcome]').text
         capture_panel(el('[data-claim-workbench]'),'rai-attribution-inspector.png')
+        open_page('index.html')
+        assert el('.actions .button').text=='View AD case study'
+        assert el('[data-signal-display]').get_attribute('data-visual')=='film'
+        wait.until(lambda _:el('[data-signal-display]').get_attribute('data-film-running')=='true')
+        click('[data-film-play]')
+        assert el('[data-signal-film]').get_attribute('src').endswith('signal-to-case-still.png')
+        click('[data-film-play]')
+        assert el('[data-signal-display]').get_attribute('data-film-running')=='true'
+        click('[data-signal-step]')
+        assert el('[data-signal-display]').get_attribute('data-visual')=='events'
+        assert el('[data-signal-display]').get_attribute('data-film-running')=='false'
+        Select(el('[data-signal-scenario]')).select_by_value('below')
+        assert not el('.signal-film-caption span').is_displayed()
+        click('[data-film-play]')
+        assert el('[data-signal-display]').get_attribute('data-visual')=='film'
+        assert el('[data-signal-display]').get_attribute('data-running')=='false'
+        assert Select(el('[data-signal-scenario]')).first_selected_option.get_attribute('value')=='ten_minute_boundary'
+        assert '6 timestamped events' in el('[data-signal-detail]').text
+        d.execute_cdp_cmd('Emulation.setEmulatedMedia',{'features':[{'name':'prefers-reduced-motion','value':'reduce'}]})
+        wait.until(lambda _:el('[data-film-play]').get_attribute('disabled'))
+        assert d.execute_script('return arguments[0].currentSrc',el('[data-signal-film]')).endswith('signal-to-case-still.png')
+        d.execute_cdp_cmd('Emulation.setEmulatedMedia',{'features':[]})
+        wait.until(lambda _:not el('[data-film-play]').get_attribute('disabled'))
+        click('[data-film-play]')
+        d.execute_script('window.scrollTo({top:document.body.scrollHeight,behavior:"instant"})')
+        wait.until(lambda _:el('[data-signal-display]').get_attribute('data-film-running')=='false')
+        checks.append('finite GIF controls, inspector handoff, offscreen stop and reduced-motion poster passed')
         open_page('index.html');click('[data-signal-play]')
         wait.until(lambda _:el('[data-signal-display]').get_attribute('data-running')=='true')
         old=d.current_window_handle;d.switch_to.new_window('tab');d.switch_to.window(old)
