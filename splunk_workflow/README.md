@@ -6,6 +6,8 @@
 
 ## What is ready to use
 
+The [execution evidence workflow](EXECUTION.md) now prepares a current-time six-event replay and verifies indexed events, native fired-alert job results and an analyst handoff through authenticated REST. The new verifier has offline protocol tests; **it has not run against a live Splunk instance**. Existing upload and temporary-alert configuration steps remain operator actions.
+
 | Component | Artifact | Deployment state |
 | --- | --- | --- |
 | Self-contained demo | [Splunk app source](../splunk_app/don_lopez_soc/) + lookup `portfolio_auth_validation.csv` | Prepared; independent of index and ingest |

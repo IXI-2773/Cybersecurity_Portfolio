@@ -57,6 +57,7 @@ jobs:
         run: python scripts/check_case_evidence.py
       - name: Validate Splunk integration source and safe disabled alert
         run: |
+          python -m unittest discover -s splunk_workflow -p 'test_*.py' -v
           python scripts/check_splunk_workflow.py
           python scripts/build_splunk_app.py --output don_lopez_soc.spl
       - name: Attach installable synthetic Splunk SOC app package

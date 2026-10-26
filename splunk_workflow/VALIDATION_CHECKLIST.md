@@ -2,6 +2,8 @@
 
 Only change status based on genuine Splunk screenshots, exports or verified job metadata.
 
+The [execution verifier](EXECUTION.md) can prepare a fresh replay, collect authenticated search/job evidence, compare indexed UTC/row parity and an actual fired-alert result, and generate a handoff. Its offline tests are implemented; **live execution remains pending**. A generated replay or passing protocol test does not advance any execution milestone below.
+
 | Milestone | Prepared artifacts | Execution evidence | Allowed claim |
 | --- | --- | --- | --- |
 | Previous 7-event SPL smoke | Query | Screenshot-reviewed 1/1 | Small synthetic SPL smoke passed |
