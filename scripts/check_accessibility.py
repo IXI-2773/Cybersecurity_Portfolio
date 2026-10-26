@@ -115,12 +115,17 @@ def check_page(path: Path, targets: dict[Path, set[str]]) -> list[str]:
            "missing page description")
     expect(sum(a.get("rel") == "canonical" for a in page.metas) <= 1,
            "duplicate canonical meta tag")  # link tags checked separately by normal link audit
-    expect(page.details == 1 and page.summaries >= 1,
-           "expected one semantic details/summary mobile menu")
+    standalone = rel == "projects/10-soc-triage/artifacts/report.html"
+    if not standalone:
+        expect(page.details == 1 and page.summaries >= 1,
+               "expected one semantic details/summary mobile menu")
+    else:
+        expect(bool(page.navs.get("Report sections")), "standalone report needs section navigation")
     desktop = page.navs.get("Main navigation", [])
     mobile = page.navs.get("Mobile navigation", [])
-    expect(bool(desktop) and desktop == mobile,
-           "desktop and mobile navigation destinations must match")
+    if not standalone:
+        expect(bool(desktop) and desktop == mobile,
+               "desktop and mobile navigation destinations must match")
     for image in page.images:
         expect("alt" in image, f"image missing alt attribute: {image.get('src', '')}")
     for anchor in page.external_blank:

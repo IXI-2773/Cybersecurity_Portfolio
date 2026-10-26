@@ -27,6 +27,10 @@ jobs:
           python -m unittest discover -s scripts -p "test_technical_fixture.py"
           node scripts/test_detection_lab.cjs
           node scripts/test_research_workbenches.cjs
+      - name: Test exported-log triage and reproduce retained execution
+        run: |
+          python -m unittest discover -s projects/10-soc-triage -p 'test_*.py' -v
+          python projects/10-soc-triage/run_demo.py --check
       - name: Authentication detection tests (31)
         run: python -m unittest discover -s projects/01-authentication-detection -p 'test_*.py' -v
       - name: Independent synthetic SOC validation matrix
