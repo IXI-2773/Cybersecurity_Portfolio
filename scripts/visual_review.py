@@ -85,7 +85,11 @@ def main() -> None:
         if not driver.current_url.endswith('/projects/ad-attack-chain.html'):
             failures.append('Primary employer action did not open the AD investigation')
         driver.get((ROOT/'index.html').resolve().as_uri())
-        driver.find_element(By.CSS_SELECTOR, '.more-investigations a[href="explore.html"]').click()
+        all_work = driver.find_element(By.CSS_SELECTOR, '.more-investigations a[href="explore.html"]')
+        # Finish scrolling before the native click; CSS smooth scrolling can leave
+        # Selenium's automatically scrolled target outside the viewport.
+        driver.execute_script("arguments[0].scrollIntoView({behavior:'instant',block:'center'})", all_work)
+        all_work.click()
         if not driver.current_url.endswith('/explore.html'):
             failures.append('All-work action did not open the choice page')
         for slug in CASES:
