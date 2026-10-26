@@ -8,7 +8,7 @@ LinkedIn: https://www.linkedin.com/in/ixi2773/
 SECURITY ANALYST | CYBERSECURITY ANALYST | SECURITY VALIDATION
 
 PROFESSIONAL SUMMARY
-Cybersecurity graduate and Security Officer with monitoring, incident-reporting and escalation experience (résumé-reported). Develops reproducible analysis and remediation workflows in Splunk, Python and controlled lab environments. Holds Security+ and CySA+ according to the supplied résumé; public issuer verification remains pending.
+Cybersecurity graduate and Security Officer with monitoring, incident-reporting and escalation experience (résumé-reported). Develops reproducible analysis of recorded Active Directory telemetry alongside Splunk, Python and controlled remediation labs. Holds Security+ and CySA+ according to the supplied résumé; public issuer verification remains pending.
 
 PROFESSIONAL EXPERIENCE
 Allied Universal — Security Officer | 2019–Present (as reported on supplied résumé)
@@ -17,10 +17,16 @@ Allied Universal — Security Officer | 2019–Present (as reported on supplied 
 - Apply observation, handoff and documentation disciplines transferable to security operations.
 
 TECHNICAL SKILLS
-Demonstrated in published lab evidence: Splunk Enterprise, SPL, Python, log correlation, Windows Event ID 4688 process triage, synthetic PCAP and DNS/HTTP investigation, HTTP response headers, cookie hardening, input validation and GitHub Actions.
-Also listed on original résumé (not independently established by these four public labs): Sigma, Snort, Wireshark, Nessus, Nmap, Metasploit, VMware, Docker, Linux, Windows Server, Bash, PowerShell, SQL, basic AWS.
+Demonstrated in published lab evidence: Splunk Enterprise, SPL, Python, Sysmon, Kerberos, process GUID/session correlation, Windows Event ID 4688 process triage, synthetic PCAP and DNS/HTTP investigation, HTTP response headers, cookie hardening, input validation and GitHub Actions.
+Also listed on original résumé (not independently established by the published capture analysis and controlled labs): Sigma, Snort, Wireshark, Nessus, Nmap, Metasploit, VMware, Docker, Linux, Windows Server, Bash, PowerShell, SQL, basic AWS.
 
-SELECTED CYBERSECURITY PROJECTS (INDEPENDENT PUBLIC LABS)
+SELECTED CYBERSECURITY PROJECTS (INDEPENDENT CAPTURE ANALYSIS AND LABS)
+Active Directory Attack-Chain Investigation | 2026
+- Analyzed 25,993 host events and 1,121 packets from OTRF’s recorded emulation; correlated authentication, Kerberos tickets and remote PowerShell across host and network evidence.
+- Used same-host process GUID and logon-session joins; explained a 39.812-second collection delay and preserved competing administration explanations.
+- Published reproducible Python analysis, source references and correctness tests. SPL/Sigma translations remain unexecuted candidates.
+Evidence: https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/ad-attack-chain.html
+
 Local HTTP Security Assessment and Remediation | 2026
 - Examined four intentionally weak HTTP response controls on a local demonstration service; checked content-type protections, policy header, session-cookie attributes and verbose debug output.
 - Applied scoped changes and verified the same checks went from four to zero matching findings. Wrote 16 focused Python tests.
@@ -46,4 +52,4 @@ CompTIA CySA+ | Earned October 2026 according to supplied résumé; issuer verif
 Splunk Certified Cybersecurity Defense Analyst (SCCDA) | Planned; not earned
 
 EVIDENCE AND PUBLICATION SCOPE
-PORTFOLIO LABS, NOT EMPLOYMENT: Public security exercises use synthetic or localhost-only inputs. The one-panel Splunk saved dashboard was screenshot-reviewed; production SOC operations, scheduled alerts and real incidents were not demonstrated. Professional experience and credential dates are drawn from the owner's résumé and are not independently verified. Unsupported lab metrics are not invented or added to these public summaries. A private phone number and the full personal name used in the supplied PDF are deliberately excluded from this public portfolio.
+PORTFOLIO LABS, NOT EMPLOYMENT: The AD investigation independently analyzes OTRF’s recorded emulation; other reproducible exercises use synthetic, generated or localhost inputs. The one-panel Splunk saved dashboard was screenshot-reviewed; production SOC operations, scheduled alerts and real incidents were not demonstrated. Professional experience and credential dates are drawn from the owner's résumé and are not independently verified. Unsupported lab metrics are not invented or added to these public summaries. A private phone number and the full personal name used in the supplied PDF are deliberately excluded from this public portfolio.
