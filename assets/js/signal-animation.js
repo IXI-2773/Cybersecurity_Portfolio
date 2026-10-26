@@ -35,7 +35,7 @@
   stop();
   button.addEventListener('click', () => { wanted = !running; update(); });
   function inspect(event) {
-    if (event.target.closest('[data-signal-stage], [data-signal-play], [data-signal-step], [data-signal-reset], [data-signal-scenario]')) {
+    if (event.target.closest('[data-signal-stage], [data-signal-play], [data-signal-step], [data-signal-reset], [data-signal-scenario], [data-signal-event]')) {
       wanted = false;
       stop();
       panel.dataset.visual = 'events';
@@ -49,6 +49,6 @@
     new IntersectionObserver(entries => {
       visible = entries[0].isIntersecting;
       update();
-    }).observe(image);
+    }).observe(panel.querySelector('.signal-visual'));
   } else play();
 })();

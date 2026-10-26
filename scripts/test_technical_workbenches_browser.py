@@ -122,6 +122,13 @@ def main():
         click('[data-film-play]')
         assert el('[data-signal-display]').get_attribute('data-film-running')=='true'
         click('.signal-inspection > summary')
+        click('[data-signal-detail] summary')
+        click('[data-signal-event]')
+        assert el('[data-signal-display]').get_attribute('data-visual')=='events'
+        assert el('[data-signal-display]').get_attribute('data-film-running')=='false'
+        click('[data-film-play]')
+        wait.until(lambda _:el('[data-signal-display]').get_attribute('data-film-running')=='true')
+        assert el('[data-signal-display]').get_attribute('data-visual')=='film'
         click('[data-signal-step]')
         assert el('[data-signal-display]').get_attribute('data-visual')=='events'
         assert el('[data-signal-display]').get_attribute('data-film-running')=='false'
