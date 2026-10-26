@@ -21,6 +21,34 @@ def required(condition: bool, message: str) -> None:
 
 
 def main() -> None:
+    # Executed Linux evidence: read-only verification needs no root privileges.
+    import sys
+    import html
+    sys.path.insert(0, str(ROOT / 'projects/09-linux-access-audit'))
+    from audit_lab import validate, source_hashes, findings
+    linux = json.loads(get('projects/09-linux-access-audit/artifacts/executed_report.json'))
+    validate(linux)
+    required(linux['source_sha256'] == source_hashes(),
+             'Linux execution evidence belongs to different runner/SQL bytes; execute again')
+    for stage in ('before', 'after'):
+        required(linux[stage]['findings'] == findings(linux[stage]['assets']),
+                 'Retained Linux SQL findings do not match inventory: ' + stage)
+        required(all(r['mode_octal'] == format(r['mode'], '04o') for r in linux[stage]['assets']),
+                 'Linux display modes differ from measured integers')
+    required(linux['execution_context'] == {
+        'GITHUB_RUN_ID': '40333115846',
+        'GITHUB_SHA': '5d1a34086adc419921e5d8696dfe1289b80daa89',
+        'GITHUB_REPOSITORY': 'IXI-2773/Cybersecurity_Portfolio'},
+        'Retained Linux execution context changed; review provenance')
+    linux_html = html.unescape(get('projects/linux-sql-access-audit.html'))
+    stdout = get('projects/09-linux-access-audit/artifacts/execution.txt')
+    required(stdout.strip() in linux_html, 'Linux page differs from recorded execution stdout')
+    for text in ('0644 → 0600', '0777 → 0755', '0644 → 0644', 'UID/GID 65534',
+                 'not employment experience', '40333115846', 'executed_report.json'):
+        required(text in linux_html, 'Linux case missing result, evidence or scope: ' + text)
+    for file in ('index.html', 'explore.html', 'sitemap.xml'):
+        required('projects/linux-sql-access-audit.html' in get(file),
+                 'New Linux experience is not discoverable: ' + file)
     net = json.loads(get("projects/03-network-pcap/expected_findings.json"))
     reqs = net["findings"]
     required(net["packet_count"] == 20 and net["decoded_event_count"] == 12,

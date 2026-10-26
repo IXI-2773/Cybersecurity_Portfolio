@@ -20,7 +20,7 @@ from selenium.webdriver.common.keys import Keys
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "visual-review-screenshots"
-CASES = ("ad-attack-chain", "authentication-detection", "windows-process-triage", "network-traffic-analysis",
+CASES = ("linux-sql-access-audit", "ad-attack-chain", "authentication-detection", "windows-process-triage", "network-traffic-analysis",
          "vulnerability-remediation", "celestial-resonance", "research-ai-infrastructure",
          "certification-learning-engine", "detection-engineering", "splunk-siem-investigation",
          "network-intrusion-lab", "phishing-investigation", "identity-mfa-investigation",

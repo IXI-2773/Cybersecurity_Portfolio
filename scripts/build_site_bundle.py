@@ -17,13 +17,16 @@ ALLOWED = {
     "assets": {".svg", ".png", ".jpg", ".jpeg", ".webp", ".gif", ".js", ".txt"},
     "docs": {".md"},
     "resumes": {".txt", ".pdf"},
-    "projects": {".html", ".md", ".py", ".json", ".csv", ".spl"},
+    "projects": {".html", ".md", ".py", ".json", ".csv", ".spl", ".sql", ".txt"},
 }
 ROOT_FILES = {
     "index.html", "apply.html", "recruiter.html", "resume-soc.html", "resume-security.html", "explore.html", "test-lab.html", "verify.html", "roles.html", "styles.css", "README.md", "SECURITY.md",
     "PUBLICATION_CHECKLIST.md", "portfolio.css", "awards.html", "education.html", "visual-credits.html",
 }
 REQUIRED_SITE_FILES = {
+    "projects/linux-sql-access-audit.html", "projects/09-linux-access-audit/audit.sql",
+    "projects/09-linux-access-audit/artifacts/executed_report.json",
+    "projects/09-linux-access-audit/artifacts/execution.txt",
     "assets/animation/signal-to-case.gif", "assets/animation/signal-to-case-still.png", "assets/js/signal-animation.js",
     "education.html", "visual-credits.html", "assets/reference/kali-desktop-2020.4.png",
     "assets/reference/forensic-write-blocker.webp", "assets/reference/csusb-pfau-library.webp",
