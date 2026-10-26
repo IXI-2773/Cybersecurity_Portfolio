@@ -15,6 +15,7 @@ Security investigations, research infrastructure, and independent certification 
 - Completed Kali/VM and network intrusion experience (résumé lab)
 
 - Authentication detection and Splunk boundary debugging
+- [Linux access audit with SQL](https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/linux-sql-access-audit.html) — executed permissions audit, two scoped fixes and actual unprivileged access retest
 - Windows process triage
 - Network packet analysis
 - Live local web attack-log analysis and hardening

@@ -18,6 +18,7 @@ import urllib.request
 
 BASE = "https://ixi-2773.github.io/Cybersecurity_Portfolio/"
 EXPECTED_PAGES = {
+    "projects/linux-sql-access-audit.html": "Linux Access Audit",
     "education.html": "Academic Experience",
     "visual-credits.html": "Image Credits",
     "projects/e3-digital-forensics.html": "Forensic Evidence",

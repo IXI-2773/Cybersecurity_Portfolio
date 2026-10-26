@@ -4,6 +4,7 @@ Choose a readable case below, or [browse the visual portfolio](https://ixi-2773.
 
 | Case | Evidence and scope |
 | --- | --- |
+| [Linux access audit with SQL](linux-sql-access-audit.html) | Executed Linux/SQLite lab: two permission findings corrected; UID/GID 65534 access probes deny secret read and script write while public read stays available. Source hashes, CI context and recorded JSON retained. |
 | [Active Directory attack-chain investigation](ad-attack-chain.md) | Independent OTRF capture analysis: 25,993 host events, 1,121 packets, six qualified findings, exact source references and tested counterexamples. |
 | [Splunk execution workflow](splunk-execution-workflow.html) | Replay preparation, native job/query/namespace checks and handoff generation; 18 offline tests, live ingestion and alert validation pending. |
 | [Authentication detection](authentication-detection.md) | Synthetic authentication fixtures; corrected 5/5 result in a reviewed Splunk screenshot. Indexed ingestion and fired alerts remain unverified. |

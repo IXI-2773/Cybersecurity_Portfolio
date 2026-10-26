@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Linux Access Audit with SQL | Don Lopez</title><meta name="description" content="An executed Linux permissions lab: SQL identifies two unsafe modes, scoped hardening blocks unprivileged access, and a public-read control stays available."><meta property="og:title" content="Linux Access Audit with SQL | Don Lopez"><meta property="og:description" content="Measured permissions, SQL policy checks, scoped remediation and actual unprivileged access tests in an isolated Linux lab."><meta property="og:type" content="website"><link rel="canonical" href="https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/linux-sql-access-audit.html"><link rel="stylesheet" href="../portfolio.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header"><div class="shell header-inner">
+      <a class="brand" href="../index.html">Don Lopez</a>
+      <nav aria-label="Main navigation" class="desktop-nav"><a href="../explore.html">Work</a><a href="../index.html#about">About</a><a href="../awards.html">Awards &amp; Honors</a><a href="../resumes/Don_Lopez_Cybersecurity_Resume.pdf">Résumé <span class="file-type">PDF</span></a><a href="../index.html#contact">Contact</a></nav>
+      <details class="mobile-nav"><summary>Menu</summary><nav aria-label="Mobile navigation"><a href="../explore.html">Work</a><a href="../index.html#about">About</a><a href="../awards.html">Awards &amp; Honors</a><a href="../resumes/Don_Lopez_Cybersecurity_Resume.pdf">Résumé <span class="file-type">PDF</span></a><a href="../index.html#contact">Contact</a></nav></details>
+    </div></header>
+    <main id="main"><article class="reading access-audit" data-case-scope="completed-reproducible-lab">
+      <header class="case-intro" id="brief">
+        <a class="back-link" href="../explore.html#security-work">Back to investigations</a>
+        <p class="project-meta">EXECUTED LAB / LINUX · SQLITE · PYTHON</p>
+        <h1>Linux access audit with SQL</h1>
+        <p class="case-lead">Can I remove two unsafe access conditions without breaking the access that should remain?</p>
+        <p class="case-result">Two permission findings → zero. Public read access preserved.</p>
+        <p class="audit-scope">Original repository lab · Three temporary dummy files · Executed on Ubuntu CI, 26 October 2026</p>
+      </header>
+      <nav class="audit-nav" aria-label="Case sections"><a href="#brief">Brief</a><a href="#evidence">Evidence</a><a href="#method">Method</a><a href="#limits">Limits</a></nav>
+      <section class="case-section" id="evidence" aria-labelledby="evidence-title">
+        <h2 id="evidence-title">The access test, before and after</h2>
+        <p>I collected file modes, used a SQL policy join to identify unsafe access, applied the two matched fixes and repeated the same checks. A separate process running as UID/GID 65534 with no supplementary groups tested actual file opens.</p>
+        <div class="audit-results">
+          <article><p class="project-meta">CONFIDENTIALITY</p><h3>Dummy service secret</h3><p class="audit-mode"><code>0644 → 0600</code></p><p>Unprivileged read<br><strong>Allowed → denied</strong></p><p class="audit-path"><code>secrets/service.env</code></p></article>
+          <article><p class="project-meta">INTEGRITY</p><h3>Dummy maintenance script</h3><p class="audit-mode"><code>0777 → 0755</code></p><p>Unprivileged write-open<br><strong>Allowed → denied</strong></p><p class="audit-path"><code>bin/rotate_logs.sh</code></p></article>
+          <article><p class="project-meta">PRESERVED CONTROL</p><h3>Public notice</h3><p class="audit-mode"><code>0644 → 0644</code></p><p>Unprivileged read<br><strong>Allowed → allowed</strong></p><p class="audit-path"><code>public/notice.txt</code></p></article>
+        </div>
+        <p>All three file-content hashes remained unchanged. The script was never executed and the write probe opened it without truncating or writing bytes.</p>
+        <div class="artifact-links"><a href="09-linux-access-audit/artifacts/executed_report.json">Recorded JSON</a><a href="09-linux-access-audit/artifacts/execution.txt">Recorded stdout</a><a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/actions/runs/40333115846">Execution run ↗</a></div>
+      </section>
+      <section class="case-section" id="method" aria-labelledby="method-title">
+        <h2 id="method-title">From Linux modes to a SQL finding</h2>
+        <p>Python inventories the three root-owned files using <code>lstat</code>. SQLite stores the measured modes as integers and joins them to a policy table by path. The bitwise predicate selects a file when any forbidden permission bit is present.</p>
+        <pre tabindex="0" aria-label="Executed SQL policy query"><code>SELECT a.path, a.mode, p.forbidden_mask,
+       p.target_mode, p.risk
+FROM assets AS a
+JOIN policies AS p ON p.path = a.path
+WHERE (a.mode &amp; p.forbidden_mask) != 0
+ORDER BY a.path;</code></pre>
+        <p>The secret policy forbids group/other read (<code>0044</code>). The script and notice policies forbid group/other write (<code>0022</code>). Octal modes are converted to integers before insertion; values enter SQLite through parameterized statements.</p>
+        <p>Only the matched paths receive their declared target modes. The second SQL pass returns zero findings under the same policies. The child-process tests then establish that the access change was enforced on this Linux runner.</p>
+        <div class="artifact-links"><a href="09-linux-access-audit/audit.sql">SQL query</a><a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/projects/09-linux-access-audit/audit_lab.py">Runner source ↗</a><a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/projects/09-linux-access-audit/test_audit_lab.py">Eight tests ↗</a></div>
+      </section>
+      <section class="case-section" aria-labelledby="decision-title">
+        <h2 id="decision-title">The remediation decision</h2>
+        <p><strong>Restrict the secret to its owner.</strong> Its dummy token illustrates a confidentiality risk: another local user could open a file intended for the service owner. The <code>0600</code> target preserves owner read/write and removes group/other access.</p>
+        <p><strong>Remove shared write access from the script.</strong> A script writable by other users creates an integrity risk if a trusted process later executes it. That later execution is a risk scenario, not an observed event here. The <code>0755</code> target keeps owner write and public read/execute while removing group/other write.</p>
+        <p><strong>Retest the intended access too.</strong> The public notice must remain readable. Keeping that control prevents a blanket lock-down from appearing to be a successful fix. On a real system, I would confirm the service identity and required access with its owner before changing modes.</p>
+      </section>
+      <section class="case-section" aria-labelledby="record-title">
+        <h2 id="record-title">Recorded execution</h2>
+        <p>The retained run used Ubuntu 24.04.5, Python 3.11.17 and SQLite 3.45.1 at 13:43 UTC on 26 October 2026. All eight tests passed, including the actual unprivileged access test. The JSON records the source hashes, execution timestamp and CI context.</p>
+        <pre tabindex="0" aria-label="Recorded Linux lab stdout"><code>PASS: 2 permission findings -&gt; 0 under the same SQL policies
+UID 65534: secret read allowed -&gt; denied; script write allowed -&gt; denied
+Control: public read allowed -&gt; allowed; file contents unchanged; parent UID remains 0
+Scope: isolated Linux dummy files; no production system, account or service changed</code></pre>
+        <p><a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/projects/09-linux-access-audit/README.md">Reproduce the lab and inspect execution provenance ↗</a></p>
+      </section>
+      <section class="scope-note" id="limits" aria-labelledby="limits-title">
+        <h2 id="limits-title">Scope and limits</h2>
+        <p>Executed on three deliberately configured dummy files in a temporary directory. This demonstrates Linux permission analysis, SQL policy matching and a measured remediation retest. It is not employment experience or a production incident. No real credential was exposed.</p>
+        <p>Zero findings applies only to these policies and files. The lab does not assess ACLs, capabilities, privileged access, network services, application authorization or all ways a file can be replaced. The access probe verifies open permission; it does not execute the script or prove an application works. A restricted container can block the required UID/GID change; that failure produces no successful report.</p>
+      </section>
+      <p class="case-back"><a href="../explore.html#security-work">Choose another investigation ↗</a></p>
+    </article></main>
+    <footer class="site-footer shell"><span>© 2026 Don Lopez</span><div><a href="../explore.html">All work</a><a href="../awards.html">Awards &amp; Honors</a><a href="https://github.com/IXI-2773">GitHub</a><a href="https://www.linkedin.com/in/ixi2773/">LinkedIn</a><a href="mailto:frailtycraven@gmail.com">Email</a><a href="../visual-credits.html">Image credits</a></div></footer>
+  </body>
+</html>

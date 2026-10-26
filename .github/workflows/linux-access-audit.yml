@@ -1,0 +1,58 @@
+name: Execute isolated Linux access audit
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'projects/09-linux-access-audit/**'
+      - 'projects/linux-sql-access-audit.html'
+      - '.github/workflows/linux-access-audit.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'projects/09-linux-access-audit/**'
+      - 'projects/linux-sql-access-audit.html'
+      - '.github/workflows/linux-access-audit.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  access-proof:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test SQL policies and actual unprivileged file access
+        shell: bash
+        run: sudo "$(command -v python)" -m unittest discover -s projects/09-linux-access-audit -p 'test_*.py' -v
+      - name: Record isolated Linux execution
+        shell: bash
+        run: |
+          sudo --preserve-env=GITHUB_RUN_ID,GITHUB_SHA,GITHUB_REPOSITORY "$(command -v python)" projects/09-linux-access-audit/audit_lab.py --output /tmp/linux-access-audit.json | tee /tmp/linux-access-audit.txt
+      - name: Verify any published evidence against its source bytes
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json,sys
+          from pathlib import Path
+          sys.path.insert(0,'projects/09-linux-access-audit')
+          from audit_lab import validate,source_hashes
+          recorded=Path('projects/09-linux-access-audit/artifacts/executed_report.json')
+          if recorded.exists():
+              report=json.loads(recorded.read_text())
+              validate(report)
+              assert report['source_sha256']==source_hashes()
+              print('PASS: retained execution evidence matches published source')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: linux-access-audit-execution
+          path: |
+            /tmp/linux-access-audit.json
+            /tmp/linux-access-audit.txt
+          if-no-files-found: error
+          retention-days: 30
