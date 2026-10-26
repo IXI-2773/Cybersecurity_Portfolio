@@ -2,19 +2,23 @@
 
 Build detections that explain the behavior they match—and the benign activity they can confuse.
 
-Splunk SPL · Sigma · MITRE ATT&CK · 2026
+Splunk SPL · Python · MITRE ATT&CK · 2026
 
-Résumé-reported lab outcome: 5+ detection rules and approximately 30% fewer false positives during validation.
+**Public authentication validation:** 64 events, nine scenarios and five expected findings. Corrected Splunk output matches all five.
 
 ## The investigation problem
 
 A rule that matches a suspicious command or a login burst is a starting point. Its value depends on the behavior it is intended to detect, the data it needs and the legitimate activity that can produce the same pattern.
 
-## My lab work
+## What I validated
 
-My résumé describes developing and testing more than five SPL and Sigma rules for brute-force activity, Base64-encoded PowerShell and lateral movement. I simulated attack scenarios, mapped the detections to ATT&CK and documented their logic.
+I investigated why an authentication search returned three of five expected findings on a frozen 64-event training matrix. Both misses depended on the exact ten-minute boundary. An explicit inclusive 600-second comparison replaced the original window assumption; the corrected query and saved Splunk panel displayed all five expected findings.
 
-The tuning work focused on reducing false positives during lab validation. The approximately 30% reduction is the result reported in my résumé; the original before-and-after event sets will accompany the detailed evidence when organized.
+This measures agreement with the fixture's expected findings. It is not a false-positive reduction, a precision/recall estimate or evidence of production detection performance.
+
+**Inspect the evidence:** [Source events](01-authentication-detection/validation_events.csv) · [Expected findings](01-authentication-detection/expected_findings.json) · [Corrected SPL](01-authentication-detection/SPLUNK_MATRIX_BOUNDARY_RETEST.spl) · [Observed-result record](01-authentication-detection/SPLUNK_MATRIX_BOUNDARY_RETEST_RESULT_2026-10-23.md).
+
+The [interactive rule laboratory](detection-engineering.html#auth-lab-title) replays the public fixture locally in JavaScript. It does not run Splunk.
 
 ## How I explain a detection
 
@@ -23,19 +27,23 @@ The tuning work focused on reducing false positives during lab validation. The a
 - **Challenge the rule.** Compare simulated attack activity with benign administration and normal authentication failures.
 - **Tune and document.** Record what changed, what was excluded and which blind spots remain.
 
-## A public example you can inspect now
+## Existing rules and controls
 
-The separate authentication exercise preserves a missed boundary case, the corrected SPL and a genuine cropped Splunk result panel. The Windows exercise adds encoded PowerShell and certutil-style review candidates. These are smaller public examples, not the original five-rule collection.
+| Capability | Inspectable condition | Evidence and controls |
+| --- | --- | --- |
+| Authentication correlation | At least five preceding failures in the same account/IP stream, with ages zero through 600 seconds; every success resets the streak | [Python detector](01-authentication-detection/detect_auth.py), [boundary and isolation tests](01-authentication-detection/test_detect_auth.py), corrected SPL above |
+| Windows command candidates | PowerShell encoded-command flags; certutil URL-cache and force flags are a separate predicate | [Rule source](02-windows-process-triage/process_triage.py), [benign and flag-boundary controls](02-windows-process-triage/test_process_triage.py) |
+| Recorded AD correlation | Distinct-account failures, RC4 service tickets and remote PowerShell retain exact source references and competing explanations | [Conditions and evidence joins](08-ad-investigation/CASE_REPORT.md), [isolation and missing-corroboration tests](08-ad-investigation/test_analysis.py) |
 
-[Inspect the Splunk boundary case ↗](authentication-detection.md) · [Review Windows command triage ↗](windows-process-triage.md)
+The [rule-to-evidence matrix](../docs/DETECTION_EVIDENCE_MATRIX.md) maps inputs, implementations, verification and remaining gaps. These are existing public examples, not the original résumé rule collection. The AD Python analysis is executed; its SPL/Sigma translations remain unexecuted candidates and do not implement the complete host/session/network correlation.
 
-## What the evidence will include
+## Earlier résumé lab work
 
-The original SPL/Sigma files, scenario inputs, rule explanations, ATT&CK mappings and the false-positive comparison. Those artifacts will make the broader lab work easier to reproduce and discuss.
+My résumé reports more than five SPL/Sigma rules for brute force, encoded PowerShell and lateral movement, and approximately 30% fewer false positives during lab validation. The original rule collection and before/after event sets are not published here. Reproducing that result requires the original rules, labeled inputs, false-positive counts and denominators, matching criteria and tuning procedure. The public authentication and AD examples have their own inputs and results; they do not substantiate that earlier percentage.
 
 ## Scope and evidence
 
-Completed lab work described in my supplied résumé. The original lab artifacts and screenshots will be added here; the linked public exercises have their own, smaller scope. This is lab experience, not a claim of a production incident or paid SOC employment.
+The authentication case uses synthetic inputs and a genuine screenshot-reviewed Splunk result. The AD case separately analyzes OTRF recorded emulation in Python. Indexed ingestion, scheduled alert firing and production detection efficacy remain unverified.
 
 Background reference
 

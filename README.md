@@ -10,7 +10,7 @@ Security investigations, research infrastructure, and independent certification 
 
 - Active Directory attack-chain investigation (independent analysis of OTRF recorded emulation)
 - Detection engineering and rule development (resume lab)
-- Multi-source Splunk investigation (resume lab)
+- Splunk investigation and evidence correlation (public authentication result and separate AD analysis)
 - Completed Kali/VM and network intrusion experience (résumé lab)
 
 - Authentication detection and Splunk boundary debugging
