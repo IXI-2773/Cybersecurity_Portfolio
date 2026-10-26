@@ -17,13 +17,14 @@ ALLOWED = {
     "assets": {".svg", ".png", ".jpg", ".jpeg", ".webp", ".gif", ".js", ".txt"},
     "docs": {".md"},
     "resumes": {".txt", ".pdf"},
-    "projects": {".html", ".md", ".py", ".json", ".csv", ".spl", ".sql", ".txt"},
+    "projects": {".html", ".md", ".py", ".json", ".csv", ".spl", ".sql", ".txt", ".pdf"},
 }
 ROOT_FILES = {
     "index.html", "apply.html", "recruiter.html", "resume-soc.html", "resume-security.html", "explore.html", "test-lab.html", "verify.html", "roles.html", "styles.css", "README.md", "SECURITY.md",
     "PUBLICATION_CHECKLIST.md", "portfolio.css", "awards.html", "education.html", "visual-credits.html",
 }
 REQUIRED_SITE_FILES = {
+    "projects/ad-incident-report.html", "projects/08-ad-investigation/AD_Incident_Report.pdf",
     "projects/linux-sql-access-audit.html", "projects/09-linux-access-audit/audit.sql",
     "projects/09-linux-access-audit/artifacts/executed_report.json",
     "projects/09-linux-access-audit/artifacts/execution.txt",

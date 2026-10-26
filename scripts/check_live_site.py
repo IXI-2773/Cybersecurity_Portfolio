@@ -18,6 +18,7 @@ import urllib.request
 
 BASE = "https://ixi-2773.github.io/Cybersecurity_Portfolio/"
 EXPECTED_PAGES = {
+    "projects/ad-incident-report.html": "Incident review",
     "projects/linux-sql-access-audit.html": "Linux Access Audit",
     "education.html": "Academic Experience",
     "visual-credits.html": "Image Credits",
@@ -54,6 +55,7 @@ EXPECTED_PAGES = {
     "projects/soc-analyst-evidence.html": "SOC Analyst",
 }
 STATIC_ASSETS = (
+    "projects/08-ad-investigation/AD_Incident_Report.pdf",
     "assets/animation/signal-to-case.gif", "assets/animation/signal-to-case-still.png",
     "assets/js/signal-animation.js",
     "assets/reference/kali-desktop-2020.4.png", "assets/reference/forensic-write-blocker.webp", "assets/reference/csusb-pfau-library.webp",

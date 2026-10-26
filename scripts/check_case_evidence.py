@@ -21,6 +21,8 @@ def required(condition: bool, message: str) -> None:
 
 
 def main() -> None:
+    from build_incident_brief import content, render_html, HTML
+    required(HTML.read_text() == render_html(content()), 'Incident report differs from shared editorial source')
     # Executed Linux evidence: read-only verification needs no root privileges.
     import sys
     import html
