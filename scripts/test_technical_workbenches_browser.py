@@ -109,11 +109,26 @@ def main():
         assert el('.actions .button').text=='View AD case study'
         assert el('[data-signal-display]').get_attribute('data-visual')=='film'
         wait.until(lambda _:el('[data-signal-display]').get_attribute('data-film-running')=='true')
+        d.execute_async_script('const done=arguments[0];setTimeout(done,5100)')
+        assert el('[data-signal-display]').get_attribute('data-film-running')=='true','GIF must keep running past one cycle'
+        assert el('[data-signal-film]').get_attribute('src').endswith('signal-to-case.gif')
         click('[data-film-play]')
         assert el('[data-signal-film]').get_attribute('src').endswith('signal-to-case-still.png')
+        d.execute_script('window.scrollTo({top:document.body.scrollHeight,behavior:"instant"})')
+        d.execute_async_script('const done=arguments[0];requestAnimationFrame(()=>requestAnimationFrame(done))')
+        d.execute_script('window.scrollTo({top:0,behavior:"instant"})')
+        d.execute_async_script('const done=arguments[0];requestAnimationFrame(()=>requestAnimationFrame(done))')
+        assert el('[data-signal-display]').get_attribute('data-film-running')=='false','Manual stop must persist'
         click('[data-film-play]')
         assert el('[data-signal-display]').get_attribute('data-film-running')=='true'
         click('.signal-inspection > summary')
+        click('[data-signal-detail] summary')
+        click('[data-signal-event]')
+        assert el('[data-signal-display]').get_attribute('data-visual')=='events'
+        assert el('[data-signal-display]').get_attribute('data-film-running')=='false'
+        click('[data-film-play]')
+        wait.until(lambda _:el('[data-signal-display]').get_attribute('data-film-running')=='true')
+        assert el('[data-signal-display]').get_attribute('data-visual')=='film'
         click('[data-signal-step]')
         assert el('[data-signal-display]').get_attribute('data-visual')=='events'
         assert el('[data-signal-display]').get_attribute('data-film-running')=='false'
@@ -133,10 +148,17 @@ def main():
         assert d.execute_script('return arguments[0].currentSrc',el('[data-signal-film]')).endswith('signal-to-case-still.png')
         d.execute_cdp_cmd('Emulation.setEmulatedMedia',{'features':[]})
         wait.until(lambda _:not el('[data-film-play]').get_attribute('disabled'))
-        click('[data-film-play]')
+        wait.until(lambda _:el('[data-signal-display]').get_attribute('data-film-running')=='true')
         d.execute_script('window.scrollTo({top:document.body.scrollHeight,behavior:"instant"})')
         wait.until(lambda _:el('[data-signal-display]').get_attribute('data-film-running')=='false')
-        checks.append('finite GIF controls, inspector handoff, offscreen stop and reduced-motion poster passed')
+        d.execute_script('window.scrollTo({top:0,behavior:"instant"})')
+        wait.until(lambda _:el('[data-signal-display]').get_attribute('data-film-running')=='true')
+        d.execute_script("window.filmVisibility=[];document.addEventListener('visibilitychange',()=>window.filmVisibility.push({hidden:document.hidden,running:document.querySelector('[data-signal-display]').dataset.filmRunning}))")
+        old=d.current_window_handle;d.switch_to.new_window('tab');d.switch_to.window(old)
+        wait.until(lambda _:d.execute_script("return window.filmVisibility.some(s=>s.hidden&&s.running==='false') && window.filmVisibility.some(s=>!s.hidden&&s.running==='true')"))
+        d.switch_to.window(d.window_handles[-1]);d.close();d.switch_to.window(old)
+        wait.until(lambda _:el('[data-signal-display]').get_attribute('data-film-running')=='true')
+        checks.append('looping GIF past one cycle, persistent manual stop, inspector handoff, hidden/offscreen pause/resume and reduced-motion poster passed')
         open_page('index.html');click('.signal-inspection > summary');click('[data-signal-play]')
         wait.until(lambda _:el('[data-signal-display]').get_attribute('data-running')=='true')
         old=d.current_window_handle;d.switch_to.new_window('tab');d.switch_to.window(old)
@@ -198,6 +220,9 @@ def main():
             if 'celestial-resonance' in path:assert 'release-v1' in el('[data-vintage-outcome]').text
             if 'research-ai' in path:assert 'Not directly comparable' in el('[data-claim-outcome]').text
             if 'ad-attack-chain' in path:assert 'both clocks' in el('[data-ad-inspector]').text
+            if path=='index.html':
+                assert el('[data-signal-film]').get_attribute('src').endswith('signal-to-case-still.png')
+                assert not el('[data-film-play]').is_displayed()
         checks.append('no-JavaScript representative explanations, image, and source links retained')
     (OUT/'technical-review.json').write_text(json.dumps({'status':'PASS','checks':checks},indent=2))
     print('PASS:',len(checks),'technical browser check groups')

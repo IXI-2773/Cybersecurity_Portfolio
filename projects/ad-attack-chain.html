@@ -20,6 +20,27 @@
     </header>
 <main id="main"><article class="reading technical-reading">
 <header class="case-intro"><a class="back-link" href="../explore.html">Back to all work</a><p class="project-meta">PUBLIC CAPTURE · INDEPENDENT ANALYSIS · 2026</p><h1>One account. Three targets.<br>What connects the chain?</h1><p class="case-lead">Trace an authentication burst through Kerberos, share access and remote PowerShell. Inspect the joins—and the gaps—between host records and packets.</p><p class="case-result">25,993 host events · 1,121 packets · four hosts · six rule/context findings</p></header>
+<section class="case-section analyst-brief" id="analyst-brief" aria-labelledby="analyst-brief-title">
+<h2 id="analyst-brief-title">Analyst brief</h2>
+<p class="brief-scope">Independent analysis of OTRF’s recorded emulation · 22 October 2020</p>
+<p class="brief-assessment"><strong>Assessment: investigate the connected activity; keep compromise unconfirmed.</strong> The records link authentication, service-ticket and share activity with remote PowerShell on three targets. Legitimate administration remains a competing explanation.</p>
+<dl class="brief-facts">
+<div><dt>Observed scope</dt><dd><code>THESHIRE\pgustavo</code> on WORKSTATION5; target records on WORKSTATION6, WORKSTATION7 and MORDORDC. These are observed hosts, not a count of compromised systems.</dd></div>
+<div><dt>Priority and impact</dt><dd>Review warranted. Operational severity would depend on authorization and impact evidence; business impact is not established by this capture.</dd></div>
+</dl>
+<h3>Key timeline</h3>
+<ol class="brief-timeline">
+<li><time datetime="2020-10-22T08:29:53Z">08:29:53 UTC</time><span>Seven distinct-account failures share a caller host, PID and session. The failure records have no source IP.</span></li>
+<li><span class="brief-time">08:29:53–54 UTC</span><span>Five successful RC4 service-ticket requests and IPC$/srvsvc checks across three hosts.</span></li>
+<li><span class="brief-time">08:29:57.967–58.095 UTC</span><span>Three target PowerShell children have same-host parent-GUID and logon-session joins.</span></li>
+<li><time datetime="2020-10-22T08:30:37.907Z">08:30:37.907 UTC</time><span>The DC child is collected 39.812 seconds after execution. This is collection delay, not a second execution wave.</span></li>
+</ol>
+<dl class="brief-facts">
+<div><dt>Evidence strength</dt><dd>Direct host GUID/session joins support execution. Matching packet tuples corroborate client flows; no end-to-end request ID proves packet-to-child causality.</dd></div>
+<div><dt>Recommended follow-up</dt><dd>For an authorized follow-up, confirm operator/change approval, inspect full commands and script blocks, and seek identity/session and target-action evidence.</dd></div>
+</dl>
+<div class="artifact-links"><a href="#ad-title">Inspect source records</a><a href="08-ad-investigation/evidence.csv" download>Source-reference index (CSV)</a><a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/projects/08-ad-investigation/CASE_REPORT.md">Full analyst report</a></div>
+</section>
 <section class="case-section"><h2>The investigation</h2><p>I analyzed OTRF’s recorded PurpleSharp Active Directory emulation, built a reproducible Python analyzer, and tested detection logic against source records and counterexamples. The work links native process GUIDs and logon sessions to time-bounded network context.</p><p>The original capture was recorded by OTRF in 2020. This is my independent analysis of that public evidence, with the producer’s scenario notes kept separate from what the records establish.</p></section>
 <section class="technical-workbench ad-workbench" data-ad-case aria-labelledby="ad-title">
 <div class="workbench-heading"><p class="project-meta">EVIDENCE WORKBENCH / PINNED PUBLIC CAPTURE</p><h2 id="ad-title">Reconstruct the chain.</h2><p>The replay displays the executed Python analysis. Select a phase, inspect its source fields, then compare the two clocks or the excluded ticket controls.</p></div>
