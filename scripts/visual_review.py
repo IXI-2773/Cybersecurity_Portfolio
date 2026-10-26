@@ -23,7 +23,7 @@ CASES = ("ad-attack-chain", "authentication-detection", "windows-process-triage"
          "certification-learning-engine", "detection-engineering", "splunk-siem-investigation",
          "network-intrusion-lab", "phishing-investigation", "identity-mfa-investigation",
          "soc-triage-automation", "e3-digital-forensics", "offensive-security-vm-labs",
-         "kali-defender-visibility", "splunk-threat-hunting")
+         "kali-defender-visibility", "splunk-threat-hunting", "splunk-execution-workflow")
 PAGES = {"home": "index.html", "choice": "explore.html", "role-paths": "roles.html", "awards": "awards.html", "education":"education.html", "image-credits":"visual-credits.html",
          **{slug: f"projects/{slug}.html" for slug in CASES}}
 VIEWPORTS = {"desktop": (1280, 1000), "mobile": (390, 844), "small-mobile": (320, 720)}
@@ -78,12 +78,16 @@ def main() -> None:
                 path = OUT / f"{name}-{viewport}.png"
                 path.write_bytes(base64.b64decode(shot["data"]))
                 captures.append({"page":relative,"viewport":viewport,"screenshot":path.name})
-        # Follow the actual employer choice action with page JavaScript disabled.
+        # Follow the strongest case, then the full directory, without JavaScript.
         driver.set_window_size(1280,1000)
         driver.get((ROOT/'index.html').resolve().as_uri())
         driver.find_element(By.CSS_SELECTOR,'.actions .button').click()
+        if not driver.current_url.endswith('/projects/ad-attack-chain.html'):
+            failures.append('Primary employer action did not open the AD investigation')
+        driver.get((ROOT/'index.html').resolve().as_uri())
+        driver.find_element(By.CSS_SELECTOR, '.more-investigations a[href="explore.html"]').click()
         if not driver.current_url.endswith('/explore.html'):
-            failures.append('Primary employer action did not open the choice page')
+            failures.append('All-work action did not open the choice page')
         for slug in CASES:
             links = driver.find_elements(By.CSS_SELECTOR,f'a[href="projects/{slug}.html"]')
             if not links or not any(link.is_displayed() for link in links):
