@@ -53,6 +53,8 @@ EXPECTED_PAGES = {
     "projects/soc-analyst-evidence.html": "SOC Analyst",
 }
 STATIC_ASSETS = (
+    "assets/animation/signal-to-case.gif", "assets/animation/signal-to-case-still.png",
+    "assets/js/signal-animation.js",
     "assets/reference/kali-desktop-2020.4.png", "assets/reference/forensic-write-blocker.webp", "assets/reference/csusb-pfau-library.webp",
     "assets/reference/csusb-jack-brown-hall.webp", "assets/reference/csusb-university-entrance.webp",
     "assets/evidence/splunk-native-dashboard-results.png",
@@ -167,6 +169,9 @@ def verify_response(path: str, status: int, content_type: str, body: bytes) -> d
     elif path.endswith(".png"):
         if "image/png" not in content_type.lower() or not body.startswith(b"\x89PNG\r\n\x1a\n"):
             raise ValueError("Application screenshot was not served as a PNG")
+    elif path.endswith(".gif"):
+        if "image/gif" not in content_type.lower() or body[:6] not in (b"GIF87a", b"GIF89a"):
+            raise ValueError("Animation was not served as a GIF")
     elif path.endswith(".svg"):
         if "svg" not in content_type.lower():
             raise ValueError("SVG asset served with unexpected MIME type")
@@ -260,12 +265,16 @@ def self_test() -> None:
     verify_response(resume, 200, "application/pdf", (root / resume).read_bytes())
     screenshot = "assets/evidence/sc900-practice-linux.png"
     verify_response(screenshot, 200, "image/png", (root / screenshot).read_bytes())
+    animation = "assets/animation/signal-to-case.gif"
+    verify_response(animation, 200, "image/gif", (root / animation).read_bytes())
     broken_catalog = (root / "explore.html").read_bytes().replace(
         b"projects/certification-learning-engine.html", b"missing-case.html")
     for path, mime, body in [
         ("explore.html", "text/html", broken_catalog),
         (resume, "text/html", b"<!doctype html>not a resume"),
         (screenshot, "text/html", b"<!doctype html>missing image"),
+        (animation, "text/html", b"<!doctype html>missing animation"),
+        (animation, "image/gif", b"not a GIF"),
     ]:
         try:
             verify_response(path, 200, mime, body)
