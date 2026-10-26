@@ -18,7 +18,7 @@
     if(root.document)root.document.addEventListener('visibilitychange',visibility);
     if(media&&media.addEventListener)media.addEventListener('change',reduced);
     let observer;
-    if(element&&root.IntersectionObserver){observer=new root.IntersectionObserver(entries=>{if(!entries[0].isIntersecting)pause();});observer.observe(element);}
+    if(element&&root.IntersectionObserver){observer=new root.IntersectionObserver(entries=>{if(!entries[0].isIntersecting&&timer!==null)pause();});observer.observe(element);}
     function dispose(){stop();disposed=true;if(observer)observer.disconnect();if(root.document)root.document.removeEventListener('visibilitychange',visibility);if(media&&media.removeEventListener)media.removeEventListener('change',reduced);}
     emit();return {play,pause,step,reset,select,dispose};
   }
