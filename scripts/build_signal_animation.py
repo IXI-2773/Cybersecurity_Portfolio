@@ -1,7 +1,7 @@
 """Render the homepage's explanatory GIF from the public authentication fixture.
 
 Requires Pillow and DejaVu Sans (Debian: fonts-dejavu-core). Run from any cwd.
-The 4.8-second animation plays once; its last frame is also the reduced-motion
+The 4.8-second animation loops; its last frame is also the reduced-motion
 poster. This is a visual explanation, not a Splunk capture or live telemetry.
 """
 import csv
@@ -75,17 +75,17 @@ def main():
     assert (datetime.fromisoformat(rows[-1]["timestamp"])-datetime.fromisoformat(rows[0]["timestamp"])).total_seconds() == 600
     OUT.mkdir(exist_ok=True)
     frames = [render(i).quantize(colors=32) for i in range(48)]
-    frames[0].save(OUT / "signal-to-case.gif", save_all=True, append_images=frames[1:], duration=100, optimize=True, disposal=1)
+    frames[0].save(OUT / "signal-to-case.gif", save_all=True, append_images=frames[1:], duration=100, loop=0, optimize=True, disposal=1)
     render(47).save(OUT / "signal-to-case-still.png", optimize=True)
     with Image.open(OUT / "signal-to-case.gif") as gif:
-        assert "loop" not in gif.info, "Autoplay must be finite"
+        assert gif.info.get("loop") == 0, "GIF must repeat continuously while displayed"
         duration = 0
         for i in range(gif.n_frames):
             gif.seek(i)
             duration += gif.info["duration"]
         assert duration == 4800
     assert (OUT / "signal-to-case.gif").stat().st_size < 250_000
-    print("PASS: 4.8s finite GIF; five failures, one success, exact 600s boundary; under 250KB")
+    print("PASS: 4.8s looping GIF; five failures, one success, exact 600s boundary; under 250KB")
 
 
 if __name__ == "__main__":

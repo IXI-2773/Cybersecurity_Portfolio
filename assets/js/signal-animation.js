@@ -1,4 +1,4 @@
-/* Finite explanatory GIF. Existing fixture inspection remains independent. */
+/* Loop while visible; preserve manual stops and independent fixture inspection. */
 (() => {
   'use strict';
   const panel = document.querySelector('[data-signal-display]');
@@ -7,48 +7,48 @@
   const button = panel.querySelector('[data-film-play]');
   if (!image || !button) return;
   const media = matchMedia('(prefers-reduced-motion: reduce)');
-  const gif = image.getAttribute('src'), still = image.dataset.still;
-  let timer, replay = 0, running = false, started = false;
+  const gif = image.dataset.gif, still = image.dataset.still;
+  let running = false, wanted = true, visible = !globalThis.IntersectionObserver;
   function stop() {
-    clearTimeout(timer);
     running = false;
     image.src = still;
-    button.textContent = media.matches ? 'Still illustration' : 'Replay animation';
+    button.textContent = media.matches ? 'Still illustration' : 'Play animation';
     button.disabled = media.matches;
     panel.dataset.filmRunning = 'false';
   }
   function play() {
-    if (media.matches || document.hidden) return;
+    if (running || media.matches || document.hidden || !visible) return;
     panel.querySelector('[data-signal-scenario]').value = 'ten_minute_boundary';
     panel.querySelector('[data-signal-reset]').click();
     panel.dataset.visual = 'film';
-    // A fresh image URL restarts a finite GIF, including after its final frame.
-    image.src = gif + '?replay=' + (++replay);
-    started = true;
+    image.src = gif;
+    wanted = true;
     running = true;
     button.textContent = 'Stop animation';
     panel.dataset.filmRunning = 'true';
-    clearTimeout(timer);
-    timer = setTimeout(stop, 4800);
+  }
+  function update() {
+    if (wanted && visible && !media.matches && !document.hidden) play();
+    else stop();
   }
   button.hidden = false;
   stop();
-  button.addEventListener('click', () => running ? stop() : play());
+  button.addEventListener('click', () => { wanted = !running; update(); });
   function inspect(event) {
     if (event.target.closest('[data-signal-stage], [data-signal-play], [data-signal-step], [data-signal-reset], [data-signal-scenario]')) {
-      started = true;
+      wanted = false;
       stop();
       panel.dataset.visual = 'events';
     }
   }
   panel.addEventListener('click', inspect);
   panel.addEventListener('change', inspect);
-  document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); });
-  media.addEventListener('change', stop);
+  document.addEventListener('visibilitychange', update);
+  media.addEventListener('change', update);
   if (globalThis.IntersectionObserver) {
     new IntersectionObserver(entries => {
-      if (!entries[0].isIntersecting) stop();
-      else if (!started) play();
+      visible = entries[0].isIntersecting;
+      update();
     }).observe(image);
   } else play();
 })();
