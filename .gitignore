@@ -12,3 +12,4 @@ __pycache__/
 *.pyc
 
 don_lopez_soc.spl
+local_splunk_run*/
