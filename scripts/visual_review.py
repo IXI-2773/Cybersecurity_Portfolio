@@ -26,7 +26,7 @@ CASES = ("linux-sql-access-audit", "ad-attack-chain", "authentication-detection"
          "network-intrusion-lab", "phishing-investigation", "identity-mfa-investigation",
          "soc-triage-automation", "e3-digital-forensics", "offensive-security-vm-labs",
          "kali-defender-visibility", "splunk-threat-hunting", "splunk-execution-workflow")
-PAGES = {"home": "index.html", "choice": "explore.html", "role-paths": "roles.html", "evidence":"verify.html", "application":"apply.html", "recruiter":"recruiter.html", "workbench":"test-lab.html", "awards": "awards.html", "education":"education.html", "image-credits":"visual-credits.html",
+PAGES = {"incident-report": "projects/ad-incident-report.html", "home": "index.html", "choice": "explore.html", "role-paths": "roles.html", "evidence":"verify.html", "application":"apply.html", "recruiter":"recruiter.html", "workbench":"test-lab.html", "awards": "awards.html", "education":"education.html", "image-credits":"visual-credits.html",
          **{slug: f"projects/{slug}.html" for slug in CASES}}
 VIEWPORTS = {"desktop": (1280, 1000), "mobile": (390, 844), "small-mobile": (320, 720)}
 
@@ -128,6 +128,18 @@ def main() -> None:
             if not driver.current_url.endswith('#work-categories'):
                 failures.append('Directory return shortcut failed: '+category)
         # PDF source is independent of browser print and must preserve the master content.
+        brief=PdfReader(ROOT/'projects/08-ad-investigation/AD_Incident_Report.pdf')
+        if len(brief.pages)!=1:
+            failures.append('Incident report is not one page')
+        brief_text=' '.join(' '.join(page.extract_text() for page in brief.pages).split())
+        for term in ('AD-2020-1022', 'compromise unconfirmed', '39.812', 'No containment was performed', 'SPL/Sigma candidates remain unexecuted'):
+            if term not in brief_text:
+                failures.append('Incident PDF missing evidence/decision boundary: '+term)
+        report=json.loads((ROOT/'projects/08-ad-investigation/incident_brief.json').read_text())
+        expected=[report['summary'], report['scope'], report['limits']]
+        expected.extend(r['text'] for key in ('timeline','decisions','recommendations') for r in report[key])
+        if any(' '.join(text.split()) not in brief_text for text in expected):
+            failures.append('Incident PDF differs from canonical report content')
         pdf = PdfReader(ROOT/'resumes/Don_Lopez_Cybersecurity_Resume.pdf')
         content = '\n'.join(page.extract_text() for page in pdf.pages)
         if len(pdf.pages)!=1:

@@ -1266,3 +1266,8 @@ button,input {
 .ad-feature span { font:.76rem/1.7 ui-monospace,monospace; color:#bbd6c6; }
 .ad-feature:hover { background:#204635; }
 @media(max-width:650px) { .ad-phases { grid-template-columns:1fr 1fr; } .ad-summary { padding:15px; } .ad-summary .field-list { display:block; } .ad-summary .field-list > div { grid-template-columns:1fr; } .ad-timeline .chart-note { font-size:14px; } .ad-chart-hint { display:block; } }
+
+.incident-list { padding-left:22px; }
+.incident-list li + li { margin-top:20px; }
+.incident-list p { margin-top:7px; }
+.incident-list small { display:block; margin-top:7px; color:var(--muted); overflow-wrap:anywhere; }
