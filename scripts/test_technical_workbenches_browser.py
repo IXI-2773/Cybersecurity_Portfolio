@@ -173,6 +173,20 @@ def main():
         assert el('[data-ad-phase="1"]').get_attribute('aria-pressed')=='true'
         checks.append('AD source selection, target session, two clocks, PCAP tuple, negative controls, offscreen pause and reduced motion passed')
         checks.append('keyboard, selected evidence, scope/attribution, hidden/offscreen pause, reduced motion passed')
+        d.execute_cdp_cmd('Emulation.setEmulatedMedia',{'features':[]})
+        d.get((ROOT/'test-lab.html').as_uri())
+        wait.until(lambda _:el('#run-checks').is_enabled())
+        click('#run-checks')
+        assert '9 / 9 checks passed' in el('#checks-status').text
+        assert el('#download-run').is_enabled()
+        click('[data-window-preset="599"]')
+        assert '2 baseline rows missing' in el('#replay-status').text
+        click('[data-window-preset="600"]')
+        assert '0 baseline rows missing' in el('#replay-status').text
+        Select(el('#coverage-case')).select_by_value('omitted')
+        click('#coverage-submit')
+        assert el('#coverage-status').get_attribute('data-result')=='hold'
+        checks.append('restyled public workbench: nine baseline checks, window boundary, receipt availability and evidence hold passed')
         d.execute_cdp_cmd('Emulation.setScriptExecutionDisabled',{'value':True})
         for path in ROUTES:
             d.get((ROOT/path).as_uri())

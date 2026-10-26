@@ -5,6 +5,9 @@ on:
   pull_request:
     paths:
       - 'explore.html'
+      - 'roles.html'
+      - 'verify.html'
+      - 'recruiter.html'
       - 'awards.html'
       - 'education.html'
       - 'visual-credits.html'
@@ -29,6 +32,10 @@ on:
     branches: [main]
     paths:
       - 'explore.html'
+      - 'roles.html'
+      - 'verify.html'
+      - 'apply.html'
+      - 'recruiter.html'
       - 'awards.html'
       - 'education.html'
       - 'visual-credits.html'

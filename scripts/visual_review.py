@@ -6,6 +6,7 @@ review covers readable layouts, no-script links, image loading and menus.
 from __future__ import annotations
 
 import base64
+from io import BytesIO
 import json
 from pathlib import Path
 import shutil
@@ -24,7 +25,7 @@ CASES = ("ad-attack-chain", "authentication-detection", "windows-process-triage"
          "network-intrusion-lab", "phishing-investigation", "identity-mfa-investigation",
          "soc-triage-automation", "e3-digital-forensics", "offensive-security-vm-labs",
          "kali-defender-visibility", "splunk-threat-hunting", "splunk-execution-workflow")
-PAGES = {"home": "index.html", "choice": "explore.html", "role-paths": "roles.html", "awards": "awards.html", "education":"education.html", "image-credits":"visual-credits.html",
+PAGES = {"home": "index.html", "choice": "explore.html", "role-paths": "roles.html", "evidence":"verify.html", "application":"apply.html", "recruiter":"recruiter.html", "workbench":"test-lab.html", "awards": "awards.html", "education":"education.html", "image-credits":"visual-credits.html",
          **{slug: f"projects/{slug}.html" for slug in CASES}}
 VIEWPORTS = {"desktop": (1280, 1000), "mobile": (390, 844), "small-mobile": (320, 720)}
 
@@ -78,8 +79,21 @@ def main() -> None:
                 path = OUT / f"{name}-{viewport}.png"
                 path.write_bytes(base64.b64decode(shot["data"]))
                 captures.append({"page":relative,"viewport":viewport,"screenshot":path.name})
-        # Follow the strongest case, then the full directory, without JavaScript.
+        # Each skill must lead directly to its supporting case without scripts.
         driver.set_window_size(1280,1000)
+        for relative in ('projects/detection-engineering.html','projects/ad-attack-chain.html','projects/network-traffic-analysis.html','projects/splunk-execution-workflow.html'):
+            driver.get((ROOT/'index.html').resolve().as_uri())
+            skill = driver.find_element(By.CSS_SELECTOR, f'#skills a[href="{relative}"]')
+            driver.execute_script("arguments[0].scrollIntoView({behavior:'instant',block:'center'})",skill)
+            skill.click()
+            if not driver.current_url.endswith('/'+relative) or not driver.find_element(By.CSS_SELECTOR,'main h1').is_displayed():
+                failures.append('Skill evidence destination unavailable: '+relative)
+        for relative in ('roles.html','verify.html','apply.html','recruiter.html','test-lab.html'):
+            driver.get((ROOT/relative).resolve().as_uri())
+            current = driver.find_elements(By.CSS_SELECTOR,'.employer-nav a[aria-current="page"]')
+            if len(current)!=1 or not current[0].get_attribute('href').endswith('/'+relative):
+                failures.append('Employer navigation current-page mismatch: '+relative)
+        # Follow the strongest case, then the full directory, without JavaScript.
         driver.get((ROOT/'index.html').resolve().as_uri())
         driver.find_element(By.CSS_SELECTOR,'.actions .button').click()
         if not driver.current_url.endswith('/projects/ad-attack-chain.html'):
@@ -106,6 +120,17 @@ def main() -> None:
                 failures.append('Public resume missing master content: '+term)
         if 'Brandon' in content or '(760)' in content:
             failures.append('Private master identity or phone exposed in public resume')
+        driver.get((ROOT/'recruiter.html').resolve().as_uri())
+        printed=driver.execute_cdp_cmd('Page.printToPDF',{'printBackground':True,'preferCSSPageSize':True})
+        printed_bytes=base64.b64decode(printed['data'])
+        (OUT/'recruiter-print.pdf').write_bytes(printed_bytes)
+        profile=PdfReader(BytesIO(printed_bytes))
+        profile_text='\n'.join(page.extract_text() for page in profile.pages)
+        if len(profile.pages)!=1:
+            failures.append('Recruiter profile print is not one page')
+        for term in ('Don Lopez','Allied Universal','CySA+','25,993','5/5'):
+            if term not in profile_text:
+                failures.append('Recruiter print missing content: '+term)
     # Technical playback and inspector behavior live in test_technical_workbenches_browser.py.
     summary = {"status":"PASS" if not failures else "FAIL","captures":captures,
                "interactive_review":"covered by separate technical workbench browser check",
