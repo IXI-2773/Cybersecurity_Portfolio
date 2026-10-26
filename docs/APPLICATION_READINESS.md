@@ -6,16 +6,16 @@ This guide accompanies the public [application toolkit](https://ixi-2773.github.
 
 | Target | Copy/download | Best first interview example |
 | --- | --- | --- |
-| SOC Analyst / Tier 1 SOC | [SOC Analyst ATS text](../resumes/Don_Lopez_SOC_Analyst.txt) | Real Splunk 3/5 → 5/5 boundary-debugging and triage case |
-| Cybersecurity / Security Analyst | [Security Analyst ATS text](../resumes/Don_Lopez_Security_Analyst.txt) | Local HTTP hardening from four toy rule hits to zero; then Splunk and Windows/PCAP |
+| SOC Analyst / Tier 1 SOC | [SOC Analyst ATS text](../resumes/Don_Lopez_SOC_Analyst.txt) | Recorded AD host/packet correlation, then Splunk 3/5 → 5/5 boundary debugging |
+| Cybersecurity / Security Analyst | [Security Analyst ATS text](../resumes/Don_Lopez_Security_Analyst.txt) | Local HTTP hardening from four fixture-rule hits to zero; then recorded AD evidence correlation |
 
-**Source anchors:** [Genuine cropped Splunk screenshot](../assets/evidence/splunk-native-dashboard-results.png) · [Auth case](../projects/authentication-detection.html) · [Process case](../projects/windows-process-triage.html) · [Network case](../projects/network-traffic-analysis.html) · [Web remediation case](../projects/vulnerability-remediation.html).
+**Source anchors:** [Recorded AD investigation](../projects/ad-attack-chain.html) · [AD report](../projects/08-ad-investigation/CASE_REPORT.md) · [Genuine cropped Splunk screenshot](../assets/evidence/splunk-native-dashboard-results.png) · [Auth case](../projects/authentication-detection.html) · [Process case](../projects/windows-process-triage.html) · [Network case](../projects/network-traffic-analysis.html) · [Web remediation case](../projects/vulnerability-remediation.html).
 
 ## Current readiness record
 
 | Application element | Status | Public handling |
 | --- | --- | --- |
-| Portfolio and case studies | **Ready** | Public GitHub website, source, genuine cropped Splunk screenshot and four synthetic security labs |
+| Portfolio and case studies | **Ready** | Public GitHub website, recorded OTRF AD analysis, genuine cropped Splunk screenshot and controlled security labs |
 | Two role-specific résumé drafts | **Ready to tailor** | Public text files include the approved professional email; owner-résumé-reported Security Officer experience; no invented employers or phone details |
 | Professional profile | **Public** | [GitHub profile](https://github.com/IXI-2773); not represented as a guaranteed direct messaging channel |
 | Professional email | **Publicly approved** | [frailtycraven@gmail.com](mailto:frailtycraven@gmail.com) appears on the website and both résumé drafts |
@@ -30,14 +30,16 @@ This guide accompanies the public [application toolkit](https://ixi-2773.github.
 
 1. Read the job posting and highlight no more than five **required** capabilities; check each against code or a genuinely completed task. Do not add a tool you have merely heard of or a credential not held.
 2. Choose the nearest résumé track and keep the text-only section headings **Professional Summary**, **Technical Skills**, **Selected Cybersecurity Projects**, **Education**, **Certifications**. Review the Allied Universal role and dates against employment records before submission; never invent experience.
-3. Reorder two or three project bullets to match the posting. For a SOC job, foreground Splunk, Windows Event 4688 and investigative judgement; for a security analyst role, foreground HTTP response controls, repeatable remediation checks and network evidence.
+3. Reorder two or three project bullets to match the posting. For a SOC job, foreground recorded AD evidence correlation, Splunk and investigative judgement; for a security analyst role, foreground HTTP response controls, repeatable remediation checks and host/network analysis.
 4. Confirm **frailtycraven@gmail.com** remains the preferred email for employers. It appears in the public drafts. Add a phone number or alternative address only to a private copy unless separately authorized; review badge visibility and issued-to names before posting verification URLs.
 5. Paste the plain text into your preferred résumé editor; proofread dates, links, line wrapping and final PDF before submitting. A text copy is provided for ease of ATS parsing, **not a guarantee of ATS performance or hiring success**.
 
 ## Interview verification map
 
+- **Walk through a multi-source investigation:** start with the [recorded AD case](../projects/ad-attack-chain.html). Explain same-host process GUID/session joins, packet corroboration, the 39.812-second collection delay, alternative administration explanations and why six findings are not six confirmed compromises. Python analysis is reproducible; AD SPL/Sigma translations remain unexecuted candidates.
+
 - **Walk through a Splunk investigation:** explain the original 3/5 result, why 600-second inclusivity matters, the revised SPL and the real native 5/5 screenshot. [Original discrepancy](../projects/01-authentication-detection/SPLUNK_MATRIX_FIRST_RUN_2026-10-23.md) · [Corrected query](../projects/01-authentication-detection/SPLUNK_MATRIX_BOUNDARY_RETEST.spl).
-- **How do you differentiate signal from incident?** A rule hit is a lead; corroborate MFA, device, identity and session logs. Our available public events are invented.
+- **How do you differentiate signal from incident?** A rule hit is a lead; corroborate MFA, device, identity and session logs. The authentication fixture is synthetic; the AD investigation separately analyzes OTRF’s recorded emulation telemetry.
 - **How do you test a fix?** Compare frozen expected findings before and after while preserving negative cases and scope. HTTP lab demonstrates four fixture-rule hits dropping to zero, not production security.
 - **How do you handle missing telemetry?** State limitations and alternative explanations, do not invent supporting data. [Analyst handoff template](ANALYST_HANDOFF_TEMPLATE.md).
 

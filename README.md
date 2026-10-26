@@ -8,6 +8,7 @@ Security investigations, research infrastructure, and independent certification 
 
 [Choose a case or planned project](projects/CASE_STUDIES.md).
 
+- Active Directory attack-chain investigation (independent analysis of OTRF recorded emulation)
 - Detection engineering and rule development (resume lab)
 - Multi-source Splunk investigation (resume lab)
 - Completed Kali/VM and network intrusion experience (résumé lab)
@@ -24,7 +25,7 @@ Security investigations, research infrastructure, and independent certification 
 - Research AI Infrastructure (private architecture summary)
 - Security+ and SC-900 certification learning engines
 
-The reproducible security exercises use synthetic, generated or localhost inputs. The saved Splunk panel is screenshot-reviewed; indexed ingestion and alert firing remain unverified. CR/RAI summaries do not publish their private implementations. The study applications are independent products and do not guarantee exam results.
+The AD investigation independently analyzes OTRF’s public recorded emulation telemetry. Other reproducible security exercises use synthetic, generated or localhost inputs. The saved Splunk panel is screenshot-reviewed; indexed ingestion and alert firing remain unverified. CR/RAI summaries do not publish their private implementations. The study applications are independent products and do not guarantee exam results.
 
 The three expanded résumé labs preserve the owner's reported work and identify the original artifacts still to be added. Phishing and enterprise-account investigations now have completed, reproducible evidence. Python SOC automation remains a planned brief. Prior Kali, VMware, Necromancer, HackThisSite and Paraben E3 experience is owner-confirmed and kept distinct from current repository evidence.
 

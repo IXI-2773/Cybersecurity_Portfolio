@@ -1,15 +1,23 @@
 # Interview Evidence Brief — Don Lopez
 
 **Audience:** SOC Analyst, junior Security Analyst, Detection Engineering and Security Automation interviewers  
-**Positioning:** B.S. Cybersecurity (2024); CompTIA Security+ and CySA+ **reported by holder**, public verification pending. The four public security labs are **synthetic portfolio exercises**, not paid SOC incident experience.
+**Positioning:** B.S. Cybersecurity (2024); CompTIA Security+ and CySA+ **reported by holder**, public verification pending. Public work includes **independent recorded AD emulation analysis and controlled labs**, separate from paid SOC incident experience.
 
 **Recruiter navigation:** [SOC Analyst evidence index](https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/soc-analyst-evidence.html) · [GitHub-readable evidence guide](SOC_ANALYST_EVIDENCE_GUIDE.md).
 
 ## 45-second introduction
 
-I built four independently reproducible defensive-security exercises covering authentication correlation, Windows process telemetry, network packet analysis and localhost HTTP hardening. Each includes source, tests, evidence boundaries and a case report. The design focus is to avoid escalating a rule match into a claim of compromise without corroboration. I also document test/regression engineering and authority boundaries from separate private software projects.
+I analyzed OTRF’s recorded Active Directory emulation, joining host and packet evidence while separating execution from collection time. I also built reproducible controlled exercises covering authentication correlation, Windows process telemetry, network packet analysis and localhost HTTP hardening. Each includes source, tests, evidence boundaries and a case report. The design focus is to avoid escalating a rule match into a claim of compromise without corroboration. I also document test/regression engineering and authority boundaries from separate private software projects.
 
-## Three evidence-backed interview stories
+## Featured: recorded Active Directory investigation
+
+I analyzed OTRF’s public recorded emulation: **25,993 host events and 1,121 packets**. The Python analysis links authentication failures, Kerberos service tickets, share checks and remote PowerShell using source references, same-host process GUIDs, logon sessions and bounded network context. Separating execution from collection time explains a **39.812-second delay** on the DC.
+
+**Evidence:** [Interactive investigation](../projects/ad-attack-chain.html) · [Analyst report and reproduction](../projects/08-ad-investigation/CASE_REPORT.md) · [Source-reference index](../projects/08-ad-investigation/evidence.csv).
+
+**Scope:** Independent analysis of OTRF’s recorded emulation, not an owner-operated capture or production incident. Six rule/context findings support investigation; legitimate administration remains a competing explanation. The Python implementation has source-linked correctness tests. SPL/Sigma translations remain unexecuted candidates; enterprise detection efficacy is unmeasured.
+
+## Additional evidence-backed interview stories
 
 ### Story 1 — Authentication triage and a corrected detection bug
 
@@ -47,8 +55,8 @@ A screenshot from Splunk Enterprise, reviewed October 23, 2026, showed a seven-e
 
 ## Answers to common challenges
 
-- **How many tests?** 76 Python unit tests, plus CI matrix, link, static accessibility and browser QA checks. This is a test count, **not** a measure of real-world detection accuracy.
-- **Were these real incidents?** No. They use fabricated data in isolated environments.
+- **How many tests?** The original four-lab suite has 76 Python tests; the AD analysis has 23 separately scoped correctness tests. Later exercises have their own suites. These counts are not a portfolio-wide total or a measure of real-world detection accuracy.
+- **Were these real incidents?** No production incident is claimed. The AD case independently analyzes OTRF’s recorded emulation; other reproducible exercises use synthetic, generated or localhost inputs.
 - **What do the MITRE mappings prove?** They categorize possible behavior to investigate, not an adversary's intent or confirmed incident.
 - **What is CR/RAI?** Private software-engineering projects discussed in public-safe architectural summaries. Their private implementations have not been independently validated as deployed security systems.
 

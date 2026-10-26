@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Don Lopez — SOC Analyst and Security Analyst recruiter profile. Real Splunk Enterprise authentication-debugging example, Security+ and CySA+, 76 Python tests, and source-linked case studies.">
+<meta name="description" content="Don Lopez — SOC Analyst and Security Analyst recruiter profile. Recorded Active Directory investigation, Splunk detection debugging, Security+ and CySA+, and source-linked case studies.">
 <meta name="theme-color" content="#0b1014">
 <meta property="og:type" content="website"><meta property="og:title" content="Don Lopez | SOC Analyst Recruiter Profile">
-<meta property="og:description" content="A concise, evidence-backed recruiter profile with a Splunk investigation and three defensive security case studies.">
+<meta property="og:description" content="A concise recruiter profile with recorded Active Directory analysis, Splunk detection debugging and reproducible security labs.">
 <meta property="og:url" content="https://ixi-2773.github.io/Cybersecurity_Portfolio/recruiter.html">
 <link rel="canonical" href="https://ixi-2773.github.io/Cybersecurity_Portfolio/recruiter.html">
 <title>Don Lopez | SOC Analyst Recruiter Profile</title>
@@ -24,7 +24,7 @@
 <div class="eyebrow">SECURITY OPERATIONS / ANALYST PORTFOLIO</div>
 <h1 id="recruiter-name">Don Lopez</h1>
 <p class="recruiter-position">Cybersecurity Analyst · Security Operations · SOC Analyst candidate</p>
-<p class="recruiter-intro">Cybersecurity graduate, California State University, San Bernardino, with Security Officer experience in monitoring, incident documentation, and escalation. CompTIA Security+ and CySA+ are résumé-reported. Builds reproducible Splunk and Python investigations with clear evidence limits.</p>
+<p class="recruiter-intro">Cybersecurity graduate, California State University, San Bernardino, with Security Officer experience in monitoring, incident documentation, and escalation. CompTIA Security+ and CySA+ are résumé-reported. Builds source-linked Active Directory, Splunk and Python investigations with clear evidence limits.</p>
 <div class="recruiter-links">
 <a href="https://ixi-2773.github.io/Cybersecurity_Portfolio/">Live portfolio</a>
 <a href="https://github.com/IXI-2773/Cybersecurity_Portfolio">Source repository</a>
@@ -35,10 +35,14 @@
 <div class="recruiter-credential-row">
 <div><strong>Education</strong><span>B.S. Information Systems &amp; Technology (Cybersecurity) · Dec 2024</span><small>California State University, San Bernardino</small></div>
 <div><strong>Certifications</strong><span>CompTIA Security+ · CySA+ (Oct 2026)</span><small>Holder-reported; public verification pending</small></div>
-<div><strong>Public lab suite</strong><span>4 defensive exercises · 76 Python tests</span></div>
+<div><strong>Inspectable work</strong><span>Recorded AD telemetry · controlled security labs</span></div>
 </div>
-<section class="recruiter-block recruiter-experience" aria-labelledby="recruiter-experience-title"><div class="recruiter-section-title"><span>01</span><h2 id="recruiter-experience-title">Professional security experience</h2></div><p class="recruiter-detail"><strong>Allied Universal · Security Officer · 2019–present.</strong> Résumé-reported responsibilities: monitoring a secure environment, maintaining security logs, and documenting and escalating incidents. Physical-security work, not claimed as paid SOC analyst experience.</p></section><section class="recruiter-block" aria-labelledby="recruiter-featured">
-<div class="recruiter-section-title"><span>02</span><h2 id="recruiter-featured">Featured: Splunk authentication investigation</h2></div>
+<section class="recruiter-block recruiter-experience" aria-labelledby="recruiter-experience-title"><div class="recruiter-section-title"><span>01</span><h2 id="recruiter-experience-title">Professional security experience</h2></div><p class="recruiter-detail"><strong>Allied Universal · Security Officer · 2019–present.</strong> Résumé-reported responsibilities: monitoring a secure environment, maintaining security logs, and documenting and escalating incidents. Physical-security work, not claimed as paid SOC analyst experience.</p></section><section class="recruiter-block" aria-labelledby="recruiter-ad">
+<div class="recruiter-section-title"><span>02</span><h2 id="recruiter-ad">Featured: Active Directory attack-chain investigation</h2></div>
+<p class="recruiter-detail">Analyzed 25,993 host events and 1,121 packets from OTRF’s recorded Active Directory emulation. Correlated authentication, Kerberos tickets and remote PowerShell using process GUIDs, logon sessions and packet references; preserved alternative explanations and source timing. The Python analysis retains six rule/context findings; a 39.812-second collection delay explains why execution and collection order differ. These findings support investigation, not confirmed compromise.</p>
+<p class="recruiter-evidence-links"><a href="projects/ad-attack-chain.html">Interactive investigation</a> · <a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/projects/08-ad-investigation/CASE_REPORT.md">Analyst report and reproduction</a> · <a href="projects/08-ad-investigation/evidence.csv">Source-reference index</a></p>
+</section><section class="recruiter-block" aria-labelledby="recruiter-featured">
+<div class="recruiter-section-title"><span>03</span><h2 id="recruiter-featured">Splunk authentication investigation</h2></div>
 <p class="recruiter-detail">Executed an authentication-correlation SPL search in <strong>Splunk Enterprise Search &amp; Reporting</strong> against 64 synthetic events across nine test scenarios. The first full-matrix search returned <strong>3 of 5</strong> expected findings, omitting two detections at the exact ten-minute boundary. Reworked the bounded search to calculate an <strong>inclusive 600-second window</strong>; the corrected results and saved one-panel Splunk dashboard displayed <strong>5 of 5</strong> expected findings in screenshots supplied by the operator.</p>
 <figure class="recruiter-evidence-img recruiter-screen-only"><a href="assets/evidence/splunk-native-dashboard-results.png"><img src="assets/evidence/splunk-native-dashboard-results.png" width="700" height="169" loading="lazy" decoding="async" alt="Cropped screenshot of an actual Splunk Enterprise saved dashboard showing all five synthetic findings"></a><figcaption>Actual user-submitted Splunk screenshot (cropped and compressed); training dataset, not a real incident.</figcaption></figure><div class="recruiter-comparison" role="group" aria-label="Splunk boundary-debugging results">
 <div><small>Original query</small><strong>3 / 5</strong><span>Two boundary misses</span></div>
@@ -53,7 +57,7 @@
 </p>
 </section>
 <section class="recruiter-block" aria-labelledby="recruiter-projects">
-<div class="recruiter-section-title"><span>03</span><h2 id="recruiter-projects">Additional security investigations</h2></div>
+<div class="recruiter-section-title"><span>04</span><h2 id="recruiter-projects">Additional security investigations</h2></div>
 <div class="recruiter-project-grid">
 <div><h3>Windows Event 4688 triage</h3><p>Reviewed encoded PowerShell and certutil-style command patterns against benign controls; 11 focused tests. <a href="projects/windows-process-triage.html">Evidence →</a></p></div>
 <div><h3>Network traffic analysis</h3><p>Generated and analyzed a 20-packet DNS/HTTP PCAP with source-attributed rule candidates; 18 focused tests. <a href="projects/network-traffic-analysis.html">Evidence →</a></p></div>
@@ -61,13 +65,13 @@
 </div>
 </section>
 <section class="recruiter-block recruiter-bottom" aria-labelledby="recruiter-skills">
-<div class="recruiter-section-title"><span>04</span><h2 id="recruiter-skills">Technical evidence &amp; approach</h2></div>
+<div class="recruiter-section-title"><span>05</span><h2 id="recruiter-skills">Technical evidence &amp; approach</h2></div>
 <div class="recruiter-skill-columns">
-<div><h3>Hands-on areas</h3><p>Splunk SPL, detection debugging, Python 3, Windows process creation, PCAP, DNS/HTTP, input validation, targeted tests, GitHub Actions CI.</p></div>
+<div><h3>Hands-on areas</h3><p>Splunk SPL, Python 3, Sysmon, Windows authentication, Kerberos, process GUID/session correlation, PCAP, DNS/HTTP, targeted tests and GitHub Actions CI.</p></div>
 <div><h3>Analyst method</h3><p>Verify source and time → correlate user/IP/host → test alternative explanations → document missing corroboration → escalate only with authorized context.</p></div>
 </div>
 </section>
-<p class="recruiter-qualification"><strong>Evidence scope:</strong> Employment, job dates, duties and credential dates are drawn from the owner’s supplied résumé; independent employer and issuer verification is not asserted.  All public lab inputs are fabricated or localhost-only; tests are not production detection metrics. The one-panel Splunk dashboard was screenshot-reviewed in conversation, but a cropped, size-reduced derivative is published; the full original remains in the project conversation. Indexed CSV ingestion, scheduled Splunk alert triggering, and real incident response were not demonstrated. Certification validity dates and badges remain unverified publicly.</p>
+<p class="recruiter-qualification"><strong>Evidence scope:</strong> Employment, job dates, duties and credential dates are drawn from the owner’s supplied résumé; independent employer and issuer verification is not asserted.  The AD case independently analyzes OTRF’s public recorded emulation; other reproducible exercises use synthetic, generated or localhost inputs. Tests are not production detection metrics. AD SPL/Sigma translations remain unexecuted candidates. The one-panel Splunk dashboard was screenshot-reviewed in conversation, but a cropped, size-reduced derivative is published; the full original remains in the project conversation. Indexed CSV ingestion, scheduled Splunk alert triggering, and real incident response were not demonstrated. Certification validity dates and badges remain unverified publicly.</p>
 </article>
 <p class="recruiter-screen-only recruiter-after">Choose a <a href="roles.html">role-specific case-study path</a> or inspect public proof in the <a href="verify.html">evidence review guide</a>. For expanded investigations and source code, see the <a href="projects/soc-analyst-evidence.html">SOC Analyst evidence index</a> or <a href="https://github.com/IXI-2773/Cybersecurity_Portfolio/blob/main/docs/RECRUITER_QUICK_BRIEF.md">GitHub-readable evidence brief</a>.</p>
 </main>
