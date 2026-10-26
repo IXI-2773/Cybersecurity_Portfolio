@@ -30,7 +30,7 @@ The public [browser workbench](https://ixi-2773.github.io/Cybersecurity_Portfoli
 ## Prior training and expanded résumé lab stories
 
 - [Offensive Security VM Training](offensive-security-vm-labs.md) — owner-confirmed Kali, VMware, Necromancer and HackThisSite experience; original session evidence is not available.
-- [Python SOC Triage Assistant](soc-triage-automation.md) — planned, not executed.
+- [Python SOC Triage Assistant](soc-triage-automation.html) — working CSV/JSON CLI, UTC timeline, source-linked candidates and actual partial-run report; no live integration.
 
 ## Classroom and applied investigations
 

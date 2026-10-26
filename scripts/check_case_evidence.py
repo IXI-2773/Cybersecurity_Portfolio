@@ -228,9 +228,20 @@ def main() -> None:
         required(f'href="projects/{slug}.html"' in catalog, "Resume case missing from catalog: " + slug)
     for slug in ("soc-triage-automation",):
         rendered = get("projects/" + slug + ".html")
-        required('data-case-scope="planned-project"' in rendered and "Not yet executed" in rendered,
-                 "Planned brief must not claim completed work: " + slug)
-        required(f'href="projects/{slug}.html"' in catalog, "Planned brief missing from catalog: " + slug)
+        required('data-case-scope="completed-reproducible-tool"' in rendered and 'PARTIAL' in rendered,
+                 "Completed exported-log tool must retain partial-run scope: " + slug)
+        required(f'href="projects/{slug}.html"' in catalog, "Working tool missing from catalog: " + slug)
+    sys.path.insert(0, str(ROOT / 'projects/10-soc-triage'))
+    from triage import analyze, render_html as triage_html
+    executed = analyze([ROOT/'projects/10-soc-triage/fixtures/authentication.csv',
+                        ROOT/'projects/10-soc-triage/fixtures/processes.json'])
+    required(executed == json.loads(get('projects/10-soc-triage/artifacts/case.json')),
+             'Retained triage JSON differs from executed source and inputs')
+    required(triage_html(executed) == get('projects/10-soc-triage/artifacts/report.html'),
+             'Retained triage report differs from actual output')
+    required(executed['summary'] == {'input_rows':20, 'accepted_events':13, 'duplicate_rows':1,
+                                    'rejected_rows':6, 'review_candidates':3},
+             'Triage walkthrough counts changed; review public claim')
 
     # Evidence expansion contract: completed cases provide inspectable artifacts.
     for slug, evidence_path in (

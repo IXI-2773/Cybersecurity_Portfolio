@@ -26,7 +26,7 @@ CASES = ("linux-sql-access-audit", "ad-attack-chain", "authentication-detection"
          "network-intrusion-lab", "phishing-investigation", "identity-mfa-investigation",
          "soc-triage-automation", "e3-digital-forensics", "offensive-security-vm-labs",
          "kali-defender-visibility", "splunk-threat-hunting", "splunk-execution-workflow")
-PAGES = {"incident-report": "projects/ad-incident-report.html", "home": "index.html", "choice": "explore.html", "role-paths": "roles.html", "evidence":"verify.html", "application":"apply.html", "recruiter":"recruiter.html", "workbench":"test-lab.html", "awards": "awards.html", "education":"education.html", "image-credits":"visual-credits.html",
+PAGES = {"triage-handoff": "projects/10-soc-triage/artifacts/report.html", "incident-report": "projects/ad-incident-report.html", "home": "index.html", "choice": "explore.html", "role-paths": "roles.html", "evidence":"verify.html", "application":"apply.html", "recruiter":"recruiter.html", "workbench":"test-lab.html", "awards": "awards.html", "education":"education.html", "image-credits":"visual-credits.html",
          **{slug: f"projects/{slug}.html" for slug in CASES}}
 VIEWPORTS = {"desktop": (1280, 1000), "mobile": (390, 844), "small-mobile": (320, 720)}
 
@@ -63,7 +63,7 @@ def main() -> None:
                         driver.execute_script("arguments[0].scrollIntoView({block:'center'})", image)
                         from selenium.webdriver.support.ui import WebDriverWait
                         WebDriverWait(driver, 5).until(lambda d: d.execute_script("return arguments[0].complete && arguments[0].naturalWidth>0", image))
-                if width <= 390:
+                if width <= 390 and name != "triage-handoff":
                     summary = driver.find_element(By.CSS_SELECTOR, ".mobile-nav summary")
                     summary.send_keys(Keys.ENTER)
                     menu = driver.find_element(By.CSS_SELECTOR, '.mobile-nav nav')
@@ -116,7 +116,7 @@ def main() -> None:
             links = driver.find_elements(By.CSS_SELECTOR,f'a[href="projects/{slug}.html"]')
             if not links or not any(link.is_displayed() for link in links):
                 failures.append('Case choice unavailable without scripts: '+slug)
-        for category in ('security-work','tools-work','training-work','engineering-work','planned-work'):
+        for category in ('security-work','tools-work','training-work','engineering-work'):
             category_link=driver.find_element(By.CSS_SELECTOR,f'.directory-nav a[href="#{category}"]')
             driver.execute_script("arguments[0].scrollIntoView({behavior:'instant',block:'center'})",category_link)
             category_link.click()
@@ -127,6 +127,17 @@ def main() -> None:
             back.click()
             if not driver.current_url.endswith('#work-categories'):
                 failures.append('Directory return shortcut failed: '+category)
+        driver.get((ROOT/'projects/10-soc-triage/artifacts/report.html').resolve().as_uri())
+        if 'PARTIAL' not in driver.find_element(By.CSS_SELECTOR,'.status').text:
+            failures.append('Triage report concealed partial processing')
+        source=driver.find_element(By.CSS_SELECTOR,'a[href="#S01:R000001"]')
+        source.click()
+        detail=driver.find_element(By.ID,'S01:R000001')
+        detail.find_element(By.TAG_NAME,'summary').send_keys(Keys.ENTER)
+        if detail.get_attribute('open') is None:
+            failures.append('Triage source record did not open by keyboard')
+        if len(driver.find_elements(By.CSS_SELECTOR,'#records details'))!=20:
+            failures.append('Triage report lost preserved source records')
         # PDF source is independent of browser print and must preserve the master content.
         brief=PdfReader(ROOT/'projects/08-ad-investigation/AD_Incident_Report.pdf')
         if len(brief.pages)!=1:

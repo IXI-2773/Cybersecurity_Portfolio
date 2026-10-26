@@ -55,6 +55,8 @@ EXPECTED_PAGES = {
     "projects/soc-analyst-evidence.html": "SOC Analyst",
 }
 STATIC_ASSETS = (
+    "projects/10-soc-triage/artifacts/report.html",
+    "projects/10-soc-triage/artifacts/case.json",
     "projects/08-ad-investigation/AD_Incident_Report.pdf",
     "assets/animation/signal-to-case.gif", "assets/animation/signal-to-case-still.png",
     "assets/js/signal-animation.js",
@@ -122,6 +124,21 @@ def verify_response(path: str, status: int, content_type: str, body: bytes) -> d
         raise ValueError(f"{path or '/'} returned HTTP {status}")
     if len(body) > MAX_BYTES:
         raise ValueError(f"{path or '/'} exceeds response byte limit")
+    if path == 'projects/10-soc-triage/artifacts/report.html':
+        if 'text/html' not in content_type.lower() or not body.startswith(b'<!doctype html>'):
+            raise ValueError('Triage output is not served as HTML')
+        for value in (b'PARTIAL / analyst review required', b'input rows: 20',
+                      b'rejected rows: 6', b'review candidates: 3', b'S01:R000001'):
+            if value not in body:
+                raise ValueError('Triage report lost execution or partial-data evidence')
+        return {'path':path, 'status':'PASS', 'content_type':content_type}
+    if path == 'projects/10-soc-triage/artifacts/case.json':
+        data = json.loads(body)
+        if ('application/json' not in content_type.lower() or data.get('status') != 'PARTIAL'
+                or data.get('summary') != {'input_rows':20, 'accepted_events':13,
+                                           'duplicate_rows':1, 'rejected_rows':6, 'review_candidates':3}):
+            raise ValueError('Published triage JSON differs from recorded walkthrough')
+        return {'path':path, 'status':'PASS', 'content_type':content_type}
     if path in EXPECTED_PAGES:
         if "text/html" not in content_type.lower():
             raise ValueError(f"{path or '/'} is not served as HTML ({content_type})")

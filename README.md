@@ -29,7 +29,7 @@ Security investigations, research infrastructure, and independent certification 
 
 The AD investigation independently analyzes OTRF’s public recorded emulation telemetry. Other reproducible security exercises use synthetic, generated or localhost inputs. The saved Splunk panel is screenshot-reviewed; indexed ingestion and alert firing remain unverified. CR/RAI summaries do not publish their private implementations. The study applications are independent products and do not guarantee exam results.
 
-The three expanded résumé labs preserve the owner's reported work and identify the original artifacts still to be added. Phishing and enterprise-account investigations now have completed, reproducible evidence. Python SOC automation remains a planned brief. Prior Kali, VMware, Necromancer, HackThisSite and Paraben E3 experience is owner-confirmed and kept distinct from current repository evidence.
+The three expanded résumé labs preserve the owner's reported work and identify the original artifacts still to be added. Phishing and enterprise-account investigations now have completed, reproducible evidence. The completed Python SOC Triage Assistant now validates local CSV/JSON exports, retains malformed rows and produces a source-linked handoff; its actual synthetic-input run is published. Prior Kali, VMware, Necromancer, HackThisSite and Paraben E3 experience is owner-confirmed and kept distinct from current repository evidence.
 
 CR and RAI now include independent, fictional-data interactive explainers:
 point-in-time data admission and structured evidence support. They do not run

@@ -24,6 +24,8 @@ ROOT_FILES = {
     "PUBLICATION_CHECKLIST.md", "portfolio.css", "awards.html", "education.html", "visual-credits.html",
 }
 REQUIRED_SITE_FILES = {
+    "projects/10-soc-triage/triage.py", "projects/10-soc-triage/artifacts/case.json",
+    "projects/10-soc-triage/artifacts/report.html", "projects/10-soc-triage/artifacts/execution.txt",
     "projects/ad-incident-report.html", "projects/08-ad-investigation/AD_Incident_Report.pdf",
     "projects/linux-sql-access-audit.html", "projects/09-linux-access-audit/audit.sql",
     "projects/09-linux-access-audit/artifacts/executed_report.json",
