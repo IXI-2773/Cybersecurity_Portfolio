@@ -12,6 +12,51 @@
   font-synthesis:none;
   line-height:1.65;
 }
+/* Employer reading path: evidence visual, compact reasoning, then deeper work. */
+.featured-investigations .project-row {
+  grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
+  gap:48px;
+  padding:40px 0;
+  align-items:center;
+}
+.featured-investigations .project-copy h3 { font-size:1.55rem; }
+.featured-investigations .project-copy .project-meta { margin:12px 0 20px; }
+.featured-investigations .project-copy .text-link { min-height:44px; display:inline-flex; align-items:center; }
+.featured-investigations .network-feature img { height:auto; }
+.case-brief { display:grid; gap:13px; }
+.case-brief > div { display:grid; grid-template-columns:72px minmax(0,1fr); gap:12px; }
+.case-brief dt { font-size:.83rem; font-weight:650; color:var(--ink); padding-top:2px; }
+.case-brief dd { margin:0; font-size:.95rem; line-height:1.6; color:var(--muted); overflow-wrap:anywhere; }
+.capstone-workflow { border-top:1px solid var(--line); padding:48px 0; }
+.workflow-heading { max-width:72ch; }
+.workflow-heading > p { color:var(--muted); margin-top:15px; }
+.workflow-status { padding:16px 18px; background:#fbf3dc; color:#6a4f16; font-size:.94rem; line-height:1.65; margin-top:24px; }
+.workflow-heading .workflow-status { color:#6a4f16; }
+.workflow-status strong { font-weight:700; }
+.workflow-ledger { margin:28px 0; }
+.workflow-ledger > div { display:grid; grid-template-columns:minmax(120px,.8fr) minmax(0,1.8fr) minmax(0,1fr); gap:24px; padding:19px 0; border-bottom:1px solid var(--line); align-items:start; }
+.workflow-ledger dt { font-size:1rem; font-weight:650; }
+.workflow-ledger dd { margin:0; font-size:.94rem; color:var(--muted); min-width:0; overflow-wrap:anywhere; }
+.workflow-ledger .workflow-state { color:#6a4f16; background:#fbf3dc; font-size:.8rem; padding:6px 9px; width:fit-content; max-width:100%; line-height:1.5; }
+.workflow-ledger .workflow-state.observed { color:#174e43; background:var(--soft); }
+.workflow-actions { display:flex; flex-wrap:wrap; align-items:center; gap:16px 28px; }
+.workflow-actions .text-link { display:inline-flex; min-height:44px; align-items:center; }
+.workflow-preview { padding:24px; background:#172b28; color:#f4f8f5; }
+.workflow-preview strong { display:block; font-size:1.15rem; line-height:1.5; }
+.workflow-preview p { margin:20px 0; font-size:.9rem; line-height:1.9; color:#d3e3da; }
+.workflow-preview span { display:block; font-size:.76rem; line-height:1.6; color:#c1d4cb; }
+.workflow-reading .workflow-status { margin-top:24px; }
+@media(max-width:760px) {
+  .featured-investigations .project-row { grid-template-columns:minmax(0,1fr); gap:24px; padding:32px 0; }
+  .workflow-ledger > div { grid-template-columns:minmax(0,1fr); gap:9px; }
+  .workflow-state { margin-top:3px; }
+  .featured-investigations .project-copy h3 { font-size:1.35rem; }
+  .case-brief > div { grid-template-columns:62px minmax(0,1fr); gap:10px; }
+}
+@media(max-width:360px) {
+  .case-brief > div { grid-template-columns:minmax(0,1fr); gap:3px; }
+  .workflow-status { padding:14px; }
+}
 .course-list > div { padding:19px 0; border-bottom:1px solid var(--line); }
 .course-list dt { font-size:1.06rem; line-height:1.5; }
 .course-list dt span { display:block; font-size:.8rem; color:var(--muted); font-weight:400; margin-bottom:5px; }
@@ -366,7 +411,7 @@ p+p {
 }
 .project-row {
   display:grid;
-  grid-template-columns:300px 1fr;
+  grid-template-columns:300px minmax(0,1fr);
   gap:40px;
   padding:32px 0;
   border-bottom:1px solid var(--line);
@@ -391,6 +436,7 @@ p+p {
   color:var(--ink);
   text-decoration:none;
 }
+.project-copy { min-width:0; }
 .project-copy>p {
   color:var(--muted);
   margin-top:12px;
@@ -700,7 +746,7 @@ button,input {
     padding:55px 0 46px;
   }
   .project-row {
-    grid-template-columns:230px 1fr;
+    grid-template-columns:230px minmax(0,1fr);
     gap:27px;
   }
   .project-visual img {

@@ -27,6 +27,7 @@ EXPECTED_PAGES = {
     "awards.html": "Awards",
     "projects/detection-engineering.html": "Detection Engineering",
     "projects/splunk-siem-investigation.html": "Splunk Investigation & Evidence Correlation",
+    "projects/splunk-execution-workflow.html": "Splunk Execution Workflow",
     "projects/network-intrusion-lab.html": "Network Intrusion",
     "projects/phishing-investigation.html": "Phishing",
     "projects/identity-mfa-investigation.html": "Enterprise Account",

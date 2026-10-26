@@ -9,6 +9,7 @@ Security investigations, research infrastructure, and independent certification 
 [Choose a case or planned project](projects/CASE_STUDIES.md).
 
 - Active Directory attack-chain investigation (independent analysis of OTRF recorded emulation)
+- [Splunk execution workflow](https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/splunk-execution-workflow.html) (tooling tested offline; live validation pending)
 - Detection engineering and rule development (resume lab)
 - Splunk investigation and evidence correlation (public authentication result and separate AD analysis)
 - Completed Kali/VM and network intrusion experience (résumé lab)
