@@ -161,6 +161,7 @@ def analyze(paths):
     if not 1 <= len(paths) <= MAX_FILES:
         raise ValueError('Provide 1..8 input exports')
     inputs, records, pending, events, notes = [], [], defaultdict(list), [], []
+    rejected_ids = set()
     for file_no, supplied in enumerate(paths, 1):
         path = Path(supplied)
         raw, rows = load(path)
@@ -177,17 +178,23 @@ def analyze(paths):
                 item = normalize(row)
             except (ValueError, TypeError, OverflowError) as exc:
                 record.update(status='rejected', reason=str(exc))
+                # An invalid copy must not leave a matching identified event trusted.
+                if isinstance(row, dict):
+                    try:
+                        rejected_ids.add((field(row, 'host').casefold(), field(row, 'event_uid')))
+                    except ValueError:
+                        pass  # Identity is unavailable or ambiguous; keep the row rejected.
                 continue
             item['source_refs'] = [ref]
             if item['event_uid']:
                 pending[(item['host'], item['event_uid'])].append((item, record))
             else:
                 events.append(item)
-    for group in pending.values():
+    for identity, group in pending.items():
         values = {packed({k: v for k, v in item.items() if k != 'source_refs'}) for item, _ in group}
-        if len(values) != 1:
+        if len(values) != 1 or identity in rejected_ids:
             for _, record in group:
-                record.update(status='rejected', reason='Conflicting event_uid within host; all matching IDs quarantined')
+                record.update(status='rejected', reason='Conflicting or invalid copy of event_uid within host; all identifiable matching IDs quarantined')
             continue
         primary = group[0][0]
         for item, record in group[1:]:
@@ -219,7 +226,7 @@ def render_html(report):
     records = ''.join(f'<details id="{r["id"]}"><summary>{r["id"]} / {r["status"]}</summary><p>{e(r.get("reason", r.get("duplicate_of", "Accepted source record")))}</p><pre>{e(json.dumps(r["raw"],indent=2,ensure_ascii=True))}</pre><p>Parsed-record SHA-256: {r["parsed_record_sha256"]}</p></details>' for r in report['source_records'])
     sources = ''.join(f'<li>{e(r["id"])} / {e(r["name"])} / {r["rows"]} data records<pre>{r["sha256"]}</pre></li>' for r in report['inputs'])
     counts = ' / '.join(f'{key.replace("_", " ")}: {value}' for key, value in report['summary'].items())
-    return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Executed exported-log triage report with source records, rejected inputs and analyst follow-up."><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'"><title>SOC triage handoff</title><style>body{{font:16px/1.65 system-ui,sans-serif;color:#213533;max-width:860px;margin:40px auto;padding:0 22px}}h1,h2,h3{{line-height:1.25}}a{{color:#286b60}}section{{margin-top:36px}}li+li,details{{margin-top:18px}}pre{{white-space:pre-wrap;overflow-wrap:anywhere;background:#eef3f0;padding:16px}}.status{{padding:20px;border-left:4px solid #93651d;background:#fff8e9}}summary{{cursor:pointer}}p{{overflow-wrap:anywhere}}</style></head><body><a class="skip-link" href="#main">Skip to content</a><main id="main">
+    return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Executed exported-log triage report with source records, rejected inputs and analyst follow-up."><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'"><title>SOC triage handoff</title><style>body{{font:16px/1.65 system-ui,sans-serif;color:#213533;max-width:860px;margin:40px auto;padding:0 22px}}h1,h2,h3{{line-height:1.25;overflow-wrap:anywhere}}a{{color:#286b60}}section{{margin-top:36px}}li+li,details{{margin-top:18px}}pre{{white-space:pre-wrap;overflow-wrap:anywhere;background:#eef3f0;padding:16px}}.status{{padding:20px;border-left:4px solid #93651d;background:#fff8e9}}summary{{cursor:pointer}}p{{overflow-wrap:anywhere}}</style></head><body><a class="skip-link" href="#main">Skip to content</a><main id="main">
 <h1>SOC triage handoff</h1><p class="status"><strong>{report['status']} / analyst review required</strong><br>{e(counts)}</p><p>{e(report['scope'])}</p><p>Rejected records remain below. A zero-candidate result does not establish that the input is complete or safe.</p>
 <nav aria-label="Report sections"><a href="#findings">Candidates</a> / <a href="#timeline">Timeline</a> / <a href="#sources">Sources</a> / <a href="#records">Input records</a></nav>
 <section id="findings"><h2>Review candidates</h2><ol>{findings}</ol></section><section id="timeline"><h2>Normalized UTC timeline</h2><ol>{timeline}</ol></section><section id="sources"><h2>Source files and scope</h2><ul>{sources}</ul>{''.join('<p>'+e(n)+'</p>' for n in report['notes'])}<p>Record references count CSV data records after the header or JSON array positions, starting at one. Record hashes cover canonical parsed JSON; file hashes cover exact input bytes. Only declared host/event_uid pairs are coalesced. Shared IDs must be stable and unique within a host across the supplied exports.</p></section><section id="records"><h2>Preserved input records</h2>{records}</section></main></body></html>'''

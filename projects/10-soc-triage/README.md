@@ -39,7 +39,8 @@ rows/file. This is a bounded utility, not an EVTX parser or universal vendor ada
 | Process fields | `image`, `command_line` | Required for process records; parent image and positive process ID optional |
 
 Conflicting aliases reject the row. A conflicting host/event UID quarantines all
-rows carrying that key. Matching normalized records with the same key coalesce
+rows carrying that key. An invalid copy with an unambiguous host and event UID
+also quarantines otherwise valid copies of that identity. Matching normalized records with the same key coalesce
 and keep every source reference. Rows without an event UID remain distinct;
 lookalike rows alone do not prove duplicate events. A CSV with extra values is
 retained as named fields plus an `extra_values` list, and quarantined.

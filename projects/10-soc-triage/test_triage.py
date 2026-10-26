@@ -53,6 +53,15 @@ class TriageTests(unittest.TestCase):
         self.assertEqual(r['summary']['rejected_rows'], 2)
         self.assertEqual(r['timeline'], [])
 
+    def test_malformed_copy_quarantines_identifiable_valid_uid(self):
+        r=self.analyze([event(),event(timestamp='not-a-time')])
+        self.assertEqual(r['summary']['rejected_rows'],2)
+        self.assertEqual(r['timeline'],[])
+
+    def test_malformed_uid_copy_cannot_contribute_to_finding(self):
+        rows=self.sequence();rows.append(event('4', 'not-a-time'))
+        self.assertEqual(self.analyze(rows)['findings'],[])
+
     def test_host_isolation(self):
         rows = self.sequence(); rows[-1]['host'] = 'other-host'
         self.assertEqual(self.analyze(rows)['findings'], [])
