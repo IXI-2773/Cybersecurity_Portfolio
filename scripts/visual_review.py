@@ -94,11 +94,16 @@ def main() -> None:
             current = driver.find_elements(By.CSS_SELECTOR,'.employer-nav a[aria-current="page"]')
             if len(current)!=1 or not current[0].get_attribute('href').endswith('/'+relative):
                 failures.append('Employer navigation current-page mismatch: '+relative)
-        # Follow the strongest case, then the full directory, without JavaScript.
+        # Use the homepage shortcuts and featured work, without a hero case button.
         driver.get((ROOT/'index.html').resolve().as_uri())
-        driver.find_element(By.CSS_SELECTOR,'.actions .button').click()
+        driver.find_element(By.CSS_SELECTOR,'.home-jump-nav a[href="#projects"]').click()
+        if not driver.current_url.endswith('#projects'):
+            failures.append('Homepage investigations shortcut did not reach the section')
+        featured=driver.find_element(By.CSS_SELECTOR,'.featured-investigations h3 a[href="projects/ad-attack-chain.html"]')
+        driver.execute_script("arguments[0].scrollIntoView({behavior:'instant',block:'center'})",featured)
+        featured.click()
         if not driver.current_url.endswith('/projects/ad-attack-chain.html'):
-            failures.append('Primary employer action did not open the AD investigation')
+            failures.append('Featured case did not open the AD investigation')
         driver.get((ROOT/'index.html').resolve().as_uri())
         all_work = driver.find_element(By.CSS_SELECTOR, '.more-investigations a[href="explore.html"]')
         # Finish scrolling before the native click; CSS smooth scrolling can leave
@@ -111,6 +116,17 @@ def main() -> None:
             links = driver.find_elements(By.CSS_SELECTOR,f'a[href="projects/{slug}.html"]')
             if not links or not any(link.is_displayed() for link in links):
                 failures.append('Case choice unavailable without scripts: '+slug)
+        for category in ('security-work','tools-work','training-work','engineering-work','planned-work'):
+            category_link=driver.find_element(By.CSS_SELECTOR,f'.directory-nav a[href="#{category}"]')
+            driver.execute_script("arguments[0].scrollIntoView({behavior:'instant',block:'center'})",category_link)
+            category_link.click()
+            if not driver.current_url.endswith('#'+category):
+                failures.append('Directory category shortcut failed: '+category)
+            back=driver.find_element(By.CSS_SELECTOR,f'#{category} .directory-heading a')
+            driver.execute_script("arguments[0].scrollIntoView({behavior:'instant',block:'center'})",back)
+            back.click()
+            if not driver.current_url.endswith('#work-categories'):
+                failures.append('Directory return shortcut failed: '+category)
         # PDF source is independent of browser print and must preserve the master content.
         pdf = PdfReader(ROOT/'resumes/Don_Lopez_Cybersecurity_Resume.pdf')
         content = '\n'.join(page.extract_text() for page in pdf.pages)

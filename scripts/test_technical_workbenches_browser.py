@@ -106,7 +106,8 @@ def main():
         assert 'attribution mismatch' in el('[data-claim-outcome]').text
         capture_panel(el('[data-claim-workbench]'),'rai-attribution-inspector.png')
         open_page('index.html')
-        assert el('.actions .button').text=='View AD case study'
+        assert not d.find_elements(By.CSS_SELECTOR,'.intro-content a[href="projects/ad-attack-chain.html"]')
+        assert el('.actions a[download]').get_attribute('href').endswith('/resumes/Don_Lopez_Cybersecurity_Resume.pdf')
         assert el('[data-signal-display]').get_attribute('data-visual')=='film'
         wait.until(lambda _:el('[data-signal-display]').get_attribute('data-film-running')=='true')
         d.execute_async_script('const done=arguments[0];setTimeout(done,5100)')
