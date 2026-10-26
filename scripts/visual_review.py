@@ -8,6 +8,7 @@ from __future__ import annotations
 import base64
 from io import BytesIO
 import json
+import re
 from pathlib import Path
 import shutil
 
@@ -72,7 +73,7 @@ def main() -> None:
                         if not link.is_displayed():
                             failures.append(f"{name}/{viewport}: menu destination hidden")
                     summary.send_keys(Keys.ENTER)
-                driver.execute_script("window.scrollTo(0,0)")
+                driver.execute_script("window.scrollTo({top:0,left:0,behavior:'instant'})")
                 layout = driver.execute_cdp_cmd("Page.getLayoutMetrics", {})["cssContentSize"]
                 shot = driver.execute_cdp_cmd("Page.captureScreenshot", {"format":"png","captureBeyondViewport":True,
                        "clip":{"x":0,"y":0,"width":width,"height":layout["height"],"scale":1}})
@@ -128,9 +129,11 @@ def main() -> None:
         profile_text='\n'.join(page.extract_text() for page in profile.pages)
         if len(profile.pages)!=1:
             failures.append('Recruiter profile print is not one page')
-        for term in ('Don Lopez','Allied Universal','CySA+','25,993','5/5'):
+        for term in ('Don Lopez','Allied Universal','CySA+','25,993'):
             if term not in profile_text:
                 failures.append('Recruiter print missing content: '+term)
+        if not re.search(r'5\s*/\s*5',profile_text):
+            failures.append('Recruiter print missing five-of-five result')
     # Technical playback and inspector behavior live in test_technical_workbenches_browser.py.
     summary = {"status":"PASS" if not failures else "FAIL","captures":captures,
                "interactive_review":"covered by separate technical workbench browser check",

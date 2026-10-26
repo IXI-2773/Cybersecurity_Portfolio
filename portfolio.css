@@ -187,6 +187,9 @@
 .employer-main summary { cursor:pointer; font-weight:600; min-height:44px; padding:8px 0; }
 .employer-main details p { margin-top:12px; }
 .employer-main .role-followup-links { line-height:2; }
+.employer-main .role-followup-links { display:flex; flex-direction:column; align-items:flex-start; gap:4px; margin-top:20px; }
+.employer-main .role-followup-links a { display:inline-flex; align-items:center; min-height:44px; font-size:.94rem; }
+.employer-main :is(.role-route-card>span:first-child,.application-role-header>span) { display:none; }
 .employer-main .application-role-header>span { color:var(--muted); font-size:.8rem; display:block; margin-bottom:12px; }
 .employer-main .application-proof-list a { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.5fr) 20px; gap:22px; align-items:baseline; padding:20px 0; border-bottom:1px solid var(--line); text-decoration:none; }
 .employer-main .application-proof-list span { color:var(--muted); font-size:.94rem; }
@@ -239,7 +242,8 @@
   .employer-main .engine-controls>div { flex-basis:100%; min-width:0; }
   .employer-main :is(.engine-controls>.button,.lab-actions>.button) { width:100%; }
   .employer-main .lab-actions { width:100%; }
-  .employer-nav { column-gap:22px; }
+  .employer-nav { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:4px 16px; }
+  .employer-nav a { line-height:1.4; }
 }
 @media print {
   .employer-page { font:9pt/1.35 Arial,sans-serif; color:#1e2b2b; background:white; }
@@ -248,13 +252,14 @@
   .employer-page .recruiter-sheet h1 { font-size:26pt; margin:0 0 5pt; }
   .employer-page .recruiter-sheet h2 { font-size:12pt; margin-bottom:5pt; }
   .employer-page .recruiter-sheet h3 { font-size:9pt; margin-bottom:4pt; }
-  .employer-page .recruiter-sheet p { font-size:8.4pt; line-height:1.4; }
+  .employer-page .recruiter-sheet p { font-size:8.4pt; line-height:1.4; max-width:none; }
+  .employer-page .recruiter-sheet p+p { margin-top:5pt; }
   .employer-page .recruiter-position { font-size:10pt !important; margin-bottom:7pt; }
   .employer-page .recruiter-links { gap:4pt 12pt; margin:7pt 0; }
   .employer-page .recruiter-links a { font-size:7.8pt; min-height:0; }
   .employer-page .recruiter-credential-row { grid-template-columns:repeat(3,minmax(0,1fr)); gap:12pt; margin:9pt 0; font-size:8pt; }
   .employer-page .recruiter-credential-row :is(span,small) { font-size:7.5pt; line-height:1.4; }
-  .employer-page .recruiter-block { padding:9pt 0 6pt; break-inside:avoid; }
+  .employer-page .recruiter-block { padding:6pt 0 4pt; break-inside:avoid; }
   .employer-page .recruiter-comparison { gap:10pt; margin:7pt 0; }
   .employer-page .recruiter-comparison>div:not(.recruiter-arrow) { padding:6pt; }
   .employer-page .recruiter-comparison strong { font-size:12pt; }
