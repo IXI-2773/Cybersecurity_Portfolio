@@ -91,6 +91,8 @@
 .signal-film-caption span { font-size:.75rem; line-height:1.6; color:#c8ded1; }
 .signal-film-caption button { min-height:44px; padding:6px 0; border:0; border-bottom:1px solid #729f87; border-radius:0; color:#c4efd4; background:transparent; font:inherit; font-size:.76rem; cursor:pointer; }
 .signal-film-caption button:disabled { border-color:transparent; color:#c8ded1; cursor:default; }
+.signal-inspection > summary { min-height:44px; padding:10px 0; color:#c4efd4; font-size:.85rem; cursor:pointer; }
+.signal-inspection[open] > summary { margin-bottom:12px; }
 .signal-top { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:12px; }
 .signal-top h2 { font-size:1.28rem; color:#f4f8f5; }
 .signal-top span { font-size:.72rem; color:#c1d4cb; }

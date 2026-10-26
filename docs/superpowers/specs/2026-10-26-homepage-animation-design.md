@@ -26,6 +26,8 @@ static final frame; explicit replay and stop controls. Stop when hidden/offscree
 with no automatic restart. Reduced motion uses a still image before scripts run.
 Selecting the existing inspector controls switches to its actual fixture chart.
 Animation replay resets the inspector so two independent replays never run at once.
+Keep the detailed inspector behind a native disclosure so the default hero remains
+compact and the main case link stays prominent. The disclosure works without JavaScript.
 
 Generate both assets with scripts/build_signal_animation.py; verify source counts,
 group identity, boundary duration, finite playback and payload size. Extend the

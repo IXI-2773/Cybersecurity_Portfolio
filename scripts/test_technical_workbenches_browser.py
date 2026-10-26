@@ -66,6 +66,7 @@ def main():
                     d.save_screenshot(str(OUT/(Path(path).stem+f'-technical-{width}.png')))
                     panels=d.find_elements(By.CSS_SELECTOR,'.technical-workbench')
                     if panels:capture_panel(panels[0],Path(path).stem+f'-inspector-{width}.png')
+                    if path=='index.html':capture_panel(el('[data-signal-display]'),f'signal-film-{width}.png')
                 checks.append(f'{path}/{width}: images, no overflow, no JS errors')
         d.set_window_size(1280,1100)
         d.execute_cdp_cmd('Emulation.setDeviceMetricsOverride',{'width':1280,'height':950,'deviceScaleFactor':1,'mobile':False})
@@ -112,9 +113,14 @@ def main():
         assert el('[data-signal-film]').get_attribute('src').endswith('signal-to-case-still.png')
         click('[data-film-play]')
         assert el('[data-signal-display]').get_attribute('data-film-running')=='true'
+        click('.signal-inspection > summary')
         click('[data-signal-step]')
         assert el('[data-signal-display]').get_attribute('data-visual')=='events'
         assert el('[data-signal-display]').get_attribute('data-film-running')=='false'
+        click('[data-signal-detail] summary')
+        click('[data-signal-event]')
+        assert el('[data-signal-detail] details').get_attribute('open') is not None
+        assert el('[data-signal-event-inspector]').is_displayed()
         Select(el('[data-signal-scenario]')).select_by_value('below')
         assert not el('.signal-film-caption span').is_displayed()
         click('[data-film-play]')
@@ -131,7 +137,7 @@ def main():
         d.execute_script('window.scrollTo({top:document.body.scrollHeight,behavior:"instant"})')
         wait.until(lambda _:el('[data-signal-display]').get_attribute('data-film-running')=='false')
         checks.append('finite GIF controls, inspector handoff, offscreen stop and reduced-motion poster passed')
-        open_page('index.html');click('[data-signal-play]')
+        open_page('index.html');click('.signal-inspection > summary');click('[data-signal-play]')
         wait.until(lambda _:el('[data-signal-display]').get_attribute('data-running')=='true')
         old=d.current_window_handle;d.switch_to.new_window('tab');d.switch_to.window(old)
         wait.until(lambda _:el('[data-signal-display]').get_attribute('data-running')=='false')
