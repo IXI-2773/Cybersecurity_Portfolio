@@ -20,6 +20,27 @@ check('duplicate event IDs rejected',()=>assert.throws(()=>evaluateAuthenticatio
 check('invalid threshold rejected',()=>assert.throws(()=>evaluateAuthentication(five,{threshold:0})));
 check('replay finite, no duplicate timers, selection pauses',()=>{let cb,active=0,last;const scheduler={setInterval(fn){cb=fn;active++;return 1;},clearInterval(){active--;}};const r=createReplay({count:4,intervalMs:10,scheduler,onChange:(i,running)=>last={i,running}});assert.deepEqual(last,{i:0,running:false});r.play();r.play();assert.equal(active,1);cb();assert.equal(last.i,1);r.select(2);assert.equal(active,0);assert.equal(last.running,false);r.play();cb();assert.deepEqual(last,{i:3,running:false});assert.equal(active,0);r.step();assert.equal(last.i,3);r.reset();assert.equal(last.i,0);r.dispose();r.play();assert.equal(active,0);});
 check('bad replay size rejected',()=>assert.throws(()=>createReplay({count:0,onChange(){}})));
+check('offscreen notifications preserve idle controls and pause active playback',()=>{
+ let notify,frames=0,running=false,active=0;
+ const original=globalThis.IntersectionObserver;
+ globalThis.IntersectionObserver=class{constructor(callback){notify=callback;}observe(){}disconnect(){}};
+ try{
+  const scheduler={setInterval(){active++;return 1;},clearInterval(){active--;}};
+  const replay=createReplay({count:4,element:{},scheduler,onChange:(_,playing)=>{frames++;running=playing;}});
+  assert.equal(frames,1);
+  notify([{isIntersecting:false}]);
+  assert.equal(frames,1,'An idle notification must not replace the event buttons');
+  replay.play();assert.equal(active,1);assert.equal(running,true);
+  notify([{isIntersecting:false}]);
+  assert.equal(active,0);assert.equal(running,false);
+  const stopped=frames;
+  notify([{isIntersecting:false}]);assert.equal(frames,stopped);
+  replay.dispose();
+ }finally{
+  if(original===undefined)delete globalThis.IntersectionObserver;
+  else globalThis.IntersectionObserver=original;
+ }
+});
 check('inspector explains selected earlier success',()=>{const events=fixture.events.filter(e=>e.scenario==='post_success_burst');const evaluation=evaluateAuthentication(events);const early=events.find(e=>e.event_type==='login_success');const d=decisionForSelection(events,evaluation.decisions,early.id);assert.equal(d.successId,early.id);assert.equal(d.triggered,false);assert.equal(d.count,3);});
 check('interleaved user selection uses their own decision',()=>{const events=fixture.events.filter(e=>e.scenario==='interleaved_users');const evaluation=evaluateAuthentication(events);const alpha=events.find(e=>e.username==='user_alpha');const d=decisionForSelection(events,evaluation.decisions,alpha.id);assert.equal(events.find(e=>e.id===d.successId).username,'user_alpha');assert.ok(d.contributingIds.includes(alpha.id));});
 console.log(`PASS: ${checks} authentication and replay checks`);
