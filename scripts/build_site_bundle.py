@@ -14,7 +14,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 ARCHIVE_DATE = (2026, 10, 22, 0, 0, 0)
 ALLOWED = {
-    "assets": {".svg", ".png", ".jpg", ".jpeg", ".webp", ".gif", ".js", ".txt"},
+    "assets": {".svg", ".png", ".jpg", ".jpeg", ".webp", ".gif", ".js", ".txt", ".pdf"},
     "docs": {".md"},
     "resumes": {".txt", ".pdf"},
     "projects": {".html", ".md", ".py", ".json", ".csv", ".spl", ".sql", ".txt", ".pdf"},
@@ -24,6 +24,7 @@ ROOT_FILES = {
     "PUBLICATION_CHECKLIST.md", "portfolio.css", "awards.html", "education.html", "visual-credits.html",
 }
 REQUIRED_SITE_FILES = {
+    "assets/certificates/comptia-security-plus.pdf", "assets/certificates/comptia-cysa-plus.pdf",
     "projects/10-soc-triage/triage.py", "projects/10-soc-triage/artifacts/case.json",
     "projects/10-soc-triage/artifacts/report.html", "projects/10-soc-triage/artifacts/execution.txt",
     "projects/ad-incident-report.html", "projects/08-ad-investigation/AD_Incident_Report.pdf",
