@@ -39,7 +39,7 @@ EXPECTED_PAGES = {
     "resume-soc.html": "SOC Analyst Résumé",
     "resume-security.html": "Security Analyst Résumé",
     "explore.html": "Explore the work",
-    "recruiter.html": "SOC Analyst Recruiter Profile",
+    "recruiter.html": "Employer Overview",
     "roles.html": "Role Paths",
     "test-lab.html": "Verification Workbench",
     "verify.html": "Evidence Review",
