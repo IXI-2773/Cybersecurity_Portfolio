@@ -1271,3 +1271,32 @@ button,input {
 .incident-list li + li { margin-top:20px; }
 .incident-list p { margin-top:7px; }
 .incident-list small { display:block; margin-top:7px; color:var(--muted); overflow-wrap:anywhere; }
+
+/* Homepage: a short employer reading path within the existing desktop layout. */
+.home-page .intro { padding:54px 0 44px; }
+.home-page .intro-degree { margin-top:18px; font-size:.97rem; }
+.home-page .intro-copy { font-size:1.05rem; }
+.home-actions.home-jump-nav { border:0; padding:0; margin-top:24px; gap:12px 22px; }
+.home-actions.home-jump-nav a { min-height:44px; font-weight:600; }
+.home-actions.home-jump-nav .button { color:#fff; font-size:.95rem; padding:10px 17px; }
+.home-page .social-profiles { margin-top:12px; }
+.home-page .more-investigations { display:flex; flex-wrap:wrap; gap:8px 28px; }
+.home-page .more-investigations a { display:inline-flex; align-items:center; min-height:44px; }
+.triage-preview { display:grid; gap:20px; padding:24px; border-radius:8px; background:var(--soft); text-decoration:none; min-width:0; }
+.triage-preview > strong { font-size:1.25rem; line-height:1.4; color:var(--ink); }
+.triage-preview dl { display:grid; gap:12px; }
+.triage-preview dl > div { display:grid; grid-template-columns:70px minmax(0,1fr); gap:12px; }
+.triage-preview dd { margin:0; overflow-wrap:anywhere; }
+.triage-preview > p { color:var(--muted); font-size:.86rem; }
+.triage-preview > span { font-size:.94rem; font-weight:600; }
+.triage-preview:hover > span { text-decoration:underline; }
+.home-page .background { padding:40px 0; gap:48px; }
+.home-capabilities { margin-top:24px; }
+.home-capabilities h3 { font-size:1.05rem; margin-bottom:6px; }
+.home-capabilities nav,.home-background-links { display:flex; flex-wrap:wrap; gap:0 22px; }
+.home-capabilities a,.home-background-links a { display:inline-flex; align-items:center; min-height:44px; font-size:.9rem; }
+.home-capabilities > p { font-size:.88rem; }
+.home-background-links { margin-top:14px; }
+.home-more-work { border-top:1px solid var(--line); padding:30px 0; }
+.home-more-work p { max-width:70ch; font-size:.98rem; color:var(--muted); }
+.home-more-work a { display:inline-block; padding-block:5px; }
