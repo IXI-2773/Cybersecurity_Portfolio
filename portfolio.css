@@ -1302,3 +1302,11 @@ button,input {
 .home-more-work { border-top:1px solid var(--line); padding:30px 0; }
 .home-more-work p { max-width:70ch; font-size:.98rem; color:var(--muted); }
 .home-more-work a { display:inline-block; padding-block:5px; }
+
+/* Related case views share one primary directory entry. */
+.directory-supporting { margin-top:16px; }
+.directory-supporting > p { font-size:.8rem; font-weight:600; color:var(--ink); }
+.directory-supporting nav { display:flex; flex-direction:column; align-items:flex-start; margin-top:4px; }
+.directory-supporting a { display:inline-flex; align-items:center; min-height:44px; font-size:.88rem; }
+.case-view-nav { display:flex; flex-wrap:wrap; gap:4px 24px; padding:12px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.case-view-nav a { display:inline-flex; align-items:center; min-height:44px; font-size:.9rem; }
