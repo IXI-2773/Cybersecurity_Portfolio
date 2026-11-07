@@ -1310,3 +1310,16 @@ button,input {
 .directory-supporting a { display:inline-flex; align-items:center; min-height:44px; font-size:.88rem; }
 .case-view-nav { display:flex; flex-wrap:wrap; gap:4px 24px; padding:12px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
 .case-view-nav a { display:inline-flex; align-items:center; min-height:44px; font-size:.9rem; }
+
+/* The employer overview leads with qualifications and three short case summaries. */
+@media screen {
+  .recruiter-main .recruiter-sheet-head h1 { margin-bottom:10px; }
+  .recruiter-main .recruiter-position { margin-bottom:14px; }
+  .recruiter-main .recruiter-links { margin:8px 0 18px; }
+  .recruiter-main .application-recruiter-actions .button { gap:6px; }
+  .recruiter-main .button.primary .file-type { color:inherit; }
+  .recruiter-main .recruiter-credential-row { margin:20px 0 26px; }
+  .recruiter-main .recruiter-selected h3 { font-size:1.15rem; }
+  .recruiter-main .recruiter-more-work { margin-top:22px; font-size:.9rem; }
+  .recruiter-main .employer-nav { margin:28px 0 0; padding:14px 0; border-top:1px solid var(--line); }
+}
