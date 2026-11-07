@@ -1272,11 +1272,8 @@ button,input {
 .incident-list p { margin-top:7px; }
 .incident-list small { display:block; margin-top:7px; color:var(--muted); overflow-wrap:anywhere; }
 
-/* Homepage: a short employer path, with the replay supplementary on mobile. */
-.home-layout { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); column-gap:48px; }
-.home-layout > section { grid-column:1 / -1; }
-.home-layout > .intro { grid-column:1; grid-row:1; padding:54px 0 44px; }
-.home-layout > .signal-display { grid-column:2; grid-row:1; align-self:center; margin:38px 0; min-width:0; }
+/* Homepage: a short employer reading path within the existing desktop layout. */
+.home-page .intro { padding:54px 0 44px; }
 .home-page .intro-degree { margin-top:18px; font-size:.97rem; }
 .home-page .intro-copy { font-size:1.05rem; }
 .home-actions.home-jump-nav { border:0; padding:0; margin-top:24px; gap:12px 22px; }
@@ -1303,24 +1300,3 @@ button,input {
 .home-more-work { border-top:1px solid var(--line); padding:30px 0; }
 .home-more-work p { max-width:70ch; font-size:.98rem; color:var(--muted); }
 .home-more-work a { display:inline-block; padding-block:5px; }
-@media(max-width:1000px) {
-  .home-layout { display:block; }
-  .home-layout > .intro { padding:36px 0 30px; }
-  .home-layout > .signal-display { width:auto; margin:8px 0 32px; }
-  .home-page .signal-visual { max-width:360px; }
-}
-@media(max-width:600px) {
-  .home-page .intro-degree span { font-size:.88rem; }
-  .home-page .intro-credentials { margin-top:10px; }
-  .home-page .intro-copy { margin-top:14px; font-size:1rem; }
-  .home-actions.home-jump-nav { gap:8px 16px; margin-top:20px; }
-  .home-page .social-profiles { margin-top:8px; font-size:.9rem; }
-  .home-page .work-section { padding-top:26px; }
-  .home-page .featured-investigations .project-row { padding:26px 0; gap:20px; }
-  .home-page .featured-investigations .project-copy { grid-row:1; }
-  .home-page .signal-display { padding:18px; }
-  .home-page .signal-scenario { font-size:.9rem; }
-  .home-page .signal-film-caption { margin-bottom:8px; }
-  .home-page .background { padding:30px 0; gap:30px; }
-  .triage-preview { padding:20px; gap:16px; }
-}
