@@ -1,6 +1,6 @@
 # Don Lopez - Cybersecurity portfolio
 
-[Open the visual portfolio](https://ixi-2773.github.io/Cybersecurity_Portfolio/) · [Choose a case study](https://ixi-2773.github.io/Cybersecurity_Portfolio/explore.html) · [Resume PDF](resumes/Don_Lopez_Cybersecurity_Resume.pdf) · [LinkedIn](https://www.linkedin.com/in/ixi2773/)
+[Project code, reports and results](https://github.com/IXI-2773/Cybersecurity-Projects) · [Open the visual portfolio](https://ixi-2773.github.io/Cybersecurity_Portfolio/) · [Choose a case study](https://ixi-2773.github.io/Cybersecurity_Portfolio/explore.html) · [Resume PDF](resumes/Don_Lopez_Cybersecurity_Resume.pdf) · [LinkedIn](https://www.linkedin.com/in/ixi2773/)
 
 Security investigations, research infrastructure, and independent certification study software. The main website offers a short introduction and selected investigations; the work directory lets employers choose what to review.
 
