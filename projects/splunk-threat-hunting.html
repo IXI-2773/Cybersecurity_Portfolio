@@ -2,15 +2,15 @@
       <div class="shell header-inner">
         <a class="brand" href="../index.html">Don Lopez</a>
         <nav aria-label="Main navigation" class="desktop-nav">
-          <a href="../explore.html">Work</a><a href="../index.html#about">About</a><a href="../awards.html">Awards &amp; Honors</a><a href="../resumes/Don_Lopez_Cybersecurity_Resume.pdf">Résumé <span class="file-type">PDF</span></a><a href="../index.html#contact">Contact</a>
+          <a href="../explore.html">Work</a><a href="../index.html#about">About</a><a href="../awards.html">Awards &amp; Honors</a><a href="../recruiter.html">Employer overview</a><a href="../resumes/Don_Lopez_Cybersecurity_Resume.pdf">Résumé <span class="file-type">PDF</span></a><a href="../index.html#contact">Contact</a>
         </nav>
         <details class="mobile-nav">
           <summary>
             Menu
           </summary>
           <nav aria-label="Mobile navigation">
-            <a href="../explore.html">Work</a><a href="../index.html#about">About</a><a href="../awards.html">Awards &amp; Honors</a><a href="../resumes/Don_Lopez_Cybersecurity_Resume.pdf">Résumé <span class="file-type">PDF</span></a><a href="../index.html#contact">Contact</a>
-          </nav>
+          <a href="../explore.html">Work</a><a href="../index.html#about">About</a><a href="../awards.html">Awards &amp; Honors</a><a href="../recruiter.html">Employer overview</a><a href="../resumes/Don_Lopez_Cybersecurity_Resume.pdf">Résumé <span class="file-type">PDF</span></a><a href="../index.html#contact">Contact</a>
+        </nav>
         </details>
       </div>
     </header><main id="main"><article class="reading" data-case-scope="investigation-design"><header class="case-intro"><a class="back-link" href="../explore.html">Back to all work</a><h1>Splunk Threat Investigation Playbook</h1><p class="case-lead">Work through authentication, endpoint execution and persistence questions with source-aware searches.</p><p class="project-meta">Splunk SPL · Event correlation · Investigation playbook</p></header><figure class="case-figure reference-figure"><a href="../assets/evidence/splunk-native-dashboard-results.png" aria-label="Open authentic image at full size"><img src="../assets/evidence/splunk-native-dashboard-results.png" alt="Actual cropped Splunk dashboard showing five findings from the public synthetic authentication lab" width="700" height="169"></a><figcaption>Actual cropped Splunk result panel from my independent synthetic authentication lab. It shows the corrected five findings; it is separate from the broader multi-source résumé lab. <a href="authentication-detection.html">Read the result and scope ↗</a></figcaption></figure><section class="case-section"><h2>Three useful investigation paths</h2><p>This playbook expands the multi-source Splunk case with specific questions an analyst can work through. The searches below are illustrative starting points for exported or ingested lab data. Indexes, field names, audit configuration and source coverage must match the actual environment.</p></section><section class="case-section"><h2>Repeated authentication failures followed by success</h2><p>Start with the affected accounts, source addresses and time range. Inspect the event sequence; a count alone does not establish that failures preceded the success. Consider ordinary mistakes, administrative activity and shared addresses, then seek session or endpoint context.</p><pre tabindex="0"><code>index=lab EventCode IN (4624, 4625)

@@ -516,6 +516,7 @@ p+p {
 .header-inner {
   min-height:88px;
   display:flex;
+  flex-wrap:wrap;
   align-items:center;
   justify-content:space-between;
   gap:24px;
@@ -529,8 +530,9 @@ p+p {
 }
 .desktop-nav {
   display:flex;
+  flex-wrap:wrap;
   align-items:center;
-  gap:30px;
+  gap:12px 24px;
 }
 .desktop-nav a {
   font-size:.92rem;
