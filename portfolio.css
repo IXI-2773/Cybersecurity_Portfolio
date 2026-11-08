@@ -1323,3 +1323,51 @@ button,input {
   .recruiter-main .recruiter-more-work { margin-top:22px; font-size:.9rem; }
   .recruiter-main .employer-nav { margin:28px 0 0; padding:14px 0; border-top:1px solid var(--line); }
 }
+
+
+/* Searchable work directory — builds on the existing employer reading path. */
+.directory-search {
+  margin:28px 0 24px;
+  padding:24px 28px;
+  background:var(--soft);
+  border:1px solid var(--line);
+  border-radius:14px;
+}
+.directory-search[hidden], .directory-section[hidden], .directory-entry[hidden],
+.directory-nav[hidden], .directory-empty[hidden] { display:none !important; }
+.directory-search label { display:block; font-size:1.02rem; font-weight:700; margin-bottom:10px; }
+.directory-search input[type="search"] {
+  display:block;
+  width:min(100%,720px);
+  min-height:48px;
+  border:1px solid #859b91;
+  border-radius:9px;
+  background:var(--paper);
+  padding:10px 14px;
+  font:inherit;
+  color:var(--ink);
+}
+.directory-search input[type="search"]::placeholder { color:var(--muted); opacity:1; }
+.directory-filters { display:flex; flex-wrap:wrap; gap:8px; margin:18px 0 12px; }
+.directory-filters button {
+  min-height:42px;
+  padding:8px 15px;
+  border:1px solid #94a9a0;
+  border-radius:999px;
+  background:var(--paper);
+  color:var(--ink);
+  font:inherit;
+  font-size:.88rem;
+  font-weight:600;
+  cursor:pointer;
+}
+.directory-filters button:hover { border-color:var(--accent); background:#e5eee9; }
+.directory-filters button[aria-pressed="true"] { background:var(--accent); border-color:var(--accent); color:#fff; }
+.directory-filters button[aria-pressed="true"]:hover { background:#19554b; }
+.directory-search :is(input,button):focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
+.directory-status { margin:0; font-size:.88rem; color:var(--muted); font-variant-numeric:tabular-nums; }
+.directory-empty { margin:10px 0 0; font-weight:600; }
+.directory-entry .entry-type { margin:0 0 10px; font-size:.77rem; font-weight:700; color:var(--accent); line-height:1.5; }
+.directory-entry .entry-type-upstream { color:#69502d; }
+.directory-entry .work-link-row { display:flex; flex-wrap:wrap; gap:4px 20px; margin:12px 0 0; font-size:.88rem; }
+.directory-entry .work-link-row a { display:inline-flex; align-items:center; min-height:36px; }
