@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Linux Access Hardening — Synthetic CIS Review | Don Lopez</title>
+  <meta name="description" content="Reproducible synthetic SSH and password-policy audit using a credited third-party CIS-style scanner, saved before/after evidence, and clearly stated limits.">
+  <meta property="og:title" content="Linux Access Hardening — Synthetic CIS Review | Don Lopez">
+  <meta property="og:description" content="23 synthetic controls, 17 failing checks moved to passing, and one unresolved finding. See the original scanner credit and retained evidence.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/linux-cis-synthetic-hardening.html">
+  <link rel="stylesheet" href="../portfolio.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="shell header-inner">
+    <a class="brand" href="../index.html">Don Lopez</a>
+    <nav aria-label="Main navigation" class="desktop-nav">
+      <a href="../explore.html">Work</a><a href="../index.html#about">About</a><a href="../awards.html">Awards &amp; Honors</a><a href="../recruiter.html">Employer overview</a><a href="../resumes/Don_Lopez_Cybersecurity_Resume.pdf">Résumé <span class="file-type">PDF</span></a><a href="../index.html#contact">Contact</a>
+    </nav>
+    <details class="mobile-nav"><summary>Menu</summary>
+      <nav aria-label="Mobile navigation">
+        <a href="../explore.html">Work</a><a href="../index.html#about">About</a><a href="../awards.html">Awards &amp; Honors</a><a href="../recruiter.html">Employer overview</a><a href="../resumes/Don_Lopez_Cybersecurity_Resume.pdf">Résumé <span class="file-type">PDF</span></a><a href="../index.html#contact">Contact</a>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<main id="main"><article class="reading" data-case-scope="synthetic-third-party-scanner">
+  <header class="case-intro">
+    <a class="back-link" href="../explore.html#security-work">Back to investigations</a>
+    <p class="project-meta">SYNTHETIC OFFLINE LAB · THIRD-PARTY SCANNER · SAVED JSON EVIDENCE</p>
+    <h1>Linux access hardening, checked twice</h1>
+    <p class="case-lead">A controlled before/after review of fabricated SSH and password-policy settings, using an upstream-authored Linux CIS auditor. The scanner was not written for this portfolio; the fixtures, verification runner and case analysis are separate work.</p>
+    <p class="case-result">17 failing checks became passes · 10% → 95% on 23 selected synthetic checks</p>
+    <div class="artifact-links">
+      <a href="https://github.com/IXI-2773/Cybersecurity-Projects/tree/87d7fb5b6c89bef929294becd80240472746809c/projects/15-linux-cis-synthetic-hardening">Case, fixtures &amp; verifier ↗</a>
+      <a href="https://github.com/IXI-2773/Cybersecurity-Projects/blob/87d7fb5b6c89bef929294becd80240472746809c/projects/15-linux-cis-synthetic-hardening/reports/before.json">Before JSON ↗</a>
+      <a href="https://github.com/IXI-2773/Cybersecurity-Projects/blob/87d7fb5b6c89bef929294becd80240472746809c/projects/15-linux-cis-synthetic-hardening/reports/after.json">After JSON ↗</a>
+    </div>
+  </header>
+  <nav class="audit-nav" aria-label="Case sections"><a href="#result">Result</a><a href="#method">Method</a><a href="#evidence">Evidence</a><a href="#limits">Limits</a></nav>
+  <section class="case-section" id="result">
+    <h2>What changed in the synthetic review</h2>
+    <p>The first fixture produced <strong>2 PASS, 18 FAIL and 3 SKIP</strong>. After changing the fabricated SSH, PAM and login-policy files, the same scanner produced <strong>19 PASS, 1 FAIL and 3 SKIP</strong>. Its score for the non-skipped selected controls rose from 10% to 95%.</p>
+    <ol class="incident-list">
+      <li><strong>Restrict SSH access.</strong> Added a fictional allowlisted user, disabled root login and X11 forwarding, reduced authentication attempts to four, and removed weak cipher, MAC and key-exchange entries.</li>
+      <li><strong>Strengthen password controls.</strong> Added illustrative quality and lockout PAM entries, limited maximum password age to 365 days, required at least one day between changes, and raised expiry warning to seven days.</li>
+      <li><strong>Keep the unresolved findings visible.</strong> The cron daemon check <code>5.1.1</code> still failed; three cron permission controls were skipped because their fixture paths were absent.</li>
+    </ol>
+  </section>
+  <section class="case-section" id="method">
+    <h2>How the test was performed</h2>
+    <p>The imported Bash auditor was run twice against isolated directory trees using <code>--test-root</code>, <code>--categories 5</code> and <code>--format json</code>. No real host or external target was scanned. Both reports were retained after removing only runner hostname and timestamp metadata.</p>
+    <p>A small Python verifier repeats both executions, checks all saved control statuses and confirms 17 <code>FAIL → PASS</code> transitions. It also asserts the remaining failure. The third-party source was kept unchanged; this case evaluates its behavior on the authored fixtures.</p>
+  </section>
+  <section class="case-section" id="evidence">
+    <h2>Open the evidence and source credit</h2>
+    <div class="artifact-links">
+      <a href="https://github.com/IXI-2773/Cybersecurity-Projects/blob/87d7fb5b6c89bef929294becd80240472746809c/projects/15-linux-cis-synthetic-hardening/README.md">Full method and limitations ↗</a>
+      <a href="https://github.com/IXI-2773/Cybersecurity-Projects/blob/87d7fb5b6c89bef929294becd80240472746809c/projects/15-linux-cis-synthetic-hardening/fixtures/before/etc/ssh/sshd_config">Weak SSH fixture ↗</a>
+      <a href="https://github.com/IXI-2773/Cybersecurity-Projects/blob/87d7fb5b6c89bef929294becd80240472746809c/projects/15-linux-cis-synthetic-hardening/fixtures/after/etc/ssh/sshd_config">Hardened SSH fixture ↗</a>
+      <a href="https://github.com/IXI-2773/Cybersecurity-Projects/blob/87d7fb5b6c89bef929294becd80240472746809c/projects/15-linux-cis-synthetic-hardening/verify_lab.py">Reproduction script ↗</a>
+      <a href="https://github.com/IXI-2773/Cybersecurity-Projects/tree/87d7fb5b6c89bef929294becd80240472746809c/third_party/community/linux-cis-hardening-auditor">Imported tool source ↗</a>
+      <a href="https://github.com/CarterPerez-dev/Cybersecurity-Projects/tree/6c8ac8547cf52edaa06935e637a1fe11ac45b865/PROJECTS/beginner/linux-cis-hardening-auditor">Original author’s project ↗</a>
+    </div>
+    <p><strong>Original tool:</strong> ©AngelaMos / CarterPerez-dev, AGPL-3.0-or-later. The source copy is credited and version-pinned. The synthetic fixtures and comparison report are not upstream-authored scanner code.</p>
+  </section>
+  <section class="scope-note" id="limits">
+    <h2>What this does not establish</h2>
+    <p>This is a synthetic educational run assisted by automation, not an owner-operated production engagement, an approved system change, or a full CIS benchmark certification. The auditor evaluated 23 controls in its section-5 subset, not the whole benchmark.</p>
+    <p>Two apparent passes in test mode do not verify SSH file or host-key permissions. The illustrative PAM configuration was not activated or tested through a real authentication stack. A production decision would require service-level tests, environment-specific review, change approval and rollback.</p>
+  </section>
+  <p class="case-back"><a href="../explore.html">Explore another project ↗</a></p>
+</article></main>
+<footer class="site-footer shell"><span>© 2026 Don Lopez</span><div>
+  <a href="../explore.html">All work</a><a href="../awards.html">Awards &amp; Honors</a><a href="https://github.com/IXI-2773">GitHub</a><a href="https://www.linkedin.com/in/ixi2773/">LinkedIn</a><a href="mailto:frailtycraven@gmail.com">Email</a><a href="../visual-credits.html">Image credits</a>
+</div></footer>
+</body>
+</html>
