@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>AWS IAM Policy Reviewer | Don Lopez</title>
+  <meta name="description" content="An original offline IAM policy review tool and synthetic role-assumption case study, with source-linked JSON evidence and a proposed narrower policy.">
+  <meta property="og:title" content="AWS IAM Policy Reviewer | Don Lopez">
+  <meta property="og:description" content="Read a synthetic AWS role-assumption policy, one static review candidate, a proposed narrow role ARN and retained before-and-after reports.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://ixi-2773.github.io/Cybersecurity_Portfolio/projects/iam-policy-review.html">
+  <link rel="stylesheet" href="../portfolio.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="shell header-inner">
+    <a class="brand" href="../index.html">Don Lopez</a>
+    <nav aria-label="Main navigation" class="desktop-nav">
+      <a href="../explore.html">Work</a><a href="../index.html#about">About</a><a href="../awards.html">Awards &amp; Honors</a><a href="../recruiter.html">Employer overview</a><a href="../resumes/Don_Lopez_Cybersecurity_Resume.pdf">Résumé <span class="file-type">PDF</span></a><a href="../index.html#contact">Contact</a>
+    </nav>
+    <details class="mobile-nav"><summary>Menu</summary>
+      <nav aria-label="Mobile navigation">
+        <a href="../explore.html">Work</a><a href="../index.html#about">About</a><a href="../awards.html">Awards &amp; Honors</a><a href="../recruiter.html">Employer overview</a><a href="../resumes/Don_Lopez_Cybersecurity_Resume.pdf">Résumé <span class="file-type">PDF</span></a><a href="../index.html#contact">Contact</a>
+      </nav>
+    </details>
+  </div>
+</header>
+<main id="main"><article class="reading" data-case-scope="synthetic-offline-tool">
+  <header class="case-intro">
+    <a class="back-link" href="../explore.html#tools-work">Back to tools &amp; software</a>
+    <p class="project-meta">ORIGINAL PYTHON TOOL · SYNTHETIC AWS IAM POLICY · SOURCE IN REVIEW</p>
+    <h1>AWS IAM Policy Reviewer</h1>
+    <p class="case-lead">Review overly broad identity-policy statements without connecting to AWS. Follow a fabricated role-assumption permission from a wildcard-resource finding to a proposed narrower role ARN.</p>
+    <p class="case-result">1 statement reviewed · 1 baseline candidate → 0 modeled findings after narrowing</p>
+    <div class="artifact-links">
+      <a href="https://github.com/IXI-2773/Cybersecurity-Projects/tree/b3cc02e49cf4a1c995dbcb709619988ce22dd29d/projects/14-iam-policy-review">Source code &amp; fixtures ↗</a>
+      <a href="https://github.com/IXI-2773/Cybersecurity-Projects/blob/b3cc02e49cf4a1c995dbcb709619988ce22dd29d/projects/14-iam-policy-review/CASE_STUDY.md">Detailed case study ↗</a>
+      <a href="https://github.com/IXI-2773/Cybersecurity-Projects/blob/b3cc02e49cf4a1c995dbcb709619988ce22dd29d/projects/14-iam-policy-review/artifacts/assumerole_broad_report.json">Baseline JSON report ↗</a>
+    </div>
+  </header>
+  <nav class="audit-nav" aria-label="Case sections"><a href="#result">Result</a><a href="#method">Method</a><a href="#evidence">Evidence</a><a href="#limits">Limits</a></nav>
+  <section class="case-section" id="result">
+    <h2>What the saved results show</h2>
+    <p>A fabricated AWS IAM identity-policy statement allows <code>sts:AssumeRole</code> with <code>Resource: "*"</code>. It also includes an example principal-tag condition. The static reviewer emits one <code>ASSUMEROLE_ALL_RESOURCES</code> review candidate and records that a condition is present, without interpreting it.</p>
+    <ol class="incident-list">
+      <li><strong>Baseline: one review candidate.</strong> The statement names no role ARN, so an analyst should ask which roles and accounts the permission was intended to cover. The finding does <em>not</em> prove that any role can be assumed; the target's trust policy and other controls still matter.</li>
+      <li><strong>Proposed follow-up: zero modeled candidates.</strong> I replaced the wildcard resource with <code>arn:aws:iam::111122223333:role/example-response-readonly</code>, a fabricated role ARN, while preserving the sample condition. A second offline run reports no patterns from this tool's narrow rule set. It is not a tested production remediation.</li>
+    </ol>
+  </section>
+  <section class="case-section" id="method">
+    <h2>How I approached it</h2>
+    <p>I built a read-only Python CLI that parses an intentionally limited identity-policy JSON grammar, identifies literal broad <code>Allow</code> patterns, and connects each review candidate to a statement ID. It also recognizes <code>iam:PassRole</code> and service-wide wildcard actions; mixed action lists can produce separate candidates.</p>
+    <p>For role assumption, I treated the wildcard as a reason to investigate intended role ARNs and trust relationships—not as a vulnerability verdict. AWS action names are case-insensitive, so the tool normalizes exact sensitive-action comparisons. Unsupported policy forms are rejected instead of silently treated as clean.</p>
+  </section>
+  <section class="case-section" id="evidence">
+    <h2>Open source and reproduce</h2>
+    <p>These are stored outputs from the offline CLI, with matching fabricated input policies. No AWS calls were required. The repository contains the execution instructions and focused tests.</p>
+    <div class="artifact-links">
+      <a href="https://github.com/IXI-2773/Cybersecurity-Projects/blob/b3cc02e49cf4a1c995dbcb709619988ce22dd29d/projects/14-iam-policy-review/fixtures/assumerole_broad_identity_policy.json">Baseline input ↗</a>
+      <a href="https://github.com/IXI-2773/Cybersecurity-Projects/blob/b3cc02e49cf4a1c995dbcb709619988ce22dd29d/projects/14-iam-policy-review/artifacts/assumerole_broad_report.json">Baseline report ↗</a>
+      <a href="https://github.com/IXI-2773/Cybersecurity-Projects/blob/b3cc02e49cf4a1c995dbcb709619988ce22dd29d/projects/14-iam-policy-review/fixtures/assumerole_restricted_identity_policy.json">Proposed input ↗</a>
+      <a href="https://github.com/IXI-2773/Cybersecurity-Projects/blob/b3cc02e49cf4a1c995dbcb709619988ce22dd29d/projects/14-iam-policy-review/artifacts/assumerole_restricted_report.json">Follow-up report ↗</a>
+      <a href="https://github.com/IXI-2773/Cybersecurity-Projects/pull/5">Source project review PR ↗</a>
+    </div>
+    <p>Links pin the source revision used for this case. The IAM tool is currently in a draft pull request and its findings are only as broad as its explicitly documented checks.</p>
+  </section>
+  <section class="scope-note" id="limits">
+    <h2>Scope and limits</h2>
+    <p><strong>Synthetic demonstration only.</strong> No AWS account, credential, principal, cloud resource, live permission, or deployed remediation was accessed or changed. The reviewer does not calculate effective permissions, evaluate conditions, role trust policies, explicit denies, SCPs, permission boundaries, session policies, or resource-based policies.</p>
+    <p>Before changing a real policy, I would verify authorized role access requirements, policy conditions and target trust, use approved AWS validation and access testing, and retain a rollback plan. A zero-finding result is <strong>not</strong> proof of least privilege.</p>
+  </section>
+  <p class="case-back"><a href="../explore.html">Choose another project ↗</a></p>
+</article></main>
+<footer class="site-footer shell"><span>© 2026 Don Lopez</span><div>
+  <a href="../explore.html">All work</a><a href="../awards.html">Awards &amp; Honors</a><a href="https://github.com/IXI-2773">GitHub</a><a href="https://www.linkedin.com/in/ixi2773/">LinkedIn</a><a href="mailto:frailtycraven@gmail.com">Email</a><a href="../visual-credits.html">Image credits</a>
+</div></footer>
+</body>
+</html>
