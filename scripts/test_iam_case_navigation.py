@@ -5,7 +5,7 @@ import unittest
 from test_firewall_case_navigation import ROOT, links_in
 
 
-SOURCE_SNAPSHOT = "b3cc02e49cf4a1c995dbcb709619988ce22dd29d"
+SOURCE_SNAPSHOT = "b991e1599cae3dc4a4f8588e33e0af46a3352d73"
 CASE_PAGE = "projects/iam-policy-review.html"
 
 
