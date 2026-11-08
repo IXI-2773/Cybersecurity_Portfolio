@@ -75,7 +75,9 @@ jobs:
       - name: Test deployment-response checker offline
         run: python scripts/check_live_site.py --self-test
       - name: Check local HTML links
-        run: python scripts/check_links.py
+        run: |
+          python scripts/check_links.py
+          python -m unittest discover -s scripts -p test_firewall_case_navigation.py -v
       - name: Build downloadable offline website preview
         run: python scripts/build_site_bundle.py --output cybersecurity-portfolio-site.zip
       - name: Attach browser-ready portfolio website archive
