@@ -33,7 +33,7 @@ EXPECTED_PAGES = {
     "projects/network-intrusion-lab.html": "Network Intrusion",
     "projects/phishing-investigation.html": "Phishing",
     "projects/identity-mfa-investigation.html": "Enterprise Account",
-    "projects/soc-triage-automation.html": "Python SOC",
+    "projects/soc-triage-automation.html": "Splunk Authentication Investigation Workflow",
     "": "Don Lopez",
     "apply.html": "Application Toolkit",
     "resume-soc.html": "SOC Analyst Résumé",
