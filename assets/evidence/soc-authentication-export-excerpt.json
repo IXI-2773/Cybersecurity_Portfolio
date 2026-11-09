@@ -1,0 +1,79 @@
+{
+  "schema": "portfolio.soc-case-public-excerpt.v1",
+  "execution_date": "2026-11-09",
+  "data_origin": "Synthetic authentication events exported from a running, owner-operated Splunk Enterprise lab",
+  "source_case_sha256": "f7ff466a1919065bf8d904a691d16f93319dcba8359dea2e5c5f54708569f64b",
+  "implementation_commit": "c6519c1ecc04596e535a8f5079e4fa75334a0270",
+  "summary": {
+    "input_rows": 70,
+    "accepted_events": 70,
+    "duplicate_rows": 0,
+    "rejected_rows": 0,
+    "review_candidates": 6
+  },
+  "selection": "First chronological authentication candidate in the retained case; six supporting events shown. Five other candidates and 64 other events are omitted.",
+  "privacy_transform": "Original user, host and IP values replaced with display aliases. Raw records and private paths omitted. UTC timestamps and source-record references retained.",
+  "display_entities": {
+    "account": "Account A",
+    "host": "Host A",
+    "source": "Source A"
+  },
+  "candidate": {
+    "rule_id": "AUTH_FAILURES_THEN_SUCCESS",
+    "timestamp_utc": "2026-10-05T09:05:00Z",
+    "window_seconds": 600,
+    "source_refs": [
+      "S01:R000017",
+      "S01:R000016",
+      "S01:R000015",
+      "S01:R000014",
+      "S01:R000013",
+      "S01:R000012"
+    ]
+  },
+  "events": [
+    {
+      "timestamp_utc": "2026-10-05T09:00:00Z",
+      "event_type": "login_failure",
+      "source_refs": [
+        "S01:R000017"
+      ]
+    },
+    {
+      "timestamp_utc": "2026-10-05T09:01:00Z",
+      "event_type": "login_failure",
+      "source_refs": [
+        "S01:R000016"
+      ]
+    },
+    {
+      "timestamp_utc": "2026-10-05T09:02:00Z",
+      "event_type": "login_failure",
+      "source_refs": [
+        "S01:R000015"
+      ]
+    },
+    {
+      "timestamp_utc": "2026-10-05T09:03:00Z",
+      "event_type": "login_failure",
+      "source_refs": [
+        "S01:R000014"
+      ]
+    },
+    {
+      "timestamp_utc": "2026-10-05T09:04:00Z",
+      "event_type": "login_failure",
+      "source_refs": [
+        "S01:R000013"
+      ]
+    },
+    {
+      "timestamp_utc": "2026-10-05T09:05:00Z",
+      "event_type": "login_success",
+      "source_refs": [
+        "S01:R000012"
+      ]
+    }
+  ],
+  "scope": "Sanitized report excerpt, not the full original report, a screenshot, or a security verdict."
+}
