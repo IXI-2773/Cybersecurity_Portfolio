@@ -30,7 +30,7 @@
     <a class="back-link" href="../explore.html#tools-work">Back to tools &amp; software</a>
     <p class="project-meta">ORIGINAL PYTHON TOOL · SYNTHETIC IPTABLES LAB · SOURCE MERGED</p>
     <h1>Firewall Policy Reviewer</h1>
-    <p class="case-lead">Find fully shadowed and partially overlapping firewall rules without editing a live firewall. Follow a fabricated RDP source-restriction example from discovery to a proposed correction.</p>
+    <p class="case-lead">Find fully shadowed and partially overlapping firewall rules without editing a live firewall. Follow the fabricated RDP source-restriction case, or inspect the separate destination-port-range example.</p>
     <p class="case-result">3 rules reviewed · 2 baseline findings → 0 modeled findings after restriction</p>
     <div class="artifact-links">
       <a href="firewall-policy-review/artifacts/partial_overlap_report.html">View saved HTML report</a>
@@ -38,7 +38,7 @@
       <a href="https://github.com/IXI-2773/Cybersecurity-Projects/blob/1713679893149ec90abb21c8fa1b3c63d3798660/projects/13-firewall-policy-review/CASE_STUDY.md">Detailed case study ↗</a>
     </div>
   </header>
-  <nav class="audit-nav" aria-label="Case sections"><a href="#result">Result</a><a href="#method">Method</a><a href="#evidence">Evidence</a><a href="#limits">Limits</a></nav>
+  <nav class="audit-nav" aria-label="Case sections"><a href="#result">RDP result</a><a href="#method">Method</a><a href="#evidence">RDP evidence</a><a href="#port-ranges">Port-range example</a><a href="#limits">Limits</a></nav>
   <section class="case-section" id="result">
     <h2>What the saved result shows</h2>
     <p>In the fabricated IPv4 <code>filter/INPUT</code> policy, two earlier <code>DROP</code> rules cover 75% of the IPv4 source space. A later rule still permits TCP/3389 from the remaining range within the tool's simplified model.</p>
@@ -63,9 +63,27 @@
     </div>
     <p>The HTML report retains the findings from the linked source revision, with portfolio navigation added for accessible viewing. The source project has merged into <code>main</code>; pinned commit links keep this case's original evidence traceable.</p>
   </section>
+  <section class="case-section" id="port-ranges">
+    <h2>Port-range overlap: a separate synthetic example</h2>
+    <p>The published range extension reviews closed numeric destination-port intervals alongside source and destination CIDRs. This independent fabricated fixture tests partial overlap; it is not part of the RDP before/after comparison above.</p>
+    <ol class="incident-list">
+      <li><strong>Earlier rule:</strong> <code>ACCEPT</code> TCP ports <code>80–90</code> from <code>10.0.0.0/24</code>.</li>
+      <li><strong>Later rule:</strong> <code>DROP</code> TCP ports <code>85–95</code> from <code>10.0.0.128/25</code>.</li>
+      <li><strong>Saved result:</strong> one <code>PARTIALLY_SHADOWED_RULE</code> candidate. The exact shared traffic is <code>10.0.0.128/25 → 0.0.0.0/0, TCP 85–90</code>. Ports <code>91–95</code> in the later rule remain outside the earlier rule's coverage.</li>
+    </ol>
+    <div class="artifact-links">
+      <a href="firewall-policy-review/artifacts/port_range_overlap_report.html">View saved port-range report</a>
+      <a href="https://github.com/IXI-2773/Cybersecurity-Projects/tree/6cdacdbfbe8adb7e38bd370b95b8793b4edd5ab9/projects/13-firewall-policy-review">Range-capable source &amp; tests ↗</a>
+      <a href="https://github.com/IXI-2773/Cybersecurity-Projects/blob/6cdacdbfbe8adb7e38bd370b95b8793b4edd5ab9/projects/13-firewall-policy-review/fixtures/iptables_port_range_overlap.rules">Exact synthetic input ↗</a>
+      <a href="https://github.com/IXI-2773/Cybersecurity-Projects/blob/6cdacdbfbe8adb7e38bd370b95b8793b4edd5ab9/projects/13-firewall-policy-review/artifacts/port_range_overlap_report.json">Range JSON ↗</a>
+      <a href="https://github.com/IXI-2773/Cybersecurity-Projects/blob/6cdacdbfbe8adb7e38bd370b95b8793b4edd5ab9/projects/13-firewall-policy-review/artifacts/port_range_overlap_report.csv">Range CSV ↗</a>
+      <a href="https://github.com/IXI-2773/Cybersecurity-Projects/blob/6cdacdbfbe8adb7e38bd370b95b8793b4edd5ab9/projects/13-firewall-policy-review/artifacts/port_range_execution.json">Execution record &amp; hashes ↗</a>
+    </div>
+    <p>A separate <a href="https://github.com/IXI-2773/Cybersecurity-Projects/blob/6cdacdbfbe8adb7e38bd370b95b8793b4edd5ab9/projects/13-firewall-policy-review/fixtures/iptables_port_range_disjoint.rules">disjoint-range negative control</a> uses <code>80–84</code> and <code>85–95</code> and produces <a href="https://github.com/IXI-2773/Cybersecurity-Projects/blob/6cdacdbfbe8adb7e38bd370b95b8793b4edd5ab9/projects/13-firewall-policy-review/artifacts/port_range_disjoint_report.json">zero modeled findings</a>. It checks detector behavior; it is not a production remediation. The rendered report preserves the saved finding, with portfolio navigation added. Links pin this example to its own published source snapshot.</p>
+  </section>
   <section class="scope-note" id="limits">
     <h2>Scope and limits</h2>
-    <p>No live firewall, host, external network, or real organizational subnet was examined or changed. Both exports are synthetic. These are static review candidates, not confirmed vulnerabilities or measured exposure. The model does not establish IPv6, NAT, routing, connection state, or other unmodeled chains.</p>
+    <p>No live firewall, host, external network, or real organizational subnet was examined or changed. All exports shown here are synthetic. These are static review candidates, not confirmed vulnerabilities or measured exposure. The model does not establish IPv6, NAT, routing, connection state, or other unmodeled chains.</p>
     <p>A production change would require an owner-approved source range, change control, validation of dependent access, and a rollback plan. Zero modeled findings is not a claim of secure deployment.</p>
   </section>
   <p class="case-back"><a href="../explore.html">Choose another project ↗</a></p>
